@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Gala.Data" GeneratedClassName="PersonalitySettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Discerning" Type="System.Int16" Scope="User">
+      <Value Profile="(Default)">75</Value>
+    </Setting>
+    <Setting Name="Loquacious" Type="System.Int16" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="Gregarious" Type="System.Int16" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="Autonomous" Type="System.Int16" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="Executive" Type="System.Int16" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="Abstract" Type="System.Int16" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="FavoriteColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Green</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

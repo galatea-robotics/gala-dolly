@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Gala.Dolly.Chatbots.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ChatbotAliceConfigFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">..\..\..\Library\ChatBots\AIMLBot\ConfigurationFiles</Value>
+    </Setting>
+    <Setting Name="ChatbotResourcesFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">..\..\..\Resources\Chatbot</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

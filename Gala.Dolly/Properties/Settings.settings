@@ -1,0 +1,114 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Gala.Dolly.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ChatbotName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MARIA</Value>
+    </Setting>
+    <Setting Name="SpeechIsSilent" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SuppressAlice" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SuppressEliza" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DefaultUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Peanut</Value>
+    </Setting>
+    <Setting Name="TtsRate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-3</Value>
+    </Setting>
+    <Setting Name="TtsVolume" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">85</Value>
+    </Setting>
+    <Setting Name="SerialOpenPortAtStartup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="WindowShowSerialInterface" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SerialPortDefaultDevice" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SerialPortDefaultBaudRate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ChatbotSubstitutions" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;I,eye&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="SerialPortIntervalMin" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="SerialPortIntervalMax" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="SerialPortDefaultInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="LogFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\..\Log.txt</Value>
+    </Setting>
+    <Setting Name="VisionCapturePanMin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="VisionCapturePanMax" Type="System.String" Scope="User">
+      <Value Profile="(Default)">120</Value>
+    </Setting>
+    <Setting Name="VisionCaptureTiltMin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">45</Value>
+    </Setting>
+    <Setting Name="VisionCaptureTiltMax" Type="System.String" Scope="User">
+      <Value Profile="(Default)">105</Value>
+    </Setting>
+    <Setting Name="SpeechRecogResumeMicInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">250</Value>
+    </Setting>
+    <Setting Name="LanguageModeChatbotOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SpeechRecogChatbotGrammarRuleFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">..\..\..\Resources\SRChatbot.xml</Value>
+    </Setting>
+    <Setting Name="SpeechRecogEvaluateGrammarRuleFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">..\..\..\Resources\SREvaluate.xml</Value>
+    </Setting>
+    <Setting Name="SpeechRecogChatbotGrammarRuleID" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="SpeechRecogEvaluateGrammarRuleID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="ImagingSettings" Type="Galatea.AI.Imaging.ImagingSettings" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RecognitionImageSaveFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\..\..\Resources\Test Cases\Live</Value>
+    </Setting>
+    <Setting Name="RecognitionImageSaveImages" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SerialPortDisableWarning" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DataAccessManagerConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">..\..\..\Data\SerializedData.dat</Value>
+    </Setting>
+    <Setting Name="TextToSpeechDefaultVoiceIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="FeedbackManagerConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">..\..\..\Data\SerializedFeedbackData.dat</Value>
+    </Setting>
+    <Setting Name="LocalSettingsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\..\..\Local Settings\app.config</Value>
+    </Setting>
+    <Setting Name="ColorTemplateHybridResultThreshold" Type="System.Int16" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

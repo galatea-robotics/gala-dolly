@@ -1,0 +1,126 @@
+﻿using System;
+using System.Windows.Forms;
+
+namespace Gala.Dolly.UI.Diagnostics
+{ 
+    using Galatea;
+    using Galatea.Diagnostics;
+
+    /// <summary>
+    /// Includes File Logging and methods for Handling Errors instead of simply outputting
+    /// the stack trace and then re-throwing.
+    /// </summary>
+    public partial class Debugger : Galatea.Runtime.Services.Debugger, IDebugger
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Gala.Dolly.UI.Diagnostics.Debugger"/> class.
+        /// </summary>
+        public Debugger() : base()
+        {
+            InitializeComponent();
+        }
+        /// <summary>
+        /// Gets or sets a <see cref="FileLogger"/> component reference.
+        /// </summary>
+        public virtual IFileLogger FileLogger
+        {
+            get { return _fileLogger; }
+            set { _fileLogger = value; }
+        }
+
+        /// <summary>
+        /// Handles expected Galatea Core Exceptions, typically by logging them.
+        /// </summary>
+        /// <param name="ex">
+        /// A run-time <see cref="TeaException"/>.
+        /// </param>
+        protected override void HandleTeaException(TeaException ex)
+        {
+            string msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+            Log(DebuggerLogLevel.Error, msg);
+            Log(DebuggerLogLevel.StackTrace, ex.StackTrace, true);
+
+            string errorMessage = Galatea.Globalization.DiagnosticResources.Debugger_Error_Speech_Message;
+            if (msg.Substring(0, 17) != "Exception of type") errorMessage += "  " + msg;
+
+            this.Exception = ex;
+            this.ErrorMessage = errorMessage;
+
+            //if (Error != null) Error(provider, new ErrorEventArgs(ex, errorMessage));
+        }
+        /// <summary>
+        /// Handles unexpected System Errors, typically by logging them, and then
+        /// re-throwing them.
+        /// </summary>
+        /// <param name="ex">
+        /// A run-time <see cref="System.Exception"/>.
+        /// </param>
+        protected override void ThrowSystemException(Exception ex)
+        {
+            Log(DebuggerLogLevel.Critical, ex.Message);
+            Log(DebuggerLogLevel.StackTrace, ex.StackTrace, true);
+
+            this.Exception = ex;
+            this.ErrorMessage = Galatea.Globalization.DiagnosticResources.Debugger_Unexpected_Error_Speech_Message;
+
+            //if (Error != null) Error(provider, new ErrorEventArgs(ex, 
+            //    Galatea.Globalization.DiagnosticResources.Debugger_Unexpected_Error_Speech_Message));
+        }
+        /// <summary>
+        /// Logs messages and errors to a log file using a <see cref="IFileLogger"/> instance.
+        /// </summary>
+        /// <param name="level">
+        /// The <see cref="DebuggerLogLevel"/> of the message to be logged.
+        /// </param>
+        /// <param name="message"> The message to be logged. </param>
+        /// <param name="overrideLevel"> 
+        /// A boolean value indicating that the Debugger should log the 
+        /// message, regardless of <see cref="DebuggerLogLevel"/>.
+        /// </param>
+        public override void Log(DebuggerLogLevel level, string message, bool overrideLevel)
+        {
+            if (level >= this.LogLevel || overrideLevel)
+            {
+                string sLevel = GetLogLevelToken(level);
+
+                string sOutput = string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    "[{0}] # {1:d} {2:HH:mm:ss}.{3:000} # {4}", sLevel,
+                    System.DateTime.Today, System.DateTime.Now,
+                    System.DateTime.Now.Millisecond, message);
+
+                System.Diagnostics.Debug.WriteLine(sOutput);
+
+                if (_fileLogger.IsLogging) _fileLogger.Log(sOutput);
+            }
+        }
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            _fileLogger.Dispose();
+            base.Dispose(disposing);
+        }
+
+        private static string GetLogLevelToken(DebuggerLogLevel level)
+        {
+            switch (level)
+            {
+                case DebuggerLogLevel.Diagnostic: return " ^^^ ";
+                case DebuggerLogLevel.Log: return " Log ";
+                case DebuggerLogLevel.Event: return "Event";
+                case DebuggerLogLevel.Message: return " Msg ";
+                case DebuggerLogLevel.Warning: return "Warn ";
+                case DebuggerLogLevel.Error: return "Error";
+                case DebuggerLogLevel.Critical: return "*ERR*";
+                case DebuggerLogLevel.StackTrace: return "TRACE";
+                default: throw new TeaArgumentException();
+            }
+        }
+
+        private IFileLogger _fileLogger;
+    }
+}

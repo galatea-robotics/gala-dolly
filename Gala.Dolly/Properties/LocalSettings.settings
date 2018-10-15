@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Gala.Dolly.Properties" GeneratedClassName="LocalSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ChatbotName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MARIA</Value>
+    </Setting>
+    <Setting Name="SpeechIsSilent" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LogFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GALA\Log.txt</Value>
+    </Setting>
+    <Setting Name="DefaultUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Peanut</Value>
+    </Setting>
+    <Setting Name="TextToSpeechDefaultVoiceIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

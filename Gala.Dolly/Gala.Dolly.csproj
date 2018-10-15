@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F0D42607-BEA9-4F6E-854D-40809AD378D8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gala.Dolly</RootNamespace>
+    <AssemblyName>Gala.Dolly</AssemblyName>
+    <ApplicationIcon>Dolly.ico</ApplicationIcon>
+    <StartupObject>Gala.Dolly.Program</StartupObject>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Gala.Dolly.pfx</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <DocumentationFile>
+    </DocumentationFile>
+    <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Analysis|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\bin\Analysis\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>
+    </DocumentationFile>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ChatbotManager.cs" />
+    <Compile Include="Internal\Extension.cs" />
+    <Compile Include="Properties\LocalSettings.Designer.cs">
+      <DependentUpon>LocalSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Internal\CameraWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Internal\CameraWindow.Designer.cs">
+      <DependentUpon>CameraWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\LocalSettingsHelper.cs" />
+    <Compile Include="Robotics\SpeechCommands.cs" />
+    <Compile Include="TemplateRecognitionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TemplateRecognitionForm.Designer.cs">
+      <DependentUpon>TemplateRecognitionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Gala.Dolly.cs" />
+    <Compile Include="Properties\Version.cs" />
+    <Compile Include="SmartEngine.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Internal\EventHandlers.cs" />
+    <Compile Include="UI\SerialInterface.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\SerialInterface.Designer.cs">
+      <DependentUpon>SerialInterface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TemplateRecognition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TemplateRecognition.Designer.cs">
+      <DependentUpon>TemplateRecognition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TTS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TTS.Designer.cs">
+      <DependentUpon>TTS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\VisionCapture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\VisionCapture.Designer.cs">
+      <DependentUpon>VisionCapture.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateRecognitionForm.resx">
+      <DependentUpon>TemplateRecognitionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SerialInterface.resx">
+      <DependentUpon>SerialInterface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TemplateRecognition.resx">
+      <DependentUpon>TemplateRecognition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VisionCapture.resx">
+      <DependentUpon>VisionCapture.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="..\..\Local Settings\LocalSettings.config">
+      <Link>Properties\LocalSettings.config</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Gala.Dolly.pfx" />
+    <None Include="Properties\LocalSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>LocalSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <SubType>
+      </SubType>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dolly.ico" />
+    <Content Include="Images\b_eyecam.png" />
+    <Content Include="Images\eyecam.png" />
+    <Content Include="Images\green_led.png" />
+    <Content Include="Images\lettuce_holder.png" />
+    <Content Include="Images\red_led.png" />
+    <None Include="Images\mic_on.png" />
+    <None Include="Images\mic_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\AForge.NET Framework-2.2.3\Sources\Imaging\Imaging %28mono%29.csproj">
+      <Project>{0e6dfeb9-e4c4-46db-bb5f-424f7275d114}</Project>
+      <Name>Imaging %28mono%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Library\motion_src\dshow\dshow.csproj">
+      <Project>{37b08afd-f4bc-4e13-9119-537ba6a12ccb}</Project>
+      <Name>dshow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Library\motion_src\motion\motion.csproj">
+      <Project>{f4799c73-dee9-48f2-b626-32149cc30976}</Project>
+      <Name>motion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Library\motion_src\vfw\vfw.csproj">
+      <Project>{ecaa3d55-19ab-440b-b82e-221ae06c4a5b}</Project>
+      <Name>vfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gala.Data\Gala.Data.csproj">
+      <Project>{fce634b4-5a87-4519-98d4-240b4a42f8d5}</Project>
+      <Name>Gala.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gala.Dolly.Chatbots\Gala.Dolly.Chatbots.csproj">
+      <Project>{8378c9ba-915f-4018-9944-8578f2855ff1}</Project>
+      <Name>Gala.Dolly.Chatbots</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gala.Dolly.Speech\Gala.Dolly.Speech.csproj">
+      <Project>{503B5858-4665-47B9-8BD3-2BBE917291C2}</Project>
+      <Name>Gala.Dolly.Speech</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gala.Dolly.UI\Gala.Dolly.UI.csproj">
+      <Project>{270e9e4e-9f39-4a3a-a04d-fc0b40ba7b12}</Project>
+      <Name>Gala.Dolly.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Galatea.AI.Abstract\Galatea.AI.Abstract.csproj">
+      <Project>{25141E11-C310-4D1F-B509-C130811104B0}</Project>
+      <Name>Galatea.AI.Abstract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Galatea.AI.Imaging\Galatea.AI.Imaging.csproj">
+      <Project>{722c0361-4b8f-415c-954f-54c988efef40}</Project>
+      <Name>Galatea.AI.Imaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Galatea.AI.Language\Galatea.AI.Language.csproj">
+      <Project>{cb45393d-18c7-47b3-a16b-2b62c1c66a77}</Project>
+      <Name>Galatea.AI.Language</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Galatea.AI.Robotics\Galatea.AI.Robotics.csproj">
+      <Project>{5d8691ab-beca-44a7-865f-41274af20950}</Project>
+      <Name>Galatea.AI.Robotics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Galatea.AI\Galatea.AI.csproj">
+      <Project>{cd60efdf-b92d-48a2-bc1f-25441c9becf3}</Project>
+      <Name>Galatea.AI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Galatea\Galatea.Core.csproj">
+      <Project>{e36af529-f151-4b39-92f1-115c31bcb746}</Project>
+      <Name>Galatea.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Galatea.Globalization\Galatea.Globalization.csproj">
+      <Project>{acd64769-d795-4230-ac94-59acc5e52de5}</Project>
+      <Name>Galatea.Globalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Galatea.Runtime\Galatea.Runtime.csproj">
+      <Project>{b0d0c0a4-d37d-4e5b-a357-758e1afb76ba}</Project>
+      <Name>Galatea.Runtime</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Interop.SpeechLib, Version=5.4.0.0, Culture=neutral, PublicKeyToken=daa0ce859239a9ad, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\Library\Interop.SpeechLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

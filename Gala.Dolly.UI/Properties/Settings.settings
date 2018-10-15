@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Gala.Dolly.UI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DebuggerLogLevel" Type="Galatea.Diagnostics.DebuggerLogLevel" Scope="User">
+      <Value Profile="(Default)">Event</Value>
+    </Setting>
+    <Setting Name="DebuggerAlertLevel" Type="Galatea.Diagnostics.DebuggerLogLevel" Scope="User">
+      <Value Profile="(Default)">Message</Value>
+    </Setting>
+    <Setting Name="DebuggerShowAlerts" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="WindowClientSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">464, 322</Value>
+    </Setting>
+    <Setting Name="ApplicationTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Gala Dolly</Value>
+    </Setting>
+    <Setting Name="ChatbotDefaultName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Default</Value>
+    </Setting>
+    <Setting Name="UserDefaultName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Peanut</Value>
+    </Setting>
+    <Setting Name="WindowLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="ChatbotDisplayResponseWaitTime" Type="System.Int16" Scope="User">
+      <Value Profile="(Default)">255</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
