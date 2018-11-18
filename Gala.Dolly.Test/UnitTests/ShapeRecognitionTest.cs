@@ -79,24 +79,24 @@ namespace Gala.Dolly.Test
 
             result = TestShapeResponse(@"..\..\..\Resources\Learning\pacman.png", "PIE SHAPED");
             Assert.IsTrue(result);
-            //result = TestShapeResponse(@"..\..\..\Resources\Learning\orange_pie.png", "PIE SHAPED");
-            //Assert.IsTrue(result);
+            result = TestShapeResponse(@"..\..\..\Resources\Learning\orange_pie.png", "PIE SHAPED");
+            Assert.IsTrue(result);
 
-            //result = TestShapeResponse(@"..\..\..\Resources\Learning\STAR_BLUE.png", "STAR");
-            //Assert.IsTrue(result);
-            //result = TestShapeResponse(@"..\..\..\Resources\Learning\star.png", "STAR");
-            //Assert.IsTrue(result);
+            result = TestShapeResponse(@"..\..\..\Resources\Learning\STAR_BLUE.png", "STAR");
+            Assert.IsTrue(result);
+            result = TestShapeResponse(@"..\..\..\Resources\Learning\star.png", "STAR");
+            Assert.IsTrue(result);
 
-            //// TEACH ADDITIONAL SHAPES
-            //_creator = null;
-            //response = GetShapeResponse(@"..\..\..\Resources\Learning\pentagon.png");
-            //TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, User, "It's a Pentagon.");
+            // TEACH ADDITIONAL SHAPES
+            _creator = null;
+            response = GetShapeResponse(@"..\..\..\Resources\Learning\pentagon.png");
+            TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, User, "It's a Pentagon.");
 
-            //_creator = TestEngine.User;  // Evaluates to Pentagon
-            //response = GetShapeResponse(@"..\..\..\Resources\Learning\hexagon.png");
-            //TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, User, "It's a Hexagon.");
-            //response = GetShapeResponse(@"..\..\..\Resources\Learning\STOP.png");
-            //TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, User, "It's an Octagon.");
+            _creator = TestEngine.User;  // Evaluates to Pentagon
+            response = GetShapeResponse(@"..\..\..\Resources\Learning\hexagon.png");
+            TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, User, "It's a Hexagon.");
+            response = GetShapeResponse(@"..\..\..\Resources\Learning\STOP.png");
+            TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, User, "It's an Octagon.");
         }
 
         private bool TestShapeResponse(string fileName, string expectedShapeName)
