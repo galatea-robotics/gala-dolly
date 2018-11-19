@@ -109,6 +109,9 @@ namespace Gala.Dolly.Test
             TestTemplateRelationShips(NamedTemplate.TemplateRelationships, TemplateRelationshipType.Comparison, Memory.Default[TemplateType.Shape]["Star"]);
         }
 
+        /*
+         * This is already tested as AiLogicTest.TestHybridColors
+         * 
         [TestMethod]
         [TestCategory("4 - Template Relationships")]
         public void TestAqua()
@@ -133,6 +136,7 @@ namespace Gala.Dolly.Test
             // Check Relationships
             AiLogicTest.TestColorTemplateRelationships(new[] { "Green", "Blue" }, false, TemplateRelationshipType.Contains, colorTest.NamedTemplate);
         }
+         */
 
         [TestMethod]
         [TestCategory("4 - Template Relationships")]

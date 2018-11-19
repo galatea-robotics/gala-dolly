@@ -102,6 +102,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\Users\User\AppData\Local\Microsoft.TestHost.x86\UnitTestAdapter__Running__StrongName_m5l5weancdfp4s54niytdpqgfzeu55uc\15.7.2\user.config">
+      <Link>Properties\user.config</Link>
+    </None>
     <None Include="..\Gala.Dolly\Gala.Dolly.pfx">
       <Link>Gala.Dolly.pfx</Link>
     </None>
