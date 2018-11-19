@@ -50,6 +50,16 @@ namespace Gala.Dolly.Test
         {
             try
             {
+                //// Load Local Settings
+                //if (System.IO.File.Exists("Gala.Dolly.Command.config"))
+                //    AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", "Gala.Dolly.Command.exe.config");
+
+                // Suppress Timeout
+                Settings.Default.ImagingSettings.Timeout = 2000;
+                Settings.Default.Save();
+
+                Settings.Default.ImagingSettings.SuppressTimeout = true;
+
                 // Initialize Runtime
                 _user = new Galatea.Runtime.Services.User("Test");
                 Galatea.Diagnostics.IDebugger debugger = new Gala.Dolly.Test.TestDebugger();
@@ -58,14 +68,12 @@ namespace Gala.Dolly.Test
                 SerializedDataAccessManager dataAccessManager = new SerializedDataAccessManager(Settings.Default.DataAccessManagerConnectionString);
                 dataAccessManager.RestoreBackup(@"..\..\..\Data\SerializedData.V1.dat");
 
+                // Start Test Engine
                 _engine = new TestEngine(debugger, dataAccessManager);
                 _engine.User = _user;
                 _engine.Startup();
 
                 _engine.ExecutiveFunctions.ContextRecognition += ExecutiveFunctions_ContextRecognition;
-
-                // Suppress Timeout
-                Galatea.AI.Imaging.Properties.Settings.Default.SuppressTimeout = true;
             }
             catch(Exception ex)
             {
