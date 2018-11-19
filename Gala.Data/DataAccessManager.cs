@@ -59,6 +59,8 @@ namespace Gala.Data
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
+
+            Disposed?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler Disposed;
@@ -90,7 +92,7 @@ namespace Gala.Data
          */
 
         private FeedbackCounterTable _feedbackCounterTable;
-        private string _connectionString;
+        private readonly string _connectionString;
         private IEngine _engine;
         private bool _isInitialized;
         private ISite _site;

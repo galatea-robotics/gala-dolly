@@ -7,7 +7,6 @@ namespace Gala.Data.Databases
     using Galatea.AI.Abstract;
     using Galatea.AI.Characterization;
     using Galatea.Runtime;
-    using Gala.Data.Runtime;
 
     internal class SerializedDataAccessManager : DataAccessManager
     {
