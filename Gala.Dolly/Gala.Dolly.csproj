@@ -79,11 +79,6 @@
   <ItemGroup>
     <Compile Include="ChatbotManager.cs" />
     <Compile Include="Internal\Extension.cs" />
-    <Compile Include="Properties\LocalSettings.Designer.cs">
-      <DependentUpon>LocalSettings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,7 +95,6 @@
     <Compile Include="Internal\CameraWindow.Designer.cs">
       <DependentUpon>CameraWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\LocalSettingsHelper.cs" />
     <Compile Include="Robotics\SpeechCommands.cs" />
     <Compile Include="TemplateRecognitionForm.cs">
       <SubType>Form</SubType>
@@ -166,18 +160,10 @@
     <EmbeddedResource Include="UI\VisionCapture.resx">
       <DependentUpon>VisionCapture.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="..\..\Local Settings\LocalSettings.config">
-      <Link>Properties\LocalSettings.config</Link>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="Gala.Dolly.pfx" />
-    <None Include="Properties\LocalSettings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>LocalSettings.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <SubType>

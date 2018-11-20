@@ -3,6 +3,8 @@ using System.Windows.Forms;
 
 namespace Gala.Dolly
 {
+    using Galatea.AI.Imaging;
+
     internal static class Program
     {
         internal static SmartEngine Engine { get { return _engine; } }
@@ -20,8 +22,10 @@ namespace Gala.Dolly
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += Application_ThreadException;
 
+            /*
             // Load Local Settings
             Gala.Dolly.Properties.LocalSettingsHelper.Load(localSettingsFile);
+             */
 
             // Start UI
             TemplateRecognitionForm form = new TemplateRecognitionForm();
@@ -58,11 +62,13 @@ namespace Gala.Dolly
 
         internal static void Startup()
         {
+            /*
             // Load Settings
             Gala.Dolly.Properties.Settings.Default.ImagingSettings = Galatea.AI.Imaging.ImagingSettings.Create();
 
             // TODO: Use settings and get rid of "Create()" function
             Galatea.AI.Imaging.Properties.Settings.Default.ImagingSettings = Properties.Settings.Default.ImagingSettings;
+             */
 
             // Initialize Robotics Engine
             _engine = new SmartEngine(_baseForm.UIDebugger);
@@ -84,8 +90,12 @@ namespace Gala.Dolly
 
         internal static void ShutdownUI()
         {
+            Properties.Settings.Default.ImagingSettings = VisualProcessor.ImagingSettings;
             Properties.Settings.Default.Save();
+
+            /*
             Properties.LocalSettingsHelper.Save(localSettingsFile);
+             */
 
             _baseForm.UIDebugger.LogLevel = Galatea.Diagnostics.DebuggerLogLevel.Log;
         }
@@ -112,7 +122,7 @@ namespace Gala.Dolly
             _started = false;
         }
 
-        private const string localSettingsFile = @"..\..\..\Local Settings\LocalSettings.config";
+        //private const string localSettingsFile = @"..\..\..\Local Settings\LocalSettings.config";
         private static UI.BaseForm _baseForm;
         private static UI.IConsole _console;
         private static SmartEngine _engine;

@@ -204,9 +204,9 @@ namespace Gala.Dolly.UI
             //Program.ImagingSettings.BlobPointSettings.LineAngleThreshold = 9;
             //Program.ImagingSettings.BlobPointSettings.CurveAngleThreshold = 27;
 
-            Galatea.AI.Imaging.Properties.Settings.Default.ImagingSettings.BlobPointSettings.LineSegmentThreshold = 18;
-            Galatea.AI.Imaging.Properties.Settings.Default.ImagingSettings.BlobPointSettings.LineAngleThreshold = 9;
-            Galatea.AI.Imaging.Properties.Settings.Default.ImagingSettings.BlobPointSettings.CurveAngleThreshold = 27;
+            VisualProcessor.ImagingSettings.BlobPointSettings.LineSegmentThreshold = 18;
+            VisualProcessor.ImagingSettings.BlobPointSettings.LineAngleThreshold = 9;
+            VisualProcessor.ImagingSettings.BlobPointSettings.CurveAngleThreshold = 27;
 
             try
             {

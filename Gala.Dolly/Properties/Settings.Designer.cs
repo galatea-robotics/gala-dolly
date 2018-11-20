@@ -12,7 +12,7 @@ namespace Gala.Dolly.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -321,17 +321,6 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::Galatea.AI.Imaging.ImagingSettings ImagingSettings {
-            get {
-                return ((global::Galatea.AI.Imaging.ImagingSettings)(this["ImagingSettings"]));
-            }
-            set {
-                this["ImagingSettings"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\..\\Resources\\Test Cases\\Live")]
         public string RecognitionImageSaveFolder {
             get {
@@ -417,6 +406,40 @@ namespace Gala.Dolly.Properties {
             }
             set {
                 this["ColorTemplateHybridResultThreshold"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n                    <ImagingSettings xmlns:xsi=\"http://www.w3.org/2001/XMLSchem" +
+            "a-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n                     " +
+            "   <Timeout>0</Timeout>\r\n                        <SuppressTimeout>false</Suppres" +
+            "sTimeout>\r\n                        <ColorStatsSettings>\r\n                       " +
+            "     <StatisticalAnalysisTypes>Mean</StatisticalAnalysisTypes>\r\n                " +
+            "        </ColorStatsSettings>\r\n                        <MonochromeBlobFilterSett" +
+            "ings>\r\n                            <ContrastCorrectionFactor>0.25</ContrastCorre" +
+            "ctionFactor>\r\n                            <AdaptiveSmoothingFactor>0.25</Adaptiv" +
+            "eSmoothingFactor>\r\n                            <FrameWidth>10</FrameWidth>\r\n    " +
+            "                    </MonochromeBlobFilterSettings>\r\n                        <Bl" +
+            "obPointSettings>\r\n                            <LineSegmentThreshold>18</LineSegm" +
+            "entThreshold>\r\n                            <LineAngleThreshold>9</LineAngleThres" +
+            "hold>\r\n                            <CurveAngleThreshold>27</CurveAngleThreshold>" +
+            "\r\n                        </BlobPointSettings>\r\n                        <Templat" +
+            "eRecognitionSettings>\r\n                            <ColorBrightnessThreshold>0</" +
+            "ColorBrightnessThreshold>\r\n                            <ColorSaturationThreshold" +
+            ">0</ColorSaturationThreshold>\r\n                            <ShapeOblongThreshold" +
+            ">0</ShapeOblongThreshold>\r\n                            <ShapeOblongRecognitionLe" +
+            "vel>0</ShapeOblongRecognitionLevel>\r\n                            <ShapeOblongRec" +
+            "ognitionNormalization>false</ShapeOblongRecognitionNormalization>\r\n             " +
+            "               <IdentifyShapeCertaintyMinimum>0</IdentifyShapeCertaintyMinimum>\r" +
+            "\n                        </TemplateRecognitionSettings>\r\n                    </I" +
+            "magingSettings>\r\n                ")]
+        public global::Galatea.AI.Imaging.ImagingSettings ImagingSettings {
+            get {
+                return ((global::Galatea.AI.Imaging.ImagingSettings)(this["ImagingSettings"]));
+            }
+            set {
+                this["ImagingSettings"] = value;
             }
         }
     }

@@ -37,15 +37,15 @@ namespace Gala.Dolly
 
         private void Initialize()
         {
-            _dataAccessManager.Initialize(this);
-            _dataAccessManager.InitializeMemoryBank();
-
             // Initialize Foundation Components
             Galatea.AI.Robotics.SensoryMotorSystem machine = new Galatea.AI.Robotics.Machine();
             machine.Initialize(this);
 
-            VisualProcessor vision = new VisualProcessor();
+            VisualProcessor vision = new VisualProcessor(Properties.Settings.Default.ImagingSettings);
             vision.Initialize(this);
+
+            _dataAccessManager.Initialize(this);
+            _dataAccessManager.InitializeMemoryBank();
 
             // Become Self-Aware
             IRobot robot = SelfAwareness.BecomeSelfAware(this, Properties.Settings.Default.ChatbotName);
