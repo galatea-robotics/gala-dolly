@@ -1,6 +1,6 @@
 ﻿namespace Gala.Dolly.Robotics.Bs2Commands
 {
-    public enum SpeechCommands : byte
+    internal enum SpeechCommands : byte
     {
         Pin1On = 11,
         Pin1Off = 10,

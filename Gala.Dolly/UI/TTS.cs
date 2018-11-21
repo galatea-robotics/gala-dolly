@@ -8,7 +8,7 @@ namespace Gala.Dolly.UI
     using Gala.Dolly.Properties;
     using Gala.Dolly.Robotics.Bs2Commands;
 
-    public partial class TTS : UserControl //, Galatea.Runtime.Speech.ITextToSpeech
+    internal partial class TTS : UserControl //, Galatea.Runtime.Speech.ITextToSpeech
     {
         protected ISpeechModule speechModule;
         protected BaseForm baseForm;
@@ -53,7 +53,7 @@ namespace Gala.Dolly.UI
         #region Design Properties
 
         [System.ComponentModel.DefaultValue(LEDColor.Red)]
-        public LEDColor LEDColor
+        internal LEDColor LEDColor
         {
             get { return _ledColor; }
             set {
@@ -76,7 +76,7 @@ namespace Gala.Dolly.UI
         }
 
         [System.ComponentModel.DefaultValue(EyeCamColor.Blue)]
-        public EyeCamColor EyeCamColor
+        internal EyeCamColor EyeCamColor
         {
             get { return _eyeCamColor; }
             set
@@ -497,13 +497,13 @@ namespace Gala.Dolly.UI
         private EyeCamColor _eyeCamColor;
     }
 
-    public enum LEDColor
+    internal enum LEDColor
     {
         Red,
         Green
     }
 
-    public enum EyeCamColor
+    internal enum EyeCamColor
     {
         Blue,
         Grey

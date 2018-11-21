@@ -21,11 +21,11 @@ namespace Gala.Dolly.UI
 {
     using Gala.Dolly.Properties;
 
-    public partial class VisionCapture : UserControl, IProvider
+    internal partial class VisionCapture : UserControl, IProvider
     {
         private IMotionDetector detector = null;
-        private int detectorType = 0;
-        private int intervalsToSave = 0;
+        //private int detectorType = 0;
+        //private int intervalsToSave = 0;
         private Tiger.Video.VFW.AVIWriter writer = null;
 
         private const int PANTILT_CONSTANT = 100;
@@ -166,10 +166,10 @@ namespace Gala.Dolly.UI
                 writer.Dispose();
                 writer = null;
             }
-            intervalsToSave = 0;
+            //intervalsToSave = 0;
         }
 
-        int frameIndex = 1;
+        //int frameIndex = 1;
         private void camera_NewFrame(object sender, System.EventArgs e)
         {
             /*
@@ -642,7 +642,7 @@ namespace Gala.Dolly.UI
             string file = openFileDialog1.FileName;
 
             ValidateAndLoadImage(file);
-            blobFillType = 0;
+            //blobFillType = 0;
         }
 
         private void ValidateAndLoadImage(string file)
@@ -712,8 +712,8 @@ namespace Gala.Dolly.UI
 
         private Bitmap sourceImage;
         private Bitmap displayImage;
-        private BlobImage blobImage;
-        private int blobFillType = -1;
+        //private BlobImage blobImage;
+        //private int blobFillType = -1;
 
         #endregion
 
@@ -731,7 +731,7 @@ namespace Gala.Dolly.UI
         //    Program.Engine.Machine.SerialPortController.SendCommand(nextCommand);
         //}
 
-        private int nextCommand;
+        //private int nextCommand;
 
 
         #region Pan/Tilt Limits

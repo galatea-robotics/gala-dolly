@@ -16,11 +16,11 @@ namespace Gala.Dolly.Chatbots
     internal sealed class Eliza : Chatbot
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Gala.Dolly.ChatBots.Eliza"></see> class.
+        /// Initializes a new instance of the <see cref="Eliza"></see> class.
         /// </summary>
         public Eliza() : base("Eliza") { Initialize(); }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Gala.Dolly.ChatBots.Eliza"></see> class.
+        /// Initializes a new instance of the <see cref="Eliza"></see> class.
         /// </summary>
         public Eliza(string name) : base(name, name) { Initialize(); }
 

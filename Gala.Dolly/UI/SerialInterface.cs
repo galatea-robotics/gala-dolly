@@ -18,7 +18,7 @@ namespace Gala.Dolly.UI
         internal ToolStripMenuItem serialOpenAtStartupMenuItem;
         internal ToolStripMenuItem serialDisableWarnings;
 
-        public SerialInterface()
+        internal SerialInterface()
         {
             InitializeComponent();
 

@@ -2,7 +2,7 @@ namespace Gala.Dolly
 {
     public partial class TemplateRecognitionForm : UI.BaseForm
     {
-        public TemplateRecognitionForm()
+        internal TemplateRecognitionForm()
         {
             InitializeComponent();
         }

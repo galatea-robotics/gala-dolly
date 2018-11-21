@@ -6,7 +6,7 @@ namespace Gala.Dolly
 {
     public partial class MainForm : UI.BaseForm
     {
-        public MainForm()
+        internal MainForm()
         {
             InitializeComponent();
         }

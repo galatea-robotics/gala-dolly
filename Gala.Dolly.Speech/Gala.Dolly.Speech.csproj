@@ -79,7 +79,7 @@
     <ErrorReport>prompt</ErrorReport>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\doc\Gala.Dolly.Speech.XML</DocumentationFile>
+    <DocumentationFile>..\doc\Gala.Dolly.Speech.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Gala.Dolly\Properties\Gala.Dolly.cs">

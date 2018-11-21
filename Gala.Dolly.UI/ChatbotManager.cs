@@ -49,7 +49,13 @@ namespace Gala.Dolly.UI
         /// Performs application-defined tasks associated with freeing, releasing, or resetting
         /// unmanaged resources.
         /// </summary>
-        public void Dispose() { Dispose(true); }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+
+            Disposed?.Invoke(this, EventArgs.Empty);
+        }
 
         /// <summary>
         /// Releases the unmanaged resources used by the System.ComponentModel.Component
