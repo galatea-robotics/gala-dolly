@@ -136,4 +136,10 @@ Public Class Form1
             Return "Gala.Dolly.Basic.SpeechRecognition"
         End Get
     End Property
+
+    Public ReadOnly Property ProviderName As String Implements IProvider.ProviderName
+        Get
+            Return "SpeechRecognition"
+        End Get
+    End Property
 End Class

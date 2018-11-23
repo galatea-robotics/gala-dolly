@@ -59,11 +59,7 @@ namespace Gala.Data
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-
-            Disposed?.Invoke(this, EventArgs.Empty);
         }
-
-        public event EventHandler Disposed;
 
         #endregion
 

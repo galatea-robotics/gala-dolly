@@ -90,7 +90,7 @@ namespace Gala.Dolly
             {
                 string msg = "Error loading Text to Speech.  Silencing Speech Module.";
                 Galatea.Speech.TeaSpeechException ex1 = new Galatea.Speech.TeaSpeechException(msg, ex);
-                Debugger.HandleTeaException(ex1);
+                Debugger.HandleTeaException(ex1, speech);
 
                 Program.Console.SendResponse(msg);
                 speech.StaySilent = true;

@@ -72,7 +72,19 @@ namespace Gala.Data.Databases
                             creator = Creators.Fetch(creatorData[0], creatorData[1]);
                         }
 
-                        this[templateType].Add(id, name, friendlyName, serialData, creator);
+                        try
+                        {
+                            this[templateType].Add(id, name, friendlyName, serialData, creator);
+                        }
+                        catch (TeaException ex)
+                        {
+                            this.Engine.Debugger.HandleTeaException(ex, this);
+                        }
+                        catch (System.Exception ex)
+                        {
+                            this.Engine.Debugger.ThrowSystemException(ex, this);
+                        }
+
                         nextLine = reader.ReadLine();
 
                         #region Other Tables
@@ -108,10 +120,13 @@ namespace Gala.Data.Databases
                 if (this.FeedbackCounterTable.Count == 0)
                     throw new TeaInitializeDataException("No Feedback Counter Table ticks initialized.");
             }
-            catch (Exception e)
+            catch (TeaException ex)
             {
-                if (!(e is TeaInitializeDataException))
-                    throw;
+                this.Engine.Debugger.HandleTeaException(ex, this);
+            }
+            catch (System.Exception ex)
+            {
+                this.Engine.Debugger.ThrowSystemException(ex, this);
             }
         }
 

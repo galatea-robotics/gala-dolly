@@ -48,11 +48,11 @@ namespace Gala.Dolly
         {
             if (e.Exception is Galatea.TeaException)
             {
-                _engine.Debugger.HandleTeaException(e.Exception as Galatea.TeaException);
+                _engine.Debugger.HandleTeaException(e.Exception as Galatea.TeaException, null);
             }
             else
             {
-                _engine.Debugger.ThrowSystemException(e.Exception);
+                _engine.Debugger.ThrowSystemException(e.Exception, null);
             }
 
             // Notify UI 

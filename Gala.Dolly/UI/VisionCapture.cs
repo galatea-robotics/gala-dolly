@@ -44,7 +44,8 @@ namespace Gala.Dolly.UI
             txtTiltMax.Text = Settings.Default.VisionCaptureTiltMax.ToString();
         }
 
-        string IProvider.ProviderID { get { return "Gala.Dolly.UI.VisionCapture"; } }
+        string IProvider.ProviderID => "Gala.Dolly.UI.VisionCapture";
+        string IProvider.ProviderName => "VisionCapture";
 
         public Point Offset
         {
@@ -658,7 +659,7 @@ namespace Gala.Dolly.UI
             catch (System.ArgumentException ex)
             {
                 errorMessage = "Invalid image type.";
-                Program.Engine.Debugger.HandleTeaException(new Galatea.TeaArgumentException(errorMessage, ex));
+                Program.Engine.Debugger.HandleTeaException(new Galatea.TeaArgumentException(errorMessage, ex), this);
             }
 
             if (Settings.Default.RecognitionImageSaveImages)
@@ -677,7 +678,7 @@ namespace Gala.Dolly.UI
             }
             catch (TeaImagingException ex)
             {
-                Program.Engine.Debugger.HandleTeaException(ex);
+                Program.Engine.Debugger.HandleTeaException(ex, this);
             }
 
             // Notify if Error

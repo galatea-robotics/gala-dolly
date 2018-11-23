@@ -164,6 +164,18 @@ Public Class VbChatbot
         End Set
     End Property
 
+    Public ReadOnly Property ProviderID As String Implements IProvider.ProviderID
+        Get
+            Throw New NotImplementedException()
+        End Get
+    End Property
+
+    Public ReadOnly Property ProviderName As String Implements IProvider.ProviderName
+        Get
+            Throw New NotImplementedException()
+        End Get
+    End Property
+
     Public Property Inputting() As Boolean
         Get
             Return _inputting
@@ -171,12 +183,6 @@ Public Class VbChatbot
         Set(ByVal value As Boolean)
             _inputting = value
         End Set
-    End Property
-
-    Public ReadOnly Property ProviderID As String Implements IProvider.ProviderID
-        Get
-            Throw New NotImplementedException()
-        End Get
     End Property
 
     Private _inputting As Boolean

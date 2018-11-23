@@ -5,6 +5,7 @@ namespace Gala.Dolly.UI.Diagnostics
 { 
     using Galatea;
     using Galatea.Diagnostics;
+    using Galatea.Globalization;
 
     /// <summary>
     /// Includes File Logging and methods for Handling Errors instead of simply outputting
@@ -34,19 +35,22 @@ namespace Gala.Dolly.UI.Diagnostics
         /// <param name="ex">
         /// A run-time <see cref="TeaException"/>.
         /// </param>
-        protected override void HandleTeaException(TeaException ex)
+        /// <param name="provider">
+        /// The runtime component where the exception occurred.
+        /// </param>
+        protected override void HandleTeaException(TeaException ex, IProvider provider)
         {
             string msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
             Log(DebuggerLogLevel.Error, msg);
             Log(DebuggerLogLevel.StackTrace, ex.StackTrace, true);
 
-            string errorMessage = Galatea.Globalization.DiagnosticResources.Debugger_Error_Speech_Message;
+            string errorMessage = provider == null ? DiagnosticResources.Debugger_Error_Speech_Message :
+                string.Format(DiagnosticResources.Debugger_Error_Speech_Message_Format, provider.ProviderName);
+
             if (msg.Substring(0, 17) != "Exception of type") errorMessage += "  " + msg;
 
             this.Exception = ex;
             this.ErrorMessage = errorMessage;
-
-            //if (Error != null) Error(provider, new ErrorEventArgs(ex, errorMessage));
         }
         /// <summary>
         /// Handles unexpected System Errors, typically by logging them, and then
@@ -55,16 +59,17 @@ namespace Gala.Dolly.UI.Diagnostics
         /// <param name="ex">
         /// A run-time <see cref="System.Exception"/>.
         /// </param>
-        protected override void ThrowSystemException(Exception ex)
+        /// <param name="provider">
+        /// The runtime component where the exception occurred.
+        /// </param>
+        protected override void ThrowSystemException(Exception ex, IProvider provider)
         {
             Log(DebuggerLogLevel.Critical, ex.Message);
             Log(DebuggerLogLevel.StackTrace, ex.StackTrace, true);
 
             this.Exception = ex;
-            this.ErrorMessage = Galatea.Globalization.DiagnosticResources.Debugger_Unexpected_Error_Speech_Message;
-
-            //if (Error != null) Error(provider, new ErrorEventArgs(ex, 
-            //    Galatea.Globalization.DiagnosticResources.Debugger_Unexpected_Error_Speech_Message));
+            this.ErrorMessage = provider == null ? DiagnosticResources.Debugger_Error_Unexpected_Speech_Message :
+                string.Format(DiagnosticResources.Debugger_Error_Unexpected_Speech_Message_Format, provider.ProviderName);
         }
         /// <summary>
         /// Logs messages and errors to a log file using a <see cref="IFileLogger"/> instance.

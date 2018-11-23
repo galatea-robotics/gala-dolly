@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using Galatea.AI.Abstract;
 using Galatea.AI.Characterization;
+using Galatea.Runtime;
 
 namespace Gala.Data.Runtime
 {
@@ -15,6 +17,10 @@ namespace Gala.Data.Runtime
             Galatea.AI.Abstract.Memory.Default = this;
 
             // Initialize
+            var t = this.GetType();
+            ProviderID = t.FullName;
+            ProviderName = t.Name;
+
             if (_feedbackCache == null) _feedbackCache = new FeedbackCache();
             if (_creators == null) _creators = new CreatorCollection();
         }
@@ -50,6 +56,7 @@ namespace Gala.Data.Runtime
 
         public abstract void SaveAll();
 
+
         #region IDisposable
         private bool disposedValue = false; // To detect redundant calls
 
@@ -67,6 +74,8 @@ namespace Gala.Data.Runtime
 
                 disposedValue = true;
             }
+
+            Disposed?.Invoke(this, EventArgs.Empty);
         }
 
         // This code added to correctly implement the disposable pattern.
@@ -75,7 +84,22 @@ namespace Gala.Data.Runtime
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
         }
+
+        public event EventHandler Disposed;
         #endregion
+
+        ISite IComponent.Site { get; set; }
+
+        /// <summary>
+        /// Gets a unique value representing the Data Access Manager.
+        /// </summary>
+        public string ProviderID { get; }
+
+        /// <summary>
+        /// The name that is displayed by UI and logging functions.
+        /// </summary>
+        public string ProviderName { get; }
+
 
         private static IFeedbackCache _feedbackCache;
         private static CreatorCollection _creators;

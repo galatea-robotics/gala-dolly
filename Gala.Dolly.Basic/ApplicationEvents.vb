@@ -33,10 +33,10 @@ Namespace My
 
             If TypeOf e.Exception Is TeaException Then
 
-                Program.Engine.Debugger.HandleTeaException(e.Exception)
+                Program.Engine.Debugger.HandleTeaException(e.Exception, Nothing)
             Else
 
-                Program.Engine.Debugger.ThrowSystemException(e.Exception)
+                Program.Engine.Debugger.ThrowSystemException(e.Exception, Nothing)
             End If
         End Sub
 

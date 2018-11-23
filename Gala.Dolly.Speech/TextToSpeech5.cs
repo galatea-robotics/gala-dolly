@@ -74,7 +74,7 @@ namespace Galatea.Speech
                 Galatea.Speech.TeaSpeechException speechException = new Galatea.Speech.TeaSpeechException(msg, ex);
 
                 if (index != -1)
-                    _speechModule.LanguageModel.AI.Engine.Debugger.HandleTeaException(speechException);
+                    _speechModule.LanguageModel.AI.Engine.Debugger.HandleTeaException(speechException, _speechModule);
                 else
                 {
                     // 2nd Try - Throw the error instead of handling it.

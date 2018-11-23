@@ -93,7 +93,9 @@ namespace Gala.Dolly.UI
             }
         }
 
-        string IProvider.ProviderID { get { return "Gala.Dolly.UI.ChatbotControl"; } }
+        string IProvider.ProviderID => "Gala.Dolly.UI.ChatbotControl";
+        string IProvider.ProviderName => "ChatbotControl";
+
         void IConsole.SendResponse(string response)
         {
             SendResponse(response);

@@ -96,9 +96,7 @@
     <Compile Include="Runtime\ContextCache.cs" />
     <Compile Include="Runtime\CreatorCollection.cs" />
     <Compile Include="Runtime\FeedbackCache.cs" />
-    <Compile Include="Runtime\Memory.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Runtime\Memory.cs" />
     <Compile Include="Runtime\TeaInitializeDataException.cs" />
   </ItemGroup>
   <ItemGroup>
