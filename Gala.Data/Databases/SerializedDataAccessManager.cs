@@ -115,10 +115,11 @@ namespace Gala.Data.Databases
                     throw new TeaInitializeDataException("No Shape Templates initialized.");
                 if (this[TemplateType.Symbol].Count == 0)
                     throw new TeaInitializeDataException("No Symbol Templates initialized.");
-                if (this[TemplateType.PatternEntity].Count == 0)
-                    throw new TeaInitializeDataException("No Named Entities initialized.");
-                if (this.FeedbackCounterTable.Count == 0)
-                    throw new TeaInitializeDataException("No Feedback Counter Table ticks initialized.");
+
+                //if (this[TemplateType.PatternEntity].Count == 0)
+                //    throw new TeaInitializeDataException("No Named Entities initialized.");
+                //if (this.FeedbackCounterTable.Count == 0)
+                //    throw new TeaInitializeDataException("No Feedback Counter Table ticks initialized.");
             }
             catch (TeaException ex)
             {
