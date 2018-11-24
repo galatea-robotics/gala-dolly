@@ -63,6 +63,8 @@ namespace Gala.Dolly.UI.Diagnostics
         /// </param>
         protected override void Dispose(bool disposing)
         {
+            _isLogging = false;
+
             _writer.Dispose();
             base.Dispose(disposing);
         }

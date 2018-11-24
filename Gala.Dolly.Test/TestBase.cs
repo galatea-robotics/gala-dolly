@@ -5,6 +5,7 @@ using System.ComponentModel;
 namespace Gala.Dolly.Test
 {
     using Galatea;
+    using Galatea.Diagnostics;
     using Gala.Data;
     using Gala.Data.Databases;
     using Gala.Dolly.Test.Properties;
@@ -18,18 +19,22 @@ namespace Gala.Dolly.Test
         private static Galatea.AI.Abstract.NamedEntity _namedEntity;
 
         internal static TestEngine TestEngine { get { return _engine; } }
+
+        public TestBase()
+        {
+            var t = this.GetType();
+            _providerId = t.FullName;
+            _providerName = t.Name;
+        }
+
         public Galatea.AI.Abstract.IUser User { get { return _user; } }
         public Galatea.AI.Abstract.BaseTemplate NamedTemplate { get { return _namedTemplate; } }
         public Galatea.AI.Abstract.NamedEntity NamedEntity { get { return _namedEntity; } }
 
         #region IProvider
-        string IProvider.ProviderID
-        {
-            get
-            {
-                return this.GetType().FullName;
-            }
-        }
+        string IProvider.ProviderID { get { return _providerId; } }
+        string IProvider.ProviderName { get { return _providerName; } }
+
         ISite IComponent.Site
         {
             get { return _site; }
@@ -42,6 +47,7 @@ namespace Gala.Dolly.Test
         }
         public event EventHandler Disposed;
 
+        private readonly string _providerId, _providerName;
         private ISite _site;
         #endregion
 
@@ -62,8 +68,10 @@ namespace Gala.Dolly.Test
 
                 // Initialize Runtime
                 _user = new Galatea.Runtime.Services.User("Test");
+
+                Properties.Settings.Default.DebuggerLogLevel = Galatea.Diagnostics.DebuggerLogLevel.Diagnostic;
+                DebuggerLogLevelSettings.Initialize(Properties.Settings.Default.DebuggerLogLevel, Properties.Settings.Default.DebuggerAlertLevel);
                 Galatea.Diagnostics.IDebugger debugger = new Gala.Dolly.Test.TestDebugger();
-                debugger.LogLevel = Galatea.Diagnostics.DebuggerLogLevel.Diagnostic;
 
                 SerializedDataAccessManager dataAccessManager = new SerializedDataAccessManager(Settings.Default.DataAccessManagerConnectionString);
                 dataAccessManager.RestoreBackup(@"..\..\..\Data\SerializedData.V1.dat");
@@ -92,6 +100,11 @@ namespace Gala.Dolly.Test
         public static void End()
         {
             _engine.Shutdown();
+
+            // Save Runtime Settings
+            Properties.Settings.Default.DebuggerLogLevel = DebuggerLogLevelSettings.DebuggerLogLevel;
+            Properties.Settings.Default.DebuggerAlertLevel = DebuggerLogLevelSettings.DebuggerAlertLevel;
+            Properties.Settings.Default.Save();
         }
     }
 }

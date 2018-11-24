@@ -17,6 +17,11 @@ namespace Gala.Dolly.UI
         {
             InitializeComponent();
             this.Icon = Galatea.IconResource.Galatea;
+
+            this._debugger = new Diagnostics.UIDebugger();
+            _debugger.LogLevel = Properties.Settings.Default.DebuggerLogLevel;
+            _debugger.AlertLevel = Properties.Settings.Default.DebuggerAlertLevel;
+            _debugger.ShowAlerts = Properties.Settings.Default.DebuggerShowAlerts;
             this._debugger.InitializeToolStrip(_toolsMenu);
 
             /*
@@ -45,6 +50,7 @@ namespace Gala.Dolly.UI
             System.Diagnostics.Debug.WriteLine("....BaseForm.Disposed....");
         }
 
+        private Gala.Dolly.UI.Diagnostics.UIDebugger _debugger;
         private static BaseForm _current;
     }
 }

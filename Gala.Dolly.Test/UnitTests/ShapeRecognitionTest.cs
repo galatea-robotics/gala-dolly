@@ -1,14 +1,15 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Galatea.IO;
-using Galatea.Imaging.IO;
 using Galatea;
-using System.ComponentModel;
+using Galatea.Imaging.IO;
+using Galatea.IO;
 
 namespace Gala.Dolly.Test
 {
     using Galatea.AI.Abstract;
+    using Galatea.AI.Imaging;
 
     [TestClass]
     public class ShapeRecognitionTest : TestBase
@@ -107,8 +108,10 @@ namespace Gala.Dolly.Test
         internal string GetShapeResponse(string fileName)
         {
             Bitmap bitmap = new Bitmap(fileName);
-            bitmap.Save("bitmap.png", System.Drawing.Imaging.ImageFormat.Png);
-
+            if (VisualProcessor.ImagingSettings.DebugRecognitionSaveImages)
+            {
+                bitmap.Save("bitmap.png", System.Drawing.Imaging.ImageFormat.Png);
+            }
             ImagingContextStream stream = ImagingContextStream.FromBitmap(bitmap);
 
             TestEngine.ExecutiveFunctions.StreamContext(TestEngine, TestEngine.Vision.ImageAnalyzer,

@@ -142,9 +142,12 @@ namespace Gala.Data.Databases
             }
 
             // Save Feedback Counter table
-            streamWriter.WriteLine(SerializationHelper.FeedbackDelimiter);
-            string feedbackData = SerializationHelper.Serialize(FeedbackCounterTable);
-            streamWriter.WriteLine(feedbackData);
+            if (FeedbackCounterTable != null)
+            {
+                streamWriter.WriteLine(SerializationHelper.FeedbackDelimiter);
+                string feedbackData = SerializationHelper.Serialize(FeedbackCounterTable);
+                streamWriter.WriteLine(feedbackData);
+            }
 
             // Indicate EoF
             streamWriter.Write(SerializationHelper.EndOfFileDelimiter);

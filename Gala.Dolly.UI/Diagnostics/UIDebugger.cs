@@ -112,19 +112,23 @@ namespace Gala.Dolly.UI.Diagnostics
             this.debugEventMenuItem.Checked = (LogLevel == DebuggerLogLevel.Event);
             this.debugMsgMenuItem.Checked = (LogLevel >= DebuggerLogLevel.Message);
             this.debugShowAlertsMenuItem.CheckOnClick = true;
-
-            // Initialize Events
-            debugDiagnosticMenuItem.Click += DebugStripMenuItem_Click;
-            debugLogMenuItem.Click += DebugStripMenuItem_Click;
-            debugEventMenuItem.Click += DebugStripMenuItem_Click;
-            debugMsgMenuItem.Click += DebugStripMenuItem_Click;
-
             speechSilentMenuItem.CheckOnClick = true;
-            speechSilentMenuItem.Click += SpeechSilentMenuItem_Click;
+
 
             // Add the Menu to the Application
             container.DropDownItems.Add(this.debugMenu);
             container.DropDownItems.Add(this.speechMenu);
+
+            // Initialize Events
+            if (!this.DesignMode)
+            {
+                debugDiagnosticMenuItem.Click += DebugStripMenuItem_Click;
+                debugLogMenuItem.Click += DebugStripMenuItem_Click;
+                debugEventMenuItem.Click += DebugStripMenuItem_Click;
+                debugMsgMenuItem.Click += DebugStripMenuItem_Click;
+
+                speechSilentMenuItem.Click += SpeechSilentMenuItem_Click;
+            }
         }
 
         private void SpeechSilentMenuItem_Click(object sender, EventArgs e)

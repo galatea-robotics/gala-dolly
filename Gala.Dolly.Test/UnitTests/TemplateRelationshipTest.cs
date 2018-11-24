@@ -44,16 +44,25 @@ namespace Gala.Dolly.Test
             Color fillColor = Color.FromArgb(128, 128, 255);
 
             Bitmap temp = new Bitmap(@"..\..\..\Resources\Learning\fat_circle.png");
-            temp.Save("bitmap.png", ImageFormat.Png);
+            if (VisualProcessor.ImagingSettings.DebugRecognitionSaveImages)
+            {
+                temp.Save("bitmap.png", ImageFormat.Png);
+            }
 
             // Get Initial Points
             GuiPointsGraphics.DrawInitialPoints(Color.Blue, Color.DarkBlue, Color.LightBlue, GuiPointShape.Cross,
                 namedTemplate.BlobPoints.InitialPoints, temp);
-            temp.Save("bitmapPoints.png", ImageFormat.Png);
+            if (VisualProcessor.ImagingSettings.DebugRecognitionSaveImages)
+            {
+                temp.Save("bitmapPoints.png", ImageFormat.Png);
+            }
 
             // Get final Blob Points
             GuiPointsGraphics.DrawBlobPoints(temp, namedTemplate.BlobPoints, Color.Orange, Color.Red, Color.Pink, Color.Yellow, Color.Green);
-            temp.Save("bitmapBlobPoints.png", ImageFormat.Png);
+            if (VisualProcessor.ImagingSettings.DebugRecognitionSaveImages)
+            {
+                temp.Save("bitmapBlobPoints.png", ImageFormat.Png);
+            }
 
             #endregion
 

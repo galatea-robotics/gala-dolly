@@ -35,7 +35,6 @@ namespace Gala.Dolly.UI
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._viewMenu = new System.Windows.Forms.ToolStripMenuItem();
             this._toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this._debugger = new Gala.Dolly.UI.Diagnostics.UIDebugger();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,11 +50,11 @@ namespace Gala.Dolly.UI
             this.menuStrip.TabIndex = 2;
             this.menuStrip.Text = "menuStrip";
             // 
-            // fileMenu
+            // _fileMenu
             // 
             this._fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitMenuItem});
-            this._fileMenu.Name = "fileMenu";
+            this._fileMenu.Name = "_fileMenu";
             this._fileMenu.Size = new System.Drawing.Size(37, 20);
             this._fileMenu.Text = "&File";
             // 
@@ -66,25 +65,17 @@ namespace Gala.Dolly.UI
             this.exitMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitMenuItem.Text = "E&xit";
             // 
-            // viewMenu
+            // _viewMenu
             // 
-            this._viewMenu.Name = "viewMenu";
+            this._viewMenu.Name = "_viewMenu";
             this._viewMenu.Size = new System.Drawing.Size(44, 20);
             this._viewMenu.Text = "&View";
             // 
-            // toolsMenu
+            // _toolsMenu
             // 
-            this._toolsMenu.Name = "toolsMenu";
+            this._toolsMenu.Name = "_toolsMenu";
             this._toolsMenu.Size = new System.Drawing.Size(47, 20);
             this._toolsMenu.Text = "&Tools";
-            // 
-            // _debugger
-            // 
-            this._debugger.AlertLevel = Galatea.Diagnostics.DebuggerLogLevel.Log;
-            this._debugger.FileLogger = null;
-            this._debugger.LogLevel = Galatea.Diagnostics.DebuggerLogLevel.Log;
-            this._debugger.ShowAlerts = false;
-            this._debugger.SpeechMenuEnabled = true;
             // 
             // BaseForm
             // 
@@ -95,7 +86,6 @@ namespace Gala.Dolly.UI
             this.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Gala.Dolly.UI.Properties.Settings.Default, "ApplicationTitle", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::Gala.Dolly.UI.Properties.Settings.Default, "WindowClientSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::Gala.Dolly.UI.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.Icon = global::Gala.Dolly.UI.Properties.Resources.Dolly;
             this.Location = global::Gala.Dolly.UI.Properties.Settings.Default.WindowLocation;
             this.Name = "BaseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -111,7 +101,6 @@ namespace Gala.Dolly.UI
 
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
-        private Gala.Dolly.UI.Diagnostics.UIDebugger _debugger;
         private System.Windows.Forms.ToolStripMenuItem _fileMenu;
         private System.Windows.Forms.ToolStripMenuItem _viewMenu;
         private System.Windows.Forms.ToolStripMenuItem _toolsMenu;

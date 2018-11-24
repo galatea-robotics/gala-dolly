@@ -6,6 +6,7 @@ namespace Gala.Dolly.UI.Diagnostics
     using Galatea;
     using Galatea.Diagnostics;
     using Galatea.Globalization;
+    using Galatea.Runtime.Services;
 
     /// <summary>
     /// Includes File Logging and methods for Handling Errors instead of simply outputting
@@ -16,10 +17,11 @@ namespace Gala.Dolly.UI.Diagnostics
         /// <summary>
         /// Initializes a new instance of the <see cref="Gala.Dolly.UI.Diagnostics.Debugger"/> class.
         /// </summary>
-        public Debugger() : base()
+        public Debugger() : base(Properties.Settings.Default.DebuggerLogLevel, Properties.Settings.Default.DebuggerAlertLevel)
         {
             InitializeComponent();
         }
+
         /// <summary>
         /// Gets or sets a <see cref="FileLogger"/> component reference.
         /// </summary>
@@ -96,7 +98,13 @@ namespace Gala.Dolly.UI.Diagnostics
 
                 System.Diagnostics.Debug.WriteLine(sOutput);
 
-                if (_fileLogger.IsLogging) _fileLogger.Log(sOutput);
+                // Output to log file
+                if (_fileLogger == null) return;
+
+                if (Debugger.Initialized && _fileLogger.IsLogging)
+                {
+                    _fileLogger.Log(sOutput);
+                }
             }
         }
 
