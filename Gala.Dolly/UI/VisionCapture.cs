@@ -59,7 +59,10 @@ namespace Gala.Dolly.UI
 
 #if DEBUG
             // Debugging
-            result.Save("lastframe.png", System.Drawing.Imaging.ImageFormat.Png);
+            if (Settings.Default.ImagingSettings.DebugRecognitionSaveImages)
+            {
+                result.Save("lastframe.png", System.Drawing.Imaging.ImageFormat.Png);
+            }
 #endif
 
             SetDisplayImage(result);
@@ -662,7 +665,7 @@ namespace Gala.Dolly.UI
                 Program.Engine.Debugger.HandleTeaException(new Galatea.TeaArgumentException(errorMessage, ex), this);
             }
 
-            if (Settings.Default.RecognitionImageSaveImages)
+            if (Settings.Default.ImagingSettings.DebugRecognitionSaveImages)
                 ImageDump(sourceImage, "Load");
 
             // Display in the User Control
@@ -702,12 +705,12 @@ namespace Gala.Dolly.UI
 
         private void ImageDump(Image image, string prefix = null)
         {
-            if (!Settings.Default.RecognitionImageSaveImages) return;
+            if (!Settings.Default.ImagingSettings.DebugRecognitionSaveImages) return;
 
             string filename = string.Format("{0:yyyymmdd_HHmmss_fff}.png", DateTime.Now);
             if (!string.IsNullOrEmpty(prefix)) filename = string.Format("{0}_{1}", prefix, filename);
 
-            image.Save(System.IO.Path.Combine(Settings.Default.RecognitionImageSaveFolder, filename), System.Drawing.Imaging.ImageFormat.Png);
+            image.Save(System.IO.Path.Combine(Settings.Default.ImagingSettings.DebugRecognitionSaveFolder, filename), System.Drawing.Imaging.ImageFormat.Png);
         }
 
 

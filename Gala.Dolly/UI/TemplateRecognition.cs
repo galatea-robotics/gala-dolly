@@ -327,7 +327,10 @@ namespace Gala.Dolly.UI
             Color lastPointColor = Color.FromArgb(64, Color.Blue);
             Bitmap bitmap = GuiImaging.GetBitmapBlobImage(st.BitmapBlob, fillColor, backgroundColor);
 #if DEBUG
-            bitmap.Save("bitmap.png", System.Drawing.Imaging.ImageFormat.Png);
+            if(Settings.Default.ImagingSettings.DebugRecognitionSaveImages)
+            {
+                bitmap.Save("bitmap.png", System.Drawing.Imaging.ImageFormat.Png);
+            }
 #endif
             //// Reverse any Rotation
             //if (st.BitmapBlob.Rotation > 0)

@@ -25,6 +25,18 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Peanut")]
+        public string DefaultUserName {
+            get {
+                return ((string)(this["DefaultUserName"]));
+            }
+            set {
+                this["DefaultUserName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("MARIA")]
         public string ChatbotName {
             get {
@@ -49,37 +61,15 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string SuppressAlice {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>I,eye</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection ChatbotSubstitutions {
             get {
-                return ((string)(this["SuppressAlice"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["ChatbotSubstitutions"]));
             }
             set {
-                this["SuppressAlice"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string SuppressEliza {
-            get {
-                return ((string)(this["SuppressEliza"]));
-            }
-            set {
-                this["SuppressEliza"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Peanut")]
-        public string DefaultUserName {
-            get {
-                return ((string)(this["DefaultUserName"]));
-            }
-            set {
-                this["DefaultUserName"] = value;
+                this["ChatbotSubstitutions"] = value;
             }
         }
         
@@ -104,6 +94,18 @@ namespace Gala.Dolly.Properties {
             }
             set {
                 this["TtsVolume"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int TextToSpeechDefaultVoiceIndex {
+            get {
+                return ((int)(this["TextToSpeechDefaultVoiceIndex"]));
+            }
+            set {
+                this["TextToSpeechDefaultVoiceIndex"] = value;
             }
         }
         
@@ -155,20 +157,6 @@ namespace Gala.Dolly.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>I,eye</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection ChatbotSubstitutions {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["ChatbotSubstitutions"]));
-            }
-            set {
-                this["ChatbotSubstitutions"] = value;
-            }
-        }
-        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
@@ -201,13 +189,13 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\Log.txt")]
-        public string LogFileName {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SerialPortDisableWarning {
             get {
-                return ((string)(this["LogFileName"]));
+                return ((bool)(this["SerialPortDisableWarning"]));
             }
             set {
-                this["LogFileName"] = value;
+                this["SerialPortDisableWarning"] = value;
             }
         }
         
@@ -261,18 +249,6 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("250")]
-        public int SpeechRecogResumeMicInterval {
-            get {
-                return ((int)(this["SpeechRecogResumeMicInterval"]));
-            }
-            set {
-                this["SpeechRecogResumeMicInterval"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LanguageModeChatbotOnly {
             get {
@@ -319,42 +295,6 @@ namespace Gala.Dolly.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\..\\Resources\\Test Cases\\Live")]
-        public string RecognitionImageSaveFolder {
-            get {
-                return ((string)(this["RecognitionImageSaveFolder"]));
-            }
-            set {
-                this["RecognitionImageSaveFolder"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool RecognitionImageSaveImages {
-            get {
-                return ((bool)(this["RecognitionImageSaveImages"]));
-            }
-            set {
-                this["RecognitionImageSaveImages"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool SerialPortDisableWarning {
-            get {
-                return ((bool)(this["SerialPortDisableWarning"]));
-            }
-            set {
-                this["SerialPortDisableWarning"] = value;
-            }
-        }
-        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\..\\Data\\SerializedData.dat")]
@@ -366,74 +306,46 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int TextToSpeechDefaultVoiceIndex {
+        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\Log.txt")]
+        public string LogFileName {
             get {
-                return ((int)(this["TextToSpeechDefaultVoiceIndex"]));
+                return ((string)(this["LogFileName"]));
             }
             set {
-                this["TextToSpeechDefaultVoiceIndex"] = value;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\..\\Data\\SerializedFeedbackData.dat")]
-        public string FeedbackManagerConnectionString {
-            get {
-                return ((string)(this["FeedbackManagerConnectionString"]));
+                this["LogFileName"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\..\\Local Settings\\app.config")]
-        public string LocalSettingsPath {
-            get {
-                return ((string)(this["LocalSettingsPath"]));
-            }
-            set {
-                this["LocalSettingsPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public short ColorTemplateHybridResultThreshold {
-            get {
-                return ((short)(this["ColorTemplateHybridResultThreshold"]));
-            }
-            set {
-                this["ColorTemplateHybridResultThreshold"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n                    <ImagingSettings xmlns:xsi=\"http://www.w3.org/2001/XMLSchem" +
-            "a-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n                     " +
-            "   <Timeout>0</Timeout>\r\n                        <SuppressTimeout>false</Suppres" +
-            "sTimeout>\r\n                        <ColorStatsSettings>\r\n                       " +
-            "     <StatisticalAnalysisTypes>Mean</StatisticalAnalysisTypes>\r\n                " +
-            "        </ColorStatsSettings>\r\n                        <MonochromeBlobFilterSett" +
-            "ings>\r\n                            <ContrastCorrectionFactor>0.25</ContrastCorre" +
-            "ctionFactor>\r\n                            <AdaptiveSmoothingFactor>0.25</Adaptiv" +
-            "eSmoothingFactor>\r\n                            <FrameWidth>10</FrameWidth>\r\n    " +
-            "                    </MonochromeBlobFilterSettings>\r\n                        <Bl" +
-            "obPointSettings>\r\n                            <LineSegmentThreshold>18</LineSegm" +
-            "entThreshold>\r\n                            <LineAngleThreshold>9</LineAngleThres" +
-            "hold>\r\n                            <CurveAngleThreshold>27</CurveAngleThreshold>" +
-            "\r\n                        </BlobPointSettings>\r\n                        <Templat" +
-            "eRecognitionSettings>\r\n                            <ColorBrightnessThreshold>0</" +
-            "ColorBrightnessThreshold>\r\n                            <ColorSaturationThreshold" +
-            ">0</ColorSaturationThreshold>\r\n                            <ShapeOblongThreshold" +
-            ">0</ShapeOblongThreshold>\r\n                            <ShapeOblongRecognitionLe" +
-            "vel>0</ShapeOblongRecognitionLevel>\r\n                            <ShapeOblongRec" +
-            "ognitionNormalization>false</ShapeOblongRecognitionNormalization>\r\n             " +
-            "               <IdentifyShapeCertaintyMinimum>0</IdentifyShapeCertaintyMinimum>\r" +
-            "\n                        </TemplateRecognitionSettings>\r\n                    </I" +
-            "magingSettings>\r\n                ")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ImagingSettings xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <Timeout>0</Timeout>
+  <SuppressTimeout>false</SuppressTimeout>
+  <DebugRecognitionSaveImages>false</DebugRecognitionSaveImages>
+  <DebugRecognitionSaveFolder>..\..\..\Resources\Test Cases\Live</DebugRecognitionSaveFolder>
+  <ColorStatsSettings>
+    <StatisticalAnalysisTypes>Mean</StatisticalAnalysisTypes>
+  </ColorStatsSettings>
+  <MonochromeBlobFilterSettings>
+    <ContrastCorrectionFactor>0.25</ContrastCorrectionFactor>
+    <AdaptiveSmoothingFactor>0.25</AdaptiveSmoothingFactor>
+    <FrameWidth>10</FrameWidth>
+  </MonochromeBlobFilterSettings>
+  <BlobPointSettings>
+    <LineSegmentThreshold>18</LineSegmentThreshold>
+    <LineAngleThreshold>9</LineAngleThreshold>
+    <CurveAngleThreshold>27</CurveAngleThreshold>
+  </BlobPointSettings>
+  <TemplateRecognitionSettings>
+    <ColorBrightnessThreshold>0</ColorBrightnessThreshold>
+    <ColorSaturationThreshold>0</ColorSaturationThreshold>
+    <ShapeOblongThreshold>0</ShapeOblongThreshold>
+    <ShapeOblongRecognitionLevel>0</ShapeOblongRecognitionLevel>
+    <ShapeOblongRecognitionNormalization>false</ShapeOblongRecognitionNormalization>
+    <IdentifyShapeCertaintyMinimum>0</IdentifyShapeCertaintyMinimum>
+  </TemplateRecognitionSettings>
+</ImagingSettings>")]
         public global::Galatea.AI.Imaging.ImagingSettings ImagingSettings {
             get {
                 return ((global::Galatea.AI.Imaging.ImagingSettings)(this["ImagingSettings"]));
