@@ -149,9 +149,9 @@
       <Project>{67264662-ca03-4ed0-8924-5843307e4b53}</Project>
       <Name>Eliza</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gala.Dolly.UI\Gala.Dolly.UI.csproj">
-      <Project>{270e9e4e-9f39-4a3a-a04d-fc0b40ba7b12}</Project>
-      <Name>Gala.Dolly.UI</Name>
+    <ProjectReference Include="..\Gala.Dolly.Speech\Gala.Dolly.Speech.csproj">
+      <Project>{503b5858-4665-47b9-8bd3-2bbe917291c2}</Project>
+      <Name>Gala.Dolly.Speech</Name>
     </ProjectReference>
     <ProjectReference Include="..\Galatea.Runtime\Galatea.Runtime.csproj">
       <Project>{b0d0c0a4-d37d-4e5b-a357-758e1afb76ba}</Project>

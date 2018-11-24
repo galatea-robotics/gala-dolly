@@ -155,6 +155,10 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gala.Dolly.Chatbots\Gala.Dolly.Chatbots.csproj">
+      <Project>{8378c9ba-915f-4018-9944-8578f2855ff1}</Project>
+      <Name>Gala.Dolly.Chatbots</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Galatea.Globalization\Galatea.Globalization.csproj">
       <Project>{acd64769-d795-4230-ac94-59acc5e52de5}</Project>
       <Name>Galatea.Globalization</Name>
