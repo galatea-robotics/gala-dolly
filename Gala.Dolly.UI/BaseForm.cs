@@ -43,19 +43,23 @@ namespace Gala.Dolly.UI
             bool startupHasErrors = false;
 
             // Validate Startup
+            bool showAlertsConfig = _debugger.ShowAlerts;
+            _debugger.ShowAlerts = true;
+
             if (!Program.RuntimeEngine.DataAccessManager.IsInitialized)
             {
                 _debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Error,
                     $"{Program.RuntimeEngine.DataAccessManager.ProviderName} " +
-                        "did not initialize properly.", true);
+                        "did not initialize properly.", true, false);
 
                 startupHasErrors = true;
             }
-
-            if(startupHasErrors)
+            if (startupHasErrors)
             {
                 this.Close();
             }
+
+            _debugger.ShowAlerts = showAlertsConfig;
         }
 
         private void BaseForm_Disposed(object sender, System.EventArgs e)

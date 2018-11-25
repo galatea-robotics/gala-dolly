@@ -63,8 +63,8 @@ namespace Gala.Dolly
         internal static void Startup()
         {
             // Suppress alerts during startup
-            bool showAlertsConfig = UI.Properties.Settings.Default.DebuggerShowAlerts;
-            UI.Properties.Settings.Default.DebuggerShowAlerts = false;
+            bool showAlertsConfig = _baseForm.UIDebugger.ShowAlerts;
+            _baseForm.UIDebugger.ShowAlerts = false;
 
             // Initialize Robotics Engine
             _engine = new SmartEngine(_baseForm.UIDebugger);
@@ -81,7 +81,7 @@ namespace Gala.Dolly
             _engine.ExecutiveFunctions.ResponseLogging = true;
 
             // Reset alerts
-            UI.Properties.Settings.Default.DebuggerShowAlerts = showAlertsConfig;
+            _baseForm.UIDebugger.ShowAlerts = showAlertsConfig;
 
             // Finalize
             bool started = false;

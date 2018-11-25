@@ -51,6 +51,7 @@ namespace Gala.Data.Databases
 
                 // Initialize SerializationHelper
                 SerializationHelper.Library = this;
+                FeedbackCounterTable feedbackCounterTable = null;
 
                 while (nextLine.Contains(SerializationHelper.TemplateTypeDelimiter))
                 {
@@ -95,8 +96,7 @@ namespace Gala.Data.Databases
                         if (nextLine.Contains(SerializationHelper.FeedbackDelimiter))
                         {
                             nextLine = reader.ReadLine();
-                            FeedbackCounterTable feedbackCounterTable = SerializationHelper.ToFeedbackCounterTable(nextLine);
-                            SetFeedbackCounterTable(feedbackCounterTable);
+                            feedbackCounterTable = SerializationHelper.ToFeedbackCounterTable(nextLine);
                             nextLine = reader.ReadLine();
                         }
 
@@ -106,6 +106,13 @@ namespace Gala.Data.Databases
                     if (nextLine.Contains(SerializationHelper.EndOfFileDelimiter))
                         break;
                 }
+
+                if (feedbackCounterTable == null)
+                {
+                    feedbackCounterTable = new FeedbackCounterTable();
+                }
+
+                SetFeedbackCounterTable(feedbackCounterTable);
 
                 // Close the file
                 reader.Close();
@@ -123,6 +130,11 @@ namespace Gala.Data.Databases
                 //    throw new TeaInitializeDataException("No Named Entities initialized.");
                 //if (this.FeedbackCounterTable.Count == 0)
                 //    throw new TeaInitializeDataException("No Feedback Counter Table ticks initialized.");
+
+                if(!this.Contains(TemplateType.PatternEntity))
+                    throw new TeaInitializeDataException("Named Entities table was not initialized.");
+                if (this.FeedbackCounterTable == null)
+                    throw new TeaInitializeDataException("Feedback Counter table was not initialized.");
 
                 this.IsInitialized = true;
             }
