@@ -49,6 +49,12 @@ namespace Gala.Data
 
         protected string ConnectionString { get { return _connectionString; } }
 
+        protected internal override bool IsInitialized
+        {
+            get => _isInitialized;
+            set => _isInitialized = value;
+        }
+
         #region Component Model
 
         ISite IComponent.Site

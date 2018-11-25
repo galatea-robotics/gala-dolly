@@ -75,6 +75,11 @@ namespace Gala.Dolly.UI.Diagnostics
             get { return debugShowAlertsMenuItem.Checked; }
             set { debugShowAlertsMenuItem.Checked = value; }
         }
+
+        public override void Log(DebuggerLogLevel level, string message, bool overrideLevel)
+        {
+            this.Log(level, message, overrideLevel, false);
+        }
         /// <summary>
         /// Logs messages and errors to a log file using a <see cref="IFileLogger"/> instance.
         /// </summary>
@@ -92,7 +97,7 @@ namespace Gala.Dolly.UI.Diagnostics
         /// </param>
         public void Log(DebuggerLogLevel level, string message, bool overrideLevel, bool suppressPopup)
         {
-            this.Log(level, message, overrideLevel);
+            base.Log(level, message, overrideLevel);
 
             // Show Alerts
             if (debugShowAlertsMenuItem.Checked && level >= _alertLevel)

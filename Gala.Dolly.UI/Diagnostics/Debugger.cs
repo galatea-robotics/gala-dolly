@@ -73,6 +73,7 @@ namespace Gala.Dolly.UI.Diagnostics
             this.ErrorMessage = provider == null ? DiagnosticResources.Debugger_Error_Unexpected_Speech_Message :
                 string.Format(DiagnosticResources.Debugger_Error_Unexpected_Speech_Message_Format, provider.ProviderName);
         }
+
         /// <summary>
         /// Logs messages and errors to a log file using a <see cref="IFileLogger"/> instance.
         /// </summary>
@@ -101,13 +102,17 @@ namespace Gala.Dolly.UI.Diagnostics
                 // Output to log file
                 if (_fileLogger == null) return;
 
-                if (Debugger.Initialized && _fileLogger.IsLogging)
+                if (IsInitialized && _fileLogger.IsLogging)
                 {
                     _fileLogger.Log(sOutput);
                 }
             }
         }
 
+        public override void Log(DebuggerLogLevel level, string message)
+        {
+            this.Log(level, message, false);
+        }
         /// <summary> 
         /// Clean up any resources being used.
         /// </summary>

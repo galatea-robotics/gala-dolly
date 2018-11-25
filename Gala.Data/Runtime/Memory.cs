@@ -52,6 +52,7 @@ namespace Gala.Data.Runtime
         KeyedCollection<string, ICreator> ILibrary.Creators { get { return _creators; } }
 
         protected internal abstract void InitializeMemoryBank();
+        protected internal abstract bool IsInitialized { get; set; }
         protected virtual CreatorCollection Creators { get { return _creators;} }
 
         public abstract void SaveAll();

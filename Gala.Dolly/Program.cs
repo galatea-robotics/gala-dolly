@@ -84,8 +84,17 @@ namespace Gala.Dolly
             _engine.ExecutiveFunctions.ContextLogging = true;
             _engine.ExecutiveFunctions.ResponseLogging = true;
 
+
             // Finalize
-            _started = true;
+            bool started = false;
+
+            if (_engine.DataAccessManager.IsInitialized)
+            {
+                started = true;
+            }
+
+            // Finalize
+            _started = started;
         }
 
         internal static void ShutdownUI()
@@ -112,12 +121,6 @@ namespace Gala.Dolly
 
             // Save Settings and shit
             ShutdownUI();
-
-            /*
-            // End Diagnostics Trace
-            comTrace.Logger.Stop();
-            comTrace.Dispose();
-             */
 
             _started = false;
         }

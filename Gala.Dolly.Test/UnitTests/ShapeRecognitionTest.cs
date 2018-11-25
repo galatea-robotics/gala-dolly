@@ -20,6 +20,16 @@ namespace Gala.Dolly.Test
 
         [TestMethod]
         [TestCategory("1 - Template")]
+        public void TestBlueRoundShape()
+        {
+            _creator = null;
+
+            bool  result = TestShapeResponse(@"..\..\..\Resources\Learning\blue_circle.png", "round");
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [TestCategory("1 - Template")]
         public void TestShapes()
         {
             bool result;

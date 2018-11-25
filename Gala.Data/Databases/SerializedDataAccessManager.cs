@@ -12,6 +12,7 @@ namespace Gala.Data.Databases
     {
         public SerializedDataAccessManager(string connectionString) : base(connectionString)
         {
+            this.IsInitialized = false;
         }
 
         public void RestoreBackup(string path)
@@ -24,8 +25,6 @@ namespace Gala.Data.Databases
         {
             try
             {
-                //throw new Exception("fkoff");
-
                 // Initialize Template Collections
                 this.Add(new ColorTemplateCollection());
                 this.Add(new ShapeTemplateCollection());
@@ -120,6 +119,8 @@ namespace Gala.Data.Databases
                 //    throw new TeaInitializeDataException("No Named Entities initialized.");
                 //if (this.FeedbackCounterTable.Count == 0)
                 //    throw new TeaInitializeDataException("No Feedback Counter Table ticks initialized.");
+
+                this.IsInitialized = true;
             }
             catch (TeaException ex)
             {
@@ -155,11 +156,5 @@ namespace Gala.Data.Databases
             // Finalize
             streamWriter.Close();
         }
-
-        /*
-        public bool RestoreV1 { get { return _restoreV1; } }
-
-        private bool _restoreV1;
-         */
     }
 }

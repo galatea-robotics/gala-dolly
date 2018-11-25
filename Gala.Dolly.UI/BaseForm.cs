@@ -24,16 +24,9 @@ namespace Gala.Dolly.UI
             _debugger.ShowAlerts = Properties.Settings.Default.DebuggerShowAlerts;
             this._debugger.InitializeToolStrip(_toolsMenu);
 
-            /*
-            // Trace Dispose
-            this.Disposed += BaseForm_Disposed;
-
-            // Debugging
-            this.KeyPreview = true;
-             */
-
             _current = this;
         }
+        
         /// <summary>
         /// Gets a reference to the <see cref="Galatea.Runtime.IEngine.Debugger"/> instance, 
         /// with a UI tools menu to control settings.
@@ -44,6 +37,26 @@ namespace Gala.Dolly.UI
         internal ToolStripMenuItem ViewMenu { get { return _viewMenu; } }
         internal ToolStripMenuItem ToolsMenu { get { return _toolsMenu; } }
         internal static BaseForm Current { get { return _current; } }
+
+        private void BaseForm_Load(object sender, System.EventArgs e)
+        {
+            bool startupHasErrors = false;
+
+            // Validate Startup
+            if (!Program.RuntimeEngine.DataAccessManager.IsInitialized)
+            {
+                _debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Error,
+                    $"{Program.RuntimeEngine.DataAccessManager.ProviderName} " +
+                        "did not initialize properly.", true);
+
+                startupHasErrors = true;
+            }
+
+            if(startupHasErrors)
+            {
+                this.Close();
+            }
+        }
 
         private void BaseForm_Disposed(object sender, System.EventArgs e)
         {

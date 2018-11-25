@@ -90,6 +90,7 @@ namespace Gala.Dolly.UI
             this.Name = "BaseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = global::Gala.Dolly.UI.Properties.Settings.Default.ApplicationTitle;
+            this.Load += new System.EventHandler(this.BaseForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
