@@ -62,13 +62,9 @@ namespace Gala.Dolly
 
         internal static void Startup()
         {
-            /*
-            // Load Settings
-            Gala.Dolly.Properties.Settings.Default.ImagingSettings = Galatea.AI.Imaging.ImagingSettings.Create();
-
-            // TODO: Use settings and get rid of "Create()" function
-            Galatea.AI.Imaging.Properties.Settings.Default.ImagingSettings = Properties.Settings.Default.ImagingSettings;
-             */
+            // Suppress alerts during startup
+            bool showAlertsConfig = UI.Properties.Settings.Default.DebuggerShowAlerts;
+            UI.Properties.Settings.Default.DebuggerShowAlerts = false;
 
             // Initialize Robotics Engine
             _engine = new SmartEngine(_baseForm.UIDebugger);
@@ -84,6 +80,8 @@ namespace Gala.Dolly
             _engine.ExecutiveFunctions.ContextLogging = true;
             _engine.ExecutiveFunctions.ResponseLogging = true;
 
+            // Reset alerts
+            UI.Properties.Settings.Default.DebuggerShowAlerts = showAlertsConfig;
 
             // Finalize
             bool started = false;
@@ -93,7 +91,6 @@ namespace Gala.Dolly
                 started = true;
             }
 
-            // Finalize
             _started = started;
         }
 

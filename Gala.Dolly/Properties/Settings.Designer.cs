@@ -25,6 +25,18 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\Log.txt")]
+        public string LogFileName {
+            get {
+                return ((string)(this["LogFileName"]));
+            }
+            set {
+                this["LogFileName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Peanut")]
         public string DefaultUserName {
             get {
@@ -306,46 +318,27 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\Log.txt")]
-        public string LogFileName {
-            get {
-                return ((string)(this["LogFileName"]));
-            }
-            set {
-                this["LogFileName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ImagingSettings xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <Timeout>0</Timeout>
-  <SuppressTimeout>false</SuppressTimeout>
-  <DebugRecognitionSaveImages>false</DebugRecognitionSaveImages>
-  <DebugRecognitionSaveFolder>..\..\..\Resources\Test Cases\Live</DebugRecognitionSaveFolder>
-  <ColorStatsSettings>
-    <StatisticalAnalysisTypes>Mean</StatisticalAnalysisTypes>
-  </ColorStatsSettings>
-  <MonochromeBlobFilterSettings>
-    <ContrastCorrectionFactor>0.25</ContrastCorrectionFactor>
-    <AdaptiveSmoothingFactor>0.25</AdaptiveSmoothingFactor>
-    <FrameWidth>10</FrameWidth>
-  </MonochromeBlobFilterSettings>
-  <BlobPointSettings>
-    <LineSegmentThreshold>18</LineSegmentThreshold>
-    <LineAngleThreshold>9</LineAngleThreshold>
-    <CurveAngleThreshold>27</CurveAngleThreshold>
-  </BlobPointSettings>
-  <TemplateRecognitionSettings>
-    <ColorBrightnessThreshold>0</ColorBrightnessThreshold>
-    <ColorSaturationThreshold>0</ColorSaturationThreshold>
-    <ShapeOblongThreshold>0</ShapeOblongThreshold>
-    <ShapeOblongRecognitionLevel>0</ShapeOblongRecognitionLevel>
-    <ShapeOblongRecognitionNormalization>false</ShapeOblongRecognitionNormalization>
-    <IdentifyShapeCertaintyMinimum>0</IdentifyShapeCertaintyMinimum>
-  </TemplateRecognitionSettings>
-</ImagingSettings>")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          <ImagingSettings xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance" +
+            "\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n            <Timeout>2000</Time" +
+            "out>\r\n            <SuppressTimeout>true</SuppressTimeout>\r\n            <DebugRec" +
+            "ognitionSaveImages>true</DebugRecognitionSaveImages>\r\n            <DebugRecognit" +
+            "ionSaveFolder>..\\..\\..\\Resources\\Test Cases\\Live</DebugRecognitionSaveFolder>\r\n " +
+            "           <ColorStatsSettings>\r\n              <StatisticalAnalysisTypes>Mean</S" +
+            "tatisticalAnalysisTypes>\r\n            </ColorStatsSettings>\r\n            <Monoch" +
+            "romeBlobFilterSettings>\r\n              <ContrastCorrectionFactor>0.25</ContrastC" +
+            "orrectionFactor>\r\n              <AdaptiveSmoothingFactor>0.25</AdaptiveSmoothing" +
+            "Factor>\r\n              <FrameWidth>10</FrameWidth>\r\n            </MonochromeBlob" +
+            "FilterSettings>\r\n            <BlobPointSettings>\r\n              <LineSegmentThre" +
+            "shold>18</LineSegmentThreshold>\r\n              <LineAngleThreshold>9</LineAngleT" +
+            "hreshold>\r\n              <CurveAngleThreshold>27</CurveAngleThreshold>\r\n        " +
+            "    </BlobPointSettings>\r\n            <TemplateRecognitionSettings>\r\n           " +
+            "   <ColorBrightnessThreshold>0</ColorBrightnessThreshold>\r\n              <ColorS" +
+            "aturationThreshold>0</ColorSaturationThreshold>\r\n              <ShapeOblongThres" +
+            "hold>0</ShapeOblongThreshold>\r\n              <ShapeOblongRecognitionLevel>0</Sha" +
+            "peOblongRecognitionLevel>\r\n              <ShapeOblongRecognitionNormalization>fa" +
+            "lse</ShapeOblongRecognitionNormalization>\r\n              <IdentifyShapeCertainty" +
+            "Minimum>0</IdentifyShapeCertaintyMinimum>\r\n            </TemplateRecognitionSett" +
+            "ings>\r\n          </ImagingSettings>\r\n        ")]
         public global::Galatea.AI.Imaging.ImagingSettings ImagingSettings {
             get {
                 return ((global::Galatea.AI.Imaging.ImagingSettings)(this["ImagingSettings"]));

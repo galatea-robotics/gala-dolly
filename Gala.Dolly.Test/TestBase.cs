@@ -62,6 +62,7 @@ namespace Gala.Dolly.Test
 
                 // Suppress Timeout
                 Settings.Default.ImagingSettings.Timeout = 2000;
+                Settings.Default.ImagingSettings.DebugRecognitionSaveImages = true;
                 Settings.Default.Save();
 
                 Settings.Default.ImagingSettings.SuppressTimeout = true;

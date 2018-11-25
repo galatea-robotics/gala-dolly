@@ -159,6 +159,9 @@
     <EmbeddedResource Include="UI\VisionCapture.resx">
       <DependentUpon>VisionCapture.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="..\..\..\Users\User\AppData\Local\General_Applications\Gala.Dolly.exe_StrongName_riar5fsvkmexrxywcyzf2tmtnssu4m3m\1.2.0.0\user.config">
+      <Link>Properties\user.config</Link>
+    </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>

@@ -25,14 +25,12 @@ namespace Gala.Data
         }
 
         #region IFoundation
-        public void Initialize(IEngine engine)
+        public virtual void Initialize(IEngine engine)
         {
             _engine = engine;
             _engine.Add(this);
-
-            _isInitialized = true;
         }
-        bool IFoundation.IsInitialized { get { return _isInitialized; } }
+        bool IFoundation.IsInitialized { get { return this.IsInitialized; } }
         public IEngine Engine { get { return _engine; } }
         #endregion
 
@@ -48,12 +46,6 @@ namespace Gala.Data
         #endregion  
 
         protected string ConnectionString { get { return _connectionString; } }
-
-        protected internal override bool IsInitialized
-        {
-            get => _isInitialized;
-            set => _isInitialized = value;
-        }
 
         #region Component Model
 
@@ -96,7 +88,6 @@ namespace Gala.Data
         private FeedbackCounterTable _feedbackCounterTable;
         private readonly string _connectionString;
         private IEngine _engine;
-        private bool _isInitialized;
         private ISite _site;
     }
 }

@@ -12,13 +12,17 @@ namespace Gala.Data.Databases
     {
         public SerializedDataAccessManager(string connectionString) : base(connectionString)
         {
-            this.IsInitialized = false;
         }
 
         public void RestoreBackup(string path)
         {
             FileInfo fi = new FileInfo(path);
             fi.CopyTo(this.ConnectionString, true);
+        }
+
+        public override void Initialize(IEngine engine)
+        {
+            base.Initialize(engine);
         }
 
         protected internal override void InitializeMemoryBank()
@@ -131,6 +135,11 @@ namespace Gala.Data.Databases
                 this.Engine.Debugger.ThrowSystemException(ex, this);
             }
         }
+        protected internal override bool IsInitialized
+        {
+            get => _isInitialized;
+            set => _isInitialized = value;
+        }
 
         public override void SaveAll()
         {
@@ -156,5 +165,7 @@ namespace Gala.Data.Databases
             // Finalize
             streamWriter.Close();
         }
+
+        private bool _isInitialized;
     }
 }
