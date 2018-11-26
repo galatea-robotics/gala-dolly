@@ -24,7 +24,7 @@ namespace Gala.Dolly.UI.Diagnostics
         }
 
         /// <summary>
-        /// Gets or sets the threshold to determine how messages are logged.
+        /// Gets or sets the threshold that determines how messages are logged.
         /// </summary>
         public override DebuggerLogLevel LogLevel
         {
@@ -60,7 +60,7 @@ namespace Gala.Dolly.UI.Diagnostics
             }
         }
         /// <summary>
-        /// Gets or sets the threshold to determine when the user receives a <see cref="MessageBox"/> alert.
+        /// Gets or sets the threshold that determines when the user receives a <see cref="MessageBox"/> alert.
         /// </summary>
         public DebuggerLogLevel AlertLevel
         {
@@ -75,7 +75,18 @@ namespace Gala.Dolly.UI.Diagnostics
             get { return debugShowAlertsMenuItem.Checked; }
             set { debugShowAlertsMenuItem.Checked = value; }
         }
-
+        /// <summary>
+        /// Exposes a UI method for reporting messages and errors.
+        /// </summary>
+        /// <param name="level">
+        /// The <see cref="DebuggerLogLevel"/> of the 
+        /// message to be logged.
+        /// </param>
+        /// <param name="message"> The message to be logged. </param>
+        /// <param name="overrideLevel"> 
+        /// A boolean value indicating that the Debugger should log the 
+        /// message, regardless of <see cref="DebuggerLogLevel"/>.
+        /// </param>
         public override void Log(DebuggerLogLevel level, string message, bool overrideLevel)
         {
             this.Log(level, message, overrideLevel, false);

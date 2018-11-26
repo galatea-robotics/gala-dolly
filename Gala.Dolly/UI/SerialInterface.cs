@@ -9,7 +9,7 @@ namespace Gala.Dolly.UI
 {
     using Gala.Dolly.Properties;
 
-    public partial class SerialInterface : UserControl
+    internal partial class SerialInterface : UserControl
     {
         internal ToolStripMenuItem viewSerialInterfaceMenuItem;
         internal ToolStripMenuItem serialToolStripMenuItem;
@@ -139,7 +139,7 @@ namespace Gala.Dolly.UI
 
         #endregion
 
-        private void txtInterval_Validating(object sender, CancelEventArgs e)
+        private void TxtInterval_Validating(object sender, CancelEventArgs e)
         {
             TextBox ctl = (TextBox)sender;
             int value = Convert.ToInt32(ctl.Text);
@@ -155,7 +155,7 @@ namespace Gala.Dolly.UI
                 MessageBox.Show(msg, this.FindForm().Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        private void txtInterval_TextChanged(object sender, EventArgs e)
+        private void TxtInterval_TextChanged(object sender, EventArgs e)
         {
             if (Program.Engine.Machine.SerialPortController != null)
                 Program.Engine.Machine.SerialPortController.WaitInterval = Convert.ToInt32(((TextBox)sender).Text);

@@ -1,6 +1,6 @@
 namespace Gala.Dolly
 {
-    public partial class TemplateRecognitionForm : UI.BaseForm
+    internal partial class TemplateRecognitionForm : UI.BaseForm
     {
         internal TemplateRecognitionForm()
         {
@@ -67,7 +67,7 @@ namespace Gala.Dolly
             }
         }
 
-        private void templateRecognition_TemplateLoaded(object sender, System.EventArgs e)
+        private void TemplateRecognition_TemplateLoaded(object sender, System.EventArgs e)
         {
             chatbotControl.Select();
         }

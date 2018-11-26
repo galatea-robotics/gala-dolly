@@ -4,7 +4,7 @@ using Gala.Dolly.UI;
 
 namespace Gala.Dolly
 {
-    public partial class MainForm : UI.BaseForm
+    internal partial class MainForm : UI.BaseForm
     {
         internal MainForm()
         {
@@ -67,7 +67,7 @@ namespace Gala.Dolly
             }
         }
 
-        private void templateRecognition_TemplateLoaded(object sender, System.EventArgs e)
+        private void TemplateRecognition_TemplateLoaded(object sender, System.EventArgs e)
         {
             chatbotControl.Select();
         }       

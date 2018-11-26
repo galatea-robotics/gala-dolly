@@ -67,7 +67,7 @@ namespace Gala.Dolly
             this.templateRecognition.Name = "templateRecognition";
             this.templateRecognition.Size = new System.Drawing.Size(458, 240);
             this.templateRecognition.TabIndex = 0;
-            this.templateRecognition.TemplateLoaded += new System.EventHandler(this.templateRecognition_TemplateLoaded);
+            this.templateRecognition.TemplateLoaded += new System.EventHandler(this.TemplateRecognition_TemplateLoaded);
             // 
             // chatbotControl
             // 

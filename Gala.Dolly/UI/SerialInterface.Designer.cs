@@ -111,8 +111,8 @@
             this.txtInterval.Size = new System.Drawing.Size(37, 20);
             this.txtInterval.TabIndex = 18;
             this.txtInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtInterval.TextChanged += new System.EventHandler(this.txtInterval_TextChanged);
-            this.txtInterval.Validating += new System.ComponentModel.CancelEventHandler(this.txtInterval_Validating);
+            this.txtInterval.TextChanged += new System.EventHandler(this.TxtInterval_TextChanged);
+            this.txtInterval.Validating += new System.ComponentModel.CancelEventHandler(this.TxtInterval_Validating);
             // 
             // lblCommand
             // 

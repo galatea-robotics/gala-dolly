@@ -108,11 +108,18 @@ namespace Gala.Dolly.UI.Diagnostics
                 }
             }
         }
-
+        /// <summary>
+        /// Logs messages and errors.
+        /// </summary>
+        /// <param name="level">
+        /// The <see cref="DebuggerLogLevel"/> of the message to be logged.
+        /// </param>
+        /// <param name="message"> The message to be logged. </param>
         public override void Log(DebuggerLogLevel level, string message)
         {
             this.Log(level, message, false);
         }
+
         /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
