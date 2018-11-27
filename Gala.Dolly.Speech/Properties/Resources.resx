@@ -129,4 +129,28 @@
   <data name="ChatbotResourcesFolder_Not_Found" xml:space="preserve">
     <value>Chatbot Resources folder '{0}' not found.</value>
   </data>
+  <data name="TTS4_On_Visual_Log_Format" xml:space="preserve">
+    <value>Voice Phoneme - ph:{0}, eph:{1}, mh:{2}, mw:{3}, mu:{4}, jaw:{5}, upper:{6}, lower:{7}, tongue:{8}, lip:{9}</value>
+  </data>
+  <data name="TTS5_On_MouthPositionChange_Log_Format" xml:space="preserve">
+    <value>Speech TTS Mouth Position: {0}</value>
+  </data>
+  <data name="TTS_Initialized" xml:space="preserve">
+    <value>The Text-To-Speech Interface was successfully Initialized.</value>
+  </data>
+  <data name="TTS_On_Begin_Speaking" xml:space="preserve">
+    <value>Speech TTS Starting.</value>
+  </data>
+  <data name="TTS_On_Paused" xml:space="preserve">
+    <value>Speech TTS Paused.</value>
+  </data>
+  <data name="TTS_On_Resumed" xml:space="preserve">
+    <value>Speech TTS Resumed.</value>
+  </data>
+  <data name="TTS_Speech_Text_Is_Empty" xml:space="preserve">
+    <value>The Speech Text is empty.</value>
+  </data>
+  <data name="TTS_Stopping" xml:space="preserve">
+    <value>Speech TTS Stopping.</value>
+  </data>
 </root>

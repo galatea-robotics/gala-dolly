@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Galatea;
 using Galatea.AI.Abstract;
 using Galatea.AI.Characterization;
 using Galatea.Runtime;
@@ -9,7 +10,6 @@ using Galatea.Runtime;
 namespace Gala.Data
 {
     using Gala.Data.Runtime;
-    using Galatea.AI;
 
     internal abstract class DataAccessManager : Memory, ILibrary, IDataAccessManager
     {
@@ -27,7 +27,7 @@ namespace Gala.Data
         #region IFoundation
         public virtual void Initialize(IEngine engine)
         {
-            _engine = engine;
+            _engine = engine ?? throw new TeaArgumentNullException("engine");
             _engine.Add(this);
         }
         bool IFoundation.IsInitialized { get { return this.IsInitialized; } }

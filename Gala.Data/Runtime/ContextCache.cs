@@ -76,8 +76,7 @@ namespace Gala.Data.Runtime
                 disposedValue = true;
 
                 // Raise the Disposed Event??
-                if (Disposed != null)
-                    Disposed(this, EventArgs.Empty);
+                Disposed?.Invoke(this, EventArgs.Empty);
             }
         }
 

@@ -7,6 +7,7 @@ namespace Gala.Data.Databases
     using Galatea.AI.Abstract;
     using Galatea.AI.Characterization;
     using Galatea.Runtime;
+    using Gala.Data.Runtime;
 
     internal class SerializedDataAccessManager : DataAccessManager
     {
@@ -44,78 +45,82 @@ namespace Gala.Data.Databases
                 fi.CopyTo(Path.Combine(fi.DirectoryName, fi.Name + ".backup"), true);
 
                 // Read File from beginning
-                StreamReader reader = new StreamReader(this.ConnectionString);
-                TemplateType templateType = TemplateType.Null;
-
-                nextLine = reader.ReadLine();
-
-                // Initialize SerializationHelper
-                SerializationHelper.Library = this;
-                FeedbackCounterTable feedbackCounterTable = null;
-
-                while (nextLine.Contains(SerializationHelper.TemplateTypeDelimiter))
+                using (StreamReader reader = new StreamReader(this.ConnectionString))
                 {
-                    string tType = nextLine.Replace(SerializationHelper.TemplateTypeDelimiter, "").Replace(",", "");
-                    templateType = SerializationHelper.ToTemplateType(tType);
+                    TemplateType templateType = TemplateType.Null;
+
                     nextLine = reader.ReadLine();
 
-                    while (!nextLine.Contains(SerializationHelper.TemplateTypeDelimiter)
-                        && !nextLine.Contains(SerializationHelper.EndOfFileDelimiter))
+                    // Initialize SerializationHelper
+                    SerializationHelper.Library = this;
+                    FeedbackCounterTable feedbackCounterTable = null;
+
+                    while (nextLine.Contains(SerializationHelper.TemplateTypeDelimiter))
                     {
-                        string[] templateData = nextLine.Split(':');
-                        int id = int.Parse(templateData[0].Trim());
-                        string name = templateData[1];
-                        string friendlyName = templateData[2];
-                        string serialData = templateData[3];
-                        ICreator creator = null;
-
-                        if (templateData.Length > 4 && templateData[4] != null)
-                        {
-                            // Initialize User or AI Creator from Memory
-                            string[] creatorData = templateData[4].Split(';');
-                            creator = Creators.Fetch(creatorData[0], creatorData[1]);
-                        }
-
-                        try
-                        {
-                            this[templateType].Add(id, name, friendlyName, serialData, creator);
-                        }
-                        catch (TeaException ex)
-                        {
-                            this.Engine.Debugger.HandleTeaException(ex, this);
-                        }
-                        catch (System.Exception ex)
-                        {
-                            this.Engine.Debugger.ThrowSystemException(ex, this);
-                        }
-
+                        string tType = nextLine.Replace(SerializationHelper.TemplateTypeDelimiter, "").Replace(",", "");
+                        templateType = SerializationHelper.ToTemplateType(tType);
                         nextLine = reader.ReadLine();
 
-                        #region Other Tables
-
-                        if (nextLine.Contains(SerializationHelper.FeedbackDelimiter))
+                        while (!nextLine.Contains(SerializationHelper.TemplateTypeDelimiter)
+                            && !nextLine.Contains(SerializationHelper.EndOfFileDelimiter))
                         {
+                            string[] templateData = nextLine.Split(':');
+                            int id = int.Parse(templateData[0].Trim(), System.Globalization.CultureInfo.CurrentCulture);
+                            string name = templateData[1];
+                            string friendlyName = templateData[2];
+                            string serialData = templateData[3];
+                            ICreator creator = null;
+
+                            if (templateData.Length > 4 && templateData[4] != null)
+                            {
+                                // Initialize User or AI Creator from Memory
+                                string[] creatorData = templateData[4].Split(';');
+                                creator = Creators.Fetch(creatorData[0], creatorData[1]);
+                            }
+
+                            try
+                            {
+                                this[templateType].Add(id, name, friendlyName, serialData, creator);
+                            }
+                            catch (TeaException ex)
+                            {
+                                this.Engine.Debugger.HandleTeaException(ex, this);
+                            }
+                            /*
+                            catch (System.Exception ex)
+                            {
+                                this.Engine.Debugger.ThrowSystemException(ex, this);
+                            }
+                             */
+
                             nextLine = reader.ReadLine();
-                            feedbackCounterTable = SerializationHelper.ToFeedbackCounterTable(nextLine);
-                            nextLine = reader.ReadLine();
+
+                            #region Other Tables
+
+                            if (nextLine.Contains(SerializationHelper.FeedbackDelimiter))
+                            {
+                                nextLine = reader.ReadLine();
+                                feedbackCounterTable = SerializationHelper.ToFeedbackCounterTable(nextLine);
+                                nextLine = reader.ReadLine();
+                            }
+
+                            #endregion
                         }
 
-                        #endregion
+                        if (nextLine.Contains(SerializationHelper.EndOfFileDelimiter))
+                            break;
                     }
 
-                    if (nextLine.Contains(SerializationHelper.EndOfFileDelimiter))
-                        break;
+                    if (feedbackCounterTable == null)
+                    {
+                        feedbackCounterTable = new FeedbackCounterTable();
+                    }
+
+                    SetFeedbackCounterTable(feedbackCounterTable);
+
+                    //// Close the file
+                    //reader.Close();
                 }
-
-                if (feedbackCounterTable == null)
-                {
-                    feedbackCounterTable = new FeedbackCounterTable();
-                }
-
-                SetFeedbackCounterTable(feedbackCounterTable);
-
-                // Close the file
-                reader.Close();
 
                 #endregion
 
@@ -142,10 +147,12 @@ namespace Gala.Data.Databases
             {
                 this.Engine.Debugger.HandleTeaException(ex, this);
             }
+            /*
             catch (System.Exception ex)
             {
                 this.Engine.Debugger.ThrowSystemException(ex, this);
             }
+             */
         }
         protected internal override bool IsInitialized
         {
@@ -155,27 +162,28 @@ namespace Gala.Data.Databases
 
         public override void SaveAll()
         {
-            System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(ConnectionString);
-
-            foreach (IBaseTemplateCollection collection in this)
+            using (System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(ConnectionString))
             {
-                string collectionData = collection.SerializeAll();
-                streamWriter.Write(collectionData);
+                foreach (IBaseTemplateCollection collection in this)
+                {
+                    string collectionData = collection.SerializeAll();
+                    streamWriter.Write(collectionData);
+                }
+
+                // Save Feedback Counter table
+                if (FeedbackCounterTable != null)
+                {
+                    streamWriter.WriteLine(SerializationHelper.FeedbackDelimiter);
+                    string feedbackData = SerializationHelper.Serialize(FeedbackCounterTable);
+                    streamWriter.WriteLine(feedbackData);
+                }
+
+                // Indicate EoF
+                streamWriter.Write(SerializationHelper.EndOfFileDelimiter);
+
+                //// Finalize
+                //streamWriter.Close();
             }
-
-            // Save Feedback Counter table
-            if (FeedbackCounterTable != null)
-            {
-                streamWriter.WriteLine(SerializationHelper.FeedbackDelimiter);
-                string feedbackData = SerializationHelper.Serialize(FeedbackCounterTable);
-                streamWriter.WriteLine(feedbackData);
-            }
-
-            // Indicate EoF
-            streamWriter.Write(SerializationHelper.EndOfFileDelimiter);
-
-            // Finalize
-            streamWriter.Close();
         }
 
         private bool _isInitialized;

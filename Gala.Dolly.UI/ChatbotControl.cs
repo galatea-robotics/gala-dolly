@@ -15,6 +15,7 @@ namespace Gala.Dolly.UI
     /// <summary>
     /// Represents a UI Consule for input to and output from a Chatbot.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chatbot")]
     public sealed partial class ChatbotControl : UserControl, IConsole, IProvider
     {
         private ToolStripMenuItem viewChatbotsMenuItem;
@@ -56,8 +57,12 @@ namespace Gala.Dolly.UI
         /// <param name="chatbots">
         /// A collection of <see cref="IChatbot"/> instances.
         /// </param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "chatbots")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chatbots")]
         public void InitializeChatbots(IChatbotManager chatbots)
         {
+            if (chatbots == null) throw new TeaArgumentNullException("chatbots");
+
             // Initialize Radio Buttons
             int x = 153;
             foreach (IChatbot chatbot in chatbots)
@@ -67,8 +72,23 @@ namespace Gala.Dolly.UI
                     throw new TeaArgumentNullException(nameof(chatbot.Greeting));
 
                 // Do UI
-                RadioButton rb = new RadioButton { Text = chatbot.Name.ToUpper(), Name = chatbot.Name };
-                rb.CheckedChanged += radChatbot_CheckedChanged;
+                RadioButton rb;
+                RadioButton rb1 = null;
+
+                try
+                {
+                    rb1 = new RadioButton { Text = chatbot.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture), Name = chatbot.Name };
+                    rb = rb1;
+                    rb.CheckedChanged += radChatbot_CheckedChanged;
+                    rb1 = null;
+                }
+                finally
+                {
+                    if (rb1 != null)
+                    {
+                        rb1.Dispose();
+                    }
+                }
 
                 // Placement
                 pnlChatBotSelector.Controls.Add(rb);
@@ -81,6 +101,7 @@ namespace Gala.Dolly.UI
         /// <summary>
         /// Gets or sets a boolean value determining if the Chatbot selector buttons are visible.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chatbot")]
         public bool ChatbotButtonsVisible
         {
             get
@@ -125,8 +146,10 @@ namespace Gala.Dolly.UI
             // Get Response
             if (!string.IsNullOrEmpty(inputText))
             {
-                string msg = string.Format(Resources.ChatBotMessageFormat,
-                    Program.RuntimeEngine.User.Name.ToUpper(), inputText);
+                string msg = string.Format(System.Globalization.CultureInfo.CurrentCulture,
+                    Resources.Chatbot_Message_Format,
+                    Program.RuntimeEngine.User.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture),
+                    inputText);
 
                 this.txtDisplay.AppendText(msg + "\r\n");
 
@@ -153,8 +176,10 @@ namespace Gala.Dolly.UI
             {
                 //LunaPOC.SerialInterface.Wait(240)     ' Don't talk over the Human!
 
-                string msg = string.Format(Properties.Resources.ChatBotMessageFormat,
-                    Program.RuntimeEngine.AI.LanguageModel.ChatbotManager.Current.Name.ToUpper(), responseText);
+                string msg = string.Format(System.Globalization.CultureInfo.CurrentCulture,
+                    Properties.Resources.Chatbot_Message_Format,
+                    Program.RuntimeEngine.AI.LanguageModel.ChatbotManager.Current.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture), 
+                    responseText);
 
                 this.txtDisplay.AppendText(msg + "\r\n");
 

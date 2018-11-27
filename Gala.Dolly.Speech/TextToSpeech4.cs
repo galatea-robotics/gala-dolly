@@ -5,6 +5,8 @@ using Galatea.AI.Robotics;
 
 namespace Galatea.Speech
 {
+    using Galatea.Speech.Properties;
+
     [System.Runtime.InteropServices.ComVisible(false)]
     internal class TextToSpeech4 : Galatea.Runtime.RuntimeComponent, ITextToSpeech
     {
@@ -31,8 +33,7 @@ namespace Galatea.Speech
             //_speechModule.IsSpeaking = false;
 
             // Write Debug Log
-            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log,
-                "The Text-To-Speech Interface was successfully Initialized");
+            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_Initialized);
         }
 
         public object GetSpeechObject()
@@ -43,8 +44,6 @@ namespace Galatea.Speech
         {
             return voice4.Speaker(index);
         }
-
-        //public bool IsSpeaking { get { return voice4.IsSpeaking > 0; } }
 
         public event EventHandler<MouthPositionEventArgs> MouthPositionChange;
         public event EventHandler<WordEventArgs> Word { add { throw new NotSupportedException(); } remove { } }
@@ -72,13 +71,15 @@ namespace Galatea.Speech
             // exit if there's nothing to speak
             if (string.IsNullOrEmpty(response))
             {
-                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Warning, "The Speech Text is empty.");
+                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Warning,
+                    Resources.TTS_Speech_Text_Is_Empty);
                 return;
             }
 
             try
             {
-                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, "Speech TTS Starting.");
+                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log,
+                    Resources.TTS_On_Begin_Speaking);
 
                 if (!paused)
                 {
@@ -104,22 +105,22 @@ namespace Galatea.Speech
             voice4.Pause();
             paused = true;
 
-            // Log 
-            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, "Speech TTS Paused.");
+            // Log
+            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_On_Paused);
         }
         public virtual void ResumeTTS()
         {
             voice4.Resume();
             paused = false;
 
-            // Log 
-            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, "Speech TTS Resumed.");
+            // Log
+            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_On_Resumed);
         }
         public virtual void StopTTS()
         {
             try
             {
-                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, "Speech TTS Stopping.");
+                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_Stopping);
 
                 voice4.StopSpeaking();
                 if (paused) voice4.Resume();
@@ -151,6 +152,7 @@ namespace Galatea.Speech
         public PhonemeCollection Phonemes { get { return _phonemes; } }
         private void Voice4_Visual(short Phoneme, short EnginePhoneme, int hints, short MouthHeight, short bMouthWidth, short bMouthUpturn, short bJawOpen, short TeethUpperVisible, short TeethLowerVisible, short TonguePosn, short LipTension)
         {
+            /*
             _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log,
                 "Voice Phoneme - " + "ph:" + Phoneme +
                 ", eph:" + EnginePhoneme +
@@ -162,18 +164,26 @@ namespace Galatea.Speech
                 ", lower:" + TeethLowerVisible +
                 ", tongue:" + TonguePosn +
                 ", lip:" + LipTension);
+             */
 
+            // Log event
+            string logMessage = string.Format(System.Globalization.CultureInfo.CurrentCulture,
+                Resources.TTS4_On_Visual_Log_Format, EnginePhoneme, MouthHeight, bMouthWidth,
+                bJawOpen, TeethUpperVisible, TeethLowerVisible, TonguePosn, LipTension);
+
+            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, logMessage);
+
+            // Process event
             SetMouthPosition(Phoneme);
         }
         private void SetMouthPosition(short PhonemeId)
         {
             Phoneme phoneme = Phonemes[PhonemeId];
 
-            if (MouthPositionChange != null)
-                MouthPositionChange(this, new MouthPositionEventArgs(phoneme.MouthPosition));
+            MouthPositionChange?.Invoke(this, new MouthPositionEventArgs(phoneme.MouthPosition));
         }
 
-        private PhonemeCollection _phonemes;
+        private readonly PhonemeCollection _phonemes;
         private MouthPosition _mouthPosition;
     }
 }

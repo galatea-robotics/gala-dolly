@@ -4,11 +4,13 @@ using Galatea.AI.Robotics;
 
 namespace Galatea.Speech
 {
+    using Properties;
+
     [System.Runtime.InteropServices.ComVisible(false)]
     internal class TextToSpeech5 : Galatea.Runtime.RuntimeComponent, ITextToSpeech
     {
         private SpeechLib.SpVoice spVoice;
-        private SpeechLib.SpeechVoiceSpeakFlags speakFlags;
+        private readonly SpeechLib.SpeechVoiceSpeakFlags speakFlags;
         private bool speaking, paused;
         private ISpeechModule _speechModule;
 
@@ -21,8 +23,6 @@ namespace Galatea.Speech
 
             // Initialize Voice
             spVoice = new SpeechLib.SpVoice();
-
-            var v = spVoice.Voice;
 
             spVoice.Viseme += SpVoice_Viseme;
             spVoice.Word += SpVoice_Word;
@@ -43,8 +43,7 @@ namespace Galatea.Speech
             //this._speechModule.IsSpeaking = false;
 
             // Write Debug Log
-            speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log,
-                "The Text-To-Speech Interface was successfully Initialized");
+            speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_Initialized);
         }
 
         public object GetSpeechObject()
@@ -70,7 +69,10 @@ namespace Galatea.Speech
             }
             catch (System.Runtime.InteropServices.COMException ex)
             {
-                string msg = string.Format(Galatea.AI.Language.LanguageResources.TextToSpeechGetVoicesError, index);
+                string msg = string.Format(
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    Galatea.AI.Language.LanguageResources.TextToSpeechGetVoicesError, index);
+
                 Galatea.Speech.TeaSpeechException speechException = new Galatea.Speech.TeaSpeechException(msg, ex);
 
                 if (index != -1)
@@ -109,7 +111,8 @@ namespace Galatea.Speech
             // exit if there's nothing to speak
             if (string.IsNullOrEmpty(response))
             {
-                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Warning, "The Speech Text is empty.");
+                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Warning,
+                    Resources.TTS_Speech_Text_Is_Empty);
                 return;
             }
 
@@ -118,7 +121,8 @@ namespace Galatea.Speech
 
             try
             {
-                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, "Speech TTS Starting.", true);
+                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log,
+                    Resources.TTS_On_Begin_Speaking);
 
                 // If it's paused and some text still remains to be spoken, Speak button
                 // acts the same as Resume button. However a programmer can choose to
@@ -139,7 +143,7 @@ namespace Galatea.Speech
                     spVoice.Resume();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // Deactivate Speech 
                 _speechModule.StaySilent = true;
@@ -154,21 +158,21 @@ namespace Galatea.Speech
             paused = true;
 
             // Log 
-            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, "Speech TTS Paused.");
+            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_On_Paused);
         }
         public virtual void ResumeTTS()
         {
             spVoice.Resume();
             paused = false;
 
-            // Log 
-            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, "Speech TTS Resumed.");
+            // Log
+            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_On_Resumed);
         }
         public virtual void StopTTS()
         {
             try
             {
-                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, "Speech TTS Stopping.");
+                _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_Stopping);
 
                 // when string to speak is NULL and dwFlags is set to SPF_PURGEBEFORESPEAK
                 // it indicates to SAPI that any remaining data to be synthesized should
@@ -202,32 +206,33 @@ namespace Galatea.Speech
 
         public PhonemeCollection Phonemes { get { return _phonemes; } }
 
-        private void SpVoice_Viseme(int StreamNumber, object StreamPosition, int Duration, 
-            SpeechLib.SpeechVisemeType NextVisemeId, SpeechLib.SpeechVisemeFeature Feature, 
+        private void SpVoice_Viseme(int StreamNumber, object StreamPosition, int Duration,
+            SpeechLib.SpeechVisemeType NextVisemeId, SpeechLib.SpeechVisemeFeature Feature,
             SpeechLib.SpeechVisemeType CurrentVisemeId)
         {
             short phonemeId = (short)CurrentVisemeId;
             Phoneme phoneme = Phonemes[phonemeId];
 
             // Fire Event
-            if (MouthPositionChange != null)
-                MouthPositionChange(this, new MouthPositionEventArgs(phoneme.MouthPosition));
+            MouthPositionChange?.Invoke(this, new MouthPositionEventArgs(phoneme.MouthPosition));
 
             // Log Event
-            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Diagnostic, 
-                "Speech TTS Mouth Position: " + this.MouthPosition.ToString());
+            string logMessage = string.Format(System.Globalization.CultureInfo.CurrentCulture,
+                    Resources.TTS5_On_MouthPositionChange_Log_Format,
+                    this.MouthPosition);
+
+            _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, logMessage);
         }
 
         private void SpVoice_Word(int StreamNumber, object StreamPosition, int CharacterPosition, int Length)
         {
-            if (Word != null)
-                Word(this, new WordEventArgs(CharacterPosition, Length));
+            Word?.Invoke(this, new WordEventArgs(CharacterPosition, Length));
         }
 
         public event EventHandler<MouthPositionEventArgs> MouthPositionChange;
         public event EventHandler<WordEventArgs> Word;
 
-        private PhonemeCollection _phonemes;
+        private readonly PhonemeCollection _phonemes;
         private MouthPosition _mouthPosition;
     }
 }

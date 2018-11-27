@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gala.Dolly.Chatbots.Properties {
+namespace Galatea.Speech.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Gala.Dolly.Chatbots.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Gala.Dolly.Chatbots.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Galatea.Speech.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -93,6 +93,78 @@ namespace Gala.Dolly.Chatbots.Properties {
         internal static string ChatbotResourcesFolder_Not_Found {
             get {
                 return ResourceManager.GetString("ChatbotResourcesFolder_Not_Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Text-To-Speech Interface was successfully Initialized..
+        /// </summary>
+        internal static string TTS_Initialized {
+            get {
+                return ResourceManager.GetString("TTS_Initialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speech TTS Starting..
+        /// </summary>
+        internal static string TTS_On_Begin_Speaking {
+            get {
+                return ResourceManager.GetString("TTS_On_Begin_Speaking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speech TTS Paused..
+        /// </summary>
+        internal static string TTS_On_Paused {
+            get {
+                return ResourceManager.GetString("TTS_On_Paused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speech TTS Resumed..
+        /// </summary>
+        internal static string TTS_On_Resumed {
+            get {
+                return ResourceManager.GetString("TTS_On_Resumed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Speech Text is empty..
+        /// </summary>
+        internal static string TTS_Speech_Text_Is_Empty {
+            get {
+                return ResourceManager.GetString("TTS_Speech_Text_Is_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speech TTS Stopping..
+        /// </summary>
+        internal static string TTS_Stopping {
+            get {
+                return ResourceManager.GetString("TTS_Stopping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voice Phoneme - ph:{0}, eph:{1}, mh:{2}, mw:{3}, mu:{4}, jaw:{5}, upper:{6}, lower:{7}, tongue:{8}, lip:{9}.
+        /// </summary>
+        internal static string TTS4_On_Visual_Log_Format {
+            get {
+                return ResourceManager.GetString("TTS4_On_Visual_Log_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speech TTS Mouth Position: {0}.
+        /// </summary>
+        internal static string TTS5_On_MouthPositionChange_Log_Format {
+            get {
+                return ResourceManager.GetString("TTS5_On_MouthPositionChange_Log_Format", resourceCulture);
             }
         }
     }

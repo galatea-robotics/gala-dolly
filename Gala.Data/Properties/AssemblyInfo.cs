@@ -9,3 +9,6 @@ using System.Resources;
 [assembly: AssemblyTitle("Gala.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
+
+[assembly: System.CLSCompliant(true)]
+[assembly: ComVisible(false)]

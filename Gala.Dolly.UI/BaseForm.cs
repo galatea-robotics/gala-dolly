@@ -1,8 +1,10 @@
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace Gala.Dolly.UI
 {
     using Gala.Dolly.UI.Runtime;
+    using Properties;
 
     /// <summary>
     /// Represents a window or dialog box containing controls pre-configured to run the 
@@ -17,6 +19,7 @@ namespace Gala.Dolly.UI
         {
             InitializeComponent();
             this.Icon = Galatea.IconResource.Galatea;
+            this.Disposed += BaseForm_Disposed;
 
             this._debugger = new Diagnostics.UIDebugger();
             _debugger.LogLevel = Properties.Settings.Default.DebuggerLogLevel;
@@ -26,7 +29,7 @@ namespace Gala.Dolly.UI
 
             _current = this;
         }
-        
+
         /// <summary>
         /// Gets a reference to the <see cref="Galatea.Runtime.IEngine.Debugger"/> instance, 
         /// with a UI tools menu to control settings.
@@ -48,9 +51,9 @@ namespace Gala.Dolly.UI
 
             if (!Program.RuntimeEngine.DataAccessManager.IsInitialized)
             {
-                _debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Error,
-                    $"{Program.RuntimeEngine.DataAccessManager.ProviderName} " +
-                        "did not initialize properly.", true, false);
+                _debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Error, 
+                    string.Format(CultureInfo.CurrentCulture, Resources.Startup_Fail_Message_Format), 
+                    true, false);
 
                 startupHasErrors = true;
             }

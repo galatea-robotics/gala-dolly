@@ -24,9 +24,24 @@ namespace Gala.Dolly.UI.Diagnostics
         /// </param>
         public void StartLogging(string fileName, FileMode mode)
         {
+            FileStream stream = null;
+
             // Initialize FileStream
-            FileStream stream = new FileStream(fileName, mode);
-            _writer = new StreamWriter(stream);
+            try
+            {
+                stream = new FileStream(fileName, mode);
+                FileStream stream1 = stream;
+                _writer = new StreamWriter(stream1);
+
+                stream = null;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Dispose();
+                }
+            }
 
             // Set status
             _isLogging = true;

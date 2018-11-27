@@ -1,8 +1,10 @@
 ﻿using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
-namespace Galatea.Runtime
+namespace Gala.Data.Runtime
 {
+    using Galatea;
+
     /// <summary>
     /// Represents errors that occur within an implementation of <see cref="Galatea.AI.Abstract.IObjectAnalyzer"/>
     /// because the PatternEntity is null.

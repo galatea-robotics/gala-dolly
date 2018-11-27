@@ -20,8 +20,6 @@ namespace Gala.Data.Runtime
                 .GetBaseTemplateItems()
                 .Where(t => t.CompareValue == value.CompareValue);
 
-            var itemsList = items.ToList();
-
             var result = items
                 .OrderBy(t => t.ID);
 

@@ -21,15 +21,15 @@ namespace Galatea.Speech
         /// Adds the <see cref="SpeechModule"/> component to the <see cref="CognitiveModelingSystem.LanguageModel"/>
         /// container.
         /// </summary>
-        /// <param name="languageModel">
+        /// <param name="languageAnalyzer">
         /// the <see cref="CognitiveModelingSystem.LanguageModel"/> container.
         /// </param>
-        public void Initialize(ILanguageAnalyzer languageModel)
+        public void Initialize(ILanguageAnalyzer languageAnalyzer)
         {
-            _languageAnalyzer = languageModel;
+            _languageAnalyzer = languageAnalyzer ?? throw new Galatea.TeaArgumentNullException("languageAnalyzer");
 
             // Component Model
-            languageModel.SpeechModule = this;
+            languageAnalyzer.SpeechModule = this;
         }
         /// <summary>
         /// The Speech Recognition component of the <see cref="SpeechModule"/>.

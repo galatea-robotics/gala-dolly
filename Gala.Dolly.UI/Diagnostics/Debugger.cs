@@ -42,12 +42,17 @@ namespace Gala.Dolly.UI.Diagnostics
         /// </param>
         protected override void HandleTeaException(TeaException ex, IProvider provider)
         {
+            if (ex == null) return;
+
             string msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
             Log(DebuggerLogLevel.Error, msg);
             Log(DebuggerLogLevel.StackTrace, ex.StackTrace, true);
 
-            string errorMessage = provider == null ? DiagnosticResources.Debugger_Error_Speech_Message :
-                string.Format(DiagnosticResources.Debugger_Error_Speech_Message_Format, provider.ProviderName);
+            string errorMessage = provider != null 
+                ? string.Format(System.Globalization.CultureInfo.CurrentCulture,
+                    DiagnosticResources.Debugger_Error_Speech_Message_Format,
+                    provider.ProviderName) 
+                : DiagnosticResources.Debugger_Error_Speech_Message;
 
             if (msg.Substring(0, 17) != "Exception of type") errorMessage += "  " + msg;
 
@@ -66,12 +71,17 @@ namespace Gala.Dolly.UI.Diagnostics
         /// </param>
         protected override void ThrowSystemException(Exception ex, IProvider provider)
         {
+            if (ex == null) return;
+
             Log(DebuggerLogLevel.Critical, ex.Message);
             Log(DebuggerLogLevel.StackTrace, ex.StackTrace, true);
 
             this.Exception = ex;
-            this.ErrorMessage = provider == null ? DiagnosticResources.Debugger_Error_Unexpected_Speech_Message :
-                string.Format(DiagnosticResources.Debugger_Error_Unexpected_Speech_Message_Format, provider.ProviderName);
+            this.ErrorMessage = provider != null
+                ? string.Format(System.Globalization.CultureInfo.CurrentCulture,
+                    DiagnosticResources.Debugger_Error_Unexpected_Speech_Message_Format,
+                    provider.ProviderName)
+                : DiagnosticResources.Debugger_Error_Unexpected_Speech_Message;
         }
 
         /// <summary>

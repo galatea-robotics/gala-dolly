@@ -63,9 +63,9 @@ namespace Gala.Dolly.UI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &gt;{0}: {1}.
         /// </summary>
-        internal static string ChatBotMessageFormat {
+        internal static string Chatbot_Message_Format {
             get {
-                return ResourceManager.GetString("ChatBotMessageFormat", resourceCulture);
+                return ResourceManager.GetString("Chatbot_Message_Format", resourceCulture);
             }
         }
         
@@ -76,6 +76,15 @@ namespace Gala.Dolly.UI.Properties {
             get {
                 object obj = ResourceManager.GetObject("Dolly", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} was not initialized properly..
+        /// </summary>
+        internal static string Startup_Fail_Message_Format {
+            get {
+                return ResourceManager.GetString("Startup_Fail_Message_Format", resourceCulture);
             }
         }
     }

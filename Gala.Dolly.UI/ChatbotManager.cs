@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Galatea.AI.Abstract;
+using Galatea;
 using Galatea.Runtime;
 
 namespace Gala.Dolly.UI
@@ -10,6 +11,7 @@ namespace Gala.Dolly.UI
     /// <summary>
     /// Contains a collection of hard-coded defined Chatbots downloaded from the internet.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chatbot")]
     public abstract class ChatbotManager : KeyedCollection<string, IChatbot>, IChatbotManager, IComponent
     {
@@ -93,6 +95,7 @@ namespace Gala.Dolly.UI
         /// </returns>
         protected override string GetKeyForItem(IChatbot item)
         {
+            if (item == null) throw new TeaArgumentNullException("item");
             return item.Name;
         }
 
