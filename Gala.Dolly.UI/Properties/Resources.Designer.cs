@@ -61,11 +61,11 @@ namespace Gala.Dolly.UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &gt;{0}: {1}.
+        ///   Looks up a localized string similar to Send.
         /// </summary>
-        internal static string Chatbot_Message_Format {
+        internal static string btnSendText {
             get {
-                return ResourceManager.GetString("Chatbot_Message_Format", resourceCulture);
+                return ResourceManager.GetString("btnSendText", resourceCulture);
             }
         }
         
@@ -80,11 +80,38 @@ namespace Gala.Dolly.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CHATBOT:.
+        /// </summary>
+        internal static string lblChatBotSelectorText {
+            get {
+                return ResourceManager.GetString("lblChatBotSelectorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DEFAULT.
+        /// </summary>
+        internal static string radDefaultText {
+            get {
+                return ResourceManager.GetString("radDefaultText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} was not initialized properly..
         /// </summary>
         internal static string Startup_Fail_Message_Format {
             get {
                 return ResourceManager.GetString("Startup_Fail_Message_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Chatbot Buttons.
+        /// </summary>
+        internal static string viewChatbotsMenuItemText {
+            get {
+                return ResourceManager.GetString("viewChatbotsMenuItemText", resourceCulture);
             }
         }
     }

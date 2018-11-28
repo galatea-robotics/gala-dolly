@@ -40,5 +40,50 @@ namespace Gala.Dolly.Chatbots.Properties {
                 return ((string)(this["ChatbotResourcesFolder"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(">{0}: {1}")]
+        public string ChatbotMessageFormat {
+            get {
+                return ((string)(this["ChatbotMessageFormat"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255")]
+        public short ChatbotDisplayResponseWaitTime {
+            get {
+                return ((short)(this["ChatbotDisplayResponseWaitTime"]));
+            }
+            set {
+                this["ChatbotDisplayResponseWaitTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Default")]
+        public string ChatbotDefaultName {
+            get {
+                return ((string)(this["ChatbotDefaultName"]));
+            }
+            set {
+                this["ChatbotDefaultName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("I\'m sorry - Do I know you?")]
+        public string ChatbotDefaultResponse {
+            get {
+                return ((string)(this["ChatbotDefaultResponse"]));
+            }
+            set {
+                this["ChatbotDefaultResponse"] = value;
+            }
+        }
     }
 }

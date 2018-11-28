@@ -51,9 +51,11 @@ namespace Gala.Dolly.UI
 
             if (!Program.RuntimeEngine.DataAccessManager.IsInitialized)
             {
-                _debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Error, 
-                    string.Format(CultureInfo.CurrentCulture, Resources.Startup_Fail_Message_Format), 
-                    true, false);
+                string msg = string.Format(CultureInfo.CurrentCulture,
+                    Galatea.Globalization.DiagnosticResources.Runtime_Component_Initialization_Failed,
+                    Program.RuntimeEngine.DataAccessManager.ProviderName);
+
+                _debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Error, msg, true, false);
 
                 startupHasErrors = true;
             }

@@ -10,4 +10,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 
+[assembly: System.CLSCompliant(true)]
 [assembly: ComVisible(false)]

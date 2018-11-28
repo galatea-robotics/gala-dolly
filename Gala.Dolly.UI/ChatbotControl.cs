@@ -9,7 +9,6 @@ using Galatea.IO;
 
 namespace Gala.Dolly.UI
 {
-    using Gala.Dolly.UI.Properties;
     using Gala.Dolly.UI.Runtime;
 
     /// <summary>
@@ -21,19 +20,39 @@ namespace Gala.Dolly.UI
         private ToolStripMenuItem viewChatbotsMenuItem;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Gala.Dolly.UI.ChatbotControl"/> class.
+        /// Initializes a new instance of the <see cref="ChatbotControl"/> class.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "Chatbot")]
         public ChatbotControl() : base()
         {
             InitializeComponent();
+
+            /*
+            // Grab labels from Resources
+            lblChatBotSelector.Text = Properties.Resources.lblChatBotSelectorText;
+            radDefault.Text = Properties.Resources.radDefaultText;
+            btnSend.Text = Properties.Resources.btnSendText;
+             */
 
             // Initialize Chatbot Buttons
             pnlChatBotSelector.Controls.Add(radDefault);
 
             // Do Menu Item
-            viewChatbotsMenuItem = new ToolStripMenuItem();
-            viewChatbotsMenuItem.Text = "&Chatbot Buttons";
-            viewChatbotsMenuItem.CheckOnClick = true;
+            ToolStripMenuItem tempMenuItem = null;
+
+            try
+            {
+                tempMenuItem = new ToolStripMenuItem();
+
+                viewChatbotsMenuItem = tempMenuItem;
+                //viewChatbotsMenuItem.Text = Gala.Dolly.UI.Properties;
+                viewChatbotsMenuItem.CheckOnClick = true;
+            }
+            catch
+            {
+                tempMenuItem.Dispose();
+                throw;
+            }
 
             this.Load += ChatbotControl_Load;
         }
@@ -147,7 +166,7 @@ namespace Gala.Dolly.UI
             if (!string.IsNullOrEmpty(inputText))
             {
                 string msg = string.Format(System.Globalization.CultureInfo.CurrentCulture,
-                    Resources.Chatbot_Message_Format,
+                    Gala.Dolly.Chatbots.Properties.Settings.Default.ChatbotMessageFormat,
                     Program.RuntimeEngine.User.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture),
                     inputText);
 
@@ -177,7 +196,7 @@ namespace Gala.Dolly.UI
                 //LunaPOC.SerialInterface.Wait(240)     ' Don't talk over the Human!
 
                 string msg = string.Format(System.Globalization.CultureInfo.CurrentCulture,
-                    Properties.Resources.Chatbot_Message_Format,
+                    Gala.Dolly.Chatbots.Properties.Settings.Default.ChatbotMessageFormat,
                     Program.RuntimeEngine.AI.LanguageModel.ChatbotManager.Current.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture), 
                     responseText);
 
@@ -198,7 +217,7 @@ namespace Gala.Dolly.UI
         public short DisplayResponseWaitTime { get { return waitTime; } set { waitTime = value; } }
 
         private string responseText;
-        private short waitTime = Settings.Default.ChatbotDisplayResponseWaitTime;
+        private short waitTime = Gala.Dolly.Chatbots.Properties.Settings.Default.ChatbotDisplayResponseWaitTime;
         private List<string> history = new List<string>();
         private int historyLine = -1;
 

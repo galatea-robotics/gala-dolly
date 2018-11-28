@@ -80,7 +80,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>..\doc\Gala.Dolly.Speech.xml</DocumentationFile>
-    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Gala.Dolly\Properties\Gala.Dolly.cs">
@@ -147,6 +147,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gala.Data\Gala.Data.csproj">
+      <Project>{fce634b4-5a87-4519-98d4-240b4a42f8d5}</Project>
+      <Name>Gala.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Galatea.AI.Language\Galatea.AI.Language.csproj">
       <Project>{cb45393d-18c7-47b3-a16b-2b62c1c66a77}</Project>
       <Name>Galatea.AI.Language</Name>

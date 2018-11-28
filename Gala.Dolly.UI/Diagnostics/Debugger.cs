@@ -17,10 +17,18 @@ namespace Gala.Dolly.UI.Diagnostics
         /// <summary>
         /// Initializes a new instance of the <see cref="Gala.Dolly.UI.Diagnostics.Debugger"/> class.
         /// </summary>
+        public Debugger()
+        {
+            InitializeComponent();
+        }
+
+        /*
         public Debugger() : base(Properties.Settings.Default.DebuggerLogLevel, Properties.Settings.Default.DebuggerAlertLevel)
         {
             InitializeComponent();
         }
+         */
+
 
         /// <summary>
         /// Gets or sets a <see cref="FileLogger"/> component reference.
@@ -99,17 +107,14 @@ namespace Gala.Dolly.UI.Diagnostics
         {
             if (level >= this.LogLevel || overrideLevel)
             {
-                string sLevel = GetLogLevelToken(level);
-
                 string sOutput = string.Format(
                     System.Globalization.CultureInfo.InvariantCulture,
-                    "[{0}] # {1:d} {2:HH:mm:ss}.{3:000} # {4}", sLevel,
-                    System.DateTime.Today, System.DateTime.Now,
-                    System.DateTime.Now.Millisecond, message);
-
-                System.Diagnostics.Debug.WriteLine(sOutput);
+                    DiagnosticResources.Debugger_Log_Message_Format,
+                    GetLogLevelToken(level), DateTime.Now, message);
 
                 // Output to log file
+                System.Diagnostics.Debug.WriteLine(sOutput);
+
                 if (_fileLogger == null) return;
 
                 if (IsInitialized && _fileLogger.IsLogging)
@@ -140,7 +145,18 @@ namespace Gala.Dolly.UI.Diagnostics
             base.Dispose(disposing);
         }
 
-        private static string GetLogLevelToken(DebuggerLogLevel level)
+        /// <summary>
+        /// Gets a string representing a <see cref="DebuggerLogLevel"/> value that
+        /// is visible to the user.
+        /// </summary>
+        /// <param name="level">
+        /// The <see cref="DebuggerLogLevel"/> to tokenize.
+        /// </param>
+        /// <returns>
+        /// A string representing a <see cref="DebuggerLogLevel"/> value that is visible 
+        /// to the user.
+        /// </returns>
+        protected override string GetLogLevelToken(DebuggerLogLevel level)
         {
             switch (level)
             {

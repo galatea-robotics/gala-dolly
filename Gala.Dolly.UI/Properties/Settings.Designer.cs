@@ -12,7 +12,7 @@ namespace Gala.Dolly.UI.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -73,42 +73,6 @@ namespace Gala.Dolly.UI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Gala Dolly")]
-        public string ApplicationTitle {
-            get {
-                return ((string)(this["ApplicationTitle"]));
-            }
-            set {
-                this["ApplicationTitle"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Default")]
-        public string ChatbotDefaultName {
-            get {
-                return ((string)(this["ChatbotDefaultName"]));
-            }
-            set {
-                this["ChatbotDefaultName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Peanut")]
-        public string UserDefaultName {
-            get {
-                return ((string)(this["UserDefaultName"]));
-            }
-            set {
-                this["UserDefaultName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
         public global::System.Drawing.Point WindowLocation {
             get {
@@ -121,13 +85,13 @@ namespace Gala.Dolly.UI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("255")]
-        public short ChatbotDisplayResponseWaitTime {
+        [global::System.Configuration.DefaultSettingValueAttribute("Gala Dolly")]
+        public string ApplicationTitle {
             get {
-                return ((short)(this["ChatbotDisplayResponseWaitTime"]));
+                return ((string)(this["ApplicationTitle"]));
             }
             set {
-                this["ChatbotDisplayResponseWaitTime"] = value;
+                this["ApplicationTitle"] = value;
             }
         }
     }

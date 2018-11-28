@@ -8,6 +8,8 @@ using Galatea.Runtime;
 
 namespace Gala.Dolly.UI
 {
+    using Chatbots.Properties;
+
     /// <summary>
     /// Contains a collection of hard-coded defined Chatbots downloaded from the internet.
     /// </summary>
@@ -21,7 +23,7 @@ namespace Gala.Dolly.UI
         protected ChatbotManager()
         {
             // Initialize Default
-            _chatbot = new Galatea.Runtime.Services.Chatbot(Properties.Settings.Default.ChatbotDefaultName);
+            _chatbot = new DefaultChatbot(Settings.Default.ChatbotDefaultName);
         }
 
         /// <summary>
@@ -97,6 +99,15 @@ namespace Gala.Dolly.UI
         {
             if (item == null) throw new TeaArgumentNullException("item");
             return item.Name;
+        }
+
+        private class DefaultChatbot : Galatea.Runtime.Services.Chatbot
+        {
+            public DefaultChatbot(string name):base(name)
+            {
+            }
+
+            public override string Greeting { get => Settings.Default.ChatbotDefaultResponse; }
         }
 
         private IChatbot _chatbot;
