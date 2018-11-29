@@ -117,18 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChatbotAliceConfigFolder_Not_Found" xml:space="preserve">
-    <value>Chatbot Alice Config folder '{0}' not found.</value>
-  </data>
-  <data name="ChatBotAliceGreeting" xml:space="preserve">
-    <value>Greetings, human!</value>
-  </data>
-  <data name="ChatBotElizaGreeting" xml:space="preserve">
-    <value>Tell me how you are feeling.  I am ready to listen.</value>
-  </data>
-  <data name="ChatbotResourcesFolder_Not_Found" xml:space="preserve">
-    <value>Chatbot Resources folder '{0}' not found.</value>
-  </data>
   <data name="TTS4_On_Visual_Log_Format" xml:space="preserve">
     <value>Voice Phoneme - ph:{0}, eph:{1}, mh:{2}, mw:{3}, mu:{4}, jaw:{5}, upper:{6}, lower:{7}, tongue:{8}, lip:{9}</value>
   </data>

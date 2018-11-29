@@ -2,6 +2,7 @@
 Imports Gala.Dolly.UI
 Imports Galatea
 Imports Galatea.Runtime
+Imports Gala.Dolly.Chatbots.Properties
 Imports SpeechLib
 
 Public Class VbChatbot
@@ -91,7 +92,7 @@ Public Class VbChatbot
         ' Get Response
         If Not String.IsNullOrEmpty(inputText) Then
 
-            Dim msg As String = String.Format(Gala.Dolly.UI.Properties.Resources.ChatBotMessageFormat,
+            Dim msg As String = String.Format(Settings.Default.ChatbotMessageFormat,
                                               Program.Engine.User.Name.ToUpper,
                                               inputText)
 
@@ -123,7 +124,7 @@ Public Class VbChatbot
 
         'LunaPOC.SerialInterface.Wait(240)     ' Don't talk over the Human!
 
-        Dim msg As String = String.Format(Gala.Dolly.UI.Properties.Resources.ChatBotMessageFormat,
+        Dim msg As String = String.Format(Chatbots.Properties.Settings.Default.ChatbotMessageFormat,
                                           Program.Engine.AI.LanguageModel.ChatbotManager.Current.FriendlyName.ToUpper(),
                                           responseText)
 
@@ -205,7 +206,7 @@ Public Class VbChatbot
 
         ' Set Engine ChatBot to Alice
         Dim alice As IChatbot = ChatbotManager1("Alice")
-        responseText = Gala.Dolly.Chatbots.Properties.Resources.ChatBotAliceGreeting
+        responseText = Chatbots.Properties.Settings.Default.ChatBotAliceGreeting
         SendResponse()
 
         ' Disable the Default 
@@ -220,7 +221,7 @@ Public Class VbChatbot
 
         ' Set Engine ChatBot to Eliza
         Program.Engine.AI.LanguageModel.ChatbotManager.Current = ChatbotManager1("Eliza")
-        responseText = Gala.Dolly.Chatbots.Properties.Resources.ChatBotElizaGreeting
+        responseText = Chatbots.Properties.Settings.Default.ChatBotElizaGreeting
         SendResponse()
 
         ' Disable the Default 

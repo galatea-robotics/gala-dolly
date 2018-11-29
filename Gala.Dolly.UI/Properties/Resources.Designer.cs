@@ -19,7 +19,7 @@ namespace Gala.Dolly.UI.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,11 +61,74 @@ namespace Gala.Dolly.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E&amp;xit.
+        /// </summary>
+        internal static string BaseForm_ExitMenuItem_Text {
+            get {
+                return ResourceManager.GetString("BaseForm_ExitMenuItem_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;File.
+        /// </summary>
+        internal static string BaseForm_FileMenu_Text {
+            get {
+                return ResourceManager.GetString("BaseForm_FileMenu_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Tools.
+        /// </summary>
+        internal static string BaseForm_toolsMenu_Text {
+            get {
+                return ResourceManager.GetString("BaseForm_toolsMenu_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;View.
+        /// </summary>
+        internal static string BaseForm_viewMenu_Text {
+            get {
+                return ResourceManager.GetString("BaseForm_viewMenu_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &gt;{0}: {1}.
+        /// </summary>
+        internal static string Chatbot_Message_Format {
+            get {
+                return ResourceManager.GetString("Chatbot_Message_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send.
         /// </summary>
-        internal static string btnSendText {
+        internal static string ChatbotControl_btnSend_Text {
             get {
-                return ResourceManager.GetString("btnSendText", resourceCulture);
+                return ResourceManager.GetString("ChatbotControl_btnSend_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CHATBOT:.
+        /// </summary>
+        internal static string ChatbotControl_lblChatBotSelector_Text {
+            get {
+                return ResourceManager.GetString("ChatbotControl_lblChatBotSelector_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DEFAULT.
+        /// </summary>
+        internal static string ChatbotControl_radDefault_Text {
+            get {
+                return ResourceManager.GetString("ChatbotControl_radDefault_Text", resourceCulture);
             }
         }
         
@@ -80,24 +143,6 @@ namespace Gala.Dolly.UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CHATBOT:.
-        /// </summary>
-        internal static string lblChatBotSelectorText {
-            get {
-                return ResourceManager.GetString("lblChatBotSelectorText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DEFAULT.
-        /// </summary>
-        internal static string radDefaultText {
-            get {
-                return ResourceManager.GetString("radDefaultText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} was not initialized properly..
         /// </summary>
         internal static string Startup_Fail_Message_Format {
@@ -107,11 +152,92 @@ namespace Gala.Dolly.UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Chatbot Buttons.
+        ///   Looks up a localized string similar to &amp;Diagnostic.
         /// </summary>
-        internal static string viewChatbotsMenuItemText {
+        internal static string UIDebugger_debugDiagnosticMenuItem_Text {
             get {
-                return ResourceManager.GetString("viewChatbotsMenuItemText", resourceCulture);
+                return ResourceManager.GetString("UIDebugger_debugDiagnosticMenuItem_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Events.
+        /// </summary>
+        internal static string UIDebugger_debugEventMenuItem_Text {
+            get {
+                return ResourceManager.GetString("UIDebugger_debugEventMenuItem_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Log.
+        /// </summary>
+        internal static string UIDebugger_debugLogMenuItem_Text {
+            get {
+                return ResourceManager.GetString("UIDebugger_debugLogMenuItem_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Debug.
+        /// </summary>
+        internal static string UIDebugger_debugMenu_Text {
+            get {
+                return ResourceManager.GetString("UIDebugger_debugMenu_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug.
+        /// </summary>
+        internal static string UIDebugger_debugMenu_ToolTipText {
+            get {
+                return ResourceManager.GetString("UIDebugger_debugMenu_ToolTipText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Messages.
+        /// </summary>
+        internal static string UIDebugger_debugMsgMenuItem_Text {
+            get {
+                return ResourceManager.GetString("UIDebugger_debugMsgMenuItem_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Show Alerts.
+        /// </summary>
+        internal static string UIDebugger_debugShowAlertsMenuItem_Text {
+            get {
+                return ResourceManager.GetString("UIDebugger_debugShowAlertsMenuItem_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Speech.
+        /// </summary>
+        internal static string UIDebugger_speechMenu_Text {
+            get {
+                return ResourceManager.GetString("UIDebugger_speechMenu_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Silent.
+        /// </summary>
+        internal static string UIDebugger_speechSilentMenuItem_Text {
+            get {
+                return ResourceManager.GetString("UIDebugger_speechSilentMenuItem_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to toolStrip.
+        /// </summary>
+        internal static string UIDebugger_toolStrip_Text {
+            get {
+                return ResourceManager.GetString("UIDebugger_toolStrip_Text", resourceCulture);
             }
         }
     }

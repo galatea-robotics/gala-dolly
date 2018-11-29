@@ -1,5 +1,7 @@
-﻿using Galatea.AI;
+﻿using System.Collections.Specialized;
+using Galatea.AI;
 using Galatea.AI.Imaging;
+using Galatea.AI.Robotics;
 using Galatea.Diagnostics;
 using Galatea.Runtime;
 using Galatea.Runtime.Services;
@@ -8,10 +10,11 @@ namespace Gala.Dolly
 {
     using Gala.Data;
     using Gala.Data.Databases;
+	using Gala.Data.Runtime;
 
-    internal class SmartEngine : Engine, IRuntimeEngine, IEngine
+	internal class SmartEngine : Engine, IRuntimeEngine, IEngine
     {
-        public SmartEngine(IDebugger debugger, DataAccessManager dataAccessManager)
+		public SmartEngine(IDebugger debugger, DataAccessManager dataAccessManager)
         {
             // Initialize Debugger before anything else
             this.Debugger = debugger;
@@ -35,43 +38,58 @@ namespace Gala.Dolly
             Initialize();
         }
 
-        private void Initialize()
+		private void Initialize()
         {
-            // Initialize Foundation Components
-            Galatea.AI.Robotics.SensoryMotorSystem machine = new Galatea.AI.Robotics.Machine();
-            machine.Initialize(this);
+			IRobot robot = null;
 
-            VisualProcessor vision = new VisualProcessor(Properties.Settings.Default.ImagingSettings);
-            vision.Initialize(this);
+			// Initialize Foundation Components
+            try
+			{
+                machine = new Machine();
+				machine.Initialize(this);
 
-            _dataAccessManager.Initialize(this);
-            _dataAccessManager.InitializeMemoryBank();
+                vision = new VisualProcessor(Properties.Settings.Default.ImagingSettings);
+				vision.Initialize(this);
 
-            // Become Self-Aware
-            IRobot robot = SelfAwareness.BecomeSelfAware(this, Properties.Settings.Default.ChatbotName);
-            Gala.Data.Runtime.ContextCache newContextCache = new Data.Runtime.ContextCache();
-            newContextCache.Initialize(this.ExecutiveFunctions);
-            // Verify that ContextCache is instantiated
-            System.Diagnostics.Debug.Assert(ExecutiveFunctions.ContextCache != null);
+                _dataAccessManager.Initialize(this);
+                _dataAccessManager.InitializeMemoryBank();
+
+                newContextCache = new ContextCache();
+                newContextCache.Initialize(this.ExecutiveFunctions);
+
+                // Verify that ContextCache is instantiated
+                System.Diagnostics.Debug.Assert(ExecutiveFunctions.ContextCache != null);
+            }
+            catch
+            {
+                machine.Dispose();
+                vision.Dispose();
+                throw;
+            }
+
+			// Become Self-Aware
+			robot = SelfAwareness.BecomeSelfAware(this, Properties.Settings.Default.ChatbotName);
 
             // Initialize Language Module
             this.User = new Galatea.Runtime.Services.User(Properties.Settings.Default.DefaultUserName);
             IChatbotManager chatbots = Gala.Dolly.Chatbots.ChatbotManager.GetChatbots(this.User);
             robot.LanguageModel.LoadChatBots(chatbots);
 
-            System.Collections.Specialized.StringCollection substitutions = new System.Collections.Specialized.StringCollection();
-            substitutions.Add("I ,eye ");
-            substitutions.Add(".,.  ");
-            substitutions.Add("Ayuh,If you say so|false");
-            robot.LanguageModel.LoadSubstitutions(substitutions);
+			StringCollection substitutions = new StringCollection
+			{
+				"I ,eye ",
+				".,.  ",
+				"Ayuh,If you say so|false"
+			};
+			robot.LanguageModel.LoadSubstitutions(substitutions);
 
-            Galatea.Speech.ISpeechModule speech = new Galatea.Speech.SpeechModule();
-            speech.Initialize(robot.LanguageModel);
-            speech.StaySilent = Properties.Settings.Default.SpeechIsSilent;
+			speech = new Galatea.Speech.SpeechModule();
+			speech.Initialize(robot.LanguageModel);
+			speech.StaySilent = Properties.Settings.Default.SpeechIsSilent;
 
             // Add Text to Speech (even if silent)
             Galatea.Speech.TextToSpeech5 tts5 = new Galatea.Speech.TextToSpeech5(speech);
-            speech.TextToSpeech = tts5;
+			speech.TextToSpeech = tts5;
 
 
             // ********** WIN 10 ZIRA ********** // 
@@ -82,9 +100,6 @@ namespace Gala.Dolly
             {
                 SpeechLib.SpObjectToken spVoice = tts5.GetVoice(defaultVoiceIndex) as SpeechLib.SpObjectToken;
                 spV.Voice = spVoice;
-
-                //string d = spV.Voice.GetDescription();
-                //Debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Log, string.Format("SpeechLib.SpVoice: {0}", d));
             }
             catch (Galatea.Speech.TeaSpeechException ex)
             {
@@ -93,7 +108,7 @@ namespace Gala.Dolly
                 Debugger.HandleTeaException(ex1, speech);
 
                 Program.Console.SendResponse(msg);
-                speech.StaySilent = true;
+				speech.StaySilent = true;
             }
 
             // Add Memory
@@ -105,10 +120,12 @@ namespace Gala.Dolly
             base.Startup();
             _ai = base.AI as IRobot;
 
-            // Apply default conversational labels
-            this.User = new User(Properties.Settings.Default.DefaultUserName);
-            this.User.FriendlyName = Properties.Settings.Default.DefaultUserName;
-        }
+			// Apply default conversational labels
+			User _user = null;
+			_user = new User(Properties.Settings.Default.DefaultUserName);
+			User = _user;
+			User.FriendlyName = Properties.Settings.Default.DefaultUserName;
+		}
 
         public override void Shutdown()
         {
@@ -126,7 +143,12 @@ namespace Gala.Dolly
         }
         internal new IRobot AI { get { return _ai; } }
 
+        private static SensoryMotorSystem machine;
+        private static VisualProcessor vision;
         private static DataAccessManager _dataAccessManager;
+        private static ContextCache newContextCache;
+        private static Galatea.Speech.ISpeechModule speech;
+
         private static IRobot _ai;
     }
 }

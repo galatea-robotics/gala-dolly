@@ -18,7 +18,15 @@ namespace Gala.Dolly.UI
         public BaseForm() : base()
         {
             InitializeComponent();
-            this.Icon = Galatea.IconResource.Galatea;
+
+			#region CA1303
+			FileMenu.Text = Resources.BaseForm_FileMenu_Text;
+			exitMenuItem.Text = Resources.BaseForm_ExitMenuItem_Text;
+			ViewMenu.Text = Resources.BaseForm_viewMenu_Text;
+			ToolsMenu.Text = Resources.BaseForm_toolsMenu_Text;
+			#endregion
+
+			this.Icon = Galatea.IconResource.Galatea;
             this.Disposed += BaseForm_Disposed;
 
             this._debugger = new Diagnostics.UIDebugger();
@@ -42,6 +50,14 @@ namespace Gala.Dolly.UI
         internal static BaseForm Current { get { return _current; } }
 
         private void BaseForm_Load(object sender, System.EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                ValidateStartup();
+            }
+        }
+
+        private void ValidateStartup()
         {
             bool startupHasErrors = false;
 

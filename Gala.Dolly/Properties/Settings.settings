@@ -104,12 +104,12 @@
               &lt;CurveAngleThreshold&gt;27&lt;/CurveAngleThreshold&gt;
             &lt;/BlobPointSettings&gt;
             &lt;TemplateRecognitionSettings&gt;
-              &lt;ColorBrightnessThreshold&gt;0&lt;/ColorBrightnessThreshold&gt;
-              &lt;ColorSaturationThreshold&gt;0&lt;/ColorSaturationThreshold&gt;
-              &lt;ShapeOblongThreshold&gt;0&lt;/ShapeOblongThreshold&gt;
-              &lt;ShapeOblongRecognitionLevel&gt;0&lt;/ShapeOblongRecognitionLevel&gt;
-              &lt;ShapeOblongRecognitionNormalization&gt;false&lt;/ShapeOblongRecognitionNormalization&gt;
-              &lt;IdentifyShapeCertaintyMinimum&gt;0&lt;/IdentifyShapeCertaintyMinimum&gt;
+              &lt;ColorBrightnessThreshold&gt;5&lt;/ColorBrightnessThreshold&gt;
+              &lt;ColorSaturationThreshold&gt;5&lt;/ColorSaturationThreshold&gt;
+              &lt;ShapeOblongThreshold&gt;1.75&lt;/ShapeOblongThreshold&gt;
+              &lt;ShapeOblongRecognitionLevel&gt;2&lt;/ShapeOblongRecognitionLevel&gt;
+              &lt;ShapeOblongRecognitionNormalization&gt;true&lt;/ShapeOblongRecognitionNormalization&gt;
+              &lt;IdentifyShapeCertaintyMinimum&gt;65&lt;/IdentifyShapeCertaintyMinimum&gt;
             &lt;/TemplateRecognitionSettings&gt;
           &lt;/ImagingSettings&gt;
         </Value>

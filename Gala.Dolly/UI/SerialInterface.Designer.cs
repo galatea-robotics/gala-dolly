@@ -45,7 +45,6 @@
             this.btnOpenPort.Name = "btnOpenPort";
             this.btnOpenPort.Size = new System.Drawing.Size(64, 23);
             this.btnOpenPort.TabIndex = 15;
-            this.btnOpenPort.Text = "Open Port";
             this.btnOpenPort.UseVisualStyleBackColor = true;
             this.btnOpenPort.Click += new System.EventHandler(this.OpenPort);
             // 
@@ -55,7 +54,6 @@
             this.btnClosePort.Name = "btnClosePort";
             this.btnClosePort.Size = new System.Drawing.Size(64, 23);
             this.btnClosePort.TabIndex = 16;
-            this.btnClosePort.Text = "Close Port";
             this.btnClosePort.UseVisualStyleBackColor = true;
             this.btnClosePort.Click += new System.EventHandler(this.ClosePort);
             // 
@@ -72,7 +70,6 @@
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(46, 23);
             this.btnSend.TabIndex = 12;
-            this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.SendCommand);
             // 
@@ -102,7 +99,6 @@
             this.lblInterval.Name = "lblInterval";
             this.lblInterval.Size = new System.Drawing.Size(42, 13);
             this.lblInterval.TabIndex = 17;
-            this.lblInterval.Text = "Interval";
             // 
             // txtInterval
             // 
@@ -122,7 +118,6 @@
             this.lblCommand.Name = "lblCommand";
             this.lblCommand.Size = new System.Drawing.Size(30, 13);
             this.lblCommand.TabIndex = 10;
-            this.lblCommand.Text = "Data";
             // 
             // SerialInterface
             // 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -34,6 +35,21 @@ namespace Gala.Dolly.UI
         {
             InitializeComponent();
 
+            #region CA1303
+            btnPOV.Text = Resources.VisionCapture_btnPOV_Text;
+            btnCapture.Text = Resources.VisionCapture_btnCapture_Text;
+            btnRelease.Text = Resources.VisionCapture_btnRelease_Text;
+            cbReverseY.Text = Resources.VisionCapture_cbReverseY_Text;
+            lblDisplaySize.Text = Resources.VisionCapture_lblDisplaySize_Text;
+            lblMousePosition.Text = Resources.VisionCapture_lblMousePosition_Text;
+            lblLimits.Text = Resources.VisionCapture_lblLimits_Text;
+            lblPan.Text = Resources.VisionCapture_lblPan_Text;
+            lblTilt.Text = Resources.VisionCapture_lblTilt_Text;
+            ui.Text = Resources.VisionCapture_ui_Text;
+            btnResetCamera.Text = Resources.VisionCapture_btnResetCamera_Text;
+            btnLoad.Text = Resources.VisionCapture_btnLoad_Text;
+            #endregion
+
             //maxWidth = cameraWindow.Width - cameraWindow.Margin.Left - cameraWindow.Margin.Right;
             //maxHeight = cameraWindow.Margin.Top - cameraWindow.Margin.Bottom;
 
@@ -55,20 +71,27 @@ namespace Gala.Dolly.UI
 
         public Image GetLastFrame()
         {
-            Bitmap result = new Bitmap(cameraWindow.Camera.LastFrame);
-
-#if DEBUG
-            // Debugging
-            if (Settings.Default.ImagingSettings.DebugRecognitionSaveImages)
+            Bitmap result = null;
+            try
             {
-                result.Save("lastframe.png", System.Drawing.Imaging.ImageFormat.Png);
-            }
+                result = new Bitmap(cameraWindow.Camera.LastFrame);
+#if DEBUG
+                // Debugging
+                if (Settings.Default.ImagingSettings.DebugRecognitionSaveImages)
+                {
+                    result.Save("lastframe.png", System.Drawing.Imaging.ImageFormat.Png);
+                }
 #endif
+                SetDisplayImage(result);
+                StaticMode = true;
 
-            SetDisplayImage(result);
-            StaticMode = true;
-
-            return result;
+                return result;
+            }
+            catch
+            {
+                result.Dispose();
+                throw;
+            }
         }
 
         private void VisionCapture_Load(object sender, EventArgs e)
@@ -80,8 +103,10 @@ namespace Gala.Dolly.UI
                 FilterCollection filters = new FilterCollection(FilterCategory.VideoInputDevice);
 
                 // create video source
-                CaptureDevice localSource = new CaptureDevice();
-                localSource.VideoSource = filters[0].MonikerString;
+                CaptureDevice localSource = new CaptureDevice()
+                {
+                    VideoSource = filters[0].MonikerString
+                };
 
                 // open it
                 OpenVideoSource(localSource);
@@ -96,7 +121,7 @@ namespace Gala.Dolly.UI
             _offset = new Point(11, 58);
 
             CenterMousePosition();
-            this.ParentForm.KeyDown += form_KeyDown;
+            this.ParentForm.KeyDown += Form_KeyDown;
 
             // Create EventHandler
             Program.Engine.ExecutiveFunctions.ContextRecognition += ExecutiveFunctions_ContextRecognition;
@@ -134,8 +159,8 @@ namespace Gala.Dolly.UI
              */
 
             // set event handlers
-            camera.NewFrame += camera_NewFrame;
-            camera.Alarm += camera_Alarm;
+            camera.NewFrame += Camera_NewFrame;
+            camera.Alarm += Camera_Alarm;
 
             /*
             // start timer
@@ -174,7 +199,7 @@ namespace Gala.Dolly.UI
         }
 
         //int frameIndex = 1;
-        private void camera_NewFrame(object sender, System.EventArgs e)
+        private void Camera_NewFrame(object sender, System.EventArgs e)
         {
             /*
             if ((intervalsToSave != 0) && (saveOnMotion == true))
@@ -211,8 +236,8 @@ namespace Gala.Dolly.UI
                 writer.AddFrame(camera.LastFrame);
                 camera.Unlock();
             }
-             */ 
-            
+             */
+
             /*
             // Temporary "Video" stream
             string frameLabel = string.Format(@"C:\GALA\Media\FRAME!{0:00#}!{1:HH_mm_ss_fff}.png", frameIndex, DateTime.Now);
@@ -232,13 +257,15 @@ namespace Gala.Dolly.UI
              */
         }
 
-        private void camera_Alarm(object sender, EventArgs e)
+        private void Camera_Alarm(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
 
         #endregion
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.Control.set_Text(System.String)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)")]
         private void VisionCapture_Resize(object sender, EventArgs e)
         {
             // Get the maximum available Height and Width 
@@ -282,9 +309,9 @@ namespace Gala.Dolly.UI
             txtDisplaySize.Text = string.Format("{0},{1}", cameraWindow.Width, cameraWindow.Height);
         }
 
-        private void form_KeyDown(object sender, KeyEventArgs e)
+        private void Form_KeyDown(object sender, KeyEventArgs e)
         {
-            switch(e.KeyCode)
+            switch (e.KeyCode)
             {
                 case Keys.PageUp:
                     CaptureMode = true;
@@ -300,19 +327,19 @@ namespace Gala.Dolly.UI
                     break;
             }
         }
-        private void btnCapture_Click(object sender, EventArgs e)
+        private void BtnCapture_Click(object sender, EventArgs e)
         {
             CaptureMode = true;
         }
-        private void btnRelease_Click(object sender, EventArgs e)
+        private void BtnRelease_Click(object sender, EventArgs e)
         {
             CaptureMode = false;
         }
-        private void btnPOV_Click(object sender, EventArgs e)
+        private void BtnPOV_Click(object sender, EventArgs e)
         {
             CenterMousePosition();
         }
-        private void btnResetCamera_Click(object sender, EventArgs e)
+        private void BtnResetCamera_Click(object sender, EventArgs e)
         {
             StaticMode = false;
         }
@@ -358,7 +385,7 @@ namespace Gala.Dolly.UI
         }
          */
 
-        private void cameraWindow_MouseMove(object sender, MouseEventArgs e)
+        private void CameraWindow_MouseMove(object sender, MouseEventArgs e)
         {
             if (!_captureMode) return;
 
@@ -369,7 +396,7 @@ namespace Gala.Dolly.UI
 
             InputMousePosition = new Point(x, y);
         }
-        private void cameraWindow_MouseLeave(object sender, EventArgs e)
+        private void CameraWindow_MouseLeave(object sender, EventArgs e)
         {
             if (!_captureMode) return;
 
@@ -394,32 +421,35 @@ namespace Gala.Dolly.UI
 
         internal void CenterMousePosition()
         {
-            Point center = new Point();
-            //center.X = 50;
-            //center.Y = 50;
-            center.X = (cameraWindow.Width) / 2;
-            center.Y = (cameraWindow.Height) / 2;
-
+            Point center = new Point()
+            {
+                //center.X = 50;
+                //center.Y = 50;
+                X = (cameraWindow.Width) / 2,
+                Y = (cameraWindow.Height) / 2
+            };
             InputMousePosition = center;
             ////SetCursorFromMouseCapture();
         }
 
         internal void SetCursorFromMouseCapture()
         {
-            Point cursorPoint = new Point();
+            Point cursorPoint = new Point()
+            {
+                //cursorPoint.X = this.cameraWindow.Width * InputMousePosition.X / 100;
+                //cursorPoint.X += this.ParentForm.Left + this.cameraWindow.Left + _centerOffset.X;
+                //cursorPoint.Y = this.cameraWindow.Height * InputMousePosition.Y / 100;
+                //cursorPoint.Y += this.ParentForm.Top + this.cameraWindow.Top + _centerOffset.Y;
 
-            //cursorPoint.X = this.cameraWindow.Width * InputMousePosition.X / 100;
-            //cursorPoint.X += this.ParentForm.Left + this.cameraWindow.Left + _centerOffset.X;
-            //cursorPoint.Y = this.cameraWindow.Height * InputMousePosition.Y / 100;
-            //cursorPoint.Y += this.ParentForm.Top + this.cameraWindow.Top + _centerOffset.Y;
-
-            cursorPoint.X = this.ParentForm.Left + this.cameraWindow.Left + InputMousePosition.X + _offset.X;
-            cursorPoint.Y = this.ParentForm.Top + this.cameraWindow.Top + InputMousePosition.Y + _offset.Y;
-
+                X = this.ParentForm.Left + this.cameraWindow.Left + InputMousePosition.X + _offset.X,
+                Y = this.ParentForm.Top + this.cameraWindow.Top + InputMousePosition.Y + _offset.Y
+            };
             System.Windows.Forms.Cursor.Position = cursorPoint;
         }
 
-        internal void SendCommand(Point mousePosition)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Galatea.Diagnostics.IDebugger.Log(Galatea.Diagnostics.DebuggerLogLevel,System.String)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)")]
+        internal void SendCommand()
         {
             // Convert the X value
             int x = (pan * (_panMax - _panMin) / 100) + _panMin;
@@ -437,7 +467,7 @@ namespace Gala.Dolly.UI
             // Log for Debug
             if (Program.Engine.Debugger.LogLevel == Galatea.Diagnostics.DebuggerLogLevel.Diagnostic)
             {
-                string msg = string.Format("Pan: {0}, Tilt: {1}", x, y);
+                string msg = string.Format(System.Globalization.CultureInfo.CurrentCulture, "Pan: {0}, Tilt: {1}", x, y);
                 Program.Engine.Debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Diagnostic, msg);
             }
 
@@ -449,7 +479,9 @@ namespace Gala.Dolly.UI
             Wait(Program.Engine.Machine.SerialPortController.WaitInterval);
             Program.Engine.Machine.SerialPortController.SendCommand(2000 + y);
         }
-    
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.Control.set_Text(System.String)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)")]
         internal Point InputMousePosition
         {
             get { return _mousePosition; }
@@ -472,8 +504,8 @@ namespace Gala.Dolly.UI
 
                 // Debugging
                 txtMousePosition.Text = string.Format("{0},{1}", _mousePosition.X, _mousePosition.Y);
-                txtPan.Text = pan.ToString();
-                txtTilt.Text = tilt.ToString();
+                txtPan.Text = pan.ToString(System.Globalization.CultureInfo.CurrentCulture);
+                txtTilt.Text = tilt.ToString(System.Globalization.CultureInfo.CurrentCulture);
 
                 /*
                     ' Draw the Mouse Position
@@ -484,7 +516,7 @@ namespace Gala.Dolly.UI
                  */
 
                 // Send the Basic Stamp command
-                SendCommand(_mousePosition);
+                SendCommand();
             }
         }
 
@@ -502,14 +534,16 @@ namespace Gala.Dolly.UI
                     cameraWindow.Cursor = Cursors.Cross;
 
                     // Adjust Mouse Position
-                    Point adjustedPosition = new Point();
-                    adjustedPosition.X = (cameraWindow.Width * pan) / PANTILT_CONSTANT;
-                    adjustedPosition.Y = (cameraWindow.Height * tilt) / PANTILT_CONSTANT;
+                    Point adjustedPosition = new Point()
+                    {
+                        X = (cameraWindow.Width * pan) / PANTILT_CONSTANT,
+                        Y = (cameraWindow.Height * tilt) / PANTILT_CONSTANT
+                    };
                     InputMousePosition = adjustedPosition;
 
                     // Capture mouse input
-                    this.cameraWindow.MouseMove += cameraWindow_MouseMove;
-                    this.cameraWindow.MouseLeave += cameraWindow_MouseLeave;
+                    this.cameraWindow.MouseMove += CameraWindow_MouseMove;
+                    this.cameraWindow.MouseLeave += CameraWindow_MouseLeave;
                     SetCursorFromMouseCapture();
                 }
                 else
@@ -517,8 +551,8 @@ namespace Gala.Dolly.UI
                     cameraWindow.Cursor = Cursors.Default;
 
                     // Release mouse input events
-                    this.cameraWindow.MouseMove -= cameraWindow_MouseMove;
-                    this.cameraWindow.MouseLeave -= cameraWindow_MouseLeave;
+                    this.cameraWindow.MouseMove -= CameraWindow_MouseMove;
+                    this.cameraWindow.MouseLeave -= CameraWindow_MouseLeave;
                 }
 
                 btnRelease.Visible = _captureMode;
@@ -553,7 +587,7 @@ namespace Gala.Dolly.UI
                 pictureBox1.Visible = _staticMode;
                 cameraWindow.Visible = !_staticMode;
 
-                if(_staticMode)
+                if (_staticMode)
                 {
                     CaptureMode = false;
                 }
@@ -610,9 +644,7 @@ namespace Gala.Dolly.UI
             Rectangle rect = new Rectangle(blobImage.Location.X, blobImage.Location.Y, bmpTemp.Width, bmpTemp.Height);
 
             // Create BRAND FUCKING NEW Bitmap
-            Bitmap newBitmap = new Bitmap(blobImage.Source.Size.Width, blobImage.Source.Size.Height);
-
-            try
+            using (Bitmap newBitmap = new Bitmap(blobImage.Source.Size.Width, blobImage.Source.Size.Height))
             {
                 Graphics gfx = Graphics.FromImage(newBitmap);
                 gfx.Clear(blobImage.BitmapBlob.BackgroundIsBlack ? Color.Black : Color.White);
@@ -620,14 +652,14 @@ namespace Gala.Dolly.UI
 
                 // Update the Display
                 SetDisplayImage(newBitmap);
+#if DEBUG
+                // Debugging
+                if (Settings.Default.ImagingSettings.DebugRecognitionSaveImages)
+                {
+                    ImageDump(newBitmap, "Post");
+                }
+#endif
             }
-            catch
-            {
-                newBitmap.Dispose();
-                throw;
-            }
-
-            ImageDump(newBitmap, "Post");
         }
 
         private void SetDisplayImage(Bitmap bitmap)
@@ -637,7 +669,7 @@ namespace Gala.Dolly.UI
             pictureBox1.Refresh();
         }
 
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void BtnLoad_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = Resources.OpenFileDialogImageFilter;
 
@@ -687,10 +719,13 @@ namespace Gala.Dolly.UI
             // Notify if Error
             if (Program.Engine.Debugger.Exception != null)
             {
-                if(errorMessage == null)
+                if (errorMessage == null)
+                {
                     errorMessage = string.Format(
-                    Program.Engine.Debugger.ErrorMessage,
-                    Galatea.Globalization.ProviderResources.ImagingModel_Provider_Name);
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        Program.Engine.Debugger.ErrorMessage,
+                        Galatea.Globalization.ProviderResources.ImagingModel_Provider_Name);
+                }
 
                 // Send Error Notification to Speech Module
                 Program.Engine.AI.LanguageModel.SpeechModule.TextToSpeech.Speak(errorMessage);
@@ -703,12 +738,12 @@ namespace Gala.Dolly.UI
         }
 
 
-        private void ImageDump(Image image, string prefix = null)
+        private static void ImageDump(Image image, string prefix = null)
         {
             if (!Settings.Default.ImagingSettings.DebugRecognitionSaveImages) return;
 
-            string filename = string.Format("{0:yyyymmdd_HHmmss_fff}.png", DateTime.Now);
-            if (!string.IsNullOrEmpty(prefix)) filename = string.Format("{0}_{1}", prefix, filename);
+            string filename = string.Format(CultureInfo.CurrentCulture, "{0:yyyymmdd_HHmmss_fff}.png", DateTime.Now);
+            if (!string.IsNullOrEmpty(prefix)) filename = string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, filename);
 
             image.Save(System.IO.Path.Combine(Settings.Default.ImagingSettings.DebugRecognitionSaveFolder, filename), System.Drawing.Imaging.ImageFormat.Png);
         }
@@ -721,7 +756,7 @@ namespace Gala.Dolly.UI
 
         #endregion
 
-        private void Wait(int ms)
+        private static void Wait(int ms)
         {
             DateTime start = DateTime.Now;
 
@@ -757,12 +792,14 @@ namespace Gala.Dolly.UI
         {
             // Validate value
             TextBox ctl = (TextBox)sender;
-            int value = Convert.ToInt32(ctl.Text);
+            int value = Convert.ToInt32(ctl.Text, System.Globalization.CultureInfo.CurrentCulture);
 
             if (value < 0 || value > 150)
             {
-                MessageBox.Show(Resources.VisionCaptureMinMaxInvalid,
-                    this.FindForm().Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var options = this.RightToLeft == RightToLeft.Yes ? MessageBoxOptions.RtlReading : MessageBoxOptions.DefaultDesktopOnly;
+
+                MessageBox.Show(Resources.VisionCaptureMinMaxInvalid, this.FindForm().Text, MessageBoxButtons.OK, 
+                    MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, options);
 
                 e.Cancel = true;
             }
@@ -771,7 +808,7 @@ namespace Gala.Dolly.UI
         {
             // Validate value
             TextBox ctl = (TextBox)sender;
-            int value = Convert.ToInt32(ctl.Text);
+            int value = Convert.ToInt32(ctl.Text, System.Globalization.CultureInfo.CurrentCulture);
 
             switch (ctl.Name)
             {

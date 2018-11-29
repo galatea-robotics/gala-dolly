@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.IO.Ports;
 using System.Windows.Forms;
@@ -17,31 +18,66 @@ namespace Gala.Dolly.UI
         internal ToolStripMenuItem serialClosePortMenuItem;
         internal ToolStripMenuItem serialOpenAtStartupMenuItem;
         internal ToolStripMenuItem serialDisableWarnings;
+        private ToolStripSeparator ts;
 
         internal SerialInterface()
         {
             InitializeComponent();
 
-            // Add View >> "Serial Interface" Menu Item
-            viewSerialInterfaceMenuItem = new ToolStripMenuItem("&Serial Interface") { CheckOnClick = true };
-            viewSerialInterfaceMenuItem.Click += ViewSerialInterfaceMenuItem_Click;
+            #region CA1303
+            btnOpenPort.Text = Resources.SerialInterface_btnOpenPort_Text;
+            btnClosePort.Text = Resources.SerialInterface_btnClosePort_Text;
+            btnSend.Text = Resources.SerialInterface_btnSend_Text;
+            lblInterval.Text = Resources.SerialInterface_lblInterval_Text;
+            #endregion
 
-            // Add Serial >> Open Port, Close Port, and Open at Startup Menu and Menu Items
-            serialOpenPortMenuItem = new ToolStripMenuItem("&Open Port");
-            serialClosePortMenuItem = new ToolStripMenuItem("&Close Port");
-            serialOpenAtStartupMenuItem = new ToolStripMenuItem("O&pen at Startup") { CheckOnClick = true };
+            ToolStripMenuItem viewSerialInterfaceMenuItemTemp = null;
+            ToolStripMenuItem serialOpenAtStartupMenuItemTemp = null;
+            ToolStripMenuItem serialDisableWarningsTemp = null;
 
-            serialToolStripMenuItem = new ToolStripMenuItem("&Serial Interface");
-            serialToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
-                serialOpenPortMenuItem,
-                serialClosePortMenuItem,
-                new ToolStripSeparator(),
-                serialOpenAtStartupMenuItem });
+            try
+            {
+                // Add View >> "Serial Interface" Menu Item
+                viewSerialInterfaceMenuItemTemp = new ToolStripMenuItem(Resources.SerialInterface_viewSerialInterfaceMenuItem_Text);
+				viewSerialInterfaceMenuItem = viewSerialInterfaceMenuItemTemp;
+				viewSerialInterfaceMenuItem.CheckOnClick = true;
+				viewSerialInterfaceMenuItem.Click += ViewSerialInterfaceMenuItem_Click;
+                viewSerialInterfaceMenuItemTemp = null;
 
-            // Add Disable Warnings
-            serialDisableWarnings = new ToolStripMenuItem("Disable Log Warnings") { CheckOnClick = true };
-            serialDisableWarnings.Click += SerialDisableWarnings_Click;
-            serialToolStripMenuItem.DropDownItems.Add(serialDisableWarnings);
+                // Add Serial >> Open Port, Close Port, and Open at Startup Menu and Menu Items
+                serialOpenPortMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialOpenPortMenuItem_Text);
+                serialClosePortMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialClosePortMenuItem_Text);
+
+                serialOpenAtStartupMenuItemTemp = new ToolStripMenuItem(Resources.SerialInterface_serialOpenAtStartupMenuItem_Text);
+                serialOpenAtStartupMenuItem = serialOpenAtStartupMenuItemTemp;
+                serialOpenAtStartupMenuItem.CheckOnClick = true;
+                serialOpenAtStartupMenuItemTemp = null;
+
+                serialToolStripMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialToolStripMenuItem_Text);
+                serialToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[]
+                {
+                    serialOpenPortMenuItem,
+                    serialClosePortMenuItem,
+                    new ToolStripSeparator(),
+                    serialOpenAtStartupMenuItem
+                });
+
+                // Add Disable Warnings
+                serialDisableWarningsTemp = new ToolStripMenuItem(Resources.SerialInterface_serialDisableWarnings_Text);
+                serialDisableWarnings = serialDisableWarningsTemp;
+                serialDisableWarnings.CheckOnClick = true;
+                serialDisableWarnings.Click += SerialDisableWarnings_Click;
+                serialDisableWarningsTemp = null;
+
+                serialToolStripMenuItem.DropDownItems.Add(serialDisableWarnings);
+            }
+            catch
+			{
+				viewSerialInterfaceMenuItemTemp.Dispose();
+                serialOpenAtStartupMenuItemTemp.Dispose();
+                serialDisableWarningsTemp.Dispose();
+                throw;
+			}           
         }
 
         private void SerialInterface_Load(object sender, EventArgs e)
@@ -49,12 +85,26 @@ namespace Gala.Dolly.UI
             if (!Program.Started) return;
             Program.Engine.Debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Log, Resources.SerialPortLoading);
 
-            txtInterval.Text = Settings.Default.SerialPortDefaultInterval.ToString();
+            txtInterval.Text = Settings.Default.SerialPortDefaultInterval.ToString(CultureInfo.CurrentCulture);
             txtInterval.KeyPress += Gala.Dolly.UI.EventHandlers.Numeric_KeyPress;
 
             // Add Menu Items to the Form at Runtime
             UI.BaseForm myForm = this.ParentForm as UI.BaseForm;
-            myForm.ToolsMenu.DropDownItems.Insert(0, new ToolStripSeparator());
+
+            ToolStripSeparator tsTemp = null;
+            try
+            {
+                tsTemp = new ToolStripSeparator();
+                ts = tsTemp;
+                myForm.ToolsMenu.DropDownItems.Insert(0, ts);
+                tsTemp = null;
+            }
+            catch
+            {
+                tsTemp.Dispose();
+                throw;
+            }
+
             myForm.ToolsMenu.DropDownItems.Insert(0, serialToolStripMenuItem);
             myForm.ViewMenu.DropDownItems.Add(viewSerialInterfaceMenuItem);
 
@@ -96,9 +146,13 @@ namespace Gala.Dolly.UI
             Settings.Default.SerialOpenPortAtStartup = serialOpenAtStartupMenuItem.Checked;
 
             if (comboPorts.SelectedItem != null)
+            {
                 Settings.Default.SerialPortDefaultDevice = comboPorts.SelectedItem.ToString();
+            }
             if (comboBaudRate.SelectedItem != null)
-                Settings.Default.SerialPortDefaultBaudRate = Convert.ToInt32(comboBaudRate.SelectedItem);
+            {
+                Settings.Default.SerialPortDefaultBaudRate = Convert.ToInt32(comboBaudRate.SelectedItem, CultureInfo.CurrentCulture);
+            }
 
             Properties.Settings.Default.Save();
 
@@ -142,29 +196,33 @@ namespace Gala.Dolly.UI
         private void TxtInterval_Validating(object sender, CancelEventArgs e)
         {
             TextBox ctl = (TextBox)sender;
-            int value = Convert.ToInt32(ctl.Text);
+            int value = Convert.ToInt32(ctl.Text, CultureInfo.CurrentCulture);
 
             if (value < Settings.Default.SerialPortIntervalMin || value > Settings.Default.SerialPortIntervalMax)
             {
                 e.Cancel = true;
 
                 // Prompt
-                string msg = string.Format(Resources.SerialPortInvalidInterval,
+                string msg = string.Format(CultureInfo.CurrentCulture, Resources.SerialPortInvalidInterval,
                     Settings.Default.SerialPortIntervalMin, Settings.Default.SerialPortIntervalMax);
 
-                MessageBox.Show(msg, this.FindForm().Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var options = this.RightToLeft == RightToLeft.Yes ? MessageBoxOptions.RtlReading : MessageBoxOptions.DefaultDesktopOnly;
+                MessageBox.Show(msg, this.FindForm().Text, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, options);
             }
         }
         private void TxtInterval_TextChanged(object sender, EventArgs e)
         {
             if (Program.Engine.Machine.SerialPortController != null)
-                Program.Engine.Machine.SerialPortController.WaitInterval = Convert.ToInt32(((TextBox)sender).Text);
+            {
+                Program.Engine.Machine.SerialPortController.WaitInterval = Convert.ToInt32(
+                    ((TextBox)sender).Text, CultureInfo.CurrentCulture);
+            }
         }
 
         private void OpenPort()
         {
             // Validate ComboBox Selections
-            if (comboPorts.Text == "" || comboBaudRate.Text == "")
+            if (string.IsNullOrEmpty(comboPorts.Text) || string.IsNullOrEmpty(comboBaudRate.Text))
             {
                 Program.Engine.Debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Warning,
                     Resources.SerialPortSelectPrompt);
@@ -173,7 +231,8 @@ namespace Gala.Dolly.UI
             }
 
             // Open the Port
-            Program.Engine.Machine.SerialPortController.OpenSerialPort(comboPorts.Text, Convert.ToInt32(comboBaudRate.Text));
+            Program.Engine.Machine.SerialPortController.OpenSerialPort(comboPorts.Text,
+                Convert.ToInt32(comboBaudRate.Text, CultureInfo.CurrentCulture));
 
             // Set the Form
             if (Program.Engine.Machine.SerialPortController.IsSerialPortOpen)
@@ -192,9 +251,9 @@ namespace Gala.Dolly.UI
 
         private void SendCommand()
         {
-            if (txtCommand.Text == "") return;
+            if (string.IsNullOrEmpty(txtCommand.Text)) return;
 
-            int cmd = Convert.ToInt32(txtCommand.Text);
+            int cmd = Convert.ToInt32(txtCommand.Text, CultureInfo.CurrentCulture);
             Program.Engine.Machine.SerialPortController.SendCommand(cmd);
         }
 

@@ -26,13 +26,13 @@ namespace Gala.Dolly.Chatbots
             if (!Directory.Exists(Settings.Default.ChatbotAliceConfigFolder))
                 throw new FileNotFoundException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Galatea.Speech.Properties.Resources.ChatbotAliceConfigFolder_Not_Found,
+                        Properties.Settings.Default.ChatbotAliceConfigFolder_Not_Found,
                         Settings.Default.ChatbotAliceConfigFolder));
 
             if(!Directory.Exists(Settings.Default.ChatbotResourcesFolder))
                 throw new FileNotFoundException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Galatea.Speech.Properties.Resources.ChatbotResourcesFolder_Not_Found,
+                        Properties.Settings.Default.ChatbotResourcesFolder_Not_Found,
                         Settings.Default.ChatbotResourcesFolder));
 
             aimlBot.loadSettings(Settings.Default.ChatbotAliceConfigFolder);
@@ -47,7 +47,7 @@ namespace Gala.Dolly.Chatbots
             aimlUser = new AIMLBot.User(userName, aimlBot);
         }
 
-        public override string Greeting { get { return Galatea.Speech.Properties.Resources.ChatBotAliceGreeting; } }
+        public override string Greeting { get { return Properties.Settings.Default.ChatBotAliceGreeting; } }
 
         /// <summary>
         /// An artificial intelligence method that responds to a text input based on the ALICE algorithm.

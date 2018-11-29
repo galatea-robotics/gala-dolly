@@ -16,7 +16,9 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
+				sourceImage.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -73,9 +75,8 @@
             this.btnPOV.Size = new System.Drawing.Size(160, 23);
             this.btnPOV.TabIndex = 13;
             this.btnPOV.TabStop = false;
-            this.btnPOV.Text = "[ HOME ] - Center";
             this.btnPOV.UseVisualStyleBackColor = true;
-            this.btnPOV.Click += new System.EventHandler(this.btnPOV_Click);
+            this.btnPOV.Click += new System.EventHandler(this.BtnPOV_Click);
             // 
             // btnCapture
             // 
@@ -84,10 +85,9 @@
             this.btnCapture.Size = new System.Drawing.Size(160, 23);
             this.btnCapture.TabIndex = 12;
             this.btnCapture.TabStop = false;
-            this.btnCapture.Text = "[ PAGE UP ] - Capture Mouse";
             this.btnCapture.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCapture.UseVisualStyleBackColor = true;
-            this.btnCapture.Click += new System.EventHandler(this.btnCapture_Click);
+            this.btnCapture.Click += new System.EventHandler(this.BtnCapture_Click);
             // 
             // btnRelease
             // 
@@ -96,11 +96,10 @@
             this.btnRelease.Size = new System.Drawing.Size(160, 23);
             this.btnRelease.TabIndex = 14;
             this.btnRelease.TabStop = false;
-            this.btnRelease.Text = "[ PAGE DN ] - Release Mouse";
             this.btnRelease.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRelease.UseVisualStyleBackColor = true;
             this.btnRelease.Visible = false;
-            this.btnRelease.Click += new System.EventHandler(this.btnRelease_Click);
+            this.btnRelease.Click += new System.EventHandler(this.BtnRelease_Click);
             // 
             // timer
             // 
@@ -160,7 +159,6 @@
             this.cbReverseY.Name = "cbReverseY";
             this.cbReverseY.Size = new System.Drawing.Size(101, 17);
             this.cbReverseY.TabIndex = 23;
-            this.cbReverseY.Text = "Reverse Y- Axis";
             this.cbReverseY.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -193,7 +191,6 @@
             this.lblDisplaySize.Name = "lblDisplaySize";
             this.lblDisplaySize.Size = new System.Drawing.Size(41, 13);
             this.lblDisplaySize.TabIndex = 1;
-            this.lblDisplaySize.Text = "Display";
             // 
             // txtDisplaySize
             // 
@@ -211,7 +208,6 @@
             this.lblMousePosition.Name = "lblMousePosition";
             this.lblMousePosition.Size = new System.Drawing.Size(39, 13);
             this.lblMousePosition.TabIndex = 3;
-            this.lblMousePosition.Text = "Mouse";
             // 
             // txtMousePosition
             // 
@@ -228,7 +224,6 @@
             this.lblLimits.Name = "lblLimits";
             this.lblLimits.Size = new System.Drawing.Size(75, 13);
             this.lblLimits.TabIndex = 5;
-            this.lblLimits.Text = "Limits";
             this.lblLimits.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblPan
@@ -238,7 +233,6 @@
             this.lblPan.Name = "lblPan";
             this.lblPan.Size = new System.Drawing.Size(26, 13);
             this.lblPan.TabIndex = 6;
-            this.lblPan.Text = "Pan";
             // 
             // txtPan
             // 
@@ -274,7 +268,6 @@
             this.lblTilt.Name = "lblTilt";
             this.lblTilt.Size = new System.Drawing.Size(21, 13);
             this.lblTilt.TabIndex = 10;
-            this.lblTilt.Text = "Tilt";
             // 
             // txtTilt
             // 
@@ -310,7 +303,6 @@
             this.ui.Name = "ui";
             this.ui.Size = new System.Drawing.Size(38, 13);
             this.ui.TabIndex = 14;
-            this.ui.Text = "Speed";
             // 
             // ctlSpeed
             // 
@@ -326,9 +318,8 @@
             this.btnResetCamera.Size = new System.Drawing.Size(160, 23);
             this.btnResetCamera.TabIndex = 22;
             this.btnResetCamera.TabStop = false;
-            this.btnResetCamera.Text = "[ INSERT ] - Reset Camera";
             this.btnResetCamera.UseVisualStyleBackColor = true;
-            this.btnResetCamera.Click += new System.EventHandler(this.btnResetCamera_Click);
+            this.btnResetCamera.Click += new System.EventHandler(this.BtnResetCamera_Click);
             // 
             // pictureBox1
             // 
@@ -347,9 +338,8 @@
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(158, 23);
             this.btnLoad.TabIndex = 22;
-            this.btnLoad.Text = "Load Image File";
             this.btnLoad.UseVisualStyleBackColor = true;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            this.btnLoad.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // cameraWindow
             // 

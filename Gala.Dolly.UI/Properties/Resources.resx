@@ -117,6 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BaseForm_ExitMenuItem_Text" xml:space="preserve">
+    <value>E&amp;xit</value>
+  </data>
+  <data name="BaseForm_FileMenu_Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="BaseForm_toolsMenu_Text" xml:space="preserve">
+    <value>&amp;Tools</value>
+  </data>
+  <data name="BaseForm_viewMenu_Text" xml:space="preserve">
+    <value>&amp;View</value>
+  </data>
+  <data name="ChatbotControl_btnSend_Text" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="ChatbotControl_lblChatBotSelector_Text" xml:space="preserve">
+    <value>CHATBOT:</value>
+  </data>
+  <data name="ChatbotControl_radDefault_Text" xml:space="preserve">
+    <value>DEFAULT</value>
+  </data>
   <data name="Chatbot_Message_Format" xml:space="preserve">
     <value>&gt;{0}: {1}</value>
   </data>
@@ -126,5 +147,35 @@
   </data>
   <data name="Startup_Fail_Message_Format" xml:space="preserve">
     <value>{0} was not initialized properly.</value>
+  </data>
+  <data name="UIDebugger_debugDiagnosticMenuItem_Text" xml:space="preserve">
+    <value>&amp;Diagnostic</value>
+  </data>
+  <data name="UIDebugger_debugEventMenuItem_Text" xml:space="preserve">
+    <value>&amp;Events</value>
+  </data>
+  <data name="UIDebugger_debugLogMenuItem_Text" xml:space="preserve">
+    <value>&amp;Log</value>
+  </data>
+  <data name="UIDebugger_debugMenu_Text" xml:space="preserve">
+    <value>&amp;Debug</value>
+  </data>
+  <data name="UIDebugger_debugMenu_ToolTipText" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="UIDebugger_debugMsgMenuItem_Text" xml:space="preserve">
+    <value>&amp;Messages</value>
+  </data>
+  <data name="UIDebugger_debugShowAlertsMenuItem_Text" xml:space="preserve">
+    <value>&amp;Show Alerts</value>
+  </data>
+  <data name="UIDebugger_speechMenu_Text" xml:space="preserve">
+    <value>&amp;Speech</value>
+  </data>
+  <data name="UIDebugger_speechSilentMenuItem_Text" xml:space="preserve">
+    <value>&amp;Silent</value>
+  </data>
+  <data name="UIDebugger_toolStrip_Text" xml:space="preserve">
+    <value>toolStrip</value>
   </data>
 </root>

@@ -12,7 +12,7 @@ namespace Gala.Dolly.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -332,13 +332,13 @@ namespace Gala.Dolly.Properties {
             "shold>18</LineSegmentThreshold>\r\n              <LineAngleThreshold>9</LineAngleT" +
             "hreshold>\r\n              <CurveAngleThreshold>27</CurveAngleThreshold>\r\n        " +
             "    </BlobPointSettings>\r\n            <TemplateRecognitionSettings>\r\n           " +
-            "   <ColorBrightnessThreshold>0</ColorBrightnessThreshold>\r\n              <ColorS" +
-            "aturationThreshold>0</ColorSaturationThreshold>\r\n              <ShapeOblongThres" +
-            "hold>0</ShapeOblongThreshold>\r\n              <ShapeOblongRecognitionLevel>0</Sha" +
-            "peOblongRecognitionLevel>\r\n              <ShapeOblongRecognitionNormalization>fa" +
-            "lse</ShapeOblongRecognitionNormalization>\r\n              <IdentifyShapeCertainty" +
-            "Minimum>0</IdentifyShapeCertaintyMinimum>\r\n            </TemplateRecognitionSett" +
-            "ings>\r\n          </ImagingSettings>\r\n        ")]
+            "   <ColorBrightnessThreshold>5</ColorBrightnessThreshold>\r\n              <ColorS" +
+            "aturationThreshold>5</ColorSaturationThreshold>\r\n              <ShapeOblongThres" +
+            "hold>1.75</ShapeOblongThreshold>\r\n              <ShapeOblongRecognitionLevel>2</" +
+            "ShapeOblongRecognitionLevel>\r\n              <ShapeOblongRecognitionNormalization" +
+            ">true</ShapeOblongRecognitionNormalization>\r\n              <IdentifyShapeCertain" +
+            "tyMinimum>65</IdentifyShapeCertaintyMinimum>\r\n            </TemplateRecognitionS" +
+            "ettings>\r\n          </ImagingSettings>\r\n        ")]
         public global::Galatea.AI.Imaging.ImagingSettings ImagingSettings {
             get {
                 return ((global::Galatea.AI.Imaging.ImagingSettings)(this["ImagingSettings"]));

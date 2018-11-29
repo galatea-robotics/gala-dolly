@@ -7,6 +7,7 @@ using Galatea.Diagnostics;
 namespace Gala.Dolly.UI.Diagnostics
 {
     using Gala.Dolly.UI.Runtime;
+	using Properties;
 
     /// <summary>
     /// Includes a <see cref="ToolStripMenuItem"/> User Interface for setting diagnostic application 
@@ -21,12 +22,25 @@ namespace Gala.Dolly.UI.Diagnostics
         public UIDebugger() : base()
         {
             InitializeComponent();
-        }
 
-        /// <summary>
-        /// Gets or sets the threshold that determines how messages are logged.
-        /// </summary>
-        public override DebuggerLogLevel LogLevel
+			#region CA1303
+			debugMenu.Text = Resources.UIDebugger_debugMenu_Text;
+			debugMenu.ToolTipText = Resources.UIDebugger_debugMenu_ToolTipText;
+			debugDiagnosticMenuItem.Text = Resources.UIDebugger_debugDiagnosticMenuItem_Text;
+			debugLogMenuItem.Text = Resources.UIDebugger_debugLogMenuItem_Text;
+			debugEventMenuItem.Text = Resources.UIDebugger_debugEventMenuItem_Text;
+			debugMsgMenuItem.Text = Resources.UIDebugger_debugMsgMenuItem_Text;
+			debugShowAlertsMenuItem.Text = Resources.UIDebugger_debugShowAlertsMenuItem_Text;
+			speechMenu.Text = Resources.UIDebugger_speechMenu_Text;
+			speechSilentMenuItem.Text = Resources.UIDebugger_speechSilentMenuItem_Text;
+			toolStrip.Text = Resources.UIDebugger_toolStrip_Text;
+			#endregion
+		}
+
+		/// <summary>
+		/// Gets or sets the threshold that determines how messages are logged.
+		/// </summary>
+		public override DebuggerLogLevel LogLevel
         {
             get
             {

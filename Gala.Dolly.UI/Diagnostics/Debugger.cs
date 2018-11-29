@@ -172,6 +172,19 @@ namespace Gala.Dolly.UI.Diagnostics
             }
         }
 
+		#region Component Designer generated code
+
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+		private void InitializeComponent()
+        {
+        }
+
+        #endregion
+
         private IFileLogger _fileLogger;
     }
 }

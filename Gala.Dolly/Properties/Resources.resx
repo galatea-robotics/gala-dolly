@@ -155,10 +155,10 @@
     <value>..\images\mic_on.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SpeechRecognitionInitializing" xml:space="preserve">
-    <value>Speech Recognition: Initializing SAPI reco context object...</value>
+    <value>Speech Recognition: Initializing SAPI recognition context object...</value>
   </data>
   <data name="SpeechRecognitionStopped" xml:space="preserve">
-    <value>Speech Recognition: SAPI reco is stopped.</value>
+    <value>Speech Recognition: SAPI recognition is stopped.</value>
   </data>
   <data name="SpeechRecognitionPausing" xml:space="preserve">
     <value>Speech Recognition is pausing.</value>
@@ -168,5 +168,119 @@
   </data>
   <data name="SpeechRecognitionNotLoaded" xml:space="preserve">
     <value>Speech Recognition is not running.</value>
+  </data>
+  <data name="SerialInterface_serialClosePortMenuItem_Text" xml:space="preserve">
+    <value>&amp;Close Port</value>
+  </data>
+  <data name="SerialInterface_serialDisableWarnings_Text" xml:space="preserve">
+    <value>Disable Log Warnings</value>
+  </data>
+  <data name="SerialInterface_serialOpenAtStartupMenuItem_Text" xml:space="preserve">
+    <value>O&amp;pen at Startup</value>
+  </data>
+  <data name="SerialInterface_serialOpenPortMenuItem_Text" xml:space="preserve">
+    <value>&amp;Open Port</value>
+  </data>
+  <data name="SerialInterface_serialToolStripMenuItem_Text" xml:space="preserve">
+    <value>&amp;Serial Interface</value>
+  </data>
+  <data name="SerialInterface_viewSerialInterfaceMenuItem_Text" xml:space="preserve">
+    <value>&amp;Serial Interface</value>
+  </data>
+  <data name="SerialInterface_btnClosePort_Text" xml:space="preserve">
+    <value>Close Port</value>
+  </data>
+  <data name="SerialInterface_btnOpenPort_Text" xml:space="preserve">
+    <value>Open Port</value>
+  </data>
+  <data name="SerialInterface_btnSend_Text" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SerialInterface_lblCommand_Text" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="SerialInterface_lblInterval_Text" xml:space="preserve">
+    <value>Interval</value>
+  </data>
+  <data name="TemplateRecognition_btnBlobify_Text" xml:space="preserve">
+    <value>Blobify</value>
+  </data>
+  <data name="TemplateRecognition_btnLoad_Text" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="TemplateRecognition_btnRandom_Text" xml:space="preserve">
+    <value>Random</value>
+  </data>
+  <data name="TemplateRecognition_lbl_B_Text" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="TemplateRecognition_lbl_G_Text" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="TemplateRecognition_lbl_H_Text" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="TemplateRecognition_lbl_L_Text" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="TemplateRecognition_lbl_R_Text" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="TemplateRecognition_lbl_S_Text" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="TTS_btn1_Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TTS_btn2_Text" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="TTS_btn4_Text" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="TTS_btn5_Text" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="TTS_lblSpeed_Text" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="TTS_lblVolume_Text" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="VisionCapture_btnCapture_Text" xml:space="preserve">
+    <value>[ PAGE UP ] - Capture Mouse</value>
+  </data>
+  <data name="VisionCapture_btnLoad_Text" xml:space="preserve">
+    <value>Load Image File</value>
+  </data>
+  <data name="VisionCapture_btnPOV_Text" xml:space="preserve">
+    <value>[ HOME ] - Center</value>
+  </data>
+  <data name="VisionCapture_btnRelease_Text" xml:space="preserve">
+    <value>[ PAGE DN ] - Release Mouse</value>
+  </data>
+  <data name="VisionCapture_btnResetCamera_Text" xml:space="preserve">
+    <value>[ INSERT ] - Reset Camera</value>
+  </data>
+  <data name="VisionCapture_cbReverseY_Text" xml:space="preserve">
+    <value>Reverse Y- Axis</value>
+  </data>
+  <data name="VisionCapture_lblDisplaySize_Text" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="VisionCapture_lblLimits_Text" xml:space="preserve">
+    <value>Limits</value>
+  </data>
+  <data name="VisionCapture_lblMousePosition_Text" xml:space="preserve">
+    <value>Mouse</value>
+  </data>
+  <data name="VisionCapture_lblPan_Text" xml:space="preserve">
+    <value>Pan</value>
+  </data>
+  <data name="VisionCapture_lblTilt_Text" xml:space="preserve">
+    <value>Tilt</value>
+  </data>
+  <data name="VisionCapture_ui_Text" xml:space="preserve">
+    <value>Speed</value>
   </data>
 </root>

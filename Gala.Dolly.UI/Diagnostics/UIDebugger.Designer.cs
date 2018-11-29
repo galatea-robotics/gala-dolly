@@ -25,7 +25,7 @@ namespace Gala.Dolly.UI.Diagnostics
             this.debugMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.debugDiagnosticMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugLogMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.debugEventMenuItem = new ToolStripMenuItem();
+            this.debugEventMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugMsgMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugShowAlertsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -43,39 +43,32 @@ namespace Gala.Dolly.UI.Diagnostics
             this.debugShowAlertsMenuItem});
             this.debugMenu.Name = "debugMenu";
             this.debugMenu.Size = new System.Drawing.Size(54, 25);
-            this.debugMenu.Text = "&Debug";
-            this.debugMenu.ToolTipText = "Debug";
             // 
             // debugDiagnosticMenuItem
             // 
             this.debugDiagnosticMenuItem.Name = "debugDiagnosticMenuItem";
             this.debugDiagnosticMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.debugDiagnosticMenuItem.Text = "&Diagnostic";
             // 
             // debugLogMenuItem
             // 
             this.debugLogMenuItem.Name = "debugLogMenuItem";
             this.debugLogMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.debugLogMenuItem.Text = "&Log";
             // 
             // debugEventMenuItem
             // 
             this.debugEventMenuItem.Name = "debugEventMenuItem";
             this.debugEventMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.debugEventMenuItem.Text = "&Events";
             // 
             // debugMsgMenuItem
             // 
             this.debugMsgMenuItem.Name = "debugMsgMenuItem";
             this.debugMsgMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.debugMsgMenuItem.Text = "&Messages";
             // 
             // debugShowAlertsMenuItem
             // 
             this.debugShowAlertsMenuItem.CheckOnClick = true;
             this.debugShowAlertsMenuItem.Name = "debugShowAlertsMenuItem";
             this.debugShowAlertsMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.debugShowAlertsMenuItem.Text = "&Show Alerts";
             // 
             // toolStrip
             // 
@@ -86,7 +79,6 @@ namespace Gala.Dolly.UI.Diagnostics
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(100, 25);
             this.toolStrip.TabIndex = 0;
-            this.toolStrip.Text = "toolStrip";
             // 
             // speechMenu
             // 
@@ -94,14 +86,12 @@ namespace Gala.Dolly.UI.Diagnostics
             this.speechSilentMenuItem});
             this.speechMenu.Name = "speechMenu";
             this.speechMenu.Size = new System.Drawing.Size(57, 25);
-            this.speechMenu.Text = "&Speech";
             // 
             // speechSilentMenuItem
             // 
             this.speechSilentMenuItem.CheckOnClick = true;
             this.speechSilentMenuItem.Name = "speechSilentMenuItem";
             this.speechSilentMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.speechSilentMenuItem.Text = "&Silent";
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
 

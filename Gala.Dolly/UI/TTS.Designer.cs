@@ -285,7 +285,6 @@ namespace Gala.Dolly.UI
             this.lblSpeed.Name = "lblSpeed";
             this.lblSpeed.Size = new System.Drawing.Size(38, 13);
             this.lblSpeed.TabIndex = 55;
-            this.lblSpeed.Text = "Speed";
             // 
             // slSpeed
             // 
@@ -298,7 +297,7 @@ namespace Gala.Dolly.UI
             this.slSpeed.TabIndex = 54;
             this.slSpeed.TabStop = false;
             this.slSpeed.TickFrequency = 4;
-            this.slSpeed.ValueChanged += new System.EventHandler(this.slSpeed_ValueChanged);
+            this.slSpeed.ValueChanged += new System.EventHandler(this.SlSpeed_ValueChanged);
             // 
             // slVolume
             // 
@@ -311,7 +310,7 @@ namespace Gala.Dolly.UI
             this.slVolume.TabStop = false;
             this.slVolume.TickFrequency = 10;
             this.slVolume.Value = 50;
-            this.slVolume.ValueChanged += new System.EventHandler(this.slVolume_ValueChanged);
+            this.slVolume.ValueChanged += new System.EventHandler(this.SlVolume_ValueChanged);
             // 
             // lblVolume
             // 
@@ -320,7 +319,6 @@ namespace Gala.Dolly.UI
             this.lblVolume.Name = "lblVolume";
             this.lblVolume.Size = new System.Drawing.Size(42, 13);
             this.lblVolume.TabIndex = 57;
-            this.lblVolume.Text = "Volume";
             // 
             // pnlManualControls
             // 
@@ -344,10 +342,9 @@ namespace Gala.Dolly.UI
             this.btn4a.Size = new System.Drawing.Size(18, 24);
             this.btn4a.TabIndex = 42;
             this.btn4a.TabStop = false;
-            this.btn4a.Text = "4";
             this.btn4a.UseVisualStyleBackColor = true;
-            this.btn4a.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn4_MouseDown);
-            this.btn4a.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn4_MouseUp);
+            this.btn4a.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Btn4_MouseDown);
+            this.btn4a.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Btn4_MouseUp);
             // 
             // btn5
             // 
@@ -356,10 +353,9 @@ namespace Gala.Dolly.UI
             this.btn5.Size = new System.Drawing.Size(40, 24);
             this.btn5.TabIndex = 43;
             this.btn5.TabStop = false;
-            this.btn5.Text = "5";
             this.btn5.UseVisualStyleBackColor = true;
-            this.btn5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn5_MouseDown);
-            this.btn5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn5_MouseUp);
+            this.btn5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Btn5_MouseDown);
+            this.btn5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Btn5_MouseUp);
             // 
             // btn4b
             // 
@@ -368,10 +364,9 @@ namespace Gala.Dolly.UI
             this.btn4b.Size = new System.Drawing.Size(18, 24);
             this.btn4b.TabIndex = 44;
             this.btn4b.TabStop = false;
-            this.btn4b.Text = "4";
             this.btn4b.UseVisualStyleBackColor = true;
-            this.btn4b.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn4_MouseDown);
-            this.btn4b.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn4_MouseUp);
+            this.btn4b.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Btn4_MouseDown);
+            this.btn4b.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Btn4_MouseUp);
             // 
             // btn1a
             // 
@@ -381,10 +376,9 @@ namespace Gala.Dolly.UI
             this.btn1a.Size = new System.Drawing.Size(18, 24);
             this.btn1a.TabIndex = 39;
             this.btn1a.TabStop = false;
-            this.btn1a.Text = "1";
             this.btn1a.UseVisualStyleBackColor = true;
-            this.btn1a.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn1_MouseDown);
-            this.btn1a.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn1_MouseUp);
+            this.btn1a.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Btn1_MouseDown);
+            this.btn1a.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Btn1_MouseUp);
             // 
             // btn2
             // 
@@ -394,10 +388,9 @@ namespace Gala.Dolly.UI
             this.btn2.Size = new System.Drawing.Size(40, 24);
             this.btn2.TabIndex = 40;
             this.btn2.TabStop = false;
-            this.btn2.Text = "2";
             this.btn2.UseVisualStyleBackColor = true;
-            this.btn2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn2_MouseDown);
-            this.btn2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn2_MouseUp);
+            this.btn2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Btn2_MouseDown);
+            this.btn2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Btn2_MouseUp);
             // 
             // btn1b
             // 
@@ -407,10 +400,9 @@ namespace Gala.Dolly.UI
             this.btn1b.Size = new System.Drawing.Size(18, 24);
             this.btn1b.TabIndex = 41;
             this.btn1b.TabStop = false;
-            this.btn1b.Text = "1";
             this.btn1b.UseVisualStyleBackColor = true;
-            this.btn1b.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn1_MouseDown);
-            this.btn1b.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn1_MouseUp);
+            this.btn1b.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Btn1_MouseDown);
+            this.btn1b.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Btn1_MouseUp);
             // 
             // cbMouthPositions
             // 

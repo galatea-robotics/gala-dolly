@@ -49,7 +49,6 @@ namespace Gala.Dolly.UI
             this.lblChatBotSelector.Name = "lblChatBotSelector";
             this.lblChatBotSelector.Size = new System.Drawing.Size(61, 13);
             this.lblChatBotSelector.TabIndex = 4;
-            this.lblChatBotSelector.Text = "CHATBOT:";
             // 
             // radDefault
             // 
@@ -62,7 +61,6 @@ namespace Gala.Dolly.UI
             this.radDefault.TabIndex = 7;
             this.radDefault.TabStop = true;
             this.radDefault.Tag = "Default";
-            this.radDefault.Text = "DEFAULT";
             this.radDefault.UseVisualStyleBackColor = true;
             // 
             // txtDisplay
@@ -96,9 +94,8 @@ namespace Gala.Dolly.UI
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(56, 23);
             this.btnSend.TabIndex = 2;
-            this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            this.btnSend.Click += new System.EventHandler(this.BtnSend_Click);
             // 
             // Timer
             // 
@@ -112,8 +109,8 @@ namespace Gala.Dolly.UI
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(261, 20);
             this.txtInput.TabIndex = 1;
-            this.txtInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtInput_KeyDown);
-            this.txtInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInput_KeyPress);
+            this.txtInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtInput_KeyDown);
+            this.txtInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtInput_KeyPress);
             // 
             // pnlInput
             // 

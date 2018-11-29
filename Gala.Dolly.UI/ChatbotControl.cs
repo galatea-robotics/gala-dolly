@@ -27,15 +27,14 @@ namespace Gala.Dolly.UI
         {
             InitializeComponent();
 
-            /*
-            // Grab labels from Resources
-            lblChatBotSelector.Text = Properties.Resources.lblChatBotSelectorText;
-            radDefault.Text = Properties.Resources.radDefaultText;
-            btnSend.Text = Properties.Resources.btnSendText;
-             */
+			#region CA1303
+			lblChatBotSelector.Text = Properties.Resources.ChatbotControl_lblChatBotSelector_Text;
+            radDefault.Text = Properties.Resources.ChatbotControl_radDefault_Text;
+            btnSend.Text = Properties.Resources.ChatbotControl_btnSend_Text;
+			#endregion
 
-            // Initialize Chatbot Buttons
-            pnlChatBotSelector.Controls.Add(radDefault);
+			// Initialize Chatbot Buttons
+			pnlChatBotSelector.Controls.Add(radDefault);
 
             // Do Menu Item
             ToolStripMenuItem tempMenuItem = null;
@@ -91,22 +90,21 @@ namespace Gala.Dolly.UI
                     throw new TeaArgumentNullException(nameof(chatbot.Greeting));
 
                 // Do UI
-                RadioButton rb;
-                RadioButton rb1 = null;
-
+                RadioButton rb = null;
                 try
                 {
-                    rb1 = new RadioButton { Text = chatbot.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture), Name = chatbot.Name };
-                    rb = rb1;
-                    rb.CheckedChanged += radChatbot_CheckedChanged;
-                    rb1 = null;
+                    rb = new RadioButton();
+                    pnlChatBotSelector.Controls.Add(rb);
+                    rb.Text = chatbot.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture);
+                    rb.Name = chatbot.Name;
+                    rb.CheckedChanged += RadChatbot_CheckedChanged;
+
+                    rb = null;
                 }
-                finally
+                catch
                 {
-                    if (rb1 != null)
-                    {
-                        rb1.Dispose();
-                    }
+                    rb.Dispose();
+                    throw;
                 }
 
                 // Placement
@@ -223,7 +221,7 @@ namespace Gala.Dolly.UI
 
         #region Private
 
-        private void radChatbot_CheckedChanged(object sender, EventArgs e)
+        private void RadChatbot_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton rb = (RadioButton)sender;
             if (!rb.Checked) return;
@@ -242,7 +240,7 @@ namespace Gala.Dolly.UI
             txtInput.Focus();
         }
 
-        private void txtInput_KeyDown(object sender, KeyEventArgs e)
+        private void TxtInput_KeyDown(object sender, KeyEventArgs e)
         {
             // No Data
             if (history.Count == 0) return;
@@ -286,11 +284,11 @@ namespace Gala.Dolly.UI
             }
             catch { throw; }
         }
-        private void txtInput_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtInput_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13) { GetResponse(); }
         }
-        private void btnSend_Click(object sender, EventArgs e)
+        private void BtnSend_Click(object sender, EventArgs e)
         {
             GetResponse();
         }

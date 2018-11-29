@@ -61,42 +61,6 @@ namespace Galatea.Speech.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chatbot Alice Config folder &apos;{0}&apos; not found..
-        /// </summary>
-        internal static string ChatbotAliceConfigFolder_Not_Found {
-            get {
-                return ResourceManager.GetString("ChatbotAliceConfigFolder_Not_Found", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Greetings, human!.
-        /// </summary>
-        internal static string ChatBotAliceGreeting {
-            get {
-                return ResourceManager.GetString("ChatBotAliceGreeting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tell me how you are feeling.  I am ready to listen..
-        /// </summary>
-        internal static string ChatBotElizaGreeting {
-            get {
-                return ResourceManager.GetString("ChatBotElizaGreeting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chatbot Resources folder &apos;{0}&apos; not found..
-        /// </summary>
-        internal static string ChatbotResourcesFolder_Not_Found {
-            get {
-                return ResourceManager.GetString("ChatbotResourcesFolder_Not_Found", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The Text-To-Speech Interface was successfully Initialized..
         /// </summary>
         internal static string TTS_Initialized {

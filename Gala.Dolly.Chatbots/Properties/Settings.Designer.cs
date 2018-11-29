@@ -12,7 +12,7 @@ namespace Gala.Dolly.Chatbots.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -83,6 +83,48 @@ namespace Gala.Dolly.Chatbots.Properties {
             }
             set {
                 this["ChatbotDefaultResponse"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Greetings, human!")]
+        public string ChatBotAliceGreeting {
+            get {
+                return ((string)(this["ChatBotAliceGreeting"]));
+            }
+            set {
+                this["ChatBotAliceGreeting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Tell me how you are feeling.  I am ready to listen.")]
+        public string ChatBotElizaGreeting {
+            get {
+                return ((string)(this["ChatBotElizaGreeting"]));
+            }
+            set {
+                this["ChatBotElizaGreeting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Chatbot Alice Config folder \'{0}\' not found.")]
+        public string ChatbotAliceConfigFolder_Not_Found {
+            get {
+                return ((string)(this["ChatbotAliceConfigFolder_Not_Found"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Chatbot Resources folder \'{0}\' not found.")]
+        public string ChatbotResourcesFolder_Not_Found {
+            get {
+                return ((string)(this["ChatbotResourcesFolder_Not_Found"]));
             }
         }
     }

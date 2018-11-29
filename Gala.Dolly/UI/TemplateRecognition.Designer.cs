@@ -76,9 +76,8 @@ namespace Gala.Dolly.UI
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(58, 23);
             this.btnLoad.TabIndex = 21;
-            this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            this.btnLoad.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // splitContainer2
             // 
@@ -133,7 +132,6 @@ namespace Gala.Dolly.UI
             this.lbl_R.Name = "lbl_R";
             this.lbl_R.Size = new System.Drawing.Size(15, 13);
             this.lbl_R.TabIndex = 3;
-            this.lbl_R.Text = "R";
             // 
             // txt_R
             // 
@@ -143,9 +141,9 @@ namespace Gala.Dolly.UI
             this.txt_R.Size = new System.Drawing.Size(42, 20);
             this.txt_R.TabIndex = 4;
             this.txt_R.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txt_R.Click += new System.EventHandler(this.txt_Click);
-            this.txt_R.Validating += new System.ComponentModel.CancelEventHandler(this.txt_R_Validating);
-            this.txt_R.Validated += new System.EventHandler(this.txt_Validated);
+            this.txt_R.Click += new System.EventHandler(this.Txt_Click);
+            this.txt_R.Validating += new System.ComponentModel.CancelEventHandler(this.Txt_R_Validating);
+            this.txt_R.Validated += new System.EventHandler(this.Txt_Validated);
             // 
             // lbl_G
             // 
@@ -154,7 +152,6 @@ namespace Gala.Dolly.UI
             this.lbl_G.Name = "lbl_G";
             this.lbl_G.Size = new System.Drawing.Size(15, 13);
             this.lbl_G.TabIndex = 5;
-            this.lbl_G.Text = "G";
             // 
             // txt_G
             // 
@@ -164,9 +161,9 @@ namespace Gala.Dolly.UI
             this.txt_G.Size = new System.Drawing.Size(42, 20);
             this.txt_G.TabIndex = 6;
             this.txt_G.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txt_G.Click += new System.EventHandler(this.txt_Click);
-            this.txt_G.Validating += new System.ComponentModel.CancelEventHandler(this.txt_G_Validating);
-            this.txt_G.Validated += new System.EventHandler(this.txt_Validated);
+            this.txt_G.Click += new System.EventHandler(this.Txt_Click);
+            this.txt_G.Validating += new System.ComponentModel.CancelEventHandler(this.Txt_G_Validating);
+            this.txt_G.Validated += new System.EventHandler(this.Txt_Validated);
             // 
             // lbl_B
             // 
@@ -175,7 +172,6 @@ namespace Gala.Dolly.UI
             this.lbl_B.Name = "lbl_B";
             this.lbl_B.Size = new System.Drawing.Size(14, 13);
             this.lbl_B.TabIndex = 7;
-            this.lbl_B.Text = "B";
             // 
             // txt_B
             // 
@@ -186,9 +182,9 @@ namespace Gala.Dolly.UI
             this.txt_B.Size = new System.Drawing.Size(42, 20);
             this.txt_B.TabIndex = 8;
             this.txt_B.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txt_B.Click += new System.EventHandler(this.txt_Click);
-            this.txt_B.Validating += new System.ComponentModel.CancelEventHandler(this.txt_B_Validating);
-            this.txt_B.Validated += new System.EventHandler(this.txt_Validated);
+            this.txt_B.Click += new System.EventHandler(this.Txt_Click);
+            this.txt_B.Validating += new System.ComponentModel.CancelEventHandler(this.Txt_B_Validating);
+            this.txt_B.Validated += new System.EventHandler(this.Txt_Validated);
             // 
             // lbl_H
             // 
@@ -197,7 +193,6 @@ namespace Gala.Dolly.UI
             this.lbl_H.Name = "lbl_H";
             this.lbl_H.Size = new System.Drawing.Size(15, 13);
             this.lbl_H.TabIndex = 9;
-            this.lbl_H.Text = "H";
             // 
             // txt_H
             // 
@@ -216,7 +211,6 @@ namespace Gala.Dolly.UI
             this.lbl_S.Name = "lbl_S";
             this.lbl_S.Size = new System.Drawing.Size(14, 13);
             this.lbl_S.TabIndex = 11;
-            this.lbl_S.Text = "S";
             // 
             // txt_S
             // 
@@ -235,7 +229,6 @@ namespace Gala.Dolly.UI
             this.lbl_L.Name = "lbl_L";
             this.lbl_L.Size = new System.Drawing.Size(13, 13);
             this.lbl_L.TabIndex = 13;
-            this.lbl_L.Text = "L";
             // 
             // txt_L
             // 
@@ -254,7 +247,6 @@ namespace Gala.Dolly.UI
             this.btnRandom.Name = "btnRandom";
             this.btnRandom.Size = new System.Drawing.Size(59, 23);
             this.btnRandom.TabIndex = 20;
-            this.btnRandom.Text = "Random";
             this.btnRandom.UseVisualStyleBackColor = true;
             // 
             // btnBlobify
@@ -264,10 +256,9 @@ namespace Gala.Dolly.UI
             this.btnBlobify.Name = "btnBlobify";
             this.btnBlobify.Size = new System.Drawing.Size(58, 23);
             this.btnBlobify.TabIndex = 22;
-            this.btnBlobify.Text = "Blobify";
             this.btnBlobify.UseVisualStyleBackColor = true;
             this.btnBlobify.Visible = false;
-            this.btnBlobify.Click += new System.EventHandler(this.btnBlobify_Click);
+            this.btnBlobify.Click += new System.EventHandler(this.BtnBlobify_Click);
             // 
             // TemplateRecognition
             // 

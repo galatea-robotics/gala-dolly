@@ -17,6 +17,18 @@ namespace Gala.Dolly.UI
         public TemplateRecognition()
         {
             InitializeComponent();
+
+            #region CA1303
+            btnLoad.Text = Resources.TemplateRecognition_btnLoad_Text;
+            lbl_R.Text = Resources.TemplateRecognition_lbl_R_Text;
+            lbl_G.Text = Resources.TemplateRecognition_lbl_G_Text;
+            lbl_B.Text = Resources.TemplateRecognition_lbl_B_Text;
+            lbl_H.Text = Resources.TemplateRecognition_lbl_H_Text;
+            lbl_S.Text = Resources.TemplateRecognition_lbl_S_Text;
+            lbl_L.Text = Resources.TemplateRecognition_lbl_L_Text;
+            btnRandom.Text = Resources.TemplateRecognition_btnRandom_Text;
+            btnBlobify.Text = Resources.TemplateRecognition_btnBlobify_Text;
+            #endregion
         }
 
         [System.ComponentModel.Category("Gala Dolly Events")]
@@ -57,7 +69,7 @@ namespace Gala.Dolly.UI
              */
         }
 
-        private void btnLoad_Click(object sender, System.EventArgs e)
+        private void BtnLoad_Click(object sender, System.EventArgs e)
         {
             openFileDialog1.Filter = Resources.OpenFileDialogImageFilter;
 
@@ -80,8 +92,9 @@ namespace Gala.Dolly.UI
 
         private byte _r, _g, _b;
 
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private void btnRandom_Click(object sender, System.EventArgs e)
+        private void BtnRandom_Click(object sender, System.EventArgs e)
         {
             System.Random rand = new System.Random();
             byte[] rgbInfo = new byte[3];
@@ -93,12 +106,13 @@ namespace Gala.Dolly.UI
             //chatBotControl.Focus();
             //chatBotControl.txtInput.Focus();
         }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private void SetAllRGB()
         {
-            txt_R.Text = _r.ToString();
-            txt_G.Text = _g.ToString();
-            txt_B.Text = _b.ToString();
-            txt_Validated(null, null);
+            txt_R.Text = _r.ToString(CultureInfo.CurrentCulture);
+            txt_G.Text = _g.ToString(CultureInfo.CurrentCulture);
+            txt_B.Text = _b.ToString(CultureInfo.CurrentCulture);
+            Txt_Validated(null, null);
         }
         private static bool GetRGB(TextBox textBox, ref byte value)
         {
@@ -116,23 +130,23 @@ namespace Gala.Dolly.UI
 
             return result;
         }
-        private void txt_Click(object sender, System.EventArgs e)
+        private void Txt_Click(object sender, System.EventArgs e)
         {
             ((TextBox)sender).SelectAll();
         }
-        private void txt_R_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Txt_R_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!GetRGB(txt_R, ref _r)) e.Cancel = true;
         }
-        private void txt_G_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Txt_G_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!GetRGB(txt_G, ref _g)) e.Cancel = true;
         }
-        private void txt_B_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Txt_B_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!GetRGB(txt_B, ref _b)) e.Cancel = true;
         }
-        private void txt_Validated(object sender, System.EventArgs e)
+        private void Txt_Validated(object sender, System.EventArgs e)
         {
             /*
             // Get Color from input textbox
@@ -192,7 +206,7 @@ namespace Gala.Dolly.UI
             blobImage = Program.Engine.Vision.ImageAnalyzer.ContextBlobImage;
         }
 
-        private void btnBlobify_Click(object sender, System.EventArgs e)
+        private void BtnBlobify_Click(object sender, System.EventArgs e)
         {
             blobFillType++;
 
@@ -327,7 +341,7 @@ namespace Gala.Dolly.UI
             Color lastPointColor = Color.FromArgb(64, Color.Blue);
             Bitmap bitmap = GuiImaging.GetBitmapBlobImage(st.BitmapBlob, fillColor, backgroundColor);
 #if DEBUG
-            if(Settings.Default.ImagingSettings.DebugRecognitionSaveImages)
+            if (Settings.Default.ImagingSettings.DebugRecognitionSaveImages)
             {
                 bitmap.Save("bitmap.png", System.Drawing.Imaging.ImageFormat.Png);
             }
@@ -346,18 +360,21 @@ namespace Gala.Dolly.UI
             }
 
             // Put the blob in the rectangle
-            Bitmap newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height);
-            Graphics gfx = Graphics.FromImage(newBitmap);
-            gfx.Clear(backgroundColor);
+            using (Bitmap newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height))
+            {
+                Graphics gfx = Graphics.FromImage(newBitmap);
+                gfx.Clear(backgroundColor);
 
-            //if (blobImage.BitmapBlob.BackgroundIsBlack) gfx.Clear(Color.Black);
-            gfx.DrawImage(bitmap, blobImage.Location);
+                //if (blobImage.BitmapBlob.BackgroundIsBlack) gfx.Clear(Color.Black);
+                gfx.DrawImage(bitmap, blobImage.Location);
 
-            // Update Display
-            SetDisplayImage(newBitmap);
-            //display.BackColor = backgroundColor;
+                // Update Display
+                SetDisplayImage(newBitmap);
+                //display.BackColor = backgroundColor;
+            }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private void DrawRectangle()
         {
             // Draw Blob Rectangle
@@ -388,8 +405,7 @@ namespace Gala.Dolly.UI
             Rectangle rect = new Rectangle(blobImage.Location.X, blobImage.Location.Y, blobImage.BitmapBlob.Width, blobImage.BitmapBlob.Height);
 
             // Create BRAND FUCKING NEW Bitmap
-            Bitmap newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height);
-            try
+            using (Bitmap newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height))
             {
                 Graphics gfx = Graphics.FromImage(newBitmap);
                 gfx.Clear(blobImage.BitmapBlob.BackgroundIsBlack ? Color.Black : Color.White);
@@ -397,11 +413,6 @@ namespace Gala.Dolly.UI
 
                 // Update the Display
                 SetDisplayImage(newBitmap);
-            }
-            catch
-            {
-                newBitmap.Dispose();
-                throw;
             }
         }
         private void SetDisplayImage(Bitmap bitmap)

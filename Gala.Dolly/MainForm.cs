@@ -22,13 +22,13 @@ namespace Gala.Dolly
 
         private void MainForm_Resize(object sender, System.EventArgs e)
         {
-            ResizeVideoCapture();
+            //ResizeVideoCapture();
             ResizeChatBot();
         }
-
+        
+        /*
         private void ResizeVideoCapture()
         {
-            /*
             // Get Image Display container size
             System.Drawing.Size containerSize = splitContainer.Panel1.ClientSize;
 
@@ -49,8 +49,8 @@ namespace Gala.Dolly
                 visionCapture.cameraWindow.Height = maxWidth * 3 / 4;
                 visionCapture.cameraWindow.Width = maxWidth;
             }
-             */
         }
+         */
 
         private void ResizeChatBot()
         {
@@ -67,9 +67,11 @@ namespace Gala.Dolly
             }
         }
 
+        /*
         private void TemplateRecognition_TemplateLoaded(object sender, System.EventArgs e)
         {
             chatbotControl.Select();
-        }       
+        } 
+         */
     }
 }

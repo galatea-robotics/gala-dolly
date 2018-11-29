@@ -34,7 +34,16 @@ namespace Gala.Dolly.UI
         public TTS()
         {
             InitializeComponent();
-            
+
+            #region CA1303
+            btn4a.Text = Resources.TTS_btn4_Text;
+            btn5.Text = Resources.TTS_btn5_Text;
+            btn4b.Text = Resources.TTS_btn4_Text;
+            btn1a.Text = Resources.TTS_btn1_Text;
+            btn2.Text = Resources.TTS_btn2_Text;
+            btn1b.Text = Resources.TTS_btn1_Text;
+            #endregion
+
             this.LEDColor = LEDColor.Red;           // Default is Red
             this.EyeCamColor = EyeCamColor.Blue;    // Default is Blue
 
@@ -125,22 +134,34 @@ namespace Gala.Dolly.UI
                 speechModule = new Galatea.Speech.SpeechModule();
                 speechModule.Initialize(Program.Engine.AI.LanguageModel);
 
-                Galatea.Speech.TextToSpeech5 tts5 = new Galatea.Speech.TextToSpeech5(speechModule);
-                tts5.Rate = -3;
-
+                TextToSpeech5 tts5 = null;
+                try
+                {
+                    tts5 = new TextToSpeech5(speechModule);
+                }
+                catch
+                {
+                    tts5.Dispose();
+                    throw;
+                }
+                
                 speechModule.TextToSpeech = tts5;
+                speechModule.TextToSpeech.Rate = -3;
                 speechModule.TextToSpeech.MouthPositionChange += TextToSpeech_MouthPositionChange;
 
                 //Program.Engine.Machine.SpeechModule = speechModule;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                var options = this.RightToLeft == RightToLeft.Yes ? MessageBoxOptions.RtlReading : MessageBoxOptions.DefaultDesktopOnly;
+
+                MessageBox.Show(ex.Message, this.FindForm().Text, MessageBoxButtons.OK, MessageBoxIcon.Warning, 
+                    MessageBoxDefaultButton.Button1, options);
             }
 
             // Set Keyboard Events
-            this.ParentForm.KeyDown += mainForm2_KeyDown;
-            this.ParentForm.KeyUp += mainForm2_KeyUp;
+            this.ParentForm.KeyDown += MainForm2_KeyDown;
+            this.ParentForm.KeyUp += MainForm2_KeyUp;
 
             // Close the mouth!
             SetLEDsOff();
@@ -294,14 +315,14 @@ namespace Gala.Dolly.UI
                 Program.Engine.Machine.SerialPortController.SendCommand(90 + (int)mouthPosition);
         }
 
-        private void slSpeed_ValueChanged(object sender, EventArgs e)
+        private void SlSpeed_ValueChanged(object sender, EventArgs e)
         {
             if (speechModule != null && speechModule.TextToSpeech != null)
                 speechModule.TextToSpeech.Rate = slSpeed.Value;
 
             RateChanged(this, null);
         }
-        private void slVolume_ValueChanged(object sender, EventArgs e)
+        private void SlVolume_ValueChanged(object sender, EventArgs e)
         {
             if (speechModule != null && speechModule.TextToSpeech != null)
                 speechModule.TextToSpeech.Volume = slVolume.Value;
@@ -310,11 +331,11 @@ namespace Gala.Dolly.UI
         }
 
         #region Keyboard
-        private void mainForm2_KeyDown(object sender, KeyEventArgs e)
+        private void MainForm2_KeyDown(object sender, KeyEventArgs e)
         {
             ProcessKeys(e.KeyCode, true);
         }
-        private void mainForm2_KeyUp(object sender, KeyEventArgs e)
+        private void MainForm2_KeyUp(object sender, KeyEventArgs e)
         {
             ProcessKeys(e.KeyCode, false);
         }
@@ -352,35 +373,35 @@ namespace Gala.Dolly.UI
         #endregion
 
         #region Button Up/Down
-        private void btn1_MouseDown(object sender, MouseEventArgs e)
+        private void Btn1_MouseDown(object sender, MouseEventArgs e)
         {
             SetLED(1, true);
         }
-        private void btn1_MouseUp(object sender, MouseEventArgs e)
+        private void Btn1_MouseUp(object sender, MouseEventArgs e)
         {
             SetLED(1, false);
         }
-        private void btn2_MouseDown(object sender, MouseEventArgs e)
+        private void Btn2_MouseDown(object sender, MouseEventArgs e)
         {
             SetLED(2, true);
         }
-        private void btn2_MouseUp(object sender, MouseEventArgs e)
+        private void Btn2_MouseUp(object sender, MouseEventArgs e)
         {
             SetLED(2, false);
         }
-        private void btn4_MouseDown(object sender, MouseEventArgs e)
+        private void Btn4_MouseDown(object sender, MouseEventArgs e)
         {
             SetLED(4, true);
         }
-        private void btn4_MouseUp(object sender, MouseEventArgs e)
+        private void Btn4_MouseUp(object sender, MouseEventArgs e)
         {
             SetLED(4, false);
         }
-        private void btn5_MouseDown(object sender, MouseEventArgs e)
+        private void Btn5_MouseDown(object sender, MouseEventArgs e)
         {
             SetLED(5, true);
         }
-        private void btn5_MouseUp(object sender, MouseEventArgs e)
+        private void Btn5_MouseUp(object sender, MouseEventArgs e)
         {
             SetLED(5, false);
         }

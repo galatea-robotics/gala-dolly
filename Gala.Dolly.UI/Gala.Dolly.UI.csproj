@@ -102,6 +102,7 @@
       <DependentUpon>ChatbotControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ChatbotManager.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IConsole.cs" />
     <Compile Include="Diagnostics\FileLogger.cs">
       <SubType>Component</SubType>
@@ -112,9 +113,6 @@
     </Compile>
     <Compile Include="Diagnostics\Debugger.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Diagnostics\Debugger.Designer.cs">
-      <DependentUpon>Debugger.cs</DependentUpon>
     </Compile>
     <Compile Include="Diagnostics\UIDebugger.cs">
       <SubType>Component</SubType>
@@ -183,14 +181,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BaseForm.resx">
-      <DependentUpon>BaseForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ChatbotControl.resx">
       <DependentUpon>ChatbotControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Diagnostics\Debugger.resx">
-      <DependentUpon>Debugger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Diagnostics\UIDebugger.resx">
       <DependentUpon>UIDebugger.cs</DependentUpon>
