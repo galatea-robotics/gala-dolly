@@ -18,40 +18,77 @@ namespace Gala.Dolly.Test
 
         public ICreator Creator { get { return _creator; } set { _creator = value; } }
 
+        //[TestMethod]
+        //[TestCategory("1 - Template")]
+        public void TestAllShapes()
+        {
+            TestRoundShapes();
+            TestTriangularShapes();
+            TestQuadShapes();
+            TestChevronShapes();
+        }
+
         [TestMethod]
         [TestCategory("1 - Template")]
-        public void TestBlueRoundShape()
+        public void TestRoundShapes()
         {
+            bool result;
             _creator = null;
 
-            bool  result = TestShapeResponse(@"..\..\..\Resources\Learning\blue_circle.png", "round");
+            result = TestShapeResponse(@"..\..\..\Resources\Learning\blue_circle.png", "round");
+            Assert.IsTrue(result);
+            result = TestShapeResponse(@"..\..\..\Resources\Learning\green_circle.png", "round");
+            Assert.IsTrue(result);
+            result = TestShapeResponse(@"..\..\..\Resources\Learning\circle_perspective.png", "round");
             Assert.IsTrue(result);
         }
 
         [TestMethod]
         [TestCategory("1 - Template")]
-        public void TestShapes()
+        public void TestTriangularShapes()
         {
             bool result;
             _creator = null;
 
-            // ROUND
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\green_circle.png", "round");
-            Assert.IsTrue(result);
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\circle_perspective.png", "round");
-            Assert.IsTrue(result);
             // TRIANGULAR
             result = TestShapeResponse(@"..\..\..\Resources\Learning\triangle_green2.png", "triangular");
             Assert.IsTrue(result);
             result = TestShapeResponse(@"..\..\..\Resources\Learning\triangle_orange.png", "triangular");
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [TestCategory("1 - Template")]
+        public void TestYellowTriangle()
+        {
+            bool result;
+            _creator = null;
+
             result = TestShapeResponse(@"..\..\..\Resources\Learning\triangle_yellow.png", "triangular");
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [TestCategory("1 - Template")]
+        public void TestQuadShapes()
+        {
+            bool result;
+            _creator = null;
+
             // QUAD
             result = TestShapeResponse(@"..\..\..\Resources\Learning\quad_black.png", "FOUR CORNERS");
             Assert.IsTrue(result);
             result = TestShapeResponse(@"..\..\..\Resources\Learning\quad_green.png", "FOUR CORNERS");
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [TestCategory("1 - Template")]
+        public void TestChevronShapes()
+        {
+            bool result;
+            _creator = null;
+
             // CHEVRON
             result = TestShapeResponse(@"..\..\..\Resources\Learning\chevron_purple.png", "Chevron");
             Assert.IsTrue(result);
@@ -83,7 +120,7 @@ namespace Gala.Dolly.Test
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, User, "The shape is STAR!");
 
             // MIX IT UP
-            TestShapes();
+            TestAllShapes();
 
             // NOW CHECK IF PIE AND STAR WERE LEARNED
             _creator = TestEngine.User;

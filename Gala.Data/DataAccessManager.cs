@@ -19,9 +19,6 @@ namespace Gala.Data
 
             // Reset TemplateID cache
             Galatea.AI.Abstract.Memory.Reset();
-
-            // Initialize Query Delegates
-            Gala.Data.Runtime.Queries.Initialize();
         }
 
         #region IFoundation

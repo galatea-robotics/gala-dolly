@@ -92,7 +92,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Runtime\Queries.cs" />
     <Compile Include="Runtime\ContextCache.cs" />
     <Compile Include="Runtime\CreatorCollection.cs" />
     <Compile Include="Runtime\FeedbackCache.cs" />
