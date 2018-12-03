@@ -1,4 +1,7 @@
-﻿using System;
+﻿#if NETFX_CORE
+//extern alias GCM;
+#endif
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +12,11 @@ using Galatea.Runtime;
 
 namespace Gala.Data.Runtime
 {
+#if NETFX_CORE
+    //using CM = GCM.System.ComponentModel;
+#else
+    using CM = System.ComponentModel;
+#endif
     internal class ContextCache : KeyedCollection<ContextKey, ContextNode>, IContextCache
     {
         [System.Diagnostics.DebuggerStepThrough]

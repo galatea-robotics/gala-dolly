@@ -1,5 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
+#if NETFX_CORE
+using System.Threading.Tasks;
+using Windows.Storage;
+//using Gala.Data.Configuration;
+#endif
+using Gala.Data.Runtime;
 
 namespace Gala.Data.Databases
 {
@@ -7,20 +14,42 @@ namespace Gala.Data.Databases
     using Galatea.AI.Abstract;
     using Galatea.AI.Characterization;
     using Galatea.Runtime;
-    using Gala.Data.Runtime;
 
     internal class SerializedDataAccessManager : DataAccessManager
     {
+#if NETFX_CORE
+        private static Assembly serializedDataAsm = typeof(SerializedDataAccessManager).GetTypeInfo().Assembly;
+#endif
         public SerializedDataAccessManager(string connectionString) : base(connectionString)
         {
         }
 
+#if !NETFX_CORE
+        /// <summary>
+        /// Restores the file data specified by <paramref name="path"/> to the data file 
+        /// specified by <see cref="DataAccessManager.ConnectionString"/>.
+        /// </summary>
         public void RestoreBackup(string path)
         {
             FileInfo fi = new FileInfo(path);
             fi.CopyTo(this.ConnectionString, true);
         }
-
+#else
+        /// <summary>
+        /// Restores the file data specified by <paramref name="path"/> to the data file 
+        /// specified by <see cref="DataAccessManager.ConnectionString"/>.
+        /// </summary>
+        public async Task RestoreBackup(string path)
+        {
+            if(!File.Exists(path))
+            {
+                path = Path.Combine(new FileInfo(ConnectionString).DirectoryName, new FileInfo(path).Name);
+            }
+            var fileToRestore = await serializedDataAsm.GetStorageFile(ApplicationData.Current.LocalFolder, path);
+            var defaultFile = await serializedDataAsm.GetStorageFile(ApplicationData.Current.LocalFolder, ConnectionString);
+            await fileToRestore.CopyAndReplaceAsync(defaultFile);
+        }
+#endif
         public override void Initialize(IEngine engine)
         {
             base.Initialize(engine);
@@ -30,25 +59,29 @@ namespace Gala.Data.Databases
         {
             try
             {
-                // Initialize Template Collections
-                this.Add(new ColorTemplateCollection());
-                this.Add(new ShapeTemplateCollection());
-                this.Add(new SymbolTemplateCollection());
-                this.Add(new NamedEntityCollection());
-
-                #region // Read from File
-
+                StreamReader reader;
                 string nextLine;
 
+#if !NETFX_CORE
+                #region // Get Stream from File
                 // Make a backup first
                 FileInfo fi = new FileInfo(this.ConnectionString);
                 fi.CopyTo(Path.Combine(fi.DirectoryName, fi.Name + ".backup"), true);
 
-                // Read File from beginning
-                using (StreamReader reader = new StreamReader(this.ConnectionString))
-                {
-                    TemplateType templateType = TemplateType.Null;
+                reader = new StreamReader(this.ConnectionString);
+                #endregion
+#else
+                #region // Get Stream from UWP Storage File
+                var defaultFile = serializedDataAsm.GetStorageFile(ApplicationData.Current.LocalFolder, ConnectionString).Result;
+                reader = new StreamReader(defaultFile.OpenStreamForReadAsync().Result);
+                #endregion
+#endif
+                #region // Read File from beginning
 
+                TemplateType templateType = TemplateType.Null;
+
+                using (reader)
+                {
                     nextLine = reader.ReadLine();
 
                     // Initialize SerializationHelper
@@ -124,6 +157,7 @@ namespace Gala.Data.Databases
 
                 #endregion
 
+
                 if (this[TemplateType.Color].Count == 0)
                     throw new TeaInitializeDataException("No Color Templates initialized.");
                 if (this[TemplateType.Shape].Count == 0)
@@ -136,7 +170,7 @@ namespace Gala.Data.Databases
                 //if (this.FeedbackCounterTable.Count == 0)
                 //    throw new TeaInitializeDataException("No Feedback Counter Table ticks initialized.");
 
-                if(!this.Contains(TemplateType.PatternEntity))
+                if (!this.Contains(TemplateType.PatternEntity))
                     throw new TeaInitializeDataException("Named Entities table was not initialized.");
                 if (this.FeedbackCounterTable == null)
                     throw new TeaInitializeDataException("Feedback Counter table was not initialized.");
@@ -162,7 +196,16 @@ namespace Gala.Data.Databases
 
         public override void SaveAll()
         {
-            using (System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(ConnectionString))
+            System.IO.StreamWriter streamWriter;
+#if !NETFX_CORE
+            streamWriter = new System.IO.StreamWriter(ConnectionString);
+#else
+            // Save to Storage File
+            var settingsFile = serializedDataAsm.GetStorageFile(ApplicationData.Current.LocalFolder, ConnectionString).Result;
+            streamWriter = new StreamWriter(settingsFile.OpenStreamForWriteAsync().Result);
+#endif
+            #region // Write
+            using (streamWriter)
             {
                 foreach (IBaseTemplateCollection collection in this)
                 {
@@ -180,10 +223,8 @@ namespace Gala.Data.Databases
 
                 // Indicate EoF
                 streamWriter.Write(SerializationHelper.EndOfFileDelimiter);
-
-                //// Finalize
-                //streamWriter.Close();
             }
+            #endregion
         }
 
         private bool _isInitialized;
