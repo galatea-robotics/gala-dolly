@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{534EC140-C46E-4680-9461-E33E1924E83C}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gala.Dolly.Test</RootNamespace>
+    <AssemblyName>Gala.Dolly.Test</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <UnitTestPlatformVersion Condition="'$(UnitTestPlatformVersion)' == ''">14.0</UnitTestPlatformVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <!--A reference to the entire .Net Framework and Windows SDK are automatically included-->
+    <None Include="..\..\Gala.Dolly\Gala.Dolly.pfx">
+      <Link>Gala.Dolly.pfx</Link>
+    </None>
+    <None Include="project.json" />
+    <SDKReference Include="MSTestFramework.Universal, Version=$(UnitTestPlatformVersion)" />
+    <SDKReference Include="TestPlatform.Universal, Version=$(UnitTestPlatformVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Gala.Dolly\Properties\Gala.Dolly.cs">
+      <Link>Properties\Gala.Dolly.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Gala.Dolly\Properties\Version.cs">
+      <Link>Properties\Version.cs</Link>
+    </Compile>
+    <Compile Include="..\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\TestBase.cs">
+      <Link>TestBase.cs</Link>
+    </Compile>
+    <Compile Include="..\TestCases\TestCases.cs">
+      <Link>TestCases\TestCases.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\AiLogicTest.cs">
+      <Link>UnitTests\AiLogicTest.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\ColorRecognitionTest.cs">
+      <Link>UnitTests\ColorRecognitionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\EntityTest.cs">
+      <Link>UnitTests\EntityTest.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\ImageMappingTest.cs">
+      <Link>UnitTests\ImageMappingTest.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\ShapeRecognitionTest.cs">
+      <Link>UnitTests\ShapeRecognitionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\SymbolRecognitionTest.cs">
+      <Link>UnitTests\SymbolRecognitionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\TemplateRelationshipTest.cs">
+      <Link>UnitTests\TemplateRelationshipTest.cs</Link>
+    </Compile>
+    <Compile Include="Properties\UWP.cs" />
+    <Compile Include="UnitTestApp.xaml.cs">
+      <DependentUpon>UnitTestApp.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="UnitTestApp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\Galahad\Assets\LockScreenLogo.scale-200.png">
+      <Link>Assets\LockScreenLogo.scale-200.png</Link>
+    </Content>
+    <Content Include="..\..\Galahad\Assets\SplashScreen.scale-100.png">
+      <Link>Assets\SplashScreen.scale-100.png</Link>
+    </Content>
+    <Content Include="..\..\Galahad\Assets\SplashScreen.scale-125.png">
+      <Link>Assets\SplashScreen.scale-125.png</Link>
+    </Content>
+    <Content Include="..\..\Galahad\Assets\Square150x150Logo.scale-200.png">
+      <Link>Assets\Square150x150Logo.scale-200.png</Link>
+    </Content>
+    <Content Include="..\..\Galahad\Assets\Square44x44Logo.scale-100_altform-unplated.png">
+      <Link>Assets\Square44x44Logo.scale-100_altform-unplated.png</Link>
+    </Content>
+    <Content Include="..\..\Galahad\Assets\Square44x44Logo.scale-200_altform-unplated.png">
+      <Link>Assets\Square44x44Logo.scale-200_altform-unplated.png</Link>
+    </Content>
+    <Content Include="..\..\Galahad\Assets\Square44x44Logo.scale-400_altform-unplated.png">
+      <Link>Assets\Square44x44Logo.scale-400_altform-unplated.png</Link>
+    </Content>
+    <Content Include="..\..\Galahad\Assets\Square44x44Logo.targetsize-256_altform-unplated.png">
+      <Link>Assets\Square44x44Logo.targetsize-256_altform-unplated.png</Link>
+    </Content>
+    <Content Include="..\..\Galahad\Assets\Square44x44Logo.targetsize-48_altform-unplated.png">
+      <Link>Assets\Square44x44Logo.targetsize-48_altform-unplated.png</Link>
+    </Content>
+    <Content Include="..\..\Galahad\Assets\StoreLogo.png">
+      <Link>Assets\StoreLogo.png</Link>
+    </Content>
+    <Content Include="..\..\Galahad\Assets\Wide310x150Logo.scale-200.png">
+      <Link>Assets\Wide310x150Logo.scale-200.png</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Gala.Data\_UWP\Gala.Data.csproj">
+      <Project>{07ce2a22-d0c9-472a-aedb-a80762cef39e}</Project>
+      <Name>Gala.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gala.Dolly.Command\_UWP\Gala.Dolly.Command.csproj">
+      <Project>{695296b1-5f00-40e4-90f4-8d0de80b6a9f}</Project>
+      <Name>Gala.Dolly.Command</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gala.Data.Config\Gala.Data.Config.csproj">
+      <Project>{d89d2d82-4ff1-42e6-87f8-d7d353204150}</Project>
+      <Name>Gala.Data.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gala.Dolly.Test.Resources\Gala.Dolly.Test.Resources.csproj">
+      <Project>{fc84cbf8-c753-4416-af5a-7b3c217c239b}</Project>
+      <Name>Gala.Dolly.Test.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Galatea.AI.Abstract\_NETStandard\Galatea.AI.Abstract.csproj">
+      <Project>{356f1914-4f7f-44d8-8825-63ba82196446}</Project>
+      <Name>Galatea.AI.Abstract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Galatea.AI.Imaging\_NETStandard\Galatea.AI.Imaging.csproj">
+      <Project>{c63c99ad-93bf-4a15-ba4e-511d5dcf559b}</Project>
+      <Name>Galatea.AI.Imaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Galatea.AI\_NETStandard\Galatea.AI.csproj">
+      <Project>{337f9dcc-28a2-4594-b3a5-5d2ac759ccd2}</Project>
+      <Name>Galatea.AI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Galatea.ComponentModel\_NETStandard\Galatea.ComponentModel.csproj">
+      <Project>{cf7fd784-4522-4fd4-acca-ec36850e3555}</Project>
+      <Name>Galatea.ComponentModel</Name>
+      <Aliases>global,GCM</Aliases>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Galatea.Drawing\_NETStandard\Galatea.Drawing.csproj">
+      <Project>{cd8ed733-5457-4425-9239-ac9a05675ee0}</Project>
+      <Name>Galatea.Drawing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Galatea.Runtime\_NETStandard\Galatea.Runtime.csproj">
+      <Project>{3f4664f6-4e0e-4c2a-9b22-ae31e468d378}</Project>
+      <Name>Galatea.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Galatea\_NETStandard\Galatea.Core.csproj">
+      <Project>{ea2b3b64-ef42-4e8f-b47a-1bb76969a415}</Project>
+      <Name>Galatea.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\Gala.Dolly\Gala.Dolly.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\UWP\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test PCL|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\UWP\Test\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PORTABLE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;CODE_ANALYSIS</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>..\..\bin\UWP\Test\</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

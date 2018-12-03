@@ -24,7 +24,7 @@ namespace Gala.Dolly.Test
         public void  _01_03_04_07_100()
         {
 #if !NETFX_CORE
-            Galatea.AI.Imaging.VisualProcessor.ImagingSettings.MonochromeBlobFilterSettings.ContrastCorrectionFactor = 0.15F;
+            Galatea.AI.Imaging.VisualProcessor.ImagingSettings.MonochromeBlobFilterSettings.ContrastCorrectionFactor = 0; // 0.15F;
 #endif
             string response = GetEntityResponse(@"..\..\..\Resources\\TestCases\1.3.4.7.100\orange_test.png", false);
             Assert.IsTrue(response.ToUpper().Contains("ORANGE TRIANGULAR"));
