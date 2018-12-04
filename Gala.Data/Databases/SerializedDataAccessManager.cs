@@ -57,6 +57,8 @@ namespace Gala.Data.Databases
 
         protected internal override void InitializeMemoryBank()
         {
+            base.InitializeMemoryBank();
+
             try
             {
                 StreamReader reader;

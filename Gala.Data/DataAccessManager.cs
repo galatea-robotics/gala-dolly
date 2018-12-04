@@ -36,11 +36,13 @@ namespace Gala.Data
         
         #region Other Tables and Settings
 
+        /*
         internal short ColorTemplateHybridResultThreshold
         {
             get { return ((ColorTemplateCollection)this[TemplateType.Color]).HybridResultThreshold; }
             set { ((ColorTemplateCollection)this[TemplateType.Color]).HybridResultThreshold = value; }
         }
+         */
 
         public FeedbackCounterTable FeedbackCounterTable { get { return _feedbackCounterTable; } }
         

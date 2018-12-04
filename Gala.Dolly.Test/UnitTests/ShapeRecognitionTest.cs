@@ -36,16 +36,27 @@ namespace Gala.Dolly.Test
 
         [TestMethod]
         [TestCategory("1 - Template")]
+        public void TestBlueRoundShape()
+        {
+            bool result;
+            _creator = null;
+
+            result = TestShapeResponse(resourcesFolderName + @"Learning\blue_circle.png", "round");
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [TestCategory("1 - Template")]
         public void TestRoundShapes()
         {
             bool result;
             _creator = null;
 
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\blue_circle.png", "round");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\blue_circle.png", "round");
             Assert.IsTrue(result);
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\green_circle.png", "round");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\green_circle.png", "round");
             Assert.IsTrue(result);
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\circle_perspective.png", "round");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\circle_perspective.png", "round");
             Assert.IsTrue(result);
         }
 
@@ -57,9 +68,9 @@ namespace Gala.Dolly.Test
             _creator = null;
 
             // TRIANGULAR
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\triangle_green2.png", "triangular");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\Learning\triangle_green2.png", "triangular");
             Assert.IsTrue(result);
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\triangle_orange.png", "triangular");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\Learning\triangle_orange.png", "triangular");
             Assert.IsTrue(result);
         }
 
@@ -70,7 +81,7 @@ namespace Gala.Dolly.Test
             bool result;
             _creator = null;
 
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\triangle_yellow.png", "triangular");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\Learning\triangle_yellow.png", "triangular");
             Assert.IsTrue(result);
         }
 
@@ -82,9 +93,9 @@ namespace Gala.Dolly.Test
             _creator = null;
 
             // QUAD
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\quad_black.png", "FOUR CORNERS");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\Learning\quad_black.png", "FOUR CORNERS");
             Assert.IsTrue(result);
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\quad_green.png", "FOUR CORNERS");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\Learning\quad_green.png", "FOUR CORNERS");
             Assert.IsTrue(result);
         }
 
@@ -96,11 +107,11 @@ namespace Gala.Dolly.Test
             _creator = null;
 
             // CHEVRON
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\chevron_purple.png", "Chevron");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\Learning\chevron_purple.png", "Chevron");
             Assert.IsTrue(result);
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\chevron.png", "Chevron");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\Learning\chevron.png", "Chevron");
             Assert.IsTrue(result);
-            result = TestShapeResponse(@"..\..\..\Resources\Learning\widget.png", "Chevron");
+            result = TestShapeResponse(resourcesFolderName + @"Learning\Learning\widget.png", "Chevron");
             Assert.IsTrue(result);
         }
 
