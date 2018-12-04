@@ -42,12 +42,13 @@ namespace Gala.Data.Runtime
             return result;
         }
 
-
+        /*
         IList<BaseTemplate> ILibrary.GetBaseTemplateItems<TTemplate>(IBaseTemplateCollection<TTemplate> collection)
         {
 
             return collection.Cast<BaseTemplate>().ToList();
         }
+         */
 
         IFeedbackCache ILibrary.FeedbackCache { get { return _feedbackCache; } }
         KeyedCollection<string, ICreator> ILibrary.Creators { get { return _creators; } }
