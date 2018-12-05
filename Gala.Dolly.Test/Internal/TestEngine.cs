@@ -129,10 +129,8 @@ namespace Gala.Dolly.Test
 
             _ai.InitializeMemory(_dataAccessManager);
 
-            /*
             // Set Application Settings
-            _dataAccessManager.ColorTemplateHybridResultThreshold = colorTemplateHybridResultThreshold;
-             */
+            _dataAccessManager[TemplateType.Color].HybridResultThreshold = colorTemplateHybridResultThreshold;
         }
 
         public override void Startup()

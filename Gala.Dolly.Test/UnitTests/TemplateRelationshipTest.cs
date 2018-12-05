@@ -176,15 +176,15 @@ namespace Gala.Dolly.Test
         public void TestColorComparison()
         {
             // Pink
-            TestColorComparison(@"..\..\..\Resources\Learning\pink_star.png", "LIGHT RED", new[] { Memory.Default[TemplateType.Color]["Red"] });
+            TestColorComparison(resourcesFolderName + @"Learning\pink_star.png", "LIGHT RED", new[] { Memory.Default[TemplateType.Color]["Red"] });
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is Pink");
 
             // Navy
-            TestColorComparison(@"..\..\..\Resources\Learning\triangle_navy.png", "DARK BLUE", new[] { Memory.Default[TemplateType.Color]["Blue"] });
+            TestColorComparison(resourcesFolderName + @"Learning\triangle_navy.png", "DARK BLUE", new[] { Memory.Default[TemplateType.Color]["Blue"] });
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is Navy Blue");
 
             // Maroon
-            TestColorComparison(@"..\..\..\Resources\Learning\pentagon_maroon.png", "DARK RED", new[] { Memory.Default[TemplateType.Color]["Red"] });
+            TestColorComparison(resourcesFolderName + @"Learning\pentagon_maroon.png", "DARK RED", new[] { Memory.Default[TemplateType.Color]["Red"] });
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is Maroon");
 
             // Regression Testing
