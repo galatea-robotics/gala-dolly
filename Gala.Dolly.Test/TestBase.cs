@@ -1,38 +1,24 @@
-﻿#if NETFX_CORE
-extern alias GCM;
-#endif
-using System;
-using System.ComponentModel;
-using System.IO;
-#if !NETFX_CORE
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-#else
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-#endif
-using Galatea;
-using Galatea.Diagnostics;
-using Galatea.Imaging.IO;
-using Gala.Data.Databases;
+using System.ComponentModel;
 
 namespace Gala.Dolly.Test
 {
-
-#if NETFX_CORE
-    using CM = GCM.System.ComponentModel;                                           c
-#else
-    using CM = System.ComponentModel;
-#endif
-
-    using Properties;
+    using Galatea;
+    using Galatea.AI.Imaging;
+    using Galatea.AI.Imaging.Configuration;
+    using Galatea.Diagnostics;
+    using Gala.Data;
+    using Gala.Data.Databases;
+    using Gala.Dolly.Test.Properties;
 
     [TestClass]
     public class TestBase : IProvider
     {
         private static TestEngine _engine;
-        private static Galatea.AI.Abstract.IUser _user;
+        private static Galatea.AI.Abstract.IUser _user; 
         private static Galatea.AI.Abstract.BaseTemplate _namedTemplate;
         private static Galatea.AI.Abstract.NamedEntity _namedEntity;
-        private static string connectionString;
 
         internal static TestEngine TestEngine { get { return _engine; } }
 
@@ -47,30 +33,11 @@ namespace Gala.Dolly.Test
         public Galatea.AI.Abstract.BaseTemplate NamedTemplate { get { return _namedTemplate; } }
         public Galatea.AI.Abstract.NamedEntity NamedEntity { get { return _namedEntity; } }
 
-        protected ImagingContextStream GetImagingContextStream(string filename)
-        {
-#if !NETFX_CORE
-            if (!File.Exists(filename))
-                throw new FileNotFoundException("File not Found!", new FileInfo(filename).FullName);
-
-            return ImagingContextStream.FromBitmap(new System.Drawing.Bitmap(filename));
-#else
-            using (var bitmapStream = Gala.Dolly.Test.Resources.GetResourceStream(filename))
-            {
-                return ImagingContextStream.FromBitmapStream(bitmapStream);
-            }
-#endif
-        }
-
-        protected static string ConnectionString { get { return connectionString; } }
-
-        protected static string resourcesFolderName;
-
         #region IProvider
         string IProvider.ProviderID { get { return _providerId; } }
         string IProvider.ProviderName { get { return _providerName; } }
 
-        CM.ISite CM.IComponent.Site
+        ISite IComponent.Site
         {
             get { return _site; }
             set { _site = value; }
@@ -142,53 +109,21 @@ namespace Gala.Dolly.Test
                 DebuggerLogLevelSettings.Initialize(Properties.Settings.Default.DebuggerLogLevel, Properties.Settings.Default.DebuggerAlertLevel);
                 Galatea.Diagnostics.IDebugger debugger = new Gala.Dolly.Test.TestDebugger();
 
-                SerializedDataAccessManager dataAccessManager;
-                TestEngine.LoadConfig();
-#if !NETFX_CORE
-                connectionString = Properties.Settings.Default.DataAccessManagerConnectionString;
-                dataAccessManager = new SerializedDataAccessManager(connectionString);
-                resourcesFolderName = @"..\..\..\..\Resources\";
+                SerializedDataAccessManager dataAccessManager = new SerializedDataAccessManager(Settings.Default.DataAccessManagerConnectionString);
+                dataAccessManager.RestoreBackup(@"..\..\..\Data\SerializedData.V1.dat");
 
-                // Restore Data from backup file
-                FileInfo fi = new FileInfo(connectionString);
-                string backupFilename = Path.Combine(fi.DirectoryName, "SerializedData.V1.dat");
-                dataAccessManager.RestoreBackup(backupFilename);
-
-                // Suppress Timeout
-                Settings.Default.ImagingSettings.SuppressTimeout = true;
-#else
-                connectionString = TestEngine.UWPSettings.DataAccessManagerConnectionString;
-                dataAccessManager = new SerializedDataAccessManager(connectionString);
-                resourcesFolderName = @".\Gala.Dolly.Test.Resources\Resources\";
-
-                // Restore Data from backup file
-                dataAccessManager.RestoreBackup("SerializedData.V1.dat").Wait();
-
-                // Suppress Timeout
-                Galatea.AI.Imaging.Properties.NetCoreSettings.SuppressTimeout = true;
-#endif
-
+                // Start Test Engine
                 _engine = new TestEngine(debugger, dataAccessManager);
                 _engine.User = _user;
-                _engine.AI.LanguageModel.IsSpeechModuleInactive = true;
-                _engine.StartupComplete += _engine_StartupComplete;
                 _engine.Startup();
 
                 _engine.ExecutiveFunctions.ContextRecognition += ExecutiveFunctions_ContextRecognition;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
-                System.Diagnostics.Debug.Write(ex.StackTrace);
                 throw;
             }
-        }
-
-        private static void _engine_StartupComplete(object sender, EventArgs e)
-        {
-#if PORTABLE
-            Galatea.AI.Imaging.ImageManager.BitmapConverter = new Gala.Dolly.Test.BitmapConverter();
-#endif
         }
 
         private static void ExecutiveFunctions_ContextRecognition(object sender, Galatea.AI.Abstract.ContextRecognitionEventArgs e)

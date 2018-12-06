@@ -1,7 +1,4 @@
-﻿#if NETFX_CORE
-//extern alias GCM;
-#endif
-using System;
+﻿using System;
 using System.ComponentModel;
 using Galatea;
 using Galatea.AI.Abstract;
@@ -33,16 +30,8 @@ namespace Gala.Data
         bool IFoundation.IsInitialized { get { return this.IsInitialized; } }
         public IEngine Engine { get { return _engine; } }
         #endregion
-        
-        #region Other Tables and Settings
 
-        /*
-        internal short ColorTemplateHybridResultThreshold
-        {
-            get { return ((ColorTemplateCollection)this[TemplateType.Color]).HybridResultThreshold; }
-            set { ((ColorTemplateCollection)this[TemplateType.Color]).HybridResultThreshold = value; }
-        }
-         */
+        #region Other Tables
 
         public FeedbackCounterTable FeedbackCounterTable { get { return _feedbackCounterTable; } }
         
@@ -50,32 +39,24 @@ namespace Gala.Data
         {
             _feedbackCounterTable = feedbackCounterTable;
         }
-        
-        #endregion
+
+        #endregion  
 
         protected string ConnectionString { get { return _connectionString; } }
 
-#if NETFX_CORE
         #region Component Model
-        /*
-        CM.ISite CM.IComponent.Site
+
+        ISite IComponent.Site
         {
             get { return _site; }
             set { _site = value; }
         }
-        protected internal override void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            Disposed?.Invoke(this, EventArgs.Empty);
         }
-        internal void Dispose()
-        {
-            Dispose(true);
-        }
-        private CM.ISite _site;
-         */
+
         #endregion
-#endif
 
         /*
         public static void LoadPersonalityTraits(Galatea.AI.CognitiveModelingSystem AI)
@@ -104,5 +85,6 @@ namespace Gala.Data
         private FeedbackCounterTable _feedbackCounterTable;
         private readonly string _connectionString;
         private IEngine _engine;
+        private ISite _site;
     }
 }

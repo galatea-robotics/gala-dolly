@@ -18,18 +18,6 @@
     <TestProjectType>UnitTest</TestProjectType>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\.NET\Test\</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <RegisterForComInterop>false</RegisterForComInterop>
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
@@ -38,6 +26,15 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>..\Gala.Dolly\Dolly.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\bin\Test\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -61,22 +58,8 @@
     <Compile Include="..\Gala.Dolly\Properties\Version.cs">
       <Link>Properties\Version.cs</Link>
     </Compile>
-    <Compile Include="Internal\ChatbotManager.cs" />
-    <Compile Include="Internal\TestDebugger.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Internal\TestEngine.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <DependentUpon>Settings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="TestCases\TestCases.cs" />
     <Compile Include="UnitTests\AiLogicTest.cs" />
     <Compile Include="UnitTests\EntityTest.cs" />
-    <Compile Include="UnitTests\ImageMappingTest.cs" />
     <Compile Include="UnitTests\ShapeRecognitionTest.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="UnitTests\ColorRecognitionTest.cs" />
@@ -88,6 +71,10 @@
     <ProjectReference Include="..\Gala.Data\Gala.Data.csproj">
       <Project>{fce634b4-5a87-4519-98d4-240b4a42f8d5}</Project>
       <Name>Gala.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gala.Dolly.Command\Gala.Dolly.Command.csproj">
+      <Project>{c055a544-adc2-4b60-b58e-cda890c81762}</Project>
+      <Name>Gala.Dolly.Command</Name>
     </ProjectReference>
     <ProjectReference Include="..\Galatea.AI.Abstract\Galatea.AI.Abstract.csproj">
       <Project>{25141e11-c310-4d1f-b509-c130811104b0}</Project>
@@ -121,19 +108,13 @@
     <None Include="..\Gala.Dolly\Gala.Dolly.pfx">
       <Link>Gala.Dolly.pfx</Link>
     </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\Resources\TestCases\Test Cases.txt">
-      <Link>TestCases\Test Cases.txt</Link>
-    </Content>
     <Content Include="..\Gala.Dolly\Dolly.ico">
       <Link>Dolly.ico</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -1,11 +1,6 @@
 ﻿using System;
-#if !NETFX_CORE
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
-#else
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Galatea.Drawing;
-#endif
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Galatea.IO;
 using Galatea.Imaging.IO;
 
@@ -26,16 +21,16 @@ namespace Gala.Dolly.Test
             _creator = null;
 
             // RED
-            result = TestColorResponse(resourcesFolderName + @"Learning\STOP.png", "Red");
+            result = TestColorResponse(@"..\..\..\Resources\Learning\STOP.png", "Red");
             Assert.IsTrue(result);
             // YELLOW
-            result = TestColorResponse(resourcesFolderName + @"Learning\pacman.png", "Yellow");
+            result = TestColorResponse(@"..\..\..\Resources\Learning\pacman.png", "Yellow");
             Assert.IsTrue(result);
             // GREEN
-            result = TestColorResponse(resourcesFolderName + @"Learning\green_circle.png", "Green");
+            result = TestColorResponse(@"..\..\..\Resources\Learning\green_circle.png", "Green");
             Assert.IsTrue(result);
             // BLUE
-            result = TestColorResponse(resourcesFolderName + @"Learning\Symbols\B.png", "Blue");
+            result = TestColorResponse(@"..\..\..\Resources\Learning\Symbols\B.png", "Blue");
             Assert.IsTrue(result);
         }
         [TestMethod]
@@ -48,16 +43,16 @@ namespace Gala.Dolly.Test
             string response;
 
             // ORANGE
-            response = GetColorResponse(resourcesFolderName + @"Learning\triangle_orange.png");
+            response = GetColorResponse(@"..\..\..\Resources\Learning\triangle_orange.png");
             Assert.IsFalse(response.ToUpper().Contains("ORANGE"));
 
-            TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is ORANGE!");
+            TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, User, "The color is ORANGE!");
 
             // PURPLE
-            response = GetColorResponse(resourcesFolderName + @"Learning\star2.png");
+            response = GetColorResponse(@"..\..\..\Resources\Learning\star2.png");
             Assert.IsFalse(response.ToUpper().Contains("PURPLE"));
 
-            TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's PURPLE!");
+            TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, User, "It's PURPLE!");
 
             // MIX IT UP
             TestColors();
@@ -65,10 +60,10 @@ namespace Gala.Dolly.Test
             // NOW CHECK IF ORANGE AND PURPLE WERE LEARNED
             _creator = TestEngine.User;
 
-            result = TestColorResponse(resourcesFolderName + @"Learning\orange_pie.png", "orange");
+            result = TestColorResponse(@"..\..\..\Resources\Learning\orange_pie.png", "orange");
             Assert.IsTrue(result);
 
-            result = TestColorResponse(resourcesFolderName + @"Learning\Symbols\C.png", "purple");
+            result = TestColorResponse(@"..\..\..\Resources\Learning\Symbols\C.png", "purple");
             Assert.IsTrue(result);
         }
 
@@ -82,12 +77,13 @@ namespace Gala.Dolly.Test
 
         internal string GetColorResponse(string path)
         {
-            ImagingContextStream stream = GetImagingContextStream(path);
+            Bitmap bitmap = new Bitmap(path);
+            ImagingContextStream stream = ImagingContextStream.FromBitmap(bitmap);
 
             TestEngine.ExecutiveFunctions.StreamContext(TestEngine, TestEngine.Vision.ImageAnalyzer,
                 ContextType.Machine, InputType.Visual, stream, typeof(Bitmap));
 
-            string result = TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "What color?");
+            string result = TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, User, "What color?");
 
             // Verify Creator
             Assert.IsTrue(CreatorExtension.Equals(_creator, NamedTemplate.Creator));

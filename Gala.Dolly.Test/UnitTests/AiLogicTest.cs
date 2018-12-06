@@ -1,8 +1,4 @@
-﻿#if !NETFX_CORE
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#else
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-#endif
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Gala.Dolly.Test
 {
@@ -20,12 +16,9 @@ namespace Gala.Dolly.Test
             colorTest = new ColorRecognitionTest();
 
             // Initialize Colors and Shapes
-            SerializedDataAccessManager dataAccessManager = new SerializedDataAccessManager(ConnectionString);
-#if !NETFX_CORE
-            dataAccessManager.RestoreBackup(@"..\..\..\..\Data\SerializedData.1345.dat");
-#else
-            dataAccessManager.RestoreBackup("SerializedData.1345.dat").Wait();
-#endif
+            SerializedDataAccessManager dataAccessManager = new SerializedDataAccessManager(Properties.Settings.Default.DataAccessManagerConnectionString);
+            dataAccessManager.RestoreBackup(@"..\..\..\Data\SerializedData.1345.dat");
+
             TestEngine.DataAccessManager = dataAccessManager;
             TestEngine.InitializeDatabase();
         }
@@ -35,13 +28,13 @@ namespace Gala.Dolly.Test
         public void TestHybridColors()
         {
             colorTest.Creator = TestEngine.AI.RecognitionModel;
-            TestHybridColorResponse(resourcesFolderName + @"Learning\orange_yellow_crescent.png", new[] { "ORANGE", "Yellow" });
-            TestHybridColorResponse(resourcesFolderName + @"Learning\green_blue_star.png", new[] { "Green", "Blue" });
+            TestHybridColorResponse(@"..\..\..\Resources\Learning\orange_yellow_crescent.png", new[] { "ORANGE", "Yellow" });
+            TestHybridColorResponse(@"..\..\..\Resources\Learning\green_blue_star.png", new[] { "Green", "Blue" });
 
-            TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is Aqua");
+            TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, TestEngine.User, "The color is Aqua");
 
             colorTest.Creator = TestEngine.User;
-            bool result = colorTest.TestColorResponse(resourcesFolderName + @"Learning\green_blue_star.png", "Aqua");
+            bool result = colorTest.TestColorResponse(@"..\..\..\Resources\Learning\green_blue_star.png", "Aqua");
             Assert.IsTrue(result);
 
             // Check Relationships
@@ -54,13 +47,13 @@ namespace Gala.Dolly.Test
         {
             colorTest.Creator = null;
             // RED
-            RegressionTestColorTemplate(resourcesFolderName + @"Learning\STOP.png", "Red");
+            RegressionTestColorTemplate(@"..\..\..\Resources\Learning\STOP.png", "Red");
             // YELLOW
-            RegressionTestColorTemplate(resourcesFolderName + @"Learning\pacman.png", "Yellow");
+            RegressionTestColorTemplate(@"..\..\..\Resources\Learning\pacman.png", "Yellow");
             // GREEN
-            RegressionTestColorTemplate(resourcesFolderName + @"Learning\green_circle.png", "Green");
+            RegressionTestColorTemplate(@"..\..\..\Resources\Learning\green_circle.png", "Green");
             // BLUE
-            RegressionTestColorTemplate(resourcesFolderName + @"Learning\Symbols\B.png", "Blue");
+            RegressionTestColorTemplate(@"..\..\..\Resources\Learning\Symbols\B.png", "Blue");
         }
 
         private void TestHybridColorResponse(string path, string[] templateTokens)

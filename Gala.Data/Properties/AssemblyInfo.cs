@@ -10,5 +10,5 @@ using System.Resources;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 
-[assembly: System.CLSCompliant(false)]
+[assembly: System.CLSCompliant(true)]
 [assembly: ComVisible(false)]

@@ -27,7 +27,7 @@ namespace Gala.Dolly.Test
         [TestCategory("5 - Image Mapping")]
         public void TestTwoEntities()
         {
-            string response = GetEntityResponse(resourcesFolderName + @"Learning\two_shapes1.png", false);
+            string response = GetEntityResponse(@"..\..\..\Resources\Learning\two_shapes1.png", false);
 
             // Validate Templates
             Assert.AreEqual(2, this.NamedEntity.TemplateRelationships.Count);
@@ -42,9 +42,9 @@ namespace Gala.Dolly.Test
 
         [TestMethod]
         [TestCategory("5 - Image Mapping")]
-        public void TestThreeEntities()
+        public void TestThreeEntities() 
         {
-            string response = GetEntityResponse(resourcesFolderName + @"Learning\three_shapes.png", false);
+            string response = GetEntityResponse(@"..\..\..\Resources\Learning\three_shapes.png", false);
 
             Assert.AreEqual(3, this.NamedEntity.TemplateRelationships.Count);
             foreach (TemplateRelationship tR in this.NamedEntity.TemplateRelationships)
