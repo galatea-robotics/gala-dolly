@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Resources;
@@ -7,8 +8,7 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Gala.Data")]
+[assembly: ComVisible(false)]
+[assembly: CLSCompliant(true)]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-
-[assembly: System.CLSCompliant(true)]
-[assembly: ComVisible(false)]

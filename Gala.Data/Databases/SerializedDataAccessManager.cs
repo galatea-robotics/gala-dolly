@@ -1,5 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
+#if NETFX_CORE
+using System.Threading.Tasks;
+//using Gala.Data.Configuration;
+#endif
+using Gala.Data.Runtime;
 
 namespace Gala.Data.Databases
 {
@@ -7,14 +13,20 @@ namespace Gala.Data.Databases
     using Galatea.AI.Abstract;
     using Galatea.AI.Characterization;
     using Galatea.Runtime;
-    using Gala.Data.Runtime;
 
     internal class SerializedDataAccessManager : DataAccessManager
     {
+#if NETFX_CORE
+        private static Assembly serializedDataAsm = typeof(SerializedDataAccessManager).GetTypeInfo().Assembly;
+#endif
         public SerializedDataAccessManager(string connectionString) : base(connectionString)
         {
         }
 
+        /// <summary>
+        /// Restores the file data specified by <paramref name="path"/> to the data file 
+        /// specified by <see cref="DataAccessManager.ConnectionString"/>.
+        /// </summary>
         public void RestoreBackup(string path)
         {
             FileInfo fi = new FileInfo(path);
@@ -30,25 +42,27 @@ namespace Gala.Data.Databases
         {
             try
             {
-                // Initialize Template Collections
-                this.Add(new ColorTemplateCollection());
-                this.Add(new ShapeTemplateCollection());
-                this.Add(new SymbolTemplateCollection());
-                this.Add(new NamedEntityCollection());
+                base.InitializeMemoryBank();
 
-                #region // Read from File
-
+                StreamReader reader;
                 string nextLine;
+
+                #region // Get Stream from File
 
                 // Make a backup first
                 FileInfo fi = new FileInfo(this.ConnectionString);
                 fi.CopyTo(Path.Combine(fi.DirectoryName, fi.Name + ".backup"), true);
 
                 // Read File from beginning
-                using (StreamReader reader = new StreamReader(this.ConnectionString))
-                {
-                    TemplateType templateType = TemplateType.Null;
+                reader = new StreamReader(this.ConnectionString);
 
+                #endregion
+
+                #region // Read File Stream
+                TemplateType templateType = TemplateType.Null;
+
+                using (reader)
+                {
                     nextLine = reader.ReadLine();
 
                     // Initialize SerializationHelper
@@ -121,7 +135,6 @@ namespace Gala.Data.Databases
                     //// Close the file
                     //reader.Close();
                 }
-
                 #endregion
 
                 if (this[TemplateType.Color].Count == 0)
@@ -162,7 +175,7 @@ namespace Gala.Data.Databases
 
         public override void SaveAll()
         {
-            using (System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(ConnectionString))
+            using (System.IO.StreamWriter streamWriter = new StreamWriter(ConnectionString))
             {
                 foreach (IBaseTemplateCollection collection in this)
                 {

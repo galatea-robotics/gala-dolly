@@ -11,6 +11,7 @@ namespace Gala.Data
 {
     using Gala.Data.Runtime;
 
+    // TODO:  Rename _UWP subfolder to _NETStandard
     internal abstract class DataAccessManager : Memory, ILibrary, IDataAccessManager
     {
         protected DataAccessManager(string connectionString) : base()
@@ -30,8 +31,16 @@ namespace Gala.Data
         bool IFoundation.IsInitialized { get { return this.IsInitialized; } }
         public IEngine Engine { get { return _engine; } }
         #endregion
+        
+        #region Other Tables and Settings
 
-        #region Other Tables
+        /*
+        internal short ColorTemplateHybridResultThreshold
+        {
+            get { return ((ColorTemplateCollection)this[TemplateType.Color]).HybridResultThreshold; }
+            set { ((ColorTemplateCollection)this[TemplateType.Color]).HybridResultThreshold = value; }
+        }
+         */
 
         public FeedbackCounterTable FeedbackCounterTable { get { return _feedbackCounterTable; } }
         
@@ -39,8 +48,8 @@ namespace Gala.Data
         {
             _feedbackCounterTable = feedbackCounterTable;
         }
-
-        #endregion  
+        
+        #endregion
 
         protected string ConnectionString { get { return _connectionString; } }
 
@@ -51,11 +60,17 @@ namespace Gala.Data
             get { return _site; }
             set { _site = value; }
         }
-        protected override void Dispose(bool disposing)
+        protected internal override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
+            Disposed?.Invoke(this, EventArgs.Empty);
+        }
+        internal void Dispose()
+        {
+            Dispose(true);
         }
 
+        public override event EventHandler Disposed;
         #endregion
 
         /*

@@ -1,0 +1,1 @@
+﻿// TODO:  Rename _UWP folder to NETCORE or NETSTANDARD
