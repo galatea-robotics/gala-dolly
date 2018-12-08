@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Galatea.Diagnostics;
 using Galatea.AI.Robotics;
 
@@ -7,12 +8,22 @@ namespace Galatea.Speech
     using Properties;
 
     [System.Runtime.InteropServices.ComVisible(false)]
-    internal class TextToSpeech5 : Galatea.Runtime.RuntimeComponent, ITextToSpeech
+    internal sealed class TextToSpeech5 : Galatea.Runtime.RuntimeComponent, ITextToSpeech
     {
         private SpeechLib.SpVoice spVoice;
         private readonly SpeechLib.SpeechVoiceSpeakFlags speakFlags;
         private bool speaking, paused;
         private ISpeechModule _speechModule;
+
+        private IVoice _current;
+        private List<IVoice> _voices = new List<IVoice>();
+        internal class Tts5Voice : IVoice
+        {
+            public Gender Gender { get; set; }
+            public string Name { get; set; }
+            public string Locale { get; set; }
+            public object VoiceObject { get; set; }
+        }
 
         public TextToSpeech5(ISpeechModule speechModule)
         {
@@ -34,8 +45,22 @@ namespace Galatea.Speech
                 & SpeechLib.SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak
                 & SpeechLib.SpeechVoiceSpeakFlags.SVSFIsXML;
 
-            // Determines Male / Female
+            // Get Voices
+            var voices = spVoice.GetVoices();
+            foreach (SpeechLib.SpObjectToken v in voices)
+            {
+                string vname = null;
+                try
+                {
+                    vname = v.GetDescription();
+                }
+                catch { }
 
+                if (vname != null)
+                {
+                    _voices.Add(new Tts5Voice { Gender = Gender.Other, Name = vname, VoiceObject = v });
+                }
+            }
 
             //// Turn off Listener events
             //paused = false;
@@ -45,47 +70,23 @@ namespace Galatea.Speech
             // Write Debug Log
             speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_Initialized);
         }
-
         public object GetSpeechObject()
         {
             return spVoice;
         }
 
-        public object GetVoice(int index)
+        public IVoice GetVoice(int index)
         {
-            object result = GetVoice2(index);
-            if (result == null) result = GetVoice2(-1);
-
-            return result;
+            return _voices[index];
         }
-        private object GetVoice2(int index)
+        IVoice ITextToSpeech.CurrentVoice
         {
-            object result = null;
-
-            try
+            get { return _current; }
+            set
             {
-                int voiceIndex = index == -1 ? 0 : index;
-                result = spVoice.GetVoices().Item(voiceIndex);
+                _current = value;
+                spVoice.Voice = _current.VoiceObject as SpeechLib.SpObjectToken;
             }
-            catch (System.Runtime.InteropServices.COMException ex)
-            {
-                string msg = string.Format(
-                    System.Globalization.CultureInfo.CurrentCulture,
-                    Galatea.AI.Language.LanguageResources.TextToSpeechGetVoicesError, index);
-
-                Galatea.Speech.TeaSpeechException speechException = new Galatea.Speech.TeaSpeechException(msg, ex);
-
-                if (index != -1)
-                    _speechModule.LanguageModel.AI.Engine.Debugger.HandleTeaException(speechException, _speechModule);
-                else
-                {
-                    // 2nd Try - Throw the error instead of handling it.
-                    throw speechException;
-                }
-
-            }
-
-            return result;
         }
 
         #region ITextToSpeech Members
@@ -106,7 +107,7 @@ namespace Galatea.Speech
             set { _mouthPosition = value; }
         }
 
-        public virtual void Speak(string response)
+        public void Speak(string response, IProvider sender)
         {
             // exit if there's nothing to speak
             if (string.IsNullOrEmpty(response))
@@ -152,7 +153,7 @@ namespace Galatea.Speech
                 throw new TeaSpeechException("Error occurred in TTS.  Deactivating Speech.", ex);
             }
         }
-        public virtual void PauseTTS()
+        public void PauseTTS()
         {
             spVoice.Pause();
             paused = true;
@@ -160,7 +161,7 @@ namespace Galatea.Speech
             // Log 
             _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_On_Paused);
         }
-        public virtual void ResumeTTS()
+        public void ResumeTTS()
         {
             spVoice.Resume();
             paused = false;
@@ -168,7 +169,7 @@ namespace Galatea.Speech
             // Log
             _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_On_Resumed);
         }
-        public virtual void StopTTS()
+        public void StopTTS()
         {
             try
             {
@@ -188,6 +189,8 @@ namespace Galatea.Speech
                 throw new TeaSpeechException("Error occurred in TTS.", ex);
             }
         }
+
+        public bool IsSpeaking { get; set; }
 
         #endregion
 
@@ -231,6 +234,7 @@ namespace Galatea.Speech
 
         public event EventHandler<MouthPositionEventArgs> MouthPositionChange;
         public event EventHandler<WordEventArgs> Word;
+        public event EventHandler SpeechEnded;
 
         private readonly PhonemeCollection _phonemes;
         private MouthPosition _mouthPosition;

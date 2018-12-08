@@ -6,6 +6,7 @@ namespace Gala.Dolly.UI.Diagnostics
     /// <summary>
     /// A component class that writes the Galatea.Runtime processes to a file.
     /// </summary>
+    [System.CLSCompliant(false)]
     public class FileLogger : RuntimeComponent, Galatea.Diagnostics.IFileLogger
     {
         /// <summary>
@@ -78,9 +79,7 @@ namespace Gala.Dolly.UI.Diagnostics
         /// </param>
         protected override void Dispose(bool disposing)
         {
-            _isLogging = false;
-
-            _writer.Dispose();
+            if (_isLogging) StopLogging();
             base.Dispose(disposing);
         }
 

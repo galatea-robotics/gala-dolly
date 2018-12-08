@@ -8,11 +8,20 @@ namespace Galatea.Speech
     using Galatea.Speech.Properties;
 
     [System.Runtime.InteropServices.ComVisible(false)]
-    internal class TextToSpeech4 : Galatea.Runtime.RuntimeComponent, ITextToSpeech
+    internal sealed class TextToSpeech4 : Galatea.Runtime.RuntimeComponent, ITextToSpeech
     {
         private HTTSLib.TextToSpeech voice4;
         private bool speaking, paused;
         private ISpeechModule _speechModule;
+
+        private IVoice _current;
+        private struct Tts4Voice : IVoice
+        {
+            public Gender Gender { get; set; }
+            public string Name { get; set; }
+            public string Locale { get; set; }
+            public object VoiceObject { get; set; }
+        }
 
         public TextToSpeech4(ISpeechModule speechModule)
         {
@@ -29,6 +38,9 @@ namespace Galatea.Speech
 
             _phonemes = Speech.Phonemes.GetPhonemesSapi4();
 
+            // Get Voices
+            _current = new Tts4Voice { Gender = (Gender)voice4.Gender(1), Name = voice4.Speaker(1) };
+
             // Turn off Listener events
             //_speechModule.IsSpeaking = false;
 
@@ -40,13 +52,15 @@ namespace Galatea.Speech
         {
             return voice4;
         }
-        public object GetVoice(int index)
+        public IVoice GetVoice(int index)
         {
-            return voice4.Speaker(index);
+            return _current;
         }
+        IVoice ITextToSpeech.CurrentVoice { get; set; }
 
         public event EventHandler<MouthPositionEventArgs> MouthPositionChange;
-        public event EventHandler<WordEventArgs> Word { add { throw new NotSupportedException(); } remove { } }
+        public event EventHandler<WordEventArgs> Word;
+        public event EventHandler SpeechEnded;
 
         #region ITextToSpeech Members
 
@@ -66,7 +80,7 @@ namespace Galatea.Speech
             set { _mouthPosition = value; }
         }
 
-        public virtual void Speak(string response)
+        public void Speak(string response, IProvider sender)
         {
             // exit if there's nothing to speak
             if (string.IsNullOrEmpty(response))
@@ -100,7 +114,7 @@ namespace Galatea.Speech
                 throw new TeaSpeechException("Error occurred in TTS.", ex);
             }
         }
-        public virtual void PauseTTS()
+        public void PauseTTS()
         {
             voice4.Pause();
             paused = true;
@@ -108,7 +122,7 @@ namespace Galatea.Speech
             // Log
             _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_On_Paused);
         }
-        public virtual void ResumeTTS()
+        public void ResumeTTS()
         {
             voice4.Resume();
             paused = false;
@@ -116,7 +130,7 @@ namespace Galatea.Speech
             // Log
             _speechModule.LanguageModel.AI.Engine.Debugger.Log(DebuggerLogLevel.Log, Resources.TTS_On_Resumed);
         }
-        public virtual void StopTTS()
+        public void StopTTS()
         {
             try
             {
@@ -133,6 +147,8 @@ namespace Galatea.Speech
                 throw new TeaSpeechException("Error occurred in TTS.", ex);
             }
         }
+
+        public bool IsSpeaking { get; set; }
 
         #endregion
 

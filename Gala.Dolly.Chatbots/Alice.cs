@@ -3,10 +3,11 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using AIMLBot.Utils;
-using Galatea.Runtime.Services;
 
 namespace Gala.Dolly.Chatbots
 {
+    using Galatea.Runtime.Services;
+    using Galatea.Globalization;
     using Properties;
 
     /// <summary>
@@ -14,28 +15,29 @@ namespace Gala.Dolly.Chatbots
     /// </summary>
     internal class Alice : Chatbot
     {
+#if !NETFX_CORE
         /// <summary>
         /// Initializes a new instance of the <see>Galatea.ChatBots.Alice</see> class.
         /// </summary>
-        public Alice(Galatea.AI.Abstract.IUser user, string chatbotName) : base(chatbotName)
+        public Alice(Galatea.AI.Abstract.IUser user, string chatbotName): this(user, chatbotName, null, null)
+        {
+        }
+#endif
+        /// <summary>
+        /// Initializes a new instance of the <see>Galatea.ChatBots.Alice</see> class.
+        /// </summary>
+        public Alice(Galatea.AI.Abstract.IUser user, string chatbotName, string chatbotAliceConfigFolder, string chatbotResourcesFolder) : base(chatbotName)
         {
             userName = user.Name;
             aimlBot = new AIMLBot.Bot();
+            //if (chatbotAliceConfigFolder == null) chatbotAliceConfigFolder = GetChatbotAliceConfigFolder();
+            //if (chatbotResourcesFolder == null) chatbotResourcesFolder = GetChatbotResourcesFolder();
+
+            // Validate Folders
+            ValidateFolders(chatbotAliceConfigFolder, chatbotResourcesFolder);
 
             // Initialize AIMLBot2.5 Properties
-            if (!Directory.Exists(Settings.Default.ChatbotAliceConfigFolder))
-                throw new FileNotFoundException(
-                    string.Format(CultureInfo.CurrentCulture,
-                        Properties.Settings.Default.ChatbotAliceConfigFolder_Not_Found,
-                        Settings.Default.ChatbotAliceConfigFolder));
-
-            if(!Directory.Exists(Settings.Default.ChatbotResourcesFolder))
-                throw new FileNotFoundException(
-                    string.Format(CultureInfo.CurrentCulture,
-                        Properties.Settings.Default.ChatbotResourcesFolder_Not_Found,
-                        Settings.Default.ChatbotResourcesFolder));
-
-            aimlBot.loadSettings(Settings.Default.ChatbotAliceConfigFolder);
+            aimlBot.loadSettings(chatbotAliceConfigFolder);
             aimlBot.PathToAIML = Path.Combine(Settings.Default.ChatbotResourcesFolder, "alice");
 
             aimlBot.loadAIMLFromFiles();
@@ -47,7 +49,22 @@ namespace Gala.Dolly.Chatbots
             aimlUser = new AIMLBot.User(userName, aimlBot);
         }
 
-        public override string Greeting { get { return Properties.Settings.Default.ChatBotAliceGreeting; } }
+        private static void ValidateFolders(string chatbotAliceConfigFolder, string chatbotResourcesFolder)
+        {
+            if (!Directory.Exists(chatbotAliceConfigFolder))
+                throw new FileNotFoundException(
+                    string.Format(CultureInfo.CurrentCulture,
+                        ChatbotResources.ChatbotAliceConfigFolder_Not_Found,
+                        chatbotAliceConfigFolder));
+
+            if (!Directory.Exists(chatbotResourcesFolder))
+                throw new FileNotFoundException(
+                    string.Format(CultureInfo.CurrentCulture,
+                        ChatbotResources.ChatbotResourcesFolder_Not_Found,
+                        chatbotResourcesFolder));
+        }
+
+        public override string Greeting { get { return ChatbotResources.ChatBotAliceGreeting; } }
 
         /// <summary>
         /// An artificial intelligence method that responds to a text input based on the ALICE algorithm.
@@ -70,8 +87,27 @@ namespace Gala.Dolly.Chatbots
             }
         }
 
-        private readonly string userName;
-        private readonly AIMLBot.Bot aimlBot;
-        private readonly AIMLBot.User aimlUser;
+        /*
+        private static string GetChatbotAliceConfigFolder()
+        {
+#if !NETFX_CORE
+            return Properties.Settings.Default.ChatbotAliceConfigFolder;
+#else
+            return null;
+#endif
+        }
+        private static string GetChatbotResourcesFolder()
+        {
+#if !NETFX_CORE
+            return Properties.Settings.Default.ChatbotResourcesFolder;
+#else
+            return null;
+#endif
+        }
+         */
+
+        private string userName;
+        private AIMLBot.Bot aimlBot;
+        private AIMLBot.User aimlUser;
     }
 }

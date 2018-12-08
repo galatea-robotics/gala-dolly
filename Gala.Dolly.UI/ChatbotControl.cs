@@ -77,6 +77,7 @@ namespace Gala.Dolly.UI
         /// </param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "chatbots")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chatbots")]
+        [CLSCompliant(false)]
         public void InitializeChatbots(IChatbotManager chatbots)
         {
             if (chatbots == null) throw new TeaArgumentNullException("chatbots");
@@ -138,16 +139,24 @@ namespace Gala.Dolly.UI
         {
             SendResponse(response);
         }
+        bool IConsole.IsSilent
+        {
+            get { return _consoleIsSilent; }
+            set { _consoleIsSilent = value; }
+        }
 
         internal void SendResponse(string response)
         {
             #region Speak
             this.Cursor = Cursors.WaitCursor;
 
+            if (!_consoleIsSilent && Program.RuntimeEngine != null)
+            {
             Galatea.Speech.ISpeechModule speechModule = Program.RuntimeEngine.AI.LanguageModel.SpeechModule;
 
             if (speechModule != null && !speechModule.StaySilent)
-                speechModule.TextToSpeech.Speak(response);
+                    speechModule.TextToSpeech.Speak(response, this);
+            }
 
             this.Cursor = Cursors.Default;
             #endregion
@@ -168,6 +177,10 @@ namespace Gala.Dolly.UI
                     Program.RuntimeEngine.User.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture),
                     inputText);
 
+                string sender = Program.RuntimeEngine != null ?
+                    Program.RuntimeEngine.User.Name.ToUpper()
+                    : "USER";
+
                 this.txtDisplay.AppendText(msg + "\r\n");
 
                 // Save input to short term UI History
@@ -176,7 +189,7 @@ namespace Gala.Dolly.UI
 
                 // Get response from input
                 this.Cursor = Cursors.WaitCursor;
-                responseText = Program.RuntimeEngine.ExecutiveFunctions.GetResponse(Program.RuntimeEngine.AI.LanguageModel, Program.RuntimeEngine.User, inputText);
+                responseText = Program.RuntimeEngine.ExecutiveFunctions.GetResponse(Program.RuntimeEngine.AI.LanguageModel, inputText);
                 this.Cursor = Cursors.Default;
 
                 // Display response
@@ -214,6 +227,7 @@ namespace Gala.Dolly.UI
         /// </summary>
         public short DisplayResponseWaitTime { get { return waitTime; } set { waitTime = value; } }
 
+        private bool _consoleIsSilent;
         private string responseText;
         private short waitTime = Gala.Dolly.Chatbots.Properties.Settings.Default.ChatbotDisplayResponseWaitTime;
         private List<string> history = new List<string>();

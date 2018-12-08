@@ -15,6 +15,7 @@ namespace Gala.Dolly.UI
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chatbot")]
+    [CLSCompliant(false)]
     public abstract class ChatbotManager : KeyedCollection<string, IChatbot>, IChatbotManager, IComponent
     {
         /// <summary>

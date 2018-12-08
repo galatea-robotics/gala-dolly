@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 namespace Gala.Dolly.UI
 {
+    using Galatea.Globalization;
     using Gala.Dolly.UI.Runtime;
     using Properties;
 
@@ -43,6 +44,8 @@ namespace Gala.Dolly.UI
         /// with a UI tools menu to control settings.
         /// </summary>
         public Gala.Dolly.UI.Diagnostics.UIDebugger UIDebugger { get { return _debugger; } }
+
+        internal UI.IConsole Console { get; set; }
 
         internal ToolStripMenuItem FileMenu { get { return _fileMenu; } }
         internal ToolStripMenuItem ViewMenu { get { return _viewMenu; } }

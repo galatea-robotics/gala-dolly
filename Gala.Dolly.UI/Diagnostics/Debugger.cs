@@ -12,6 +12,7 @@ namespace Gala.Dolly.UI.Diagnostics
     /// Includes File Logging and methods for Handling Errors instead of simply outputting
     /// the stack trace and then re-throwing.
     /// </summary>
+    [CLSCompliant(false)]
     public partial class Debugger : Galatea.Runtime.Services.Debugger, IDebugger
     {
         /// <summary>
@@ -38,7 +39,6 @@ namespace Gala.Dolly.UI.Diagnostics
             get { return _fileLogger; }
             set { _fileLogger = value; }
         }
-
         /// <summary>
         /// Handles expected Galatea Core Exceptions, typically by logging them.
         /// </summary>
@@ -49,6 +49,15 @@ namespace Gala.Dolly.UI.Diagnostics
         /// The runtime component where the exception occurred.
         /// </param>
         protected override void HandleTeaException(TeaException ex, IProvider provider)
+        {
+            HandleTeaException(ex, provider, false);
+        }
+
+        /// <param name="throwException">
+        /// A value indicating if the Exception should remain unhandled after
+        /// processing by the <see cref="IDebugger"/> instance.
+        /// </param>
+        protected override void HandleTeaException(TeaException ex, IProvider provider, bool throwException)
         {
             if (ex == null) return;
 
@@ -141,7 +150,9 @@ namespace Gala.Dolly.UI.Diagnostics
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            _fileLogger.Dispose();
+            _fileLogger?.Dispose();
+            _fileLogger = null;
+
             base.Dispose(disposing);
         }
 

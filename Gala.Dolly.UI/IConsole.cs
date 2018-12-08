@@ -7,5 +7,6 @@ namespace Gala.Dolly.UI
     internal interface IConsole
     {
         void SendResponse(string response);
+        bool IsSilent { get; set; }
     }
 }

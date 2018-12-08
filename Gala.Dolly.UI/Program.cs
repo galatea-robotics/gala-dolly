@@ -30,6 +30,7 @@ namespace Gala.Dolly.UI.Runtime
             }
 
             BaseForm.Current.UIDebugger.SpeechIsSilent = Program.RuntimeEngine.AI.LanguageModel.SpeechModule.StaySilent;
+            _started = true;
         }
         /// <summary>
         /// Saves the runtime settings to the <see cref="Gala.Dolly.UI.Properties.Settings"/> instance.
@@ -44,6 +45,12 @@ namespace Gala.Dolly.UI.Runtime
 
         internal static IRuntimeEngine RuntimeEngine { get { return _runtimeEngine; } }
 
+        //internal static StartupStatus StartupStatus { get; set; }
+        internal static TeaInitializationException InitializationException { get; set; }
+
+        internal static bool Started { get { return _started; } }
+
         static IRuntimeEngine _runtimeEngine;
+        static bool _started;
     }
 }

@@ -20,17 +20,6 @@
     <Setting Name="ChatbotDefaultResponse" Type="System.String" Scope="User">
       <Value Profile="(Default)">I'm sorry - Do I know you?</Value>
     </Setting>
-    <Setting Name="ChatBotAliceGreeting" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Greetings, human!</Value>
-    </Setting>
-    <Setting Name="ChatBotElizaGreeting" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Tell me how you are feeling.  I am ready to listen.</Value>
-    </Setting>
-    <Setting Name="ChatbotAliceConfigFolder_Not_Found" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Chatbot Alice Config folder '{0}' not found.</Value>
-    </Setting>
-    <Setting Name="ChatbotResourcesFolder_Not_Found" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Chatbot Resources folder '{0}' not found.</Value>
-    </Setting>
+
   </Settings>
 </SettingsFile>

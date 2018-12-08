@@ -37,7 +37,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\</OutputPath>
+    <OutputPath>..\bin\.NET\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>2</WarningLevel>
@@ -52,13 +52,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
+    <OutputPath>..\bin\.NET\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <UseVSHostingProcess>true</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
+    <DocumentationFile>..\bin\Framework\Release\Gala.Dolly.Speech.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -72,7 +73,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Analysis|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\bin\Analysis\</OutputPath>
+    <OutputPath>..\bin\.NET\Analysis\</OutputPath>
     <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -147,14 +148,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gala.Data\Gala.Data.csproj">
-      <Project>{fce634b4-5a87-4519-98d4-240b4a42f8d5}</Project>
-      <Name>Gala.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Galatea.AI.Language\Galatea.AI.Language.csproj">
-      <Project>{cb45393d-18c7-47b3-a16b-2b62c1c66a77}</Project>
-      <Name>Galatea.AI.Language</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Galatea\Galatea.Core.csproj">
       <Project>{e36af529-f151-4b39-92f1-115c31bcb746}</Project>
       <Name>Galatea.Core</Name>

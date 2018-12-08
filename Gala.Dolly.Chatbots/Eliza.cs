@@ -3,6 +3,7 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using Galatea.Globalization;
 using Galatea.Runtime.Services;
 
 namespace Gala.Dolly.Chatbots
@@ -24,7 +25,7 @@ namespace Gala.Dolly.Chatbots
         /// </summary>
         public Eliza(string name) : base(name, name) { Initialize(); }
 
-        public override string Greeting { get { return Properties.Settings.Default.ChatBotElizaGreeting; } }
+        public override string Greeting { get { return ChatbotResources.ChatBotElizaGreeting; } }
 
         private void Initialize()
         {

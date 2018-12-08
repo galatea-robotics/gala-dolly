@@ -14,6 +14,7 @@ namespace Gala.Dolly.UI.Diagnostics
     /// properties, as well as File Logging and methods for Handling Errors instead of simply outputting 
     /// the stack trace and then re-throwing.
     /// </summary>
+    [CLSCompliant(false)]
     public partial class UIDebugger : Gala.Dolly.UI.Diagnostics.Debugger, IDebugger
     {
         /// <summary>
@@ -194,7 +195,7 @@ namespace Gala.Dolly.UI.Diagnostics
             set { speechSilentMenuItem.Checked = value; }
         }
 
-        internal bool SpeechMenuEnabled
+        public bool SpeechMenuEnabled
         {
             get { return speechMenu.Enabled; }
             set
