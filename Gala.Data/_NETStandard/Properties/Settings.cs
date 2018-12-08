@@ -23,10 +23,11 @@ namespace Gala.Data.Properties
 
             string data = null;
             Settings result = null;
+            _filename = path;
 
             try
             {
-                data = File.ReadAllText(path);
+                data = File.ReadAllText(_filename);
                 result = JsonConvert.DeserializeObject<Settings>(data);
                 if (result == null) throw new NullReferenceException();
             }
@@ -49,10 +50,10 @@ namespace Gala.Data.Properties
             _default = result;
         }
 
-        public void Save(string filename = @"Properties\Settings.json")
+        public void Save()
         {
             string data = JsonConvert.SerializeObject(this);
-            System.IO.File.WriteAllText(filename, data);
+            System.IO.File.WriteAllText(_filename, data);
         }
 
         public string DataAccessManagerConnectionString { get; set; }
@@ -94,5 +95,6 @@ namespace Gala.Data.Properties
         public static Settings Default { get { return _default; } }
 
         private static Settings _default;
+        private static string _filename;
     }
 }
