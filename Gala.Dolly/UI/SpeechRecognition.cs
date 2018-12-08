@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace Gala.Dolly.UI
-{
+{ 
     public partial class SpeechRecognition : UserControl
     {
         public SpeechRecognition()

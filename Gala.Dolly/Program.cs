@@ -4,6 +4,9 @@ using System.Windows.Forms;
 namespace Gala.Dolly
 {
     using Galatea.AI.Imaging;
+    using Galatea.Diagnostics;
+    using Galatea.Runtime;
+    using Gala.Dolly.UI.Properties;
 
     internal static class Program
     {
@@ -26,6 +29,41 @@ namespace Gala.Dolly
             // Load Local Settings
             Gala.Dolly.Properties.LocalSettingsHelper.Load(localSettingsFile);
              */
+            
+            Gala.Dolly.UI.Properties.Settings uiSettings = Gala.Dolly.UI.Properties.Settings.Default;
+
+            #region // This is only temporary
+            // TODO:
+            /*
+            uiSettings.DebuggerLogLevel = DebuggerLogLevel.Diagnostic;
+            uiSettings.DebuggerAlertLevel = DebuggerLogLevel.Message;
+            uiSettings.Save();
+
+            ImagingSettings imagingSettings = new ImagingSettings
+            {
+                Timeout = 2000,
+                SuppressTimeout = true,
+            };
+
+            imagingSettings.ColorStatsSettings.StatisticalAnalysisTypes = Galatea.AI.Math.StatsTypes.Mean;
+            imagingSettings.MonochromeBlobFilterSettings.ContrastCorrectionFactor = 0;
+            imagingSettings.MonochromeBlobFilterSettings.AdaptiveSmoothingFactor = 0.25;
+            imagingSettings.MonochromeBlobFilterSettings.FrameWidth = 10;
+            imagingSettings.BlobPointSettings.LineSegmentThreshold = 20;
+            imagingSettings.BlobPointSettings.LineAngleThreshold = 10;
+            imagingSettings.BlobPointSettings.CurveAngleThreshold = 27;
+
+            imagingSettings.TemplateRecognitionSettings.ColorBrightnessThreshold = 5;
+            imagingSettings.TemplateRecognitionSettings.ColorSaturationThreshold = 5;
+            imagingSettings.TemplateRecognitionSettings.ShapeOblongThreshold = 1.75M;
+            imagingSettings.TemplateRecognitionSettings.ShapeOblongRecognitionNormalization = true;
+            imagingSettings.TemplateRecognitionSettings.IdentifyShapeCertaintyMinimum = 65;
+            Properties.Settings.Default.ImagingSettings = imagingSettings;
+            Properties.Settings.Default.Save();
+             */
+            #endregion
+
+            Galatea.Diagnostics.DebuggerLogLevelSettings.Initialize(uiSettings.DebuggerLogLevel, uiSettings.DebuggerAlertLevel);
 
             // Start UI
             TemplateRecognitionForm form = new TemplateRecognitionForm();
@@ -38,7 +76,10 @@ namespace Gala.Dolly
             // Start Galatea Robotics Engine
             Program.Startup();
 
-            Application.Run(_baseForm);
+            if (Program.Started)
+            {
+                Application.Run(_baseForm);
+            }
 
             // Shutdown Galatea Robotics Engine
             Program.Shutdown();
@@ -67,10 +108,30 @@ namespace Gala.Dolly
             _baseForm.UIDebugger.ShowAlerts = false;
 
             // Initialize Robotics Engine
-            _engine = new SmartEngine(_baseForm.UIDebugger);
-            _engine.Startup();
+            StartupStatus status = 0;
+            try
+            {
+                status++;   // Creating Galatea Runtime Engine.
+                _engine = new SmartEngine(_baseForm.UIDebugger);
 
-            Gala.Dolly.UI.Runtime.Program.Startup(_engine);
+                status++;   // Starting Galatea Runtime Engine.
+                _engine.Startup();
+
+                status++;   // Starting UI.
+                Gala.Dolly.UI.Runtime.Program.Startup(_engine);
+            }
+            catch (Exception ex)
+            {
+                _started = false;
+                UI.Runtime.Program.StartupStatus = status;
+
+                _baseForm.UIDebugger.ThrowSystemException(ex, _engine);
+
+                //throw new Galatea.Runtime.TeaInitializationException(ex.Message, ex);
+
+                //UI.Runtime.Program.InitializationException = new Galatea.Runtime.TeaInitializationException(ex.Message, ex);
+                return;
+            }
 
             // Load UI Settings
             _engine.Machine.SerialPortController.WaitInterval = Properties.Settings.Default.SerialPortDefaultInterval;
@@ -110,11 +171,18 @@ namespace Gala.Dolly
         {
             Gala.Dolly.UI.Runtime.Program.Shutdown();
 
-            // Save Settings
-            Properties.Settings.Default.SpeechIsSilent = Engine.AI.LanguageModel.SpeechModule.StaySilent;
+            if (_engine != null)
+            {
+                // Save Settings
+                if (_engine.AI?.LanguageModel?.SpeechModule != null)
+                {
+                    Properties.Settings.Default.SpeechIsSilent = Engine.AI.LanguageModel.SpeechModule.StaySilent;
+                }
+                Properties.Settings.Default.Save();
 
-            // Shutdown AI Engine
-            _engine.Shutdown();
+                // Shutdown AI Engine
+                _engine.Shutdown();
+            }
 
             // Save Settings and shit
             ShutdownUI();
@@ -122,7 +190,7 @@ namespace Gala.Dolly
             _started = false;
         }
 
-        //private const string localSettingsFile = @"..\..\..\Local Settings\LocalSettings.config";
+        //private const string localSettingsFile = @"..\..\..\..\Local Settings\LocalSettings.config";
         private static UI.BaseForm _baseForm;
         private static UI.IConsole _console;
         private static SmartEngine _engine;

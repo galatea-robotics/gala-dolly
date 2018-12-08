@@ -11,13 +11,15 @@ namespace Gala.Dolly
             InitializeComponent();
         }
 
-        internal IConsole Console { get { return this.chatbotControl; } }
+        internal override IConsole Console { get { return this.chatbotControl; } }
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
             // Load Chatbots
             chatbotControl.InitializeChatbots(Program.Engine.AI.LanguageModel.ChatbotManager);
             chatbotControl.Select();
+
+            this.Console = chatbotControl;
         }
 
         private void MainForm_Resize(object sender, System.EventArgs e)

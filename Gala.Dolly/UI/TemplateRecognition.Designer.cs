@@ -1,4 +1,4 @@
-namespace Gala.Dolly.UI
+ namespace Gala.Dolly.UI
 {
     partial class TemplateRecognition
     {

@@ -48,7 +48,7 @@ namespace Gala.Dolly.UI.Diagnostics
         /// <param name="provider">
         /// The runtime component where the exception occurred.
         /// </param>
-        protected override void HandleTeaException(TeaException ex, IProvider provider)
+        public override void HandleTeaException(TeaException ex, IProvider provider)
         {
             HandleTeaException(ex, provider, false);
         }
@@ -57,7 +57,7 @@ namespace Gala.Dolly.UI.Diagnostics
         /// A value indicating if the Exception should remain unhandled after
         /// processing by the <see cref="IDebugger"/> instance.
         /// </param>
-        protected override void HandleTeaException(TeaException ex, IProvider provider, bool throwException)
+        public override void HandleTeaException(TeaException ex, IProvider provider, bool throwException)
         {
             if (ex == null) return;
 
@@ -86,7 +86,7 @@ namespace Gala.Dolly.UI.Diagnostics
         /// <param name="provider">
         /// The runtime component where the exception occurred.
         /// </param>
-        protected override void ThrowSystemException(Exception ex, IProvider provider)
+        public override void ThrowSystemException(Exception ex, IProvider provider)
         {
             if (ex == null) return;
 

@@ -12,7 +12,7 @@ namespace Gala.Dolly.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\Log.txt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Log.txt")]
         public string LogFileName {
             get {
                 return ((string)(this["LogFileName"]));
@@ -309,7 +309,7 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\..\\Data\\SerializedData.dat")]
+        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\..\\..\\Data\\SerializedData.dat")]
         public string DataAccessManagerConnectionString {
             get {
                 return ((string)(this["DataAccessManagerConnectionString"]));
@@ -318,27 +318,6 @@ namespace Gala.Dolly.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          <ImagingSettings xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance" +
-            "\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n            <Timeout>2000</Time" +
-            "out>\r\n            <SuppressTimeout>true</SuppressTimeout>\r\n            <DebugRec" +
-            "ognitionSaveImages>true</DebugRecognitionSaveImages>\r\n            <DebugRecognit" +
-            "ionSaveFolder>..\\..\\..\\Resources\\Test Cases\\Live</DebugRecognitionSaveFolder>\r\n " +
-            "           <ColorStatsSettings>\r\n              <StatisticalAnalysisTypes>Mean</S" +
-            "tatisticalAnalysisTypes>\r\n            </ColorStatsSettings>\r\n            <Monoch" +
-            "romeBlobFilterSettings>\r\n              <ContrastCorrectionFactor>0.25</ContrastC" +
-            "orrectionFactor>\r\n              <AdaptiveSmoothingFactor>0.25</AdaptiveSmoothing" +
-            "Factor>\r\n              <FrameWidth>10</FrameWidth>\r\n            </MonochromeBlob" +
-            "FilterSettings>\r\n            <BlobPointSettings>\r\n              <LineSegmentThre" +
-            "shold>18</LineSegmentThreshold>\r\n              <LineAngleThreshold>9</LineAngleT" +
-            "hreshold>\r\n              <CurveAngleThreshold>27</CurveAngleThreshold>\r\n        " +
-            "    </BlobPointSettings>\r\n            <TemplateRecognitionSettings>\r\n           " +
-            "   <ColorBrightnessThreshold>5</ColorBrightnessThreshold>\r\n              <ColorS" +
-            "aturationThreshold>5</ColorSaturationThreshold>\r\n              <ShapeOblongThres" +
-            "hold>1.75</ShapeOblongThreshold>\r\n              <ShapeOblongRecognitionLevel>2</" +
-            "ShapeOblongRecognitionLevel>\r\n              <ShapeOblongRecognitionNormalization" +
-            ">true</ShapeOblongRecognitionNormalization>\r\n              <IdentifyShapeCertain" +
-            "tyMinimum>65</IdentifyShapeCertaintyMinimum>\r\n            </TemplateRecognitionS" +
-            "ettings>\r\n          </ImagingSettings>\r\n        ")]
         public global::Galatea.AI.Imaging.ImagingSettings ImagingSettings {
             get {
                 return ((global::Galatea.AI.Imaging.ImagingSettings)(this["ImagingSettings"]));

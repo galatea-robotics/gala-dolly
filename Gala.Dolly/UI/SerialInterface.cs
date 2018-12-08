@@ -2,9 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.IO.Ports;
 using System.Windows.Forms;
-using Galatea.AI.Robotics;
 
 namespace Gala.Dolly.UI
 {
@@ -45,8 +43,14 @@ namespace Gala.Dolly.UI
                 viewSerialInterfaceMenuItemTemp = null;
 
                 // Add Serial >> Open Port, Close Port, and Open at Startup Menu and Menu Items
-                serialOpenPortMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialOpenPortMenuItem_Text);
-                serialClosePortMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialClosePortMenuItem_Text);
+            serialOpenPortMenuItem = new ToolStripMenuItem("&Open Port");
+            serialClosePortMenuItem = new ToolStripMenuItem("&Close Port");
+            serialOpenAtStartupMenuItem = new ToolStripMenuItem("O&pen at Startup");
+            serialOpenAtStartupMenuItem.CheckOnClick = true;
+            // Add Disable Warnings
+            serialDisableWarnings = new ToolStripMenuItem("Disable Log Warnings");
+            serialDisableWarnings.CheckOnClick = true;
+            serialDisableWarnings.Click += SerialDisableWarnings_Click;
 
                 serialOpenAtStartupMenuItemTemp = new ToolStripMenuItem(Resources.SerialInterface_serialOpenAtStartupMenuItem_Text);
                 serialOpenAtStartupMenuItem = serialOpenAtStartupMenuItemTemp;
@@ -109,7 +113,7 @@ namespace Gala.Dolly.UI
             myForm.ViewMenu.DropDownItems.Add(viewSerialInterfaceMenuItem);
 
             // Initialize Robotics Serial Port
-            string[] ports = SerialPort.GetPortNames();
+            string[] ports = System.IO.Ports.SerialPort.GetPortNames();
 
             comboPorts.Items.AddRange(ports);
             string defaultDevice = Settings.Default.SerialPortDefaultDevice;
@@ -140,7 +144,11 @@ namespace Gala.Dolly.UI
         private void SerialInterface_Disposed(object sender, System.EventArgs e)
         {
             // Save Settings
+            if(Program.Engine != null)
+            {
             Settings.Default.SerialPortDefaultInterval = Program.Engine.Machine.SerialPortController.WaitInterval;
+            }
+
             Settings.Default.WindowShowSerialInterface = viewSerialInterfaceMenuItem.Checked;
             // TODO:  Why setting not saved???
             Settings.Default.SerialOpenPortAtStartup = serialOpenAtStartupMenuItem.Checked;
@@ -206,8 +214,12 @@ namespace Gala.Dolly.UI
                 string msg = string.Format(CultureInfo.CurrentCulture, Resources.SerialPortInvalidInterval,
                     Settings.Default.SerialPortIntervalMin, Settings.Default.SerialPortIntervalMax);
 
-                var options = this.RightToLeft == RightToLeft.Yes ? MessageBoxOptions.RtlReading : MessageBoxOptions.DefaultDesktopOnly;
-                MessageBox.Show(msg, this.FindForm().Text, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, options);
+                MessageBoxOptions options = (this.RightToLeft == RightToLeft.Yes) ?
+                    MessageBoxOptions.RightAlign & MessageBoxOptions.RtlReading
+                    : MessageBoxOptions.DefaultDesktopOnly;
+
+                MessageBox.Show(msg, this.FindForm().Text, MessageBoxButtons.OK, MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button1, options);
             }
         }
         private void TxtInterval_TextChanged(object sender, EventArgs e)

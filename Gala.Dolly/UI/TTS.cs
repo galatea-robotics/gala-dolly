@@ -1,18 +1,22 @@
 using System;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Windows.Forms;
 using Galatea.Speech;
 
 namespace Gala.Dolly.UI
 {
     using Gala.Dolly.Properties;
-    using Gala.Dolly.Robotics.Bs2Commands;
+    using Gala.Dolly.Robotics.BS2Commands;
 
-    internal partial class TTS : UserControl //, Galatea.Runtime.Speech.ITextToSpeech
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "TTS")]
+    [CLSCompliant(false)]
+    public partial class TTS : UserControl //, Galatea.Runtime.Speech.ITextToSpeech
     {
-        protected ISpeechModule speechModule;
-        protected BaseForm baseForm;
+        private ISpeechModule speechModule;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [Serializable]
         protected class MouthPositionList : System.Collections.Generic.Dictionary<int, string>
         {
             public MouthPositionList()
@@ -29,6 +33,10 @@ namespace Gala.Dolly.UI
                 this.Add(9, "Little Frown");
                 this.Add(10, "Big Frown");
             }
+
+            protected MouthPositionList(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+        }
         }
 
         public TTS()
@@ -54,6 +62,7 @@ namespace Gala.Dolly.UI
             cbMouthPositions.SelectedValueChanged += CbMouthPositions_SelectedValueChanged;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "LEDs")]
         public void SetLEDsOff()
         {
             SetLED(0, false);
@@ -61,6 +70,7 @@ namespace Gala.Dolly.UI
 
         #region Design Properties
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "LED")]
         [System.ComponentModel.DefaultValue(LEDColor.Red)]
         internal LEDColor LEDColor
         {
@@ -148,14 +158,14 @@ namespace Gala.Dolly.UI
                 speechModule.TextToSpeech = tts5;
                 speechModule.TextToSpeech.Rate = -3;
                 speechModule.TextToSpeech.MouthPositionChange += TextToSpeech_MouthPositionChange;
-
-                //Program.Engine.Machine.SpeechModule = speechModule;
             }
-            catch (Exception ex)
+            catch (Galatea.TeaException ex)
             {
-                var options = this.RightToLeft == RightToLeft.Yes ? MessageBoxOptions.RtlReading : MessageBoxOptions.DefaultDesktopOnly;
+                MessageBoxOptions options = (this.RightToLeft == RightToLeft.Yes) ?
+                    MessageBoxOptions.RightAlign & MessageBoxOptions.RtlReading
+                    : MessageBoxOptions.DefaultDesktopOnly;
 
-                MessageBox.Show(ex.Message, this.FindForm().Text, MessageBoxButtons.OK, MessageBoxIcon.Warning, 
+                MessageBox.Show(ex.Message, this.FindForm().Text, MessageBoxButtons.OK, MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1, options);
             }
 

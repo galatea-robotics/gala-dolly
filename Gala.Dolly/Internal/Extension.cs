@@ -3,7 +3,7 @@ namespace Gala.Dolly.UI
 {
     internal static class Extension
     {
-        public static void NormalizeSaturation(this AForge.Imaging.HSL hsl)
+        public static void NormalizeSaturation(this Accord.Imaging.HSL hsl)
         {
             if (hsl.Saturation < 0.25F)
                 hsl.Saturation *= 3.6F;

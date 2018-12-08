@@ -47,8 +47,9 @@ namespace Gala.Dolly.UI
             btnRandom.Visible = false;
             btnBlobify.Visible = true;
             btnBlobify.Enabled = false;
-
             if (this.DesignMode) return;
+
+            if (!Program.Started) return;
 
             // Create EventHandler
             Program.Engine.ExecutiveFunctions.ContextRecognition += ExecutiveFunctions_ContextRecognition;            
@@ -92,7 +93,7 @@ namespace Gala.Dolly.UI
 
         private byte _r, _g, _b;
 
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        /*
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private void BtnRandom_Click(object sender, System.EventArgs e)
         {
@@ -112,8 +113,10 @@ namespace Gala.Dolly.UI
             txt_R.Text = _r.ToString(CultureInfo.CurrentCulture);
             txt_G.Text = _g.ToString(CultureInfo.CurrentCulture);
             txt_B.Text = _b.ToString(CultureInfo.CurrentCulture);
-            Txt_Validated(null, null);
+            txt_Validated(null, null);
         }
+         */
+
         private static bool GetRGB(TextBox textBox, ref byte value)
         {
             bool result;
@@ -318,6 +321,7 @@ namespace Gala.Dolly.UI
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         private void ExecutiveFunctions_ContextRecognition(object sender, ContextRecognitionEventArgs e)
         {
             if (e.TemplateType != TemplateType.Shape || !(e.NamedTemplate is ShapeTemplate))
@@ -331,7 +335,7 @@ namespace Gala.Dolly.UI
             Color backgroundColor = blobImage.BitmapBlob.BackgroundIsBlack ? Color.Black : Color.White;
 
             // Cheat a little bit
-            AForge.Imaging.HSL hsl = new AForge.Imaging.HSL((int)fillColor.GetHue(), fillColor.GetSaturation(), fillColor.GetBrightness());
+            Accord.Imaging.HSL hsl = new Accord.Imaging.HSL((int)fillColor.GetHue(), fillColor.GetSaturation(), fillColor.GetBrightness());
             hsl.NormalizeSaturation();
 
             fillColor = hsl.ToRGB().Color;
@@ -360,8 +364,11 @@ namespace Gala.Dolly.UI
             }
 
             // Put the blob in the rectangle
-            using (Bitmap newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height))
+            Bitmap newBitmap = null;
+
+            try
             {
+                newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height);
                 Graphics gfx = Graphics.FromImage(newBitmap);
                 gfx.Clear(backgroundColor);
 
@@ -372,9 +379,14 @@ namespace Gala.Dolly.UI
                 SetDisplayImage(newBitmap);
                 //display.BackColor = backgroundColor;
             }
+            catch
+            {
+                if (newBitmap != null) newBitmap.Dispose();
+                throw;
+            }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        /*
         private void DrawRectangle()
         {
             // Draw Blob Rectangle
@@ -399,20 +411,32 @@ namespace Gala.Dolly.UI
         //        FillDisplayImage(bmpTemp);
         //    }
         //}
+         */
+
         private void FillDisplayImage(Bitmap bmpTemp)
         {
             // Get Location from Context
             Rectangle rect = new Rectangle(blobImage.Location.X, blobImage.Location.Y, blobImage.BitmapBlob.Width, blobImage.BitmapBlob.Height);
 
             // Create BRAND FUCKING NEW Bitmap
-            using (Bitmap newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height))
+            Bitmap newBitmap = null;
+            try
             {
-                Graphics gfx = Graphics.FromImage(newBitmap);
-                gfx.Clear(blobImage.BitmapBlob.BackgroundIsBlack ? Color.Black : Color.White);
-                gfx.DrawImage(bmpTemp, rect);
+                newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+                using (Graphics gfx = Graphics.FromImage(newBitmap))
+                {
+                    gfx.Clear(blobImage.BitmapBlob.BackgroundIsBlack ? Color.Black : Color.White);
+                    gfx.DrawImage(bmpTemp, rect);
+                }
 
                 // Update the Display
                 SetDisplayImage(newBitmap);
+            }
+            catch
+            {
+                newBitmap?.Dispose();
+                throw;
             }
         }
         private void SetDisplayImage(Bitmap bitmap)

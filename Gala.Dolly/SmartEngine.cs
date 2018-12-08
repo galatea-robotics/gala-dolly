@@ -12,7 +12,7 @@ namespace Gala.Dolly
     using Gala.Data.Databases;
 	using Gala.Data.Runtime;
 
-	internal class SmartEngine : Engine, IRuntimeEngine, IEngine
+	internal class SmartEngine : RuntimeEngine, IRuntimeEngine, IEngine
     {
 		public SmartEngine(IDebugger debugger, DataAccessManager dataAccessManager)
         {
@@ -75,31 +75,30 @@ namespace Gala.Dolly
             IChatbotManager chatbots = Gala.Dolly.Chatbots.ChatbotManager.GetChatbots(this.User);
             robot.LanguageModel.LoadChatBots(chatbots);
 
-			StringCollection substitutions = new StringCollection
-			{
-				"I ,eye ",
-				".,.  ",
-				"Ayuh,If you say so|false"
-			};
+            var substitutions = new []
+            {
+                "I ,eye ",
+                ".,.  ",
+                "Ayuh,If you say so|false"
+            };
 			robot.LanguageModel.LoadSubstitutions(substitutions);
 
-			speech = new Galatea.Speech.SpeechModule();
+            speech = new Galatea.Speech.SpeechModule();
 			speech.Initialize(robot.LanguageModel);
 			speech.StaySilent = Properties.Settings.Default.SpeechIsSilent;
-
+            
             // Add Text to Speech (even if silent)
-            Galatea.Speech.TextToSpeech5 tts5 = new Galatea.Speech.TextToSpeech5(speech);
+            Galatea.Speech.ITextToSpeech tts5 = new Galatea.Speech.TextToSpeech5(speech);
 			speech.TextToSpeech = tts5;
 
-
-            // ********** WIN 10 ZIRA ********** // 
-            SpeechLib.SpVoice spV = tts5.GetSpeechObject() as SpeechLib.SpVoice;
+            // ********** WIN 10 ZIRA ********** //
+            //SpeechLib.SpVoice spV = tts5.GetSpeechObject() as SpeechLib.SpVoice;
 
             int defaultVoiceIndex = Properties.Settings.Default.TextToSpeechDefaultVoiceIndex;
             try
             {
-                SpeechLib.SpObjectToken spVoice = tts5.GetVoice(defaultVoiceIndex) as SpeechLib.SpObjectToken;
-                spV.Voice = spVoice;
+                Galatea.Speech.IVoice voice = tts5.GetVoice(defaultVoiceIndex);
+                tts5.CurrentVoice = voice;
             }
             catch (Galatea.Speech.TeaSpeechException ex)
             {
@@ -134,6 +133,19 @@ namespace Gala.Dolly
 
             // Finalize
             base.Shutdown();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            machine?.Dispose();
+            vision?.Dispose();
+            _ai?.Dispose();
+            newContextCache?.Dispose();
+            this.User?.Dispose();
+            speech?.Dispose();
+            Debugger?.Dispose();
+
+            base.Dispose(disposing);
         }
 
         internal new DataAccessManager DataAccessManager

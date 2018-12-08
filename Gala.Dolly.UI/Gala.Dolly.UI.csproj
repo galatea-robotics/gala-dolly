@@ -182,6 +182,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChatbotControl.resx">
       <DependentUpon>ChatbotControl.cs</DependentUpon>
     </EmbeddedResource>

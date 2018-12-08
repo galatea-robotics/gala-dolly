@@ -15,14 +15,13 @@ namespace Gala.Dolly.Chatbots
     /// </summary>
     internal class Alice : Chatbot
     {
-#if !NETFX_CORE
         /// <summary>
         /// Initializes a new instance of the <see>Galatea.ChatBots.Alice</see> class.
         /// </summary>
         public Alice(Galatea.AI.Abstract.IUser user, string chatbotName): this(user, chatbotName, null, null)
         {
         }
-#endif
+
         /// <summary>
         /// Initializes a new instance of the <see>Galatea.ChatBots.Alice</see> class.
         /// </summary>
@@ -30,8 +29,8 @@ namespace Gala.Dolly.Chatbots
         {
             userName = user.Name;
             aimlBot = new AIMLBot.Bot();
-            //if (chatbotAliceConfigFolder == null) chatbotAliceConfigFolder = GetChatbotAliceConfigFolder();
-            //if (chatbotResourcesFolder == null) chatbotResourcesFolder = GetChatbotResourcesFolder();
+            if (chatbotAliceConfigFolder == null) chatbotAliceConfigFolder = GetChatbotAliceConfigFolder();
+            if (chatbotResourcesFolder == null) chatbotResourcesFolder = GetChatbotResourcesFolder();
 
             // Validate Folders
             ValidateFolders(chatbotAliceConfigFolder, chatbotResourcesFolder);
@@ -87,24 +86,14 @@ namespace Gala.Dolly.Chatbots
             }
         }
 
-        /*
         private static string GetChatbotAliceConfigFolder()
         {
-#if !NETFX_CORE
             return Properties.Settings.Default.ChatbotAliceConfigFolder;
-#else
-            return null;
-#endif
         }
         private static string GetChatbotResourcesFolder()
         {
-#if !NETFX_CORE
             return Properties.Settings.Default.ChatbotResourcesFolder;
-#else
-            return null;
-#endif
         }
-         */
 
         private string userName;
         private AIMLBot.Bot aimlBot;

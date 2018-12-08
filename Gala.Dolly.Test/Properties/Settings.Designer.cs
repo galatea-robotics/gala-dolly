@@ -12,7 +12,7 @@ namespace Gala.Dolly.Test.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -106,26 +106,33 @@ namespace Gala.Dolly.Test.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          <ImagingSettings xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance" +
-            "\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n            <Timeout>2000</Time" +
-            "out>\r\n            <SuppressTimeout>true</SuppressTimeout>\r\n            <DebugRec" +
-            "ognitionSaveImages>true</DebugRecognitionSaveImages>\r\n            <ColorStatsSet" +
-            "tings>\r\n              <StatisticalAnalysisTypes>Mean</StatisticalAnalysisTypes>\r" +
-            "\n            </ColorStatsSettings>\r\n            <MonochromeBlobFilterSettings>\r\n" +
-            "              <ContrastCorrectionFactor>-64</ContrastCorrectionFactor>\r\n        " +
-            "      <AdaptiveSmoothingFactor>0.25</AdaptiveSmoothingFactor>\r\n              <Fr" +
-            "ameWidth>10</FrameWidth>\r\n            </MonochromeBlobFilterSettings>\r\n         " +
-            "   <BlobPointSettings>\r\n              <LineSegmentThreshold>18</LineSegmentThres" +
-            "hold>\r\n              <LineAngleThreshold>9</LineAngleThreshold>\r\n              <" +
-            "CurveAngleThreshold>27</CurveAngleThreshold>\r\n            </BlobPointSettings>\r\n" +
-            "            <TemplateRecognitionSettings>\r\n              <ColorBrightnessThresho" +
-            "ld>6</ColorBrightnessThreshold>\r\n              <ColorSaturationThreshold>5</Colo" +
-            "rSaturationThreshold>\r\n              <ShapeOblongThreshold>1.75</ShapeOblongThre" +
-            "shold>\r\n              <ShapeOblongRecognitionLevel>2</ShapeOblongRecognitionLeve" +
-            "l>\r\n              <ShapeOblongRecognitionNormalization>true</ShapeOblongRecognit" +
-            "ionNormalization>\r\n              <IdentifyShapeCertaintyMinimum>65</IdentifyShap" +
-            "eCertaintyMinimum>\r\n            </TemplateRecognitionSettings>\r\n          </Imag" +
-            "ingSettings>\r\n        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ImagingSettings xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <Timeout>2000</Timeout>
+  <SuppressTimeout>true</SuppressTimeout>
+  <DebugRecognitionSaveImages>true</DebugRecognitionSaveImages>
+  <ColorStatsSettings>
+    <StatisticalAnalysisTypes>Mean</StatisticalAnalysisTypes>
+  </ColorStatsSettings>
+  <MonochromeBlobFilterSettings>
+    <ContrastCorrectionFactor>-64</ContrastCorrectionFactor>
+    <AdaptiveSmoothingFactor>0.25</AdaptiveSmoothingFactor>
+    <FrameWidth>10</FrameWidth>
+  </MonochromeBlobFilterSettings>
+  <BlobPointSettings>
+    <LineSegmentThreshold>18</LineSegmentThreshold>
+    <LineAngleThreshold>9</LineAngleThreshold>
+    <CurveAngleThreshold>27</CurveAngleThreshold>
+  </BlobPointSettings>
+  <TemplateRecognitionSettings>
+    <ColorBrightnessThreshold>6</ColorBrightnessThreshold>
+    <ColorSaturationThreshold>5</ColorSaturationThreshold>
+    <ShapeOblongThreshold>1.75</ShapeOblongThreshold>
+    <ShapeOblongRecognitionLevel>2</ShapeOblongRecognitionLevel>
+    <ShapeOblongRecognitionNormalization>true</ShapeOblongRecognitionNormalization>
+    <IdentifyShapeCertaintyMinimum>65</IdentifyShapeCertaintyMinimum>
+  </TemplateRecognitionSettings>
+</ImagingSettings>")]
         public global::Galatea.AI.Imaging.ImagingSettings ImagingSettings {
             get {
                 return ((global::Galatea.AI.Imaging.ImagingSettings)(this["ImagingSettings"]));

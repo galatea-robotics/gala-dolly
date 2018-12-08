@@ -12,8 +12,8 @@ namespace Gala.Dolly.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
-    public sealed partial class LocalSettings : global::System.Configuration.ApplicationSettingsBase {
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    internal sealed partial class LocalSettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static LocalSettings defaultInstance = ((LocalSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new LocalSettings())));
         

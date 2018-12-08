@@ -45,7 +45,7 @@ namespace Gala.Dolly.UI
         /// </summary>
         public Gala.Dolly.UI.Diagnostics.UIDebugger UIDebugger { get { return _debugger; } }
 
-        internal UI.IConsole Console { get; set; }
+        internal virtual UI.IConsole Console { get; set; }
 
         internal ToolStripMenuItem FileMenu { get { return _fileMenu; } }
         internal ToolStripMenuItem ViewMenu { get { return _viewMenu; } }

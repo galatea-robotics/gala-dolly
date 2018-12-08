@@ -100,12 +100,10 @@ namespace Gala.Data.Databases
                             {
                                 this.Engine.Debugger.HandleTeaException(ex, this);
                             }
-                            /*
                             catch (System.Exception ex)
                             {
                                 this.Engine.Debugger.ThrowSystemException(ex, this);
                             }
-                             */
 
                             nextLine = reader.ReadLine();
 

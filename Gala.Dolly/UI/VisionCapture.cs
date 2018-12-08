@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
@@ -69,6 +68,7 @@ namespace Gala.Dolly.UI
             set { _offset = value; }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public Image GetLastFrame()
         {
             Bitmap result = null;
@@ -306,7 +306,7 @@ namespace Gala.Dolly.UI
             //InputMousePosition = newPosition;
 
             // Debugging
-            txtDisplaySize.Text = string.Format("{0},{1}", cameraWindow.Width, cameraWindow.Height);
+            txtDisplaySize.Text = string.Format(CultureInfo.CurrentCulture, "{0},{1}", cameraWindow.Width, cameraWindow.Height);
         }
 
         private void Form_KeyDown(object sender, KeyEventArgs e)
@@ -467,7 +467,7 @@ namespace Gala.Dolly.UI
             // Log for Debug
             if (Program.Engine.Debugger.LogLevel == Galatea.Diagnostics.DebuggerLogLevel.Diagnostic)
             {
-                string msg = string.Format(System.Globalization.CultureInfo.CurrentCulture, "Pan: {0}, Tilt: {1}", x, y);
+                string msg = string.Format(CultureInfo.CurrentCulture, "Pan: {0}, Tilt: {1}", x, y);
                 Program.Engine.Debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Diagnostic, msg);
             }
 
@@ -503,9 +503,9 @@ namespace Gala.Dolly.UI
                 tilt = (_mousePosition.Y * PANTILT_CONSTANT) / cameraWindow.Height;
 
                 // Debugging
-                txtMousePosition.Text = string.Format("{0},{1}", _mousePosition.X, _mousePosition.Y);
-                txtPan.Text = pan.ToString(System.Globalization.CultureInfo.CurrentCulture);
-                txtTilt.Text = tilt.ToString(System.Globalization.CultureInfo.CurrentCulture);
+                txtMousePosition.Text = string.Format(CultureInfo.CurrentCulture, "{0},{1}", _mousePosition.X, _mousePosition.Y);
+                txtPan.Text = pan.ToString(CultureInfo.CurrentCulture);
+                txtTilt.Text = tilt.ToString(CultureInfo.CurrentCulture);
 
                 /*
                     ' Draw the Mouse Position
@@ -562,7 +562,7 @@ namespace Gala.Dolly.UI
 
                 // Turn off the Light pins if any of them got lit up accidentally
                 Wait(Program.Engine.Machine.SerialPortController.WaitInterval);
-                Program.Engine.Machine.SerialPortController.SendCommand((int)Robotics.Bs2Commands.SpeechCommands.MouthPositionClosed);
+                Program.Engine.Machine.SerialPortController.SendCommand((int)Robotics.BS2Commands.SpeechCommand.MouthPositionClosed);
 
                 //nextCommand = (int)Robotics.Bs2Commands.SpeechCommands.MouthPositionClosed;
                 //timer.Interval = Program.Engine.Machine.SerialPortController.WaitInterval;
@@ -638,6 +638,7 @@ namespace Gala.Dolly.UI
             FillDisplayImage(blobImage, bitmap);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         private void FillDisplayImage(BlobImage blobImage, Bitmap bmpTemp)
         {
             // Get Location from Context
@@ -646,6 +647,8 @@ namespace Gala.Dolly.UI
             // Create BRAND FUCKING NEW Bitmap
             using (Bitmap newBitmap = new Bitmap(blobImage.Source.Size.Width, blobImage.Source.Size.Height))
             {
+                newBitmap = new Bitmap(blobImage.Source.Size.Width, blobImage.Source.Size.Height);
+
                 Graphics gfx = Graphics.FromImage(newBitmap);
                 gfx.Clear(blobImage.BitmapBlob.BackgroundIsBlack ? Color.Black : Color.White);
                 gfx.DrawImage(bmpTemp, rect);
@@ -722,13 +725,13 @@ namespace Gala.Dolly.UI
                 if (errorMessage == null)
                 {
                     errorMessage = string.Format(
-                        System.Globalization.CultureInfo.CurrentCulture,
+                        CultureInfo.CurrentCulture,
                         Program.Engine.Debugger.ErrorMessage,
                         Galatea.Globalization.ProviderResources.ImagingModel_Provider_Name);
                 }
 
                 // Send Error Notification to Speech Module
-                Program.Engine.AI.LanguageModel.SpeechModule.TextToSpeech.Speak(errorMessage);
+                Program.Engine.AI.LanguageModel.SpeechModule.TextToSpeech.Speak(errorMessage, this);
 
                 //Program.BaseForm.Chatbot.SendResponse(errorMessage);
 
@@ -792,7 +795,7 @@ namespace Gala.Dolly.UI
         {
             // Validate value
             TextBox ctl = (TextBox)sender;
-            int value = Convert.ToInt32(ctl.Text, System.Globalization.CultureInfo.CurrentCulture);
+            int value = Convert.ToInt32(ctl.Text, CultureInfo.CurrentCulture);
 
             if (value < 0 || value > 150)
             {
@@ -808,7 +811,7 @@ namespace Gala.Dolly.UI
         {
             // Validate value
             TextBox ctl = (TextBox)sender;
-            int value = Convert.ToInt32(ctl.Text, System.Globalization.CultureInfo.CurrentCulture);
+            int value = Convert.ToInt32(ctl.Text, CultureInfo.CurrentCulture);
 
             switch (ctl.Name)
             {

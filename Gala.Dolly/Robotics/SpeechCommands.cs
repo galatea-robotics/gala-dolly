@@ -1,7 +1,8 @@
-﻿namespace Gala.Dolly.Robotics.Bs2Commands
+﻿namespace Gala.Dolly.Robotics.BS2Commands
 {
     internal enum SpeechCommands : byte
     {
+        None = 0,
         Pin1On = 11,
         Pin1Off = 10,
         Pin2On = 21,

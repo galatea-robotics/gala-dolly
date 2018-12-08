@@ -5,17 +5,14 @@ namespace Gala.Dolly
         internal TemplateRecognitionForm()
         {
             InitializeComponent();
-        }
-
-        internal UI.IConsole Console
-        {
-            get { return this.chatbotControl; }
+            this.Console = chatbotControl;
         }
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
             ResizeTemplateRecognition();
             ResizeChatBot();
+            if (!Program.Started) return;
 
             // Load Chatbots
             chatbotControl.InitializeChatbots(Program.Engine.AI.LanguageModel.ChatbotManager);
