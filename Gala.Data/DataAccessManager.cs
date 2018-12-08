@@ -11,7 +11,6 @@ namespace Gala.Data
 {
     using Gala.Data.Runtime;
 
-    // TODO:  Rename _UWP subfolder to _NETStandard
     internal abstract class DataAccessManager : Memory, ILibrary, IDataAccessManager
     {
         protected DataAccessManager(string connectionString) : base()

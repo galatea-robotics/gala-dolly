@@ -27,7 +27,7 @@ namespace Gala.Dolly.Test
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\D.png", "Letter D"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\E.png", "Letter E"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\F.png", "Letter F"); Assert.IsTrue(result);
-            result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\G.png", "Letter G"); Assert.IsTrue(result);
+            //result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\G.png", "Letter G"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\H.png", "Letter H"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\I.png", "Letter I"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\J.png", "Letter J"); Assert.IsTrue(result);
@@ -39,7 +39,7 @@ namespace Gala.Dolly.Test
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\P.png", "Letter P"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\Q.png", "Letter Q"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\R.png", "Letter R"); Assert.IsTrue(result);
-            result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\S.png", "Letter S"); Assert.IsTrue(result);
+            //result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\S.png", "Letter S"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\T.png", "Letter T"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\U.png", "Letter U"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\V.png", "Letter V"); Assert.IsTrue(result);
@@ -49,12 +49,58 @@ namespace Gala.Dolly.Test
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\Z.png", "Letter Z"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\1.png", "Number 1"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\2.png", "Number 2"); Assert.IsTrue(result);
-            result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\3.png", "Number 3"); Assert.IsTrue(result);
+            //result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\3.png", "Number 3"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\4.png", "Number 4"); Assert.IsTrue(result);
-            result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\5.png", "Number 5"); Assert.IsTrue(result);
+            //result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\5.png", "Number 5"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\6.png", "Number 6"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\7.png", "Number 7"); Assert.IsTrue(result);
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\8.png", "Number 8"); Assert.IsTrue(result);
+            //result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\9.png", "Number 9"); Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [TestCategory("1 - Template")]
+        public void TestSymbolLetterG()
+        {
+            bool result;
+            creator = null;
+
+            result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\G.png", "Letter G"); Assert.IsTrue(result);
+        }
+        [TestMethod]
+        [TestCategory("1 - Template")]
+        public void TestSymbolLetterS()
+        {
+            bool result;
+            creator = null;
+
+            result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\S.png", "Letter S"); Assert.IsTrue(result);
+        }
+        [TestMethod]
+        [TestCategory("1 - Template")]
+        public void TestSymbolNumber3()
+        {
+            bool result;
+            creator = null;
+
+            result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\3.png", "Number 3"); Assert.IsTrue(result);
+        }
+        [TestMethod]
+        [TestCategory("1 - Template")]
+        public void TestSymbolNumber5()
+        {
+            bool result;
+            creator = null;
+
+            result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\5.png", "Number 5"); Assert.IsTrue(result);
+        }
+        [TestMethod]
+        [TestCategory("1 - Template")]
+        public void TestSymbolNumber9()
+        {
+            bool result;
+            creator = null;
+
             result = TestSymbolResponse(resourcesFolderName + @"Learning\Symbols\9.png", "Number 9"); Assert.IsTrue(result);
         }
 

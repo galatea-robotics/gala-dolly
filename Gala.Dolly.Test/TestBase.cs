@@ -2,9 +2,6 @@
 using System.ComponentModel;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Galatea;
-using Galatea.Imaging.IO;
-using Gala.Data.Databases;
 
 namespace Gala.Dolly.Test
 {
@@ -12,9 +9,10 @@ namespace Gala.Dolly.Test
     using Galatea.AI.Imaging;
     using Galatea.AI.Imaging.Configuration;
     using Galatea.Diagnostics;
+    using Galatea.Imaging.IO;
     using Gala.Data;
-    using Gala.Data.Properties;
     using Gala.Data.Databases;
+    using Properties;
 
     [TestClass]
     public class TestBase : IProvider
@@ -75,11 +73,15 @@ namespace Gala.Dolly.Test
         {
             try
             {
+#if NETFX_CORE
                 // Load Local Settings
-                    Properties.Settings.Load();
-
+                Properties.Settings.Load(@"Properties\TestSettings.json");
+#endif
                 //if (System.IO.File.Exists("Gala.Dolly.Command.config"))
                 //    AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", "Gala.Dolly.Command.exe.config");
+
+                Properties.Settings.Default.DebuggerLogLevel = DebuggerLogLevel.Diagnostic;
+                Properties.Settings.Default.DebuggerAlertLevel = DebuggerLogLevel.Message;
 
                 /*
                 Properties.Settings.Default.ImagingSettings = new ImagingSettings
@@ -111,8 +113,9 @@ namespace Gala.Dolly.Test
                         IdentifyShapeCertaintyMinimum = 65
                     }
                 };
-                Properties.Settings.Default.Save();
                  */
+
+                Properties.Settings.Default.Save();
 
                 // Suppress Timeout
                 Settings.Default.ImagingSettings.Timeout = 2000;

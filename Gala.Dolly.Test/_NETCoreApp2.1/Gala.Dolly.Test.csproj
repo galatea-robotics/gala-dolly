@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -7,20 +7,14 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Configurations>Test</Configurations>
-    <!--<Configurations>Test</Configurations>-->
   </PropertyGroup>
-  <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
     <OutputPath>..\..\bin\Any CPU\Test</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-  </PropertyGroup>-->
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\Gala.Dolly\Gala.Dolly.pfx</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETFX_CORE</DefineConstants>
-    <OutputPath>..\..\bin\Any CPU\Test</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -64,8 +58,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\Local Settings\Settings.json" Link="Properties\Settings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="..\..\..\Local Settings\TestSettings.json" Link="Properties\TestSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -79,7 +73,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Gala.Data\_UWP\Gala.Data.csproj" />
+    <ProjectReference Include="..\..\Gala.Data\_NETStandard\Gala.Data.csproj" />
     <ProjectReference Include="..\..\Galatea.AI.Abstract\_NETStandard\Galatea.AI.Abstract.csproj" />
     <ProjectReference Include="..\..\Galatea.AI\_NETStandard\Galatea.AI.csproj" />
     <ProjectReference Include="..\..\Galatea.Globalization\_NETStandard\Galatea.Globalization.csproj" />

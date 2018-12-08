@@ -66,6 +66,7 @@
     <Compile Include="Internal\TestEngine.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="_NETCoreApp2.1\Properties\Settings.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <DependentUpon>Settings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -81,29 +82,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\SymbolRecognitionTest.cs" />
     <Compile Include="UnitTests\TemplateRelationshipTest.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Debug\Gala.Dolly.Test.Program.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Test\Gala.Dolly.Test.Program.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\Gala.Dolly.Test.Program.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Test\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Test\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="NETCoreApp2.1\obj\Test\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="NETCoreApp2.1\obj\x86\Test PCL\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="NETCoreApp2.1\obj\x86\Test PCL\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="NETCoreApp2.1\obj\x86\Test PCL\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="NETCoreApp2.1\obj\x86\Test PCL\UnitTestApp.g.cs" />
-    <Compile Include="NETCoreApp2.1\obj\x86\Test PCL\UnitTestApp.g.i.cs" />
-    <Compile Include="NETCoreApp2.1\obj\x86\Test PCL\XamlTypeInfo.g.cs" />
-    <Compile Include="NETCoreApp2.1\obj\x86\Test\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="NETCoreApp2.1\obj\x86\Test\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="NETCoreApp2.1\obj\x86\Test\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="NETCoreApp2.1\Properties\Settings.cs" />
-    <Compile Include="NETCoreApp2.1\Properties\UWP.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gala.Data\Gala.Data.csproj">
@@ -145,29 +123,11 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="_NETCoreApp2.1\Properties\Settings.settings" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="NETCoreApp2.1\obj\Debug\Gala.Dolly.Test.assets.cache" />
-    <None Include="NETCoreApp2.1\obj\Debug\Gala.Dolly.Test.csproj.CoreCompileInputs.cache" />
-    <None Include="NETCoreApp2.1\obj\Debug\Gala.Dolly.Test.csprojAssemblyReference.cache" />
-    <None Include="NETCoreApp2.1\obj\Gala.Dolly.Test.csproj.nuget.cache" />
-    <None Include="NETCoreApp2.1\obj\Gala.Dolly.Test.csproj.nuget.g.props" />
-    <None Include="NETCoreApp2.1\obj\Gala.Dolly.Test.csproj.nuget.g.targets" />
-    <None Include="NETCoreApp2.1\obj\project.assets.json" />
-    <None Include="NETCoreApp2.1\obj\Test\Gala.Dolly.Test.assets.cache" />
-    <None Include="NETCoreApp2.1\obj\Test\Gala.Dolly.Test.csproj.CopyComplete" />
-    <None Include="NETCoreApp2.1\obj\Test\Gala.Dolly.Test.csproj.CoreCompileInputs.cache" />
-    <None Include="NETCoreApp2.1\obj\Test\Gala.Dolly.Test.csprojAssemblyReference.cache" />
-    <None Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\Gala.Dolly.Test.assets.cache" />
-    <None Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\Gala.Dolly.Test.csproj.CopyComplete" />
-    <None Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\Gala.Dolly.Test.csproj.CoreCompileInputs.cache" />
-    <None Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\Gala.Dolly.Test.csprojAssemblyReference.cache" />
-    <None Include="NETCoreApp2.1\obj\x86\Test PCL\Gala.Dolly.Test.csproj.CoreCompileInputs.cache" />
-    <None Include="NETCoreApp2.1\obj\x86\Test\Gala.Dolly.Test.csproj.CoreCompileInputs.cache" />
-    <None Include="NETCoreApp2.1\obj\x86\Test\Gala.Dolly.Test.csprojAssemblyReference.cache" />
-    <None Include="NETCoreApp2.1\Properties\Settings.settings" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\Resources\TestCases\Test Cases.txt">
@@ -176,20 +136,8 @@
     <Content Include="..\Gala.Dolly\Dolly.ico">
       <Link>Dolly.ico</Link>
     </Content>
-    <Content Include="NETCoreApp2.1\Gala.Dolly.Test.csproj" />
-    <Content Include="NETCoreApp2.1\Gala.Dolly.Test.csproj.user" />
-    <Content Include="NETCoreApp2.1\obj\Debug\Gala.Dolly.Test.csproj.FileListAbsolute.txt" />
-    <Content Include="NETCoreApp2.1\obj\Test\Gala.Dolly.Test.csproj.FileListAbsolute.txt" />
-    <Content Include="NETCoreApp2.1\obj\Test\Gala.Dolly.Test.dll" />
-    <Content Include="NETCoreApp2.1\obj\Test\Gala.Dolly.Test.pdb" />
-    <Content Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\Gala.Dolly.Test.csproj.FileListAbsolute.txt" />
-    <Content Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\Gala.Dolly.Test.dll" />
-    <Content Include="NETCoreApp2.1\obj\Test\netcoreapp2.1\Gala.Dolly.Test.pdb" />
-    <Content Include="NETCoreApp2.1\obj\x86\Test PCL\XamlSaveStateFile.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NETCoreApp2.1\obj\x86\Test PCL\intermediatexaml\" />
-    <Folder Include="NETCoreApp2.1\obj\x86\Test PCL\TempPE\" />
+    <Content Include="_NETCoreApp2.1\Gala.Dolly.Test.csproj" />
+    <Content Include="_NETCoreApp2.1\Gala.Dolly.Test.csproj.user" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

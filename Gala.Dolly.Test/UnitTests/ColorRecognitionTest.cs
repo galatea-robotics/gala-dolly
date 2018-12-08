@@ -12,6 +12,18 @@ namespace Gala.Dolly.Test
     {
         ICreator _creator;
 
+
+        [TestMethod]
+        [TestCategory("0 - Methods")]
+        public void TestBrightness()
+        {
+            Console.WriteLine($"Red: {Color.Red.GetBrightness()}");
+            Console.WriteLine($"Pink: {Color.Pink.GetBrightness()}");
+            Console.WriteLine($"Maroon: {Color.Maroon.GetBrightness()}");
+            Console.WriteLine($"Black: {Color.Black.GetBrightness()}");
+            Console.WriteLine($"White: {Color.White.GetBrightness()}");
+        }
+
         [TestMethod]
         [TestCategory("1 - Template")]
         public void TestColors()

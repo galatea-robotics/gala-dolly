@@ -119,7 +119,7 @@
     <Compile Include="..\Runtime\Memory.cs">
       <Link>Runtime\Memory.cs</Link>
     </Compile>
-    <Compile Include="..\TeaInitializeDataException.cs">
+    <Compile Include="..\Runtime\TeaInitializeDataException.cs">
       <Link>Runtime\TeaInitializeDataException.cs</Link>
     </Compile>
   </ItemGroup>
