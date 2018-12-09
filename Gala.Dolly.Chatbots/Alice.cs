@@ -53,17 +53,17 @@ namespace Gala.Dolly.Chatbots
             if (!Directory.Exists(chatbotAliceConfigFolder))
                 throw new FileNotFoundException(
                     string.Format(CultureInfo.CurrentCulture,
-                        ChatbotResources.ChatbotAliceConfigFolder_Not_Found,
+                        Resources.ChatbotAliceConfigFolder_Not_Found,
                         chatbotAliceConfigFolder));
 
             if (!Directory.Exists(chatbotResourcesFolder))
                 throw new FileNotFoundException(
                     string.Format(CultureInfo.CurrentCulture,
-                        ChatbotResources.ChatbotResourcesFolder_Not_Found,
+                        Resources.ChatbotResourcesFolder_Not_Found,
                         chatbotResourcesFolder));
         }
 
-        public override string Greeting { get { return ChatbotResources.ChatBotAliceGreeting; } }
+        public override string Greeting { get { return Resources.ChatBotAliceGreeting; } }
 
         /// <summary>
         /// An artificial intelligence method that responds to a text input based on the ALICE algorithm.

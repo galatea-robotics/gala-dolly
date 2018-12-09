@@ -1,7 +1,9 @@
-﻿Imports Gala.Dolly.UI
+﻿Imports System.ComponentModel
+Imports Gala.Dolly.UI
 Imports Galatea
 Imports Galatea.Speech
 
+<CLSCompliant(False)>
 Public Class Form1
     Inherits Gala.Dolly.UI.BaseForm
     Implements Galatea.IProvider
@@ -16,17 +18,13 @@ Public Class Form1
         ' Add any initialization after the InitializeComponent() call.
 
         ' Debugging
+        Me.Console = Me.chatBotControl
         Program.BaseForm = Me
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        ''tts = Program.Engine.AI.LanguageModel.SpeechModule.TextToSpeech
-        'Dim speechObject = Program.Engine.AI.LanguageModel.SpeechModule.TextToSpeech.GetSpeechObject
-        'tts5 = TryCast(speechObject, SpeechLib.SpVoice)
-
         UIDebugger.SpeechMenuEnabled = False
-
         If Not Program.Started Or Program.Engine Is Nothing Then Exit Sub
 
         ' Runtime
@@ -45,9 +43,19 @@ Public Class Form1
         'End If
     End Sub
 
-    Private Sub Form1_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 
-        My.Application.ShutdownDumbass()
+        If Not (Program.Engine Is Nothing) Then
+
+            ' Save other settings
+            Gala.Dolly.Properties.Settings.Default.SerialPortDisableWarning = Program.Engine.Machine.SerialPortController.DisableWarning
+        End If
+
+        ' Shut down Program and Galatea Runtime Engine
+        Gala.Dolly.Program.Shutdown()
+
+        ' Seriously quit the fucking thing
+        Application.Exit()
     End Sub
 
 

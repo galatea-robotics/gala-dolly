@@ -117,10 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="resumeMicTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="ChatbotManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>159, 17</value>
-  </metadata>
+  <data name="ChatbotAliceConfigFolder_Not_Found" xml:space="preserve">
+    <value>Chatbot Alice Config folder '{0}' not found.</value>
+  </data>
+  <data name="ChatBotAliceGreeting" xml:space="preserve">
+    <value>Greetings, human!</value>
+  </data>
+  <data name="ChatBotElizaGreeting" xml:space="preserve">
+    <value>Tell me how you are feeling.  I am ready to listen.</value>
+  </data>
+  <data name="ChatBotMessageFormat" xml:space="preserve">
+    <value>&gt;{0}: {1}</value>
+  </data>
+  <data name="ChatbotResourcesFolder_Not_Found" xml:space="preserve">
+    <value>Chatbot Resources folder '{0}' not found.</value>
+  </data>
+  <!--
+  <data name="Chatbot_Default_Response" xml:space="preserve">
+    <value>I'm sorry - Do I know you?</value>
+  </data>
+  <data name="ChatBot_Message_Format" xml:space="preserve">
+    <value>&gt;{0}: {1}</value>
+  </data>
+  -->
+  
 </root>

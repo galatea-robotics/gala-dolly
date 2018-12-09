@@ -35,11 +35,12 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\bin\Debug\</OutputPath>
+    <OutputPath>..\bin\.NET\Debug\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -47,10 +48,11 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
+    <OutputPath>..\bin\.NET\Release\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisRuleSet />
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -63,18 +65,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <PlatformTarget>x86</PlatformTarget>
-    <OutputPath>..\bin\Debug\</OutputPath>
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <PlatformTarget>x86</PlatformTarget>
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DocumentationFile>
-    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>..\Gala.Dolly\Dolly.ico</ApplicationIcon>
@@ -89,22 +79,16 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\bin\Analysis\</OutputPath>
+    <OutputPath>..\bin\.NET\Analysis\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Analysis|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Analysis\</OutputPath>
-    <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>
-    </DocumentationFile>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.SpeechLib, Version=5.4.0.0, Culture=neutral, PublicKeyToken=daa0ce859239a9ad, processorArchitecture=x86">
@@ -185,10 +169,6 @@
       <Project>{722c0361-4b8f-415c-954f-54c988efef40}</Project>
       <Name>Galatea.AI.Imaging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Galatea.AI.Language\Galatea.AI.Language.csproj">
-      <Project>{CB45393D-18C7-47B3-A16B-2B62C1C66A77}</Project>
-      <Name>Galatea.AI.Language</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Galatea.AI\Galatea.AI.csproj">
       <Project>{cd60efdf-b92d-48a2-bc1f-25441c9becf3}</Project>
       <Name>Galatea.AI</Name>
@@ -212,9 +192,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VbChatbot.resx">
-      <DependentUpon>VbChatbot.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

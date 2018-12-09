@@ -8,7 +8,7 @@ namespace Gala.Dolly.UI
 {
     using Gala.Dolly.Properties;
 
-    internal partial class SerialInterface : UserControl
+    public partial class SerialInterface : UserControl
     {
         internal ToolStripMenuItem viewSerialInterfaceMenuItem;
         internal ToolStripMenuItem serialToolStripMenuItem;
@@ -18,7 +18,7 @@ namespace Gala.Dolly.UI
         internal ToolStripMenuItem serialDisableWarnings;
         private ToolStripSeparator ts;
 
-        internal SerialInterface()
+        public SerialInterface()
         {
             InitializeComponent();
 
@@ -33,24 +33,26 @@ namespace Gala.Dolly.UI
             ToolStripMenuItem serialOpenAtStartupMenuItemTemp = null;
             ToolStripMenuItem serialDisableWarningsTemp = null;
 
+            //if (DesignMode) return;
+
             try
             {
                 // Add View >> "Serial Interface" Menu Item
                 viewSerialInterfaceMenuItemTemp = new ToolStripMenuItem(Resources.SerialInterface_viewSerialInterfaceMenuItem_Text);
-				viewSerialInterfaceMenuItem = viewSerialInterfaceMenuItemTemp;
-				viewSerialInterfaceMenuItem.CheckOnClick = true;
-				viewSerialInterfaceMenuItem.Click += ViewSerialInterfaceMenuItem_Click;
+                viewSerialInterfaceMenuItem = viewSerialInterfaceMenuItemTemp;
+                viewSerialInterfaceMenuItem.CheckOnClick = true;
+                viewSerialInterfaceMenuItem.Click += ViewSerialInterfaceMenuItem_Click;
                 viewSerialInterfaceMenuItemTemp = null;
 
                 // Add Serial >> Open Port, Close Port, and Open at Startup Menu and Menu Items
-            serialOpenPortMenuItem = new ToolStripMenuItem("&Open Port");
-            serialClosePortMenuItem = new ToolStripMenuItem("&Close Port");
-            serialOpenAtStartupMenuItem = new ToolStripMenuItem("O&pen at Startup");
-            serialOpenAtStartupMenuItem.CheckOnClick = true;
-            // Add Disable Warnings
-            serialDisableWarnings = new ToolStripMenuItem("Disable Log Warnings");
-            serialDisableWarnings.CheckOnClick = true;
-            serialDisableWarnings.Click += SerialDisableWarnings_Click;
+                serialOpenPortMenuItem = new ToolStripMenuItem("&Open Port");
+                serialClosePortMenuItem = new ToolStripMenuItem("&Close Port");
+                serialOpenAtStartupMenuItem = new ToolStripMenuItem("O&pen at Startup");
+                serialOpenAtStartupMenuItem.CheckOnClick = true;
+                // Add Disable Warnings
+                serialDisableWarnings = new ToolStripMenuItem("Disable Log Warnings");
+                serialDisableWarnings.CheckOnClick = true;
+                serialDisableWarnings.Click += SerialDisableWarnings_Click;
 
                 serialOpenAtStartupMenuItemTemp = new ToolStripMenuItem(Resources.SerialInterface_serialOpenAtStartupMenuItem_Text);
                 serialOpenAtStartupMenuItem = serialOpenAtStartupMenuItemTemp;
@@ -76,12 +78,27 @@ namespace Gala.Dolly.UI
                 serialToolStripMenuItem.DropDownItems.Add(serialDisableWarnings);
             }
             catch
-			{
-				viewSerialInterfaceMenuItemTemp.Dispose();
+            {
+                viewSerialInterfaceMenuItemTemp.Dispose();
                 serialOpenAtStartupMenuItemTemp.Dispose();
                 serialDisableWarningsTemp.Dispose();
                 throw;
-			}           
+            }           
+        }
+
+        public new bool DesignMode
+        {
+            get
+            {
+                bool result = base.DesignMode;
+
+                // Do this thing
+                if (!result)
+                    result = (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime);
+
+                // Finalize
+                return result;
+            }
         }
 
         private void SerialInterface_Load(object sender, EventArgs e)

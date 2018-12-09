@@ -562,7 +562,7 @@ namespace Gala.Dolly.UI
 
                 // Turn off the Light pins if any of them got lit up accidentally
                 Wait(Program.Engine.Machine.SerialPortController.WaitInterval);
-                Program.Engine.Machine.SerialPortController.SendCommand((int)Robotics.BS2Commands.SpeechCommand.MouthPositionClosed);
+                Program.Engine.Machine.SerialPortController.SendCommand((int)Robotics.BS2Commands.SpeechCommands.MouthPositionClosed);
 
                 //nextCommand = (int)Robotics.Bs2Commands.SpeechCommands.MouthPositionClosed;
                 //timer.Interval = Program.Engine.Machine.SerialPortController.WaitInterval;
@@ -604,7 +604,7 @@ namespace Gala.Dolly.UI
             // Cheat a little bit
             if (!StaticMode)
             {
-                AForge.Imaging.HSL hsl = new AForge.Imaging.HSL((int)fillColor.GetHue(), fillColor.GetSaturation(), fillColor.GetBrightness());
+                Accord.Imaging.HSL hsl = new Accord.Imaging.HSL((int)fillColor.GetHue(), fillColor.GetSaturation(), fillColor.GetBrightness());
                 hsl.NormalizeSaturation();
                 fillColor = hsl.ToRGB().Color;
             }
@@ -647,8 +647,6 @@ namespace Gala.Dolly.UI
             // Create BRAND FUCKING NEW Bitmap
             using (Bitmap newBitmap = new Bitmap(blobImage.Source.Size.Width, blobImage.Source.Size.Height))
             {
-                newBitmap = new Bitmap(blobImage.Source.Size.Width, blobImage.Source.Size.Height);
-
                 Graphics gfx = Graphics.FromImage(newBitmap);
                 gfx.Clear(blobImage.BitmapBlob.BackgroundIsBlack ? Color.Black : Color.White);
                 gfx.DrawImage(bmpTemp, rect);

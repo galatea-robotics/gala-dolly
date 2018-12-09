@@ -5,9 +5,10 @@ Imports Galatea.Runtime
 Imports Gala.Dolly.Chatbots.Properties
 Imports SpeechLib
 
+<CLSCompliant(False)>
 Public Class VbChatbot
     Inherits System.Windows.Forms.UserControl
-    Implements Galatea.IProvider ', UI.IChatbotControl
+    Implements Galatea.IProvider, IConsole
 
     Protected WithEvents tts5 As SpeechLib.SpVoice
     Protected speakFlags As SpeechLib.SpeechVoiceSpeakFlags
@@ -24,6 +25,8 @@ Public Class VbChatbot
     End Sub
 
     Protected Sub VbChatbot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If DesignMode Then Exit Sub
 
         ' Initialize TTS
         tts5 = New SpeechLib.SpVoice()
@@ -110,7 +113,7 @@ Public Class VbChatbot
             If String.IsNullOrEmpty(responseText) Then
 
                 ' Get AI response to input
-                responseText = Program.Engine.ExecutiveFunctions.GetResponse(Program.Engine.AI.LanguageModel, Program.Engine.User, inputText)
+                responseText = Program.Engine.ExecutiveFunctions.GetResponse(Program.Engine.AI.LanguageModel, inputText, Program.Engine.User.FriendlyName)
             End If
 
             ' Display response
@@ -186,13 +189,24 @@ Public Class VbChatbot
         End Set
     End Property
 
+
+    Private _isSilent As Boolean
     Private _inputting As Boolean
 
-    Public Sub SendResponse(response As String) 'Implements IChatbotControl.SendResponse
+    Public Sub SendResponse(response As String) Implements IConsole.SendResponse
 
         responseText = response
         SendResponse()
     End Sub
+
+    Public Property IsSilent As Boolean Implements IConsole.IsSilent
+        Get
+            Return _isSilent
+        End Get
+        Set(value As Boolean)
+            _isSilent = value
+        End Set
+    End Property
 
 #Region "Private"
 
@@ -206,7 +220,7 @@ Public Class VbChatbot
 
         ' Set Engine ChatBot to Alice
         Dim alice As IChatbot = ChatbotManager1("Alice")
-        responseText = Chatbots.Properties.Settings.Default.ChatBotAliceGreeting
+        responseText = Chatbots.Properties.Resources.ChatBotAliceGreeting
         SendResponse()
 
         ' Disable the Default 
@@ -221,7 +235,7 @@ Public Class VbChatbot
 
         ' Set Engine ChatBot to Eliza
         Program.Engine.AI.LanguageModel.ChatbotManager.Current = ChatbotManager1("Eliza")
-        responseText = Chatbots.Properties.Settings.Default.ChatBotElizaGreeting
+        responseText = Chatbots.Properties.Resources.ChatBotElizaGreeting
         SendResponse()
 
         ' Disable the Default 

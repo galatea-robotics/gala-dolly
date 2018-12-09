@@ -72,7 +72,7 @@ namespace Gala.Dolly.UI
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "LED")]
         [System.ComponentModel.DefaultValue(LEDColor.Red)]
-        internal LEDColor LEDColor
+        public LEDColor LEDColor
         {
             get { return _ledColor; }
             set {
@@ -95,7 +95,7 @@ namespace Gala.Dolly.UI
         }
 
         [System.ComponentModel.DefaultValue(EyeCamColor.Blue)]
-        internal EyeCamColor EyeCamColor
+        public EyeCamColor EyeCamColor
         {
             get { return _eyeCamColor; }
             set
@@ -528,13 +528,13 @@ namespace Gala.Dolly.UI
         private EyeCamColor _eyeCamColor;
     }
 
-    internal enum LEDColor
+    public enum LEDColor
     {
         Red,
         Green
     }
 
-    internal enum EyeCamColor
+    public enum EyeCamColor
     {
         Blue,
         Grey

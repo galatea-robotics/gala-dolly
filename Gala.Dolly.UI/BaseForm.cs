@@ -39,6 +39,21 @@ namespace Gala.Dolly.UI
             _current = this;
         }
 
+        public new bool DesignMode
+        {
+            get
+            {
+                bool result = base.DesignMode;
+
+                // Do this thing
+                if (!result)
+                    result = (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime);
+
+                // Finalize
+                return result;
+            }
+        }
+
         /// <summary>
         /// Gets a reference to the <see cref="Galatea.Runtime.IEngine.Debugger"/> instance, 
         /// with a UI tools menu to control settings.
@@ -62,28 +77,51 @@ namespace Gala.Dolly.UI
 
         private void ValidateStartup()
         {
-            bool startupHasErrors = false;
+            MessageBox.Show("Better not be Design Mode...");
+
+            bool isInitialized = false;
 
             // Validate Startup
             bool showAlertsConfig = _debugger.ShowAlerts;
             _debugger.ShowAlerts = true;
 
-            if (!Program.RuntimeEngine.DataAccessManager.IsInitialized)
+            string providerName = "";
+
+            if(Program.RuntimeEngine == null)
+            {
+                providerName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+            }
+            else if(Program.RuntimeEngine.DataAccessManager == null)
+            {
+                providerName = Program.RuntimeEngine.ProviderName;
+            }
+            else if (!Program.RuntimeEngine.DataAccessManager.IsInitialized)
+            {
+                providerName = Program.RuntimeEngine.DataAccessManager.ProviderName;
+            }
+            else
+            {
+                isInitialized = true;
+            }
+
+            if(!isInitialized)
             {
                 string msg = string.Format(CultureInfo.CurrentCulture,
-                    Galatea.Globalization.DiagnosticResources.Runtime_Component_Initialization_Failed,
-                    Program.RuntimeEngine.DataAccessManager.ProviderName);
+                        DiagnosticResources.Runtime_Component_Initialization_Failed, 
+                        providerName);
 
                 _debugger.Log(Galatea.Diagnostics.DebuggerLogLevel.Error, msg, true, false);
 
-                startupHasErrors = true;
-            }
-            if (startupHasErrors)
-            {
                 this.Close();
             }
 
             _debugger.ShowAlerts = showAlertsConfig;
+        }
+
+        private void BaseForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Gala.Dolly.UI.Properties.Settings.Default.DebuggerShowAlerts = _debugger.ShowAlerts;
+
         }
 
         private void BaseForm_Disposed(object sender, System.EventArgs e)
