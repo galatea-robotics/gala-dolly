@@ -173,6 +173,10 @@
       <Project>{cd60efdf-b92d-48a2-bc1f-25441c9becf3}</Project>
       <Name>Galatea.AI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Galatea.Globalization\Galatea.Globalization.csproj">
+      <Project>{acd64769-d795-4230-ac94-59acc5e52de5}</Project>
+      <Name>Galatea.Globalization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Galatea.Runtime\Galatea.Runtime.csproj">
       <Project>{b0d0c0a4-d37d-4e5b-a357-758e1afb76ba}</Project>
       <Name>Galatea.Runtime</Name>

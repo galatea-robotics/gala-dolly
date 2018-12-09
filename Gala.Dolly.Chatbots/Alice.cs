@@ -8,20 +8,21 @@ namespace Gala.Dolly.Chatbots
 {
     using Galatea.Runtime.Services;
     using Galatea.Globalization;
-    using Properties;
 
     /// <summary>
     /// A ChatBot interface running the ALICE artificial intelligence algorithm.
     /// </summary>
     internal class Alice : Chatbot
     {
+#if !NETFX_CORE
         /// <summary>
         /// Initializes a new instance of the <see>Galatea.ChatBots.Alice</see> class.
         /// </summary>
-        public Alice(Galatea.AI.Abstract.IUser user, string chatbotName): this(user, chatbotName, null, null)
+        public Alice(Galatea.AI.Abstract.IUser user, string chatbotName) :
+            this(user, chatbotName, Settings.Default.ChatbotAliceConfigFolder, Settings.Default.ChatbotResourcesFolder)
         {
         }
-
+#endif
         /// <summary>
         /// Initializes a new instance of the <see>Galatea.ChatBots.Alice</see> class.
         /// </summary>
@@ -29,20 +30,16 @@ namespace Gala.Dolly.Chatbots
         {
             userName = user.Name;
             aimlBot = new AIMLBot.Bot();
-            if (chatbotAliceConfigFolder == null) chatbotAliceConfigFolder = GetChatbotAliceConfigFolder();
-            if (chatbotResourcesFolder == null) chatbotResourcesFolder = GetChatbotResourcesFolder();
 
             // Validate Folders
             ValidateFolders(chatbotAliceConfigFolder, chatbotResourcesFolder);
 
             // Initialize AIMLBot2.5 Properties
             aimlBot.loadSettings(chatbotAliceConfigFolder);
-            aimlBot.PathToAIML = Path.Combine(Settings.Default.ChatbotResourcesFolder, "alice");
+            aimlBot.PathToAIML = Path.Combine(chatbotResourcesFolder, "alice");
 
             aimlBot.loadAIMLFromFiles();
             aimlBot.DefaultPredicates.updateSetting("name", userName);
-
-            // Set Chatbot Settings
 
             // Initialize Chat runtime
             aimlUser = new AIMLBot.User(userName, aimlBot);
@@ -53,17 +50,17 @@ namespace Gala.Dolly.Chatbots
             if (!Directory.Exists(chatbotAliceConfigFolder))
                 throw new FileNotFoundException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Resources.ChatbotAliceConfigFolder_Not_Found,
+                        ChatbotResources.ChatbotAliceConfigFolder_Not_Found,
                         chatbotAliceConfigFolder));
 
             if (!Directory.Exists(chatbotResourcesFolder))
                 throw new FileNotFoundException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Resources.ChatbotResourcesFolder_Not_Found,
+                        ChatbotResources.ChatbotResourcesFolder_Not_Found,
                         chatbotResourcesFolder));
         }
 
-        public override string Greeting { get { return Resources.ChatBotAliceGreeting; } }
+        public override string Greeting { get { return ChatbotResources.ChatBotAliceGreeting; } }
 
         /// <summary>
         /// An artificial intelligence method that responds to a text input based on the ALICE algorithm.
@@ -86,6 +83,7 @@ namespace Gala.Dolly.Chatbots
             }
         }
 
+        /*
         private static string GetChatbotAliceConfigFolder()
         {
             return Properties.Settings.Default.ChatbotAliceConfigFolder;
@@ -94,9 +92,10 @@ namespace Gala.Dolly.Chatbots
         {
             return Properties.Settings.Default.ChatbotResourcesFolder;
         }
+         */
 
-        private string userName;
-        private AIMLBot.Bot aimlBot;
-        private AIMLBot.User aimlUser;
+        private readonly string userName;
+        private readonly AIMLBot.Bot aimlBot;
+        private readonly AIMLBot.User aimlUser;
     }
 }

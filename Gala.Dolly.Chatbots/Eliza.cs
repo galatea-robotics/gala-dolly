@@ -25,7 +25,7 @@ namespace Gala.Dolly.Chatbots
         /// </summary>
         public Eliza(string name) : base(name, name) { Initialize(); }
 
-        public override string Greeting { get { return Resources.ChatBotElizaGreeting; } }
+        public override string Greeting { get { return ChatbotResources.ChatBotElizaGreeting; } }
 
         private void Initialize()
         {

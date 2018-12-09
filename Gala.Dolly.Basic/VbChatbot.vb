@@ -220,7 +220,7 @@ Public Class VbChatbot
 
         ' Set Engine ChatBot to Alice
         Dim alice As IChatbot = ChatbotManager1("Alice")
-        responseText = Chatbots.Properties.Resources.ChatBotAliceGreeting
+        responseText = Galatea.Globalization.ChatbotResources.ChatBotAliceGreeting
         SendResponse()
 
         ' Disable the Default 
@@ -235,7 +235,7 @@ Public Class VbChatbot
 
         ' Set Engine ChatBot to Eliza
         Program.Engine.AI.LanguageModel.ChatbotManager.Current = ChatbotManager1("Eliza")
-        responseText = Chatbots.Properties.Resources.ChatBotElizaGreeting
+        responseText = Galatea.Globalization.ChatbotResources.ChatBotElizaGreeting
         SendResponse()
 
         ' Disable the Default 
