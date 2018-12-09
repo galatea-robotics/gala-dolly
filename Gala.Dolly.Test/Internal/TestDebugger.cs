@@ -13,7 +13,7 @@ namespace Gala.Dolly.Test
         /// <param name="ex">
         /// A run-time <see cref="TeaException"/>.
         /// </param>
-        protected override void HandleTeaException(TeaException ex, IProvider provider, bool throwException)
+        public override void HandleTeaException(TeaException ex, IProvider provider, bool throwException)
         {
             string msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
             Log(DebuggerLogLevel.Error, msg);
@@ -29,7 +29,7 @@ namespace Gala.Dolly.Test
         /// <param name="ex">
         /// A run-time <see cref="System.Exception"/>.
         /// </param>
-        protected override void ThrowSystemException(Exception ex, IProvider provider)
+        public override void ThrowSystemException(Exception ex, IProvider provider)
         {
             Log(DebuggerLogLevel.Critical, ex.Message);
             Log(DebuggerLogLevel.StackTrace, ex.StackTrace, true);
