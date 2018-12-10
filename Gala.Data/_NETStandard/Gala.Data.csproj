@@ -92,11 +92,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Gala.Dolly\Properties\Gala.Dolly.cs">
-      <Link>Properties\Gala.Dolly.cs</Link>
-    </Compile>
     <Compile Include="..\..\Gala.Dolly\Properties\Version.cs">
       <Link>Properties\Version.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Galahad.Robotics\Properties\Galahad.cs">
+      <Link>Properties\Galahad.cs</Link>
     </Compile>
     <Compile Include="..\DataAccessManager.cs">
       <Link>DataAccessManager.cs</Link>
