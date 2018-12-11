@@ -45,7 +45,6 @@ namespace Gala.Dolly.UI.Runtime
 
         internal static IRuntimeEngine RuntimeEngine { get { return _runtimeEngine; } }
 
-        internal static StartupStatus StartupStatus { get; set; }
         //internal static TeaInitializationException InitializationException { get; set; }
 
         internal static bool Started { get { return _started; } }

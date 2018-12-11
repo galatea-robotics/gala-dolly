@@ -108,28 +108,18 @@ namespace Gala.Dolly
             _baseForm.UIDebugger.ShowAlerts = false;
 
             // Initialize Robotics Engine
-            StartupStatus status = 0;
             try
             {
-                status++;   // Creating Galatea Runtime Engine.
                 _engine = new SmartEngine(_baseForm.UIDebugger);
-
-                status++;   // Starting Galatea Runtime Engine.
                 _engine.Startup();
 
-                status++;   // Starting UI.
                 Gala.Dolly.UI.Runtime.Program.Startup(_engine);
             }
             catch (Exception ex)
             {
                 _started = false;
-                UI.Runtime.Program.StartupStatus = status;
-
                 _baseForm.UIDebugger.ThrowSystemException(ex, _engine);
 
-                //throw new Galatea.Runtime.TeaInitializationException(ex.Message, ex);
-
-                //UI.Runtime.Program.InitializationException = new Galatea.Runtime.TeaInitializationException(ex.Message, ex);
                 return;
             }
 
@@ -190,7 +180,6 @@ namespace Gala.Dolly
             _started = false;
         }
 
-        //private const string localSettingsFile = @"..\..\..\..\Local Settings\LocalSettings.config";
         private static UI.BaseForm _baseForm;
         private static UI.IConsole _console;
         private static SmartEngine _engine;
