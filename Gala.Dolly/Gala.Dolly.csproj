@@ -156,7 +156,7 @@
     <EmbeddedResource Include="UI\VisionCapture.resx">
       <DependentUpon>VisionCapture.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="..\..\..\Users\User\AppData\Local\General_Applications\Gala.Dolly.exe_StrongName_riar5fsvkmexrxywcyzf2tmtnssu4m3m\1.2.0.0\user.config">
+    <None Include="$(USERPROFILE)\AppData\Local\General_Applications\Gala.Dolly.exe_StrongName_riar5fsvkmexrxywcyzf2tmtnssu4m3m\1.2.0.0\user.config">
       <Link>Properties\user.config</Link>
     </None>
     <None Include="app.config">
@@ -287,11 +287,4 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Accord.3.8.0\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Accord.3.8.0\build\Accord.targets'))" />
   </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

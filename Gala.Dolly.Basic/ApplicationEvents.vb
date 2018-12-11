@@ -36,6 +36,8 @@ Namespace My
             imagingSettings.TemplateRecognitionSettings.ShapeOblongRecognitionNormalization = True
             imagingSettings.TemplateRecognitionSettings.IdentifyShapeCertaintyMinimum = 65
             Properties.Settings.Default.ImagingSettings = imagingSettings
+
+            Properties.Settings.Default.SpeechIsSilent = True
             Properties.Settings.Default.Save()
 #End Region
             Diagnostics.DebuggerLogLevelSettings.Initialize(uiSettings.DebuggerLogLevel, uiSettings.DebuggerAlertLevel)
@@ -48,11 +50,13 @@ Namespace My
             Gala.Dolly.Program.Startup()
             If Not Gala.Dolly.Program.Started Then Exit Sub
 
+            Program.Engine.AI.LanguageModel.SpeechModule.StaySilent = Gala.Dolly.Properties.Settings.Default.SpeechIsSilent
             Program.Engine.Machine.SerialPortController.DisableWarning = Gala.Dolly.Properties.Settings.Default.SerialPortDisableWarning
         End Sub
 
         Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles MyBase.Shutdown
 
+            MessageBox.Show("Bye!")
         End Sub
 
         Sub MyApplication_UnhandledException(sender As Object, e As UnhandledExceptionEventArgs) Handles Me.UnhandledException

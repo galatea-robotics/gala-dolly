@@ -77,8 +77,6 @@ namespace Gala.Dolly.UI
 
         private void ValidateStartup()
         {
-            MessageBox.Show("Better not be Design Mode...");
-
             bool isInitialized = false;
 
             // Validate Startup

@@ -12,8 +12,6 @@ namespace Gala.Dolly.Test
     {
         ICreator _creator;
 
-
-        [TestMethod]
         [TestCategory("0 - Methods")]
         public void TestBrightness()
         {

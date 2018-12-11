@@ -8,7 +8,9 @@ namespace Gala.Dolly.Chatbots
 {
     using Galatea.Runtime.Services;
     using Galatea.Globalization;
-
+#if !NETFX_CORE
+    using Properties;
+#endif
     /// <summary>
     /// A ChatBot interface running the ALICE artificial intelligence algorithm.
     /// </summary>
