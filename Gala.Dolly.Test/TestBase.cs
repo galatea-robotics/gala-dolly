@@ -41,7 +41,7 @@ namespace Gala.Dolly.Test
             if (!File.Exists(filename))
                 throw new FileNotFoundException("File not Found!", new FileInfo(filename).FullName);
 
-            return ImagingContextStream.FromBitmap(new System.Drawing.Bitmap(filename));
+            return ImagingContextStream.FromImage(new System.Drawing.Bitmap(filename));
         }
 
         protected static string ConnectionString { get { return connectionString; } }
@@ -49,7 +49,7 @@ namespace Gala.Dolly.Test
         protected static string resourcesFolderName;
 
         #region IProvider
-        string IProvider.ProviderID { get { return _providerId; } }
+        string IProvider.ProviderId { get { return _providerId; } }
         string IProvider.ProviderName { get { return _providerName; } }
 
         ISite IComponent.Site

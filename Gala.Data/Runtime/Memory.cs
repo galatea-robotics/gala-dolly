@@ -36,7 +36,7 @@ namespace Gala.Data.Runtime
 
         int ILibrary.GetNextIdentifier<TTemplate>(IBaseTemplateCollection<TTemplate> items)
         {
-            int result = Galatea.AI.Abstract.Memory.IndexOfTemplateIDs.Keys.Max();
+            int result = Galatea.AI.Abstract.Memory.IndexOfTemplateIds.Keys.Max();
             result++;
 
             return result;

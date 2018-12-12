@@ -1,14 +1,12 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
-
-
+/*
 #if !NETFX_CORE
 using System.Drawing;
 using System.Drawing.Imaging;
-#else
 #endif
+ */
 
 namespace Gala.Dolly.Test
 {

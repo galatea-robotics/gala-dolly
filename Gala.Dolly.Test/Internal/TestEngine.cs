@@ -87,7 +87,7 @@ namespace Gala.Dolly.Test
             // Initialize Language Module
             this.User = new Galatea.Runtime.Services.User(Properties.Settings.Default.DefaultUserName);
             IChatbotManager chatbots = new Gala.Dolly.Test.ChatbotManager();
-            robot.LanguageModel.LoadChatBots(chatbots);
+            robot.LanguageModel.LoadChatbots(chatbots);
 
             var substitutions = new List<string>();
             substitutions.Add("I ,eye ");

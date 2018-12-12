@@ -173,7 +173,7 @@ namespace Gala.Dolly.Test
             {
                 bitmap.Save("bitmap.png", System.Drawing.Imaging.ImageFormat.Png);
             }
-            ImagingContextStream stream = ImagingContextStream.FromBitmap(bitmap);
+            ImagingContextStream stream = ImagingContextStream.FromImage(bitmap);
 
             TestEngine.ExecutiveFunctions.StreamContext(TestEngine, TestEngine.Vision.ImageAnalyzer,
                 ContextType.Machine, InputType.Visual, stream, typeof(Bitmap));
