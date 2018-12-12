@@ -18,7 +18,7 @@ namespace Gala.Data.Runtime
 
             // Initialize
             var t = this.GetType();
-            ProviderID = t.FullName;
+            ProviderId = t.FullName;
             ProviderName = t.Name;
 
             if (_feedbackCache == null) _feedbackCache = new FeedbackCache();
@@ -116,7 +116,7 @@ namespace Gala.Data.Runtime
         /// <summary>
         /// Gets a unique value representing the Data Access Manager.
         /// </summary>
-        public string ProviderID { get; }
+        public string ProviderId { get; }
 
         /// <summary>
         /// The name that is displayed by UI and logging functions.

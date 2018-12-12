@@ -34,7 +34,7 @@ namespace Gala.Dolly.UI
         [System.ComponentModel.Category("Gala Dolly Events")]
         public event System.EventHandler TemplateLoaded;
 
-        string IProvider.ProviderID => "Gala.Dolly.UI.TemplateRecognition";
+        string IProvider.ProviderId => "Gala.Dolly.UI.TemplateRecognition";
         string IProvider.ProviderName => "TemplateRecognition";
 
         //private IObjectAnalyzer recognition;

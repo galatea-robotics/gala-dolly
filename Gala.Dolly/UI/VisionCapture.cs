@@ -59,7 +59,7 @@ namespace Gala.Dolly.UI
             txtTiltMax.Text = Settings.Default.VisionCaptureTiltMax.ToString();
         }
 
-        string IProvider.ProviderID => "Gala.Dolly.UI.VisionCapture";
+        string IProvider.ProviderId => "Gala.Dolly.UI.VisionCapture";
         string IProvider.ProviderName => "VisionCapture";
 
         public Point Offset
@@ -706,7 +706,7 @@ namespace Gala.Dolly.UI
             StaticMode = true;
 
             // Stream Bitmap to Recognition Manager
-            ImagingContextStream stream = ImagingContextStream.FromImage(displayImage);
+            ImagingContextStream stream = ImagingContextStream.FromBitmap(displayImage);
             try
             {
                 Program.Engine.ExecutiveFunctions.StreamContext(this, Program.Engine.Vision.ImageAnalyzer,

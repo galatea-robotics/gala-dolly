@@ -75,8 +75,6 @@ namespace Gala.Dolly.UI
         /// <param name="chatbots">
         /// A collection of <see cref="IChatbot"/> instances.
         /// </param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "chatbots")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chatbots")]
         [CLSCompliant(false)]
         public void InitializeChatbots(IChatbotManager chatbots)
         {
@@ -116,10 +114,10 @@ namespace Gala.Dolly.UI
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets a boolean value determining if the Chatbot selector buttons are visible.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chatbot")]
         public bool ChatbotButtonsVisible
         {
             get
@@ -132,7 +130,7 @@ namespace Gala.Dolly.UI
             }
         }
 
-        string IProvider.ProviderID => "Gala.Dolly.UI.ChatbotControl";
+        string IProvider.ProviderId => "Gala.Dolly.UI.ChatbotControl";
         string IProvider.ProviderName => "ChatbotControl";
 
         void IConsole.SendResponse(string response)

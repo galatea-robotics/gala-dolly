@@ -139,7 +139,7 @@ Public Class Form1
 
     Private WithEvents viewSerialInterfaceMenuItem As ToolStripMenuItem
 
-    Public ReadOnly Property ProviderID As String Implements IProvider.ProviderID
+    Public ReadOnly Property ProviderId As String Implements IProvider.ProviderId
         Get
             Return "Gala.Dolly.Basic.SpeechRecognition"
         End Get

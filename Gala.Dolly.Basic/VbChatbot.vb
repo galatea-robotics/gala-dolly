@@ -168,7 +168,7 @@ Public Class VbChatbot
         End Set
     End Property
 
-    Public ReadOnly Property ProviderID As String Implements IProvider.ProviderID
+    Public ReadOnly Property ProviderId As String Implements IProvider.ProviderId
         Get
             Throw New NotImplementedException()
         End Get
