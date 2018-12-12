@@ -100,6 +100,13 @@ namespace Gala.Dolly.UI
                     rb.Name = chatbot.Name;
                     rb.CheckedChanged += RadChatbot_CheckedChanged;
 
+                    // Placement
+                    pnlChatBotSelector.Controls.Add(rb);
+
+                    rb.Location = new Point(x, radDefault.Location.Y);
+                    rb.AutoSize = true;
+                    x += rb.Width + 3;
+
                     rb = null;
                 }
                 catch
@@ -107,13 +114,6 @@ namespace Gala.Dolly.UI
                     rb.Dispose();
                     throw;
                 }
-
-                // Placement
-                pnlChatBotSelector.Controls.Add(rb);
-
-                rb.Location = new Point(x, radDefault.Location.Y);
-                rb.AutoSize = true;
-                x += rb.Width + 3;
             }
         }
         /// <summary>

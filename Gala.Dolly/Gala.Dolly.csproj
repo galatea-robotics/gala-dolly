@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+  <PropertyGroup>
+    <FileVersionReadAll>$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\Properties\Version.cs'))</FileVersionReadAll>	
+    <FileVersionLinePattern>\[assembly: AssemblyVersion\(\"(\d+)\.(\d+)\.(\d+).(\d+)\"\)</FileVersionLinePattern>
+    <FileVersionLine>$([System.Text.RegularExpressions.Regex]::Match($(FileVersionReadAll), $(FileVersionLinePattern)))</FileVersionLine>
+    <FileVersionPattern>(\d+)\.(\d+)\.(\d+).(\d+)</FileVersionPattern>
+    <FileVersionInfo>$([System.Text.RegularExpressions.Regex]::Match($(FileVersionLine), $(FileVersionPattern)))</FileVersionInfo>
+  </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -156,9 +164,13 @@
     <EmbeddedResource Include="UI\VisionCapture.resx">
       <DependentUpon>VisionCapture.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="$(USERPROFILE)\AppData\Local\General_Applications\Gala.Dolly.exe_StrongName_riar5fsvkmexrxywcyzf2tmtnssu4m3m\1.2.0.0\user.config">
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(UserProfile)\AppData\Local\General_Applications\Gala.Dolly.exe_StrongName_riar5fsvkmexrxywcyzf2tmtnssu4m3m\$(FileVersionInfo)\user.config">
       <Link>Properties\user.config</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
