@@ -118,7 +118,7 @@ Public Class Form1
         If visionCapture.StaticMode Then Exit Sub ' Only send for new images
 
         Dim image As Bitmap = visionCapture.GetLastFrame()
-        Dim stream As Galatea.Imaging.IO.ImagingContextStream = Galatea.Imaging.IO.ImagingContextStream.FromBitmap(image)
+        Dim stream As Galatea.Imaging.IO.ImagingContextStream = Galatea.Imaging.IO.ImagingContextStream.FromImage(image)
 
         ' Send image capture to AI Task Manager
         Program.Engine.ExecutiveFunctions.StreamContext(Me, Program.Engine.Vision.ImageAnalyzer,

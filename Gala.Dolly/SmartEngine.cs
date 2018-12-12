@@ -73,7 +73,7 @@ namespace Gala.Dolly
             // Initialize Language Module
             this.User = new Galatea.Runtime.Services.User(Properties.Settings.Default.DefaultUserName);
             IChatbotManager chatbots = Gala.Dolly.Chatbots.ChatbotManager.GetChatbots(this.User);
-            robot.LanguageModel.LoadChatBots(chatbots);
+            robot.LanguageModel.LoadChatbots(chatbots);
 
             var substitutions = new []
             {

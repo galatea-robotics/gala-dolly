@@ -201,7 +201,7 @@ namespace Gala.Dolly.UI
             SetDisplayImage(sourceImage);
 
             // Stream Bitmap to Recognition Manager
-            ImagingContextStream stream = ImagingContextStream.FromBitmap(displayImage);
+            ImagingContextStream stream = ImagingContextStream.FromImage(displayImage);
             Program.Engine.ExecutiveFunctions.StreamContext(this, Program.Engine.Vision.ImageAnalyzer,
                 ContextType.Machine, InputType.Visual, stream, typeof(Bitmap));
 
