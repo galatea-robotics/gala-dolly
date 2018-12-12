@@ -49,19 +49,29 @@ namespace Gala.Dolly.Test
         protected static string resourcesFolderName;
 
         #region IProvider
-        string IProvider.ProviderId { get { return _providerId; } }
-        string IProvider.ProviderName { get { return _providerName; } }
-
-        ISite IComponent.Site
+        public string ProviderId { get { return _providerId; } }
+        public string ProviderName { get { return _providerName; } }
+        public ISite Site
         {
             get { return _site; }
             set { _site = value; }
         }
         void IDisposable.Dispose()
         {
-            _engine.Dispose();
-            if (Disposed != null) Disposed(this, EventArgs.Empty);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if(disposing)
+            {
+                _engine.Dispose();
+            }
+
+            Disposed?.Invoke(this, EventArgs.Empty);
+        }
+
         public event EventHandler Disposed;
 
         private readonly string _providerId, _providerName;
@@ -146,8 +156,11 @@ namespace Gala.Dolly.Test
                 // Suppress Timeout
                 Properties.Settings.Default.ImagingSettings.SuppressTimeout = true;
 
-                _engine = new TestEngine(debugger, dataAccessManager);
-                _engine.User = _user;
+                _engine = new TestEngine(debugger, dataAccessManager)
+                {
+                    User = _user
+                };
+
                 _engine.AI.LanguageModel.IsSpeechModuleInactive = true;
                 _engine.StartupComplete += _engine_StartupComplete;
                 _engine.Startup();
