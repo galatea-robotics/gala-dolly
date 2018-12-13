@@ -34,7 +34,7 @@ namespace Gala.Dolly.Test
             foreach (IChatbot chatbot in this)
                 chatbot.Dispose();
 
-            if (Disposed != null) Disposed(this, EventArgs.Empty);
+            Disposed?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler Disposed;
@@ -43,6 +43,8 @@ namespace Gala.Dolly.Test
 
         protected override string GetKeyForItem(IChatbot item)
         {
+            if (item == null) throw new Galatea.TeaArgumentNullException(nameof(item));
+
             return item.Name;
         }
 

@@ -1,17 +1,14 @@
-﻿﻿using System.IO;
+﻿
+using System;
+﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#if !NETFX_CORE
-using System.Drawing;
-#else
-using Gala.Data.Databases;
-#endif
 
 namespace Gala.Dolly.Test
 {
     using Galatea.AI.Abstract;
 
     [TestClass]
+    [CLSCompliant(false)]
     public class ImageMappingTest : EntityTest
     {
         [ClassInitialize]

@@ -8,6 +8,7 @@ using Galatea.Imaging.IO;
 namespace Gala.Dolly.Test
 {
     [TestClass]
+    [CLSCompliant(false)]
     public class ColorRecognitionTest : TestBase
     {
         ICreator _creator;

@@ -62,7 +62,7 @@ namespace Gala.Dolly.Chatbots
                         chatbotResourcesFolder));
         }
 
-        public override string Greeting { get { return ChatbotResources.ChatBotAliceGreeting; } }
+        public override string Greeting { get { return ChatbotResources.ChatbotAliceGreeting; } }
 
         /// <summary>
         /// An artificial intelligence method that responds to a text input based on the ALICE algorithm.

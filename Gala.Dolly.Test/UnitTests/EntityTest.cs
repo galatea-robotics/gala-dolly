@@ -12,6 +12,7 @@ namespace Gala.Dolly.Test
     using Gala.Data.Databases;
 
     [TestClass]
+    [CLSCompliant(false)]
     public class EntityTest : TestBase
     {
         ICreator creator;

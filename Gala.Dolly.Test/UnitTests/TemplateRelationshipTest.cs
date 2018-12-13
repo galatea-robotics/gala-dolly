@@ -1,12 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-/*
-#if !NETFX_CORE
-using System.Drawing;
-using System.Drawing.Imaging;
-#endif
- */
 
 namespace Gala.Dolly.Test
 {
@@ -18,6 +12,7 @@ namespace Gala.Dolly.Test
     //          so that they can be included in 'similar' or 'different' 
     //          logical comparisons.      
     [TestClass]
+    [CLSCompliant(false)]
     public class TemplateRelationshipTest : TestBase
     {
         private static ColorRecognitionTest colorTest;

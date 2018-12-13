@@ -10,6 +10,7 @@ using Galatea.Imaging.IO;
 namespace Gala.Dolly.Test
 {
     [TestClass]
+    [CLSCompliant(false)]
     public class SymbolRecognitionTest : TestBase
     {
         ICreator creator;

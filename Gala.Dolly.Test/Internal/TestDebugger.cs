@@ -15,6 +15,8 @@ namespace Gala.Dolly.Test
         /// </param>
         public override void HandleTeaException(TeaException ex, IProvider provider, bool throwException)
         {
+            if (ex == null) throw new TeaArgumentNullException(nameof(ex));
+
             string msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
             Log(DebuggerLogLevel.Error, msg);
             Log(DebuggerLogLevel.StackTrace, ex.StackTrace, true);
@@ -31,6 +33,8 @@ namespace Gala.Dolly.Test
         /// </param>
         public override void ThrowSystemException(Exception ex, IProvider provider)
         {
+            if (ex == null) throw new TeaArgumentNullException(nameof(ex));
+
             Log(DebuggerLogLevel.Critical, ex.Message);
             Log(DebuggerLogLevel.StackTrace, ex.StackTrace, true);
 

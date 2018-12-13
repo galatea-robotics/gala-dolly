@@ -1,4 +1,6 @@
-﻿#if !NETFX_CORE
+﻿using System;
+
+#if !NETFX_CORE
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
 #else
@@ -11,6 +13,7 @@ using Windows.Storage;
 namespace Gala.Dolly.Test
 {
     [TestClass]
+    [CLSCompliant(false)]
     public class TestCases : EntityTest
     {
         [ClassInitialize]

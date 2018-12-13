@@ -15,6 +15,7 @@ namespace Gala.Dolly.Test
     using Properties;
 
     [TestClass]
+    [CLSCompliant(false)]
     public class TestBase : IProvider
     {
         private static TestEngine _engine;

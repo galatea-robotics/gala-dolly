@@ -1,9 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-
-#if !NETFX_CORE
-#else
-#endif
+﻿
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Gala.Dolly.Test
 {
@@ -11,6 +8,7 @@ namespace Gala.Dolly.Test
     using Gala.Data.Databases;
 
     [TestClass]
+    [CLSCompliant(false)]
     public class AiLogicTest : TestBase
     {
         internal static ColorRecognitionTest colorTest;
