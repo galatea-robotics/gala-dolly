@@ -9,7 +9,7 @@ namespace Gala.Data.Runtime
     {
         protected override string GetKeyForItem(FeedbackNode item)
         {
-            if (item == null) throw new Galatea.TeaArgumentNullException("item");
+            if (item == null) throw new Galatea.TeaArgumentNullException(nameof(item));
             return item.BaseTemplate.Name;
         }
 

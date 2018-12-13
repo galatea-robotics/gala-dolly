@@ -24,7 +24,7 @@ namespace Gala.Data
         #region IFoundation
         public virtual void Initialize(IEngine engine)
         {
-            _engine = engine ?? throw new TeaArgumentNullException("engine");
+            _engine = engine ?? throw new TeaArgumentNullException(nameof(engine));
             _engine.Add(this);
         }
         bool IFoundation.IsInitialized { get { return this.IsInitialized; } }

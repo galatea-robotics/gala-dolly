@@ -14,12 +14,12 @@ namespace Gala.Data.Runtime
         [System.Diagnostics.DebuggerStepThrough]
         protected override ContextKey GetKeyForItem(ContextNode item)
         {
-            if (item == null) throw new Galatea.TeaArgumentNullException("item");
+            if (item == null) throw new Galatea.TeaArgumentNullException(nameof(item));
             return item.Key;
         }
         internal void Initialize(IExecutiveFunctions taskManager)
         {
-            if (taskManager == null) throw new Galatea.TeaArgumentNullException("taskManager");
+            if (taskManager == null) throw new Galatea.TeaArgumentNullException(nameof(taskManager));
             taskManager.InitializeContextCache(this);
         }
 
@@ -85,6 +85,8 @@ namespace Gala.Data.Runtime
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
+
+            GC.SuppressFinalize(this);
         }
 
         public event EventHandler Disposed;

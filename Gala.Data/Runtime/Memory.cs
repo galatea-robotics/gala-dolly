@@ -28,7 +28,7 @@ namespace Gala.Data.Runtime
         [System.Diagnostics.DebuggerStepThrough]
         protected override TemplateType GetKeyForItem(IBaseTemplateCollection item)
         {
-            if (item == null) throw new Galatea.TeaArgumentNullException("item");
+            if (item == null) throw new Galatea.TeaArgumentNullException(nameof(item));
             return item.TemplateType;
         }
 
