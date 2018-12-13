@@ -145,6 +145,7 @@
     <None Include="..\Gala.Dolly\Gala.Dolly.pfx">
       <Link>Gala.Dolly.pfx</Link>
     </None>
+    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
