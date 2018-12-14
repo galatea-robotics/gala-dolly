@@ -29,26 +29,26 @@ namespace Gala.Dolly.UI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lblChatBotSelector = new System.Windows.Forms.Label();
+            this.lblChatbotSelector = new System.Windows.Forms.Label();
             this.radDefault = new System.Windows.Forms.RadioButton();
             this.txtDisplay = new System.Windows.Forms.TextBox();
-            this.pnlChatBotSelector = new System.Windows.Forms.Panel();
+            this.pnlChatbotSelector = new System.Windows.Forms.Panel();
             this.btnSend = new System.Windows.Forms.Button();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.txtInput = new System.Windows.Forms.TextBox();
             this.pnlInput = new System.Windows.Forms.Panel();
-            this.pnlChatBotSelector.SuspendLayout();
+            this.pnlChatbotSelector.SuspendLayout();
             this.pnlInput.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblChatBotSelector
+            // lblChatbotSelector
             // 
-            this.lblChatBotSelector.AutoSize = true;
-            this.lblChatBotSelector.Location = new System.Drawing.Point(3, 5);
-            this.lblChatBotSelector.Margin = new System.Windows.Forms.Padding(3, 0, 9, 0);
-            this.lblChatBotSelector.Name = "lblChatBotSelector";
-            this.lblChatBotSelector.Size = new System.Drawing.Size(61, 13);
-            this.lblChatBotSelector.TabIndex = 4;
+            this.lblChatbotSelector.AutoSize = true;
+            this.lblChatbotSelector.Location = new System.Drawing.Point(3, 5);
+            this.lblChatbotSelector.Margin = new System.Windows.Forms.Padding(3, 0, 9, 0);
+            this.lblChatbotSelector.Name = "lblChatbotSelector";
+            this.lblChatbotSelector.Size = new System.Drawing.Size(0, 13);
+            this.lblChatbotSelector.TabIndex = 4;
             // 
             // radDefault
             // 
@@ -57,7 +57,7 @@ namespace Gala.Dolly.UI
             this.radDefault.Location = new System.Drawing.Point(76, 3);
             this.radDefault.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.radDefault.Name = "radDefault";
-            this.radDefault.Size = new System.Drawing.Size(74, 17);
+            this.radDefault.Size = new System.Drawing.Size(14, 13);
             this.radDefault.TabIndex = 7;
             this.radDefault.TabStop = true;
             this.radDefault.Tag = "Default";
@@ -67,25 +67,25 @@ namespace Gala.Dolly.UI
             // 
             this.txtDisplay.BackColor = System.Drawing.SystemColors.Window;
             this.txtDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDisplay.Location = new System.Drawing.Point(0, 23);
+            this.txtDisplay.Location = new System.Drawing.Point(0, 19);
             this.txtDisplay.Multiline = true;
             this.txtDisplay.Name = "txtDisplay";
             this.txtDisplay.ReadOnly = true;
             this.txtDisplay.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDisplay.Size = new System.Drawing.Size(320, 184);
+            this.txtDisplay.Size = new System.Drawing.Size(320, 188);
             this.txtDisplay.TabIndex = 8;
             this.txtDisplay.TabStop = false;
             // 
-            // pnlChatBotSelector
+            // pnlChatbotSelector
             // 
-            this.pnlChatBotSelector.AutoSize = true;
-            this.pnlChatBotSelector.Controls.Add(this.lblChatBotSelector);
-            this.pnlChatBotSelector.Controls.Add(this.radDefault);
-            this.pnlChatBotSelector.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlChatBotSelector.Location = new System.Drawing.Point(0, 0);
-            this.pnlChatBotSelector.Name = "pnlChatBotSelector";
-            this.pnlChatBotSelector.Size = new System.Drawing.Size(320, 23);
-            this.pnlChatBotSelector.TabIndex = 3;
+            this.pnlChatbotSelector.AutoSize = true;
+            this.pnlChatbotSelector.Controls.Add(this.lblChatbotSelector);
+            this.pnlChatbotSelector.Controls.Add(this.radDefault);
+            this.pnlChatbotSelector.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlChatbotSelector.Location = new System.Drawing.Point(0, 0);
+            this.pnlChatbotSelector.Name = "pnlChatbotSelector";
+            this.pnlChatbotSelector.Size = new System.Drawing.Size(320, 19);
+            this.pnlChatbotSelector.TabIndex = 3;
             // 
             // btnSend
             // 
@@ -126,14 +126,14 @@ namespace Gala.Dolly.UI
             // ChatbotControl
             // 
             this.Controls.Add(this.txtDisplay);
-            this.Controls.Add(this.pnlChatBotSelector);
+            this.Controls.Add(this.pnlChatbotSelector);
             this.Controls.Add(this.pnlInput);
             this.Name = "ChatbotControl";
             this.Size = new System.Drawing.Size(320, 240);
             this.Enter += new System.EventHandler(this.Chatbot_Enter);
             this.Resize += new System.EventHandler(this.Chatbot_Resize);
-            this.pnlChatBotSelector.ResumeLayout(false);
-            this.pnlChatBotSelector.PerformLayout();
+            this.pnlChatbotSelector.ResumeLayout(false);
+            this.pnlChatbotSelector.PerformLayout();
             this.pnlInput.ResumeLayout(false);
             this.pnlInput.PerformLayout();
             this.ResumeLayout(false);
@@ -143,10 +143,10 @@ namespace Gala.Dolly.UI
 
         #endregion
 
-        internal System.Windows.Forms.Label lblChatBotSelector;
+        internal System.Windows.Forms.Label lblChatbotSelector;
         internal System.Windows.Forms.RadioButton radDefault;
         internal System.Windows.Forms.TextBox txtDisplay;
-        internal System.Windows.Forms.Panel pnlChatBotSelector;
+        internal System.Windows.Forms.Panel pnlChatbotSelector;
         internal System.Windows.Forms.Button btnSend;
         internal System.Windows.Forms.Timer Timer;
         internal System.Windows.Forms.TextBox txtInput;

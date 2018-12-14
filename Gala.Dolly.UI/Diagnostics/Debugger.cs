@@ -53,6 +53,12 @@ namespace Gala.Dolly.UI.Diagnostics
             HandleTeaException(ex, provider, false);
         }
 
+        /// <param name="ex">
+        /// A run-time <see cref="TeaException"/>.
+        /// </param>
+        /// <param name="provider">
+        /// The runtime component where the exception occurred.
+        /// </param>
         /// <param name="throwException">
         /// A value indicating if the Exception should remain unhandled after
         /// processing by the <see cref="IDebugger"/> instance.

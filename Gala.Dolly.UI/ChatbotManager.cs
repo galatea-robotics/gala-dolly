@@ -13,8 +13,6 @@ namespace Gala.Dolly.UI
     /// <summary>
     /// Contains a collection of hard-coded defined Chatbots downloaded from the internet.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chatbot")]
     [CLSCompliant(false)]
     public abstract class ChatbotManager : KeyedCollection<string, IChatbot>, IChatbotManager, IComponent
     {
@@ -58,8 +56,6 @@ namespace Gala.Dolly.UI
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-
-            Disposed?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -74,6 +70,8 @@ namespace Gala.Dolly.UI
         {
             foreach (IChatbot chatbot in this)
                 chatbot.Dispose();
+
+            Disposed?.Invoke(this, EventArgs.Empty);
         }
         /// <summary>
         ///  Gets or sets the <see cref="System.ComponentModel.ISite"/> associated with the 
@@ -98,7 +96,7 @@ namespace Gala.Dolly.UI
         /// </returns>
         protected override string GetKeyForItem(IChatbot item)
         {
-            if (item == null) throw new TeaArgumentNullException("item");
+            if (item == null) throw new TeaArgumentNullException(nameof(item));
             return item.Name;
         }
 

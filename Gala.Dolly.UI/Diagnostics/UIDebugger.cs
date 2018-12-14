@@ -195,7 +195,7 @@ namespace Gala.Dolly.UI.Diagnostics
             set { speechSilentMenuItem.Checked = value; }
         }
 
-        public bool SpeechMenuEnabled
+        internal bool SpeechMenuEnabled
         {
             get { return speechMenu.Enabled; }
             set

@@ -1,5 +1,4 @@
 ﻿using Galatea.AI;
-using Galatea.AI.Robotics;
 using Galatea.Runtime;
 
 // TODO: Make speech loader with Drop Down for TTS5 and TTS4.
@@ -9,8 +8,8 @@ namespace Galatea.Speech
     /// <summary>
     /// Contains Speech Recognition and Text-to-Speech components.
     /// </summary>
-
     [System.Runtime.InteropServices.ComVisible(false)]
+    [System.CLSCompliant(false)]
     public sealed class SpeechModule : RuntimeContainer, ISpeechModule
     {
         /// <summary>
@@ -26,7 +25,7 @@ namespace Galatea.Speech
         /// </param>
         public void Initialize(ILanguageAnalyzer languageAnalyzer)
         {
-            _languageAnalyzer = languageAnalyzer ?? throw new Galatea.TeaArgumentNullException("languageAnalyzer");
+            _languageAnalyzer = languageAnalyzer ?? throw new Galatea.TeaArgumentNullException(nameof(languageAnalyzer));
 
             // Component Model
             languageAnalyzer.SpeechModule = this;

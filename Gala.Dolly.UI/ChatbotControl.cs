@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Drawing;
 using System.Windows.Forms;
-using Galatea;
-using Galatea.AI.Abstract;
-using Galatea.Runtime;
-using Galatea.IO;
 
 namespace Gala.Dolly.UI
 {
+    using Galatea;
+    using Galatea.Runtime;
     using Gala.Dolly.UI.Runtime;
 
     /// <summary>
@@ -28,13 +27,13 @@ namespace Gala.Dolly.UI
             InitializeComponent();
 
 			#region CA1303
-			lblChatBotSelector.Text = Properties.Resources.ChatbotControl_lblChatBotSelector_Text;
+			lblChatbotSelector.Text = Properties.Resources.ChatbotControl_lblChatBotSelector_Text;
             radDefault.Text = Properties.Resources.ChatbotControl_radDefault_Text;
             btnSend.Text = Properties.Resources.ChatbotControl_btnSend_Text;
 			#endregion
 
 			// Initialize Chatbot Buttons
-			pnlChatBotSelector.Controls.Add(radDefault);
+			pnlChatbotSelector.Controls.Add(radDefault);
 
             // Do Menu Item
             ToolStripMenuItem tempMenuItem = null;
@@ -78,7 +77,7 @@ namespace Gala.Dolly.UI
         [CLSCompliant(false)]
         public void InitializeChatbots(IChatbotManager chatbots)
         {
-            if (chatbots == null) throw new TeaArgumentNullException("chatbots");
+            if (chatbots == null) throw new TeaArgumentNullException(nameof(chatbots));
 
             // Initialize Radio Buttons
             int x = 153;
@@ -93,13 +92,13 @@ namespace Gala.Dolly.UI
                 try
                 {
                     rb = new RadioButton();
-                    pnlChatBotSelector.Controls.Add(rb);
-                    rb.Text = chatbot.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture);
+                    pnlChatbotSelector.Controls.Add(rb);
+                    rb.Text = chatbot.Name.ToUpper(CultureInfo.CurrentCulture);
                     rb.Name = chatbot.Name;
                     rb.CheckedChanged += RadChatbot_CheckedChanged;
 
                     // Placement
-                    pnlChatBotSelector.Controls.Add(rb);
+                    pnlChatbotSelector.Controls.Add(rb);
 
                     rb.Location = new Point(x, radDefault.Location.Y);
                     rb.AutoSize = true;
@@ -122,11 +121,11 @@ namespace Gala.Dolly.UI
         {
             get
             {
-                return pnlChatBotSelector.Visible;
+                return pnlChatbotSelector.Visible;
             }
             set
             {
-                pnlChatBotSelector.Visible = value;
+                pnlChatbotSelector.Visible = value;
             }
         }
 
@@ -170,14 +169,13 @@ namespace Gala.Dolly.UI
             // Get Response
             if (!string.IsNullOrEmpty(inputText))
             {
-                string msg = string.Format(System.Globalization.CultureInfo.CurrentCulture,
-                    Gala.Dolly.Chatbots.Properties.Settings.Default.ChatbotMessageFormat,
-                    Program.RuntimeEngine.User.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture),
-                    inputText);
-
                 string sender = Program.RuntimeEngine != null ?
-                    Program.RuntimeEngine.User.Name.ToUpper()
+                    Program.RuntimeEngine.User.Name.ToUpper(CultureInfo.CurrentCulture)
                     : "USER";
+
+                string msg = string.Format(CultureInfo.CurrentCulture,
+                    Chatbots.Properties.Settings.Default.ChatbotMessageFormat,
+                    sender, inputText);
 
                 this.txtDisplay.AppendText(msg + "\r\n");
 
@@ -204,9 +202,9 @@ namespace Gala.Dolly.UI
             {
                 //LunaPOC.SerialInterface.Wait(240)     ' Don't talk over the Human!
 
-                string msg = string.Format(System.Globalization.CultureInfo.CurrentCulture,
-                    Gala.Dolly.Chatbots.Properties.Settings.Default.ChatbotMessageFormat,
-                    Program.RuntimeEngine.AI.LanguageModel.ChatbotManager.Current.Name.ToUpper(System.Globalization.CultureInfo.CurrentCulture), 
+                string msg = string.Format(CultureInfo.CurrentCulture,
+                    Chatbots.Properties.Settings.Default.ChatbotMessageFormat,
+                    Program.RuntimeEngine.AI.LanguageModel.ChatbotManager.Current.Name.ToUpper(CultureInfo.CurrentCulture), 
                     responseText);
 
                 this.txtDisplay.AppendText(msg + "\r\n");

@@ -14,7 +14,7 @@ namespace Galatea.Speech
         private bool speaking, paused;
         private ISpeechModule _speechModule;
 
-        private IVoice _current;
+        private readonly IVoice _current;
         private struct Tts4Voice : IVoice
         {
             public Gender Gender { get; set; }

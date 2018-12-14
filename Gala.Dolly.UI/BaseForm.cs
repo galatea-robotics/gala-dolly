@@ -20,7 +20,8 @@ namespace Gala.Dolly.UI
         {
             InitializeComponent();
 
-			#region CA1303
+            #region CA1303
+            menuStrip.Text = Resources.BaseForm_menuStrip_Text;
 			FileMenu.Text = Resources.BaseForm_FileMenu_Text;
 			exitMenuItem.Text = Resources.BaseForm_ExitMenuItem_Text;
 			ViewMenu.Text = Resources.BaseForm_viewMenu_Text;
@@ -31,15 +32,15 @@ namespace Gala.Dolly.UI
             this.Disposed += BaseForm_Disposed;
 
             this._debugger = new Diagnostics.UIDebugger();
-            _debugger.LogLevel = Properties.Settings.Default.DebuggerLogLevel;
-            _debugger.AlertLevel = Properties.Settings.Default.DebuggerAlertLevel;
-            _debugger.ShowAlerts = Properties.Settings.Default.DebuggerShowAlerts;
+            _debugger.LogLevel = Settings.Default.DebuggerLogLevel;
+            _debugger.AlertLevel = Settings.Default.DebuggerAlertLevel;
+            _debugger.ShowAlerts = Settings.Default.DebuggerShowAlerts;
             this._debugger.InitializeToolStrip(_toolsMenu);
 
             _current = this;
         }
 
-        public new bool DesignMode
+        internal new bool DesignMode
         {
             get
             {

@@ -26,8 +26,6 @@ namespace Gala.Dolly.UI
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "menuStrip")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.Control.set_Text(System.String)")]
         private void InitializeComponent()
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
@@ -48,7 +46,6 @@ namespace Gala.Dolly.UI
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(464, 24);
             this.menuStrip.TabIndex = 2;
-            this.menuStrip.Text = "menuStrip";
             // 
             // _fileMenu
             // 

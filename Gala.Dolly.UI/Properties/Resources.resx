@@ -123,6 +123,9 @@
   <data name="BaseForm_FileMenu_Text" xml:space="preserve">
     <value>&amp;File</value>
   </data>
+  <data name="BaseForm_menuStrip_Text" xml:space="preserve">
+    <value>menuStrip</value>
+  </data>
   <data name="BaseForm_toolsMenu_Text" xml:space="preserve">
     <value>&amp;Tools</value>
   </data>

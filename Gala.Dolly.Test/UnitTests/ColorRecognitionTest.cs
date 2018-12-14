@@ -13,6 +13,7 @@ namespace Gala.Dolly.Test
     [CLSCompliant(false)]
     public class ColorRecognitionTest : TestBase
     {
+#pragma warning disable CA1822 // Mark members as static
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
         [TestCategory("0 - Methods")]
         public void TestBrightness()
@@ -23,6 +24,7 @@ namespace Gala.Dolly.Test
             Console.WriteLine($"Black: {Color.Black.GetBrightness()}");
             Console.WriteLine($"White: {Color.White.GetBrightness()}");
         }
+#pragma warning restore CA1822 // Mark members as static
 
         [TestMethod]
         [TestCategory("1 - Template")]

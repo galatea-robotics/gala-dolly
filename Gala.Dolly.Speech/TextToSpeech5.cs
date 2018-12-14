@@ -50,11 +50,7 @@ namespace Galatea.Speech
             foreach (SpeechLib.SpObjectToken v in voices)
             {
                 string vname = null;
-                try
-                {
-                    vname = v.GetDescription();
-                }
-                catch { }
+                vname = v.GetDescription();
 
                 if (vname != null)
                 {
@@ -84,7 +80,7 @@ namespace Galatea.Speech
             get { return _current; }
             set
             {
-                _current = value;
+                _current = value ?? throw new ArgumentNullException(nameof(value));
                 spVoice.Voice = _current.VoiceObject as SpeechLib.SpObjectToken;
             }
         }
