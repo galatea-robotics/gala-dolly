@@ -9,39 +9,51 @@ namespace Gala.Dolly.Test
 
     [TestClass]
     [CLSCompliant(false)]
-    public class AiLogicTest : TestBase
+    public class AILogicTest : TestBase
     {
         internal static ColorRecognitionTest colorTest;
 
         [ClassInitialize]
+#pragma warning disable CA1801 // Review unused parameters
         public new static void Initialize(TestContext context)
         {
             colorTest = new ColorRecognitionTest();
 
             // Initialize Colors and Shapes
-            SerializedDataAccessManager dataAccessManager = new SerializedDataAccessManager(ConnectionString);
-            dataAccessManager.RestoreBackup(@"..\..\..\..\Data\SerializedData.1345.dat");
+            SerializedDataAccessManager dataAccessManager = null;
+            try
+            {
+                dataAccessManager = new SerializedDataAccessManager(ConnectionString);
+                dataAccessManager.RestoreBackup(@"..\..\..\..\Data\SerializedData.1345.dat");
 
-            TestEngine.DataAccessManager = dataAccessManager;
-            TestEngine.InitializeDatabase();
+                TestEngine.DataAccessManager = dataAccessManager;
+                TestEngine.InitializeDatabase();
+
+                dataAccessManager = null;
+            }
+            finally
+            {
+                dataAccessManager?.Dispose();
+            }
         }
+#pragma warning restore CA1801 // Review unused parameters
 
         [TestMethod]
         [TestCategory("3 - AI Logic")]
         public void TestHybridColors()
         {
             colorTest.Creator = TestEngine.AI.RecognitionModel;
-            TestHybridColorResponse(resourcesFolderName + @"Learning\orange_yellow_crescent.png", new[] { "ORANGE", "Yellow" });
-            TestHybridColorResponse(resourcesFolderName + @"Learning\green_blue_star.png", new[] { "Green", "Blue" });
+            TestHybridColorResponse(ResourcesFolderName + @"Learning\orange_yellow_crescent.png", new[] { "ORANGE", "Yellow" });
+            TestHybridColorResponse(ResourcesFolderName + @"Learning\green_blue_star.png", new[] { "Green", "Blue" });
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is Aqua");
 
             colorTest.Creator = TestEngine.User;
-            bool result = colorTest.TestColorResponse(resourcesFolderName + @"Learning\green_blue_star.png", "Aqua");
+            bool result = colorTest.TestColorResponse(ResourcesFolderName + @"Learning\green_blue_star.png", "Aqua");
             Assert.IsTrue(result);
 
             // Check Relationships
-            TestColorTemplateRelationships(new[] { "Green", "Blue" }, false, TemplateRelationshipType.Contains, colorTest.NamedTemplate);
+            TestColorTemplateRelationships(new[] { "Green", "Blue" }, false, TemplateRelationshipType.Contains, NamedTemplate);
         }
 
         [TestMethod]
@@ -50,18 +62,18 @@ namespace Gala.Dolly.Test
         {
             colorTest.Creator = null;
             // RED
-            RegressionTestColorTemplate(resourcesFolderName + @"Learning\STOP.png", "Red");
+            RegressionTestColorTemplate(ResourcesFolderName + @"Learning\STOP.png", "Red");
             // YELLOW
-            RegressionTestColorTemplate(resourcesFolderName + @"Learning\pacman.png", "Yellow");
+            RegressionTestColorTemplate(ResourcesFolderName + @"Learning\pacman.png", "Yellow");
             // GREEN
-            RegressionTestColorTemplate(resourcesFolderName + @"Learning\green_circle.png", "Green");
+            RegressionTestColorTemplate(ResourcesFolderName + @"Learning\green_circle.png", "Green");
             // BLUE
-            RegressionTestColorTemplate(resourcesFolderName + @"Learning\Symbols\B.png", "Blue");
+            RegressionTestColorTemplate(ResourcesFolderName + @"Learning\Symbols\B.png", "Blue");
         }
 
-        private void TestHybridColorResponse(string path, string[] templateTokens)
+        private static void TestHybridColorResponse(string path, string[] templateTokens)
         {
-            string response = colorTest.GetColorResponse(path);
+            colorTest.GetColorResponse(path);
             TestColorTemplateRelationships(templateTokens, true, TemplateRelationshipType.Contains, NamedTemplate);
         }
 
@@ -76,13 +88,13 @@ namespace Gala.Dolly.Test
                 if(checkHybridName)
                 {
                     result = namedTemplate.FriendlyName.Contains(token);
-                    Assert.IsTrue(result, string.Format("FriendlyName does not contain the label '{0}'.", token));
+                    Assert.IsTrue(result, $"FriendlyName does not contain the label '{token}'.");
                 }
 
                 result = namedTemplate.TemplateRelationships.Contains(token);
-                Assert.IsTrue(result, string.Format("TemplateRelationships does not contain the ColorTemplate '{0}'.", token));
+                Assert.IsTrue(result, $"TemplateRelationships does not contain the ColorTemplate '{token}'.");
                 result = namedTemplate.TemplateRelationships[token].RelationshipType == relationshipType;
-                Assert.IsTrue(result, string.Format("TemplateRelationships['{0}'].RelationshipType must be '{1}'.", token, relationshipType));
+                Assert.IsTrue(result, $"TemplateRelationships['{token}'].RelationshipType must be '{relationshipType}'.");
             }
 
             // Check for Invalid Template Relationships
@@ -96,7 +108,7 @@ namespace Gala.Dolly.Test
             }
         }
 
-        private void RegressionTestColorTemplate(string path, string expectedColorName)
+        private static void RegressionTestColorTemplate(string path, string expectedColorName)
         {
             bool result = colorTest.TestColorResponse(path, expectedColorName);
             Assert.IsTrue(result);

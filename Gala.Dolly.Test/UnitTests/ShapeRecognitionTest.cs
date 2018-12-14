@@ -1,15 +1,15 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Galatea;
-using Galatea.AI.Abstract;
-using Galatea.AI.Imaging;
-using Galatea.IO;
-using Galatea.Imaging.IO;
 
 namespace Gala.Dolly.Test
 {
+    using Galatea.AI.Abstract;
+    using Galatea.AI.Imaging;
+    using Galatea.Imaging.IO;
+    using Galatea.IO;
+
     [TestClass]
     [CLSCompliant(false)]
     public class ShapeRecognitionTest : TestBase
@@ -35,7 +35,7 @@ namespace Gala.Dolly.Test
             bool result;
             _creator = null;
 
-            result = TestShapeResponse(resourcesFolderName + @"Learning\blue_circle.png", "round");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\blue_circle.png", "round");
             Assert.IsTrue(result);
         }
 
@@ -46,11 +46,11 @@ namespace Gala.Dolly.Test
             bool result;
             _creator = null;
 
-            result = TestShapeResponse(resourcesFolderName + @"Learning\blue_circle.png", "round");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\blue_circle.png", "round");
             Assert.IsTrue(result);
-            result = TestShapeResponse(resourcesFolderName + @"Learning\green_circle.png", "round");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\green_circle.png", "round");
             Assert.IsTrue(result);
-            result = TestShapeResponse(resourcesFolderName + @"Learning\circle_perspective.png", "round");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\circle_perspective.png", "round");
             Assert.IsTrue(result);
         }
 
@@ -62,9 +62,9 @@ namespace Gala.Dolly.Test
             _creator = null;
 
             // TRIANGULAR
-            result = TestShapeResponse(resourcesFolderName + @"Learning\triangle_green2.png", "triangular");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\triangle_green2.png", "triangular");
             Assert.IsTrue(result);
-            result = TestShapeResponse(resourcesFolderName + @"Learning\triangle_orange.png", "triangular");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\triangle_orange.png", "triangular");
             Assert.IsTrue(result);
         }
 
@@ -75,7 +75,7 @@ namespace Gala.Dolly.Test
             bool result;
             _creator = null;
 
-            result = TestShapeResponse(resourcesFolderName + @"Learning\triangle_yellow.png", "triangular");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\triangle_yellow.png", "triangular");
             Assert.IsTrue(result);
         }
 
@@ -87,9 +87,9 @@ namespace Gala.Dolly.Test
             _creator = null;
 
             // QUAD
-            result = TestShapeResponse(resourcesFolderName + @"Learning\quad_black.png", "FOUR CORNERS");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\quad_black.png", "FOUR CORNERS");
             Assert.IsTrue(result);
-            result = TestShapeResponse(resourcesFolderName + @"Learning\quad_green.png", "FOUR CORNERS");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\quad_green.png", "FOUR CORNERS");
             Assert.IsTrue(result);
         }
 
@@ -101,11 +101,11 @@ namespace Gala.Dolly.Test
             _creator = null;
 
             // CHEVRON
-            result = TestShapeResponse(resourcesFolderName + @"Learning\chevron_purple.png", "Chevron");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\chevron_purple.png", "Chevron");
             Assert.IsTrue(result);
-            result = TestShapeResponse(resourcesFolderName + @"Learning\chevron.png", "Chevron");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\chevron.png", "Chevron");
             Assert.IsTrue(result);
-            result = TestShapeResponse(resourcesFolderName + @"Learning\widget.png", "Chevron");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\widget.png", "Chevron");
             Assert.IsTrue(result);
         }
 
@@ -119,14 +119,14 @@ namespace Gala.Dolly.Test
             string response;
 
             // PIE
-            response = GetShapeResponse(resourcesFolderName + @"Learning\pizza.png");
-            Assert.IsFalse(response.ToUpper().Contains("PIE SHAPED"));
+            response = GetShapeResponse(ResourcesFolderName + @"Learning\pizza.png");
+            Assert.IsFalse(response.ToUpper(CultureInfo.CurrentCulture).Contains("PIE SHAPED"));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The shape is PIE SHAPED!");
 
             // STAR
-            response = GetShapeResponse(resourcesFolderName + @"Learning\star2.png");
-            Assert.IsFalse(response.ToUpper().Contains("STAR"));
+            response = GetShapeResponse(ResourcesFolderName + @"Learning\star2.png");
+            Assert.IsFalse(response.ToUpper(CultureInfo.CurrentCulture).Contains("STAR"));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The shape is STAR!");
 
@@ -136,29 +136,29 @@ namespace Gala.Dolly.Test
             // NOW CHECK IF PIE AND STAR WERE LEARNED
             _creator = TestEngine.User;
 
-            result = TestShapeResponse(resourcesFolderName + @"Learning\pacman.png", "PIE SHAPED");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\pacman.png", "PIE SHAPED");
             Assert.IsTrue(result);
-            result = TestShapeResponse(resourcesFolderName + @"Learning\orange_pie.png", "PIE SHAPED");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\orange_pie.png", "PIE SHAPED");
             Assert.IsTrue(result);
-            result = TestShapeResponse(resourcesFolderName + @"Learning\pizza.png", "PIE SHAPED");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\pizza.png", "PIE SHAPED");
             Assert.IsTrue(result);
 
-            result = TestShapeResponse(resourcesFolderName + @"Learning\STAR_BLUE.png", "STAR");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\STAR_BLUE.png", "STAR");
             Assert.IsTrue(result);
-            result = TestShapeResponse(resourcesFolderName + @"Learning\star2.png", "STAR");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\star2.png", "STAR");
             Assert.IsTrue(result);
-            result = TestShapeResponse(resourcesFolderName + @"Learning\star.png", "STAR");
+            result = TestShapeResponse(ResourcesFolderName + @"Learning\star.png", "STAR");
             Assert.IsTrue(result);
 
             // TEACH ADDITIONAL SHAPES
             _creator = null;
-            response = GetShapeResponse(resourcesFolderName + @"Learning\pentagon.png");
+            response = GetShapeResponse(ResourcesFolderName + @"Learning\pentagon.png");
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's a Pentagon.");
 
             _creator = TestEngine.User;  // Evaluates to Pentagon
-            response = GetShapeResponse(resourcesFolderName + @"Learning\hexagon.png");
+            response = GetShapeResponse(ResourcesFolderName + @"Learning\hexagon.png");
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's a Hexagon.");
-            response = GetShapeResponse(resourcesFolderName + @"Learning\STOP.png");
+            response = GetShapeResponse(ResourcesFolderName + @"Learning\STOP.png");
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's an Octagon.");
         }
 
@@ -169,35 +169,38 @@ namespace Gala.Dolly.Test
         }
         internal string GetShapeResponse(string filename)
         {
-            Bitmap bitmap = new Bitmap(filename);
-            if (VisualProcessor.ImagingSettings.DebugRecognitionSaveImages)
-            {
-                bitmap.Save("bitmap.png", System.Drawing.Imaging.ImageFormat.Png);
-            }
-            ImagingContextStream stream = ImagingContextStream.FromImage(bitmap);
+            ImagingContextStream stream;
 
-            TestEngine.ExecutiveFunctions.StreamContext(TestEngine, TestEngine.Vision.ImageAnalyzer,
+            using (Bitmap bitmap = new Bitmap(filename))
+            {
+                if (VisualProcessor.ImagingSettings.DebugRecognitionSaveImages)
+                {
+                    bitmap.Save("bitmap.png", System.Drawing.Imaging.ImageFormat.Png);
+                }
+                stream = ImagingContextStream.FromImage(bitmap);
+            }
+
+             TestEngine.ExecutiveFunctions.StreamContext(TestEngine, TestEngine.Vision.ImageAnalyzer,
                 ContextType.Machine, InputType.Visual, stream, typeof(Bitmap));
 
             string result = TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "What SHAPE?");
-            //System.Console.WriteLine($"Result: {result}");
 
             // Verify Creator
-            if (this.NamedTemplate.FriendlyName.Equals("I don't know", StringComparison.CurrentCultureIgnoreCase))
+            if (NamedTemplate.FriendlyName.Equals("I don't know", StringComparison.CurrentCultureIgnoreCase))
             {
                 // Creator is Recognition Model
             }
             else
             {
-                Assert.AreEqual(_creator, this.NamedTemplate.Creator);
+                Assert.AreEqual(_creator, NamedTemplate.Creator);
             }
 
             // Finalize
             return result;
         }
-        private bool CheckShapeResponse(string response, string expectedShapeName)
+        private static bool CheckShapeResponse(string response, string expectedShapeName)
         {
-            string expectedResponse = string.Format("The shape is {0}.", expectedShapeName);
+            string expectedResponse = $"The shape is {expectedShapeName}.";
             return response.Equals(expectedResponse, StringComparison.CurrentCultureIgnoreCase);
         }
     }

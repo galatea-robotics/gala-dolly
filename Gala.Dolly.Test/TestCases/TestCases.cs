@@ -1,13 +1,11 @@
 ﻿using System;
+using System.Globalization;
 
 #if !NETFX_CORE
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
 #else
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Galatea.Drawing;
-using Galatea.Drawing.Imaging;
-using Windows.Storage;
 #endif
 
 namespace Gala.Dolly.Test
@@ -24,15 +22,17 @@ namespace Gala.Dolly.Test
 
         [TestMethod]
         [TestCategory("Test Cases")]
+#pragma warning disable CA1707 // Identifiers should not contain underscores
         public void  _01_03_04_07_100()
+#pragma warning restore CA1707 // Identifiers should not contain underscores
         {
             // TODO:  Load the correct Database 
 
 #if !NETFX_CORE
             Galatea.AI.Imaging.VisualProcessor.ImagingSettings.MonochromeBlobFilterSettings.ContrastCorrectionFactor = 15;
 #endif
-            string response = GetEntityResponse(resourcesFolderName + @"TestCases\1.3.4.7.100\orange_test.png", false);
-            Assert.IsTrue(response.ToUpper().Contains("ORANGE TRIANGULAR"));
+            string response = GetEntityResponse(ResourcesFolderName + @"TestCases\1.3.4.7.100\orange_test.png", false);
+            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("ORANGE TRIANGULAR"));
         }
 
         public override void TestEntityLabelCreation()

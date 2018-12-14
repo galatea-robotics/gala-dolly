@@ -115,15 +115,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(LocalAppData)\Microsoft.TestHost.x86\UnitTestAdapter__Running__StrongName_m5l5weancdfp4s54niytdpqgfzeu55uc\15.7.2\user.config">
+    <None Include="$(LocalAppData)\Microsoft.TestHost.x86\UnitTestAdapter__Running__StrongName_m5l5weancdfp4s54niytdpqgfzeu55uc\15.*.*\user.config">
       <Link>Properties\user.config</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="..\Gala.Dolly\Gala.Dolly.pfx">
       <Link>Gala.Dolly.pfx</Link>
     </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="project.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

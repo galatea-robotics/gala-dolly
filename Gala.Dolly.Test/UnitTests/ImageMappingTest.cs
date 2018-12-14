@@ -1,6 +1,6 @@
-﻿
-using System;
-﻿using System.IO;
+﻿using System;
+using System.Globalization;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Gala.Dolly.Test
@@ -21,11 +21,11 @@ namespace Gala.Dolly.Test
         [TestCategory("5 - Image Mapping")]
         public void TestTwoEntities()
         {
-            string response = GetEntityResponse(resourcesFolderName + @"Learning\two_shapes1.png", false);
+            string response = GetEntityResponse(ResourcesFolderName + @"Learning\two_shapes1.png", false);
 
             // Validate Templates
-            Assert.AreEqual(2, this.NamedEntity.TemplateRelationships.Count);
-            foreach(TemplateRelationship tR in this.NamedEntity.TemplateRelationships)
+            Assert.AreEqual(2, NamedEntity.TemplateRelationships.Count);
+            foreach(TemplateRelationship tR in NamedEntity.TemplateRelationships)
             {
                 Assert.AreEqual(TemplateRelationshipType.Contains, tR.RelationshipType);
             }
@@ -38,17 +38,17 @@ namespace Gala.Dolly.Test
         [TestCategory("5 - Image Mapping")]
         public void TestThreeEntities()
         {
-            string response = GetEntityResponse(resourcesFolderName + @"Learning\three_shapes.png", false);
+            GetEntityResponse(ResourcesFolderName + @"Learning\three_shapes.png", false);
 
-            Assert.AreEqual(3, this.NamedEntity.TemplateRelationships.Count);
-            foreach (TemplateRelationship tR in this.NamedEntity.TemplateRelationships)
+            Assert.AreEqual(3, NamedEntity.TemplateRelationships.Count);
+            foreach (TemplateRelationship tR in NamedEntity.TemplateRelationships)
             {
                 Assert.AreEqual(TemplateRelationshipType.Contains, tR.RelationshipType);
             }
 
-            Assert.AreEqual("GREEN TRIANGULAR SHAPE", NamedEntity.TemplateRelationships[0].RelatedItem.FriendlyName.ToUpper());
-            Assert.AreEqual("PURPLE STAR", NamedEntity.TemplateRelationships[1].RelatedItem.FriendlyName.ToUpper());
-            Assert.AreEqual("RED ROUND SHAPE", NamedEntity.TemplateRelationships[2].RelatedItem.FriendlyName.ToUpper());
+            Assert.AreEqual("GREEN TRIANGULAR SHAPE", NamedEntity.TemplateRelationships[0].RelatedItem.FriendlyName.ToUpper(CultureInfo.CurrentCulture));
+            Assert.AreEqual("PURPLE STAR", NamedEntity.TemplateRelationships[1].RelatedItem.FriendlyName.ToUpper(CultureInfo.CurrentCulture));
+            Assert.AreEqual("RED ROUND SHAPE", NamedEntity.TemplateRelationships[2].RelatedItem.FriendlyName.ToUpper(CultureInfo.CurrentCulture));
         }
 
         public override void TestEntityLabelCreation()

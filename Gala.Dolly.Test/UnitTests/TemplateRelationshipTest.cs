@@ -19,6 +19,7 @@ namespace Gala.Dolly.Test
         private static ShapeRecognitionTest shapeTest;
 
         [ClassInitialize]
+#pragma warning disable CA1801 // Review unused parameters
         public new static void Initialize(TestContext context)
         {
 #if NETFX_CORE
@@ -27,12 +28,23 @@ namespace Gala.Dolly.Test
             colorTest = new ColorRecognitionTest();
             shapeTest = new ShapeRecognitionTest();
 
-            SerializedDataAccessManager dataAccessManager = new SerializedDataAccessManager(ConnectionString);
-            dataAccessManager.RestoreBackup(@"..\..\..\..\Data\SerializedData.1346.dat");
+            SerializedDataAccessManager dataAccessManager = null;
+            try
+            {
+                dataAccessManager = new SerializedDataAccessManager(ConnectionString);
+                dataAccessManager.RestoreBackup(@"..\..\..\..\Data\SerializedData.1346.dat");
 
-            TestEngine.DataAccessManager = dataAccessManager;
-            TestEngine.InitializeDatabase();
+                TestEngine.DataAccessManager = dataAccessManager;
+                TestEngine.InitializeDatabase();
+
+                dataAccessManager = null;
+            }
+            finally
+            {
+                dataAccessManager?.Dispose();
+            }
         }
+#pragma warning restore CA1801 // Review unused parameters
 
 
         [TestMethod]
@@ -41,15 +53,15 @@ namespace Gala.Dolly.Test
         {
             shapeTest.Creator = TestEngine.AI.RecognitionModel;
 
-            string result = shapeTest.GetShapeResponse(resourcesFolderName + @"Learning\fat_circle.png");
+            shapeTest.GetShapeResponse(ResourcesFolderName + @"Learning\fat_circle.png");
 
-#region Save Bitmaps for Debugging
+            #region Save Bitmaps for Debugging
             /*
             // Save images
             ShapeTemplate namedTemplate = (ShapeTemplate)NamedTemplate;
             Color fillColor = Color.FromArgb(128, 128, 255);
 
-            Bitmap temp = new Bitmap(resourcesFolderName + @"Learning\fat_circle.png");
+            Bitmap temp = new Bitmap(ResourcesFolderName + @"Learning\fat_circle.png");
             if (VisualProcessor.ImagingSettings.DebugRecognitionSaveImages)
             {
                 temp.Save("bitmap.png", ImageFormat.Png);
@@ -69,8 +81,8 @@ namespace Gala.Dolly.Test
             {
                 temp.Save("bitmapBlobPoints.png", ImageFormat.Png);
             }
-             */
-#endregion
+             */          
+            #endregion
 
             Assert.AreEqual("Oblong Round", NamedTemplate.FriendlyName);
 
@@ -82,7 +94,7 @@ namespace Gala.Dolly.Test
         {
             shapeTest.Creator = TestEngine.AI.RecognitionModel;
 
-            string result = shapeTest.GetShapeResponse(resourcesFolderName + @"Learning\tall_triangle.png");
+            shapeTest.GetShapeResponse(ResourcesFolderName + @"Learning\tall_triangle.png");
             Assert.AreEqual("Oblong Triangular", NamedTemplate.FriendlyName);
 
             TestTemplateRelationships(NamedTemplate.TemplateRelationships, TemplateRelationshipType.Comparison, Memory.Default[TemplateType.Shape]["Triangle"]);
@@ -94,7 +106,7 @@ namespace Gala.Dolly.Test
         {
             shapeTest.Creator = TestEngine.AI.RecognitionModel;
 
-            string result = shapeTest.GetShapeResponse(resourcesFolderName + @"Learning\diagonal2.png");
+            shapeTest.GetShapeResponse(ResourcesFolderName + @"Learning\diagonal2.png");
             Assert.AreEqual("Oblong Four Corners", NamedTemplate.FriendlyName);
 
             TestTemplateRelationships(NamedTemplate.TemplateRelationships, TemplateRelationshipType.Comparison, Memory.Default[TemplateType.Shape]["Quadrilateral"]);
@@ -102,28 +114,30 @@ namespace Gala.Dolly.Test
 
         //[TestMethod]
         //[TestCategory("4 - Template Relationships")]
+#pragma warning disable CA1822 // Mark members as static
         public void TestOblongDiagonalStar()
         {
             shapeTest.Creator = TestEngine.AI.RecognitionModel;
 
-            string result = shapeTest.GetShapeResponse(resourcesFolderName + @"Learning\diagonal_star1.png");
+            shapeTest.GetShapeResponse(ResourcesFolderName + @"Learning\diagonal_star1.png");
             Assert.AreEqual("Oblong STAR", NamedTemplate.FriendlyName);
 
             TestTemplateRelationships(NamedTemplate.TemplateRelationships, TemplateRelationshipType.Comparison, Memory.Default[TemplateType.Shape]["STAR"]);
         }
+#pragma warning restore CA1822 // Mark members as static
 
         [TestMethod]
         [TestCategory("4 - Template Relationships")]
         public void TestFourPointedStar()
         {
             shapeTest.Creator = null;
-            string response = shapeTest.GetShapeResponse(resourcesFolderName + @"Learning\pink_star.png");
+            string response = shapeTest.GetShapeResponse(ResourcesFolderName + @"Learning\pink_star.png");
 
             shapeTest.Creator = TestEngine.User;
             response = TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's a STAR");
             Assert.AreEqual("It's a type of STAR.", response);
 
-            response = shapeTest.GetShapeResponse(resourcesFolderName + @"Learning\pink_star.png");
+            response = shapeTest.GetShapeResponse(ResourcesFolderName + @"Learning\pink_star.png");
             Assert.AreEqual("The Shape is STAR.", response);
 
             TestTemplateRelationships(NamedTemplate.TemplateRelationships, TemplateRelationshipType.TypeOf, Memory.Default.ShapeTemplates["STAR"]);
@@ -143,7 +157,7 @@ namespace Gala.Dolly.Test
             colorTest.Creator = TestEngine.AI.RecognitionModel;
 
             // Check AI Logic
-            result = colorTest.TestColorResponse(resourcesFolderName + @"Learning\green_blue_star.png", "Green Blue");
+            result = colorTest.TestColorResponse(ResourcesFolderName + @"Learning\green_blue_star.png", "Green Blue");
             Assert.IsTrue(result);
 
             // Check Relationships
@@ -153,7 +167,7 @@ namespace Gala.Dolly.Test
             colorTest.Creator = TestEngine.User;
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is AQUA");
 
-            result = colorTest.TestColorResponse(resourcesFolderName + @"Learning\green_blue_star.png", "AQUA");
+            result = colorTest.TestColorResponse(ResourcesFolderName + @"Learning\green_blue_star.png", "AQUA");
             Assert.IsTrue(result);
 
             // Check Relationships
@@ -166,44 +180,46 @@ namespace Gala.Dolly.Test
         public void TestColorComparison()
         {
             // Pink
-            TestColorComparison(resourcesFolderName + @"Learning\pink_star.png", "LIGHT RED", new[] { Memory.Default[TemplateType.Color]["Red"] });
+            TestColorComparison(ResourcesFolderName + @"Learning\pink_star.png", "LIGHT RED", new[] { Memory.Default[TemplateType.Color]["Red"] });
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is Pink");
 
             // Navy
-            TestColorComparison(resourcesFolderName + @"Learning\triangle_navy.png", "DARK BLUE", new[] { Memory.Default[TemplateType.Color]["Blue"] });
+            TestColorComparison(ResourcesFolderName + @"Learning\triangle_navy.png", "DARK BLUE", new[] { Memory.Default[TemplateType.Color]["Blue"] });
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is Navy Blue");
 
             // Maroon
-            TestColorComparison(resourcesFolderName + @"Learning\pentagon_maroon.png", "DARK RED", new[] { Memory.Default[TemplateType.Color]["Red"] });
+            TestColorComparison(ResourcesFolderName + @"Learning\pentagon_maroon.png", "DARK RED", new[] { Memory.Default[TemplateType.Color]["Red"] });
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is Maroon");
 
             // Regression Testing
-            AiLogicTest.colorTest = colorTest;
-            AiLogicTest aiLogicTest = new AiLogicTest();
-            aiLogicTest.TestSingletonColor();
+            AILogicTest.colorTest = colorTest;
+            using (AILogicTest aiLogicTest = new AILogicTest())
+            {
+                aiLogicTest.TestSingletonColor();
+            }
 
             // Test User Labels
             bool result;
             colorTest.Creator = TestEngine.User;
 
-            result = colorTest.TestColorResponse(resourcesFolderName + @"Learning\pink_star.png", "Pink");
+            result = colorTest.TestColorResponse(ResourcesFolderName + @"Learning\pink_star.png", "Pink");
             Assert.IsTrue(result);
-            result = colorTest.TestColorResponse(resourcesFolderName + @"Learning\triangle_navy.png", "Navy Blue");
+            result = colorTest.TestColorResponse(ResourcesFolderName + @"Learning\triangle_navy.png", "Navy Blue");
             Assert.IsTrue(result);
-            result = colorTest.TestColorResponse(resourcesFolderName + @"Learning\pentagon_maroon.png", "Maroon");
+            result = colorTest.TestColorResponse(ResourcesFolderName + @"Learning\pentagon_maroon.png", "Maroon");
             Assert.IsTrue(result);
         }
 
-        private void TestColorComparison(string path, string expectedColorName, params BaseTemplate[] relatedTemplates)
+        private static void TestColorComparison(string path, string expectedColorName, params BaseTemplate[] relatedTemplates)
         {
             colorTest.Creator = TestEngine.AI.RecognitionModel;
             bool result = colorTest.TestColorResponse(path, expectedColorName);
             Assert.IsTrue(result);
 
-            TestTemplateRelationships(colorTest.NamedTemplate.TemplateRelationships, TemplateRelationshipType.Comparison, relatedTemplates);
+            TestTemplateRelationships(ColorRecognitionTest.NamedTemplate.TemplateRelationships, TemplateRelationshipType.Comparison, relatedTemplates);
         }
 
-        private void TestTemplateRelationships(TemplateRelationshipCollection templateRelationships, TemplateRelationshipType relationshipType, params BaseTemplate[] relatedTemplates)
+        private static void TestTemplateRelationships(TemplateRelationshipCollection templateRelationships, TemplateRelationshipType relationshipType, params BaseTemplate[] relatedTemplates)
         {
             switch(relationshipType)
             {

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Galatea;
-using Galatea.AI.Abstract;
-using Galatea.IO;
-using Galatea.Imaging.IO;
 
 namespace Gala.Dolly.Test
 {
     using Gala.Data.Databases;
+    using Galatea;
+    using Galatea.AI.Abstract;
+    using Galatea.Imaging.IO;
+    using Galatea.IO;
 
     [TestClass]
     [CLSCompliant(false)]
@@ -17,19 +18,31 @@ namespace Gala.Dolly.Test
     {
         ICreator creator;
 
+#pragma warning disable CA1801 // Review unused parameters
         [ClassInitialize]
         public new static void Initialize(TestContext context)
         {
             // Initialize Colors and Shapes
-            ColorRecognitionTest colorTest = new ColorRecognitionTest() { Creator = TestEngine.AI.RecognitionModel };
-            ShapeRecognitionTest shapeTest = new ShapeRecognitionTest();
+            //ColorRecognitionTest colorTest = new ColorRecognitionTest() { Creator = TestEngine.AI.RecognitionModel };
+            //ShapeRecognitionTest shapeTest = new ShapeRecognitionTest();
 
-            SerializedDataAccessManager dataAccessManager = new SerializedDataAccessManager(ConnectionString);
-            dataAccessManager.RestoreBackup(@"..\..\..\..\Data\SerializedData.1344.dat");
+            SerializedDataAccessManager dataAccessManager = null;
+            try
+            {
+                dataAccessManager = new SerializedDataAccessManager(ConnectionString);
+                dataAccessManager.RestoreBackup(@"..\..\..\..\Data\SerializedData.1344.dat");
 
-            TestEngine.DataAccessManager = dataAccessManager;
-            TestEngine.InitializeDatabase();
+                TestEngine.DataAccessManager = dataAccessManager;
+                TestEngine.InitializeDatabase();
+
+                dataAccessManager = null;
+            }
+            finally
+            {
+                dataAccessManager?.Dispose();
+            }
         }
+#pragma warning restore CA1801 // Review unused parameters
 
         [TestMethod]
         [TestCategory("2 - Entity")]
@@ -39,10 +52,10 @@ namespace Gala.Dolly.Test
             creator = TestEngine.AI.RecognitionModel;
 
             // GREEN CIRCLE
-            result = TestEntityResponse(resourcesFolderName + @"Learning\circle.png", "Green Round Shape");
+            result = TestEntityResponse(ResourcesFolderName + @"Learning\circle.png", "Green Round Shape");
             Assert.IsTrue(result);
             // ORANGE TRIANGLE
-            result = TestEntityResponse(resourcesFolderName + @"Learning\triangle_orange.png", "Orange Triangular Shape");
+            result = TestEntityResponse(ResourcesFolderName + @"Learning\triangle_orange.png", "Orange Triangular Shape");
             Assert.IsTrue(result);
         }
 
@@ -50,21 +63,16 @@ namespace Gala.Dolly.Test
         [TestCategory("2 - Entity")]
         public void TestUnknownEntityLabel()
         {
-            string response;
             creator = TestEngine.AI.RecognitionModel;
 
             // BLUE STAR
-            response = GetEntityResponse(resourcesFolderName + @"Learning\STAR_BLUE.png");
-            //Assert.IsTrue(result);
+            GetEntityResponse(ResourcesFolderName + @"Learning\STAR_BLUE.png");
             // BOWTIE
-            response = GetEntityResponse(resourcesFolderName + @"Learning\bowtie.png");
-            //Assert.IsTrue(result);
+            GetEntityResponse(ResourcesFolderName + @"Learning\bowtie.png");
             // STOP SIGN
-            response = GetEntityResponse(resourcesFolderName + @"Learning\STOP.png");
-            //Assert.IsTrue(result);
+            GetEntityResponse(ResourcesFolderName + @"Learning\STOP.png");
             // EDWIN
-            response = GetEntityResponse(resourcesFolderName + @"Learning\edwin.png");
-            //Assert.IsTrue(result);
+            GetEntityResponse(ResourcesFolderName + @"Learning\edwin.png");
         }
 
         #region Not Implemented
@@ -76,17 +84,17 @@ namespace Gala.Dolly.Test
             bool result;
             creator = TestEngine.AI.RecognitionModel;
 
-            result = TestEntityResponse(resourcesFolderName + @"Learning\Symbols\A.png", "Letter A");
+            result = TestEntityResponse(ResourcesFolderName + @"Learning\Symbols\A.png", "Letter A");
             Assert.IsTrue(result);
-            result = TestEntityResponse(resourcesFolderName + @"Learning\Symbols\K.png", "Letter K");
+            result = TestEntityResponse(ResourcesFolderName + @"Learning\Symbols\K.png", "Letter K");
             Assert.IsTrue(result);
-            result = TestEntityResponse(resourcesFolderName + @"Learning\Symbols\S.png", "Letter S");
+            result = TestEntityResponse(ResourcesFolderName + @"Learning\Symbols\S.png", "Letter S");
             Assert.IsTrue(result);
-            result = TestEntityResponse(resourcesFolderName + @"Learning\Symbols\3.png", "Number 3");
+            result = TestEntityResponse(ResourcesFolderName + @"Learning\Symbols\3.png", "Number 3");
             Assert.IsTrue(result);
-            result = TestEntityResponse(resourcesFolderName + @"Learning\Symbols\7.png", "Number 7");
+            result = TestEntityResponse(ResourcesFolderName + @"Learning\Symbols\7.png", "Number 7");
             Assert.IsTrue(result);
-            result = TestEntityResponse(resourcesFolderName + @"Learning\Symbols\$.png", "Dollar Sign");
+            result = TestEntityResponse(ResourcesFolderName + @"Learning\Symbols\$.png", "Dollar Sign");
             Assert.IsTrue(result);
         }
 
@@ -100,18 +108,18 @@ namespace Gala.Dolly.Test
             creator = TestEngine.AI.RecognitionModel;
 
             // STOP SIGN
-            response = GetEntityResponse(resourcesFolderName + @"Learning\STOP.png");
-            Assert.IsTrue(response.ToUpper().Contains("RED OCTAGON"));
+            response = GetEntityResponse(ResourcesFolderName + @"Learning\STOP.png");
+            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("RED OCTAGON"));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's a STOP SIGN!");
 
             // Only Red Octagon
-            response = GetEntityResponse(resourcesFolderName + @"Learning\green_octagon.png");
-            Assert.IsTrue(response.ToUpper().Contains("GREEN OCTAGON"));
+            response = GetEntityResponse(ResourcesFolderName + @"Learning\green_octagon.png");
+            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("GREEN OCTAGON"));
 
             creator = TestEngine.User;
-            response = GetEntityResponse(resourcesFolderName + @"Learning\STOP.png");
-            Assert.IsTrue(response.ToUpper().Contains("STOP SIGN"));
+            response = GetEntityResponse(ResourcesFolderName + @"Learning\STOP.png");
+            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("STOP SIGN"));
         }
 
         [TestMethod]
@@ -122,42 +130,48 @@ namespace Gala.Dolly.Test
             creator = TestEngine.AI.RecognitionModel;
 
             // PACMAN
-            response = GetEntityResponse(resourcesFolderName + @"Learning\pacman.png");
-            Assert.IsTrue(response.ToUpper().Contains("YELLOW PIE"));
+            response = GetEntityResponse(ResourcesFolderName + @"Learning\pacman.png");
+            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("YELLOW PIE"));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's PAC-MAN!");
 
             // Only yellow Pie Shape is Pac-Man
-            response = GetEntityResponse(resourcesFolderName + @"Learning\pizza.png");
-            Assert.IsTrue(response.ToUpper().Contains("RED PIE"));
+            response = GetEntityResponse(ResourcesFolderName + @"Learning\pizza.png");
+            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("RED PIE"));
 
             creator = TestEngine.User;
-            response = GetEntityResponse(resourcesFolderName + @"Learning\pacman.png");
-            Assert.IsTrue(response.ToUpper().Contains("PAC-MAN"));
+            response = GetEntityResponse(ResourcesFolderName + @"Learning\pacman.png");
+            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("PAC-MAN"));
         }
 
         public ICreator Creator { get { return creator; } set { creator = value; } }
 
 
         #region Private
-        protected bool TestEntityResponse(string filename, string expectedColorName)
+        protected bool TestEntityResponse(string fileName, string expectedColorName)
         {
-            string response = GetEntityResponse(filename);
-            return response.ToUpper().Contains(expectedColorName.ToUpper());
+            if (expectedColorName == null) throw new ArgumentNullException(nameof(expectedColorName));
+
+            string response = GetEntityResponse(fileName);
+            return response.ToUpper(CultureInfo.CurrentCulture).Contains(expectedColorName.ToUpper(CultureInfo.CurrentCulture));
         }
-        protected string GetEntityResponse(string filename, bool verifyCreator = true)
+        protected string GetEntityResponse(string fileName)
         {
-            ImagingContextStream stream = GetImagingContextStream(filename);
+            return GetEntityResponse(fileName, false);
+        }
+        protected string GetEntityResponse(string fileName, bool verifyCreator)
+        {
+            ImagingContextStream stream = GetImagingContextStream(fileName);
 
             TestEngine.ExecutiveFunctions.StreamContext(TestEngine, TestEngine.Vision.ImageAnalyzer,
                 ContextType.Machine, InputType.Visual, stream, typeof(Bitmap));
 
             string result = TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "What is it?");
 
-            if(verifyCreator)
+            if (verifyCreator)
             {
                 // Verify Creator
-                Assert.AreEqual(creator, this.NamedEntity.Creator);
+                Assert.AreEqual(creator, NamedEntity.Creator);
             }
 
             // Finalize

@@ -106,12 +106,12 @@ namespace Gala.Dolly.Test
              */
         }
 
-        internal new DataAccessManager DataAccessManager
+        internal static new DataAccessManager DataAccessManager
         {
             get { return _dataAccessManager; }
             set { _dataAccessManager = value; }
         }
-        internal new IRobot AI { get { return _ai; } }
+        internal static new IRobot AI { get { return _ai; } }
 
         protected override void Dispose(bool disposing)
         {

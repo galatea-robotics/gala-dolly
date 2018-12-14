@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Galatea.AI.Abstract;
-using Galatea.IO;
-using Galatea.Imaging.IO;
 
 namespace Gala.Dolly.Test
 {
+    using Galatea.AI.Abstract;
+    using Galatea.Imaging.IO;
+    using Galatea.IO;
+
     [TestClass]
     [CLSCompliant(false)]
     public class ColorRecognitionTest : TestBase
     {
-        ICreator _creator;
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
         [TestCategory("0 - Methods")]
         public void TestBrightness()
         {
@@ -28,19 +29,19 @@ namespace Gala.Dolly.Test
         public void TestColors()
         {
             bool result;
-            _creator = null;
+            Creator = null;
 
             // RED
-            result = TestColorResponse(resourcesFolderName + @"Learning\STOP.png", "Red");
+            result = TestColorResponse(ResourcesFolderName + @"Learning\STOP.png", "Red");
             Assert.IsTrue(result);
             // YELLOW
-            result = TestColorResponse(resourcesFolderName + @"Learning\pacman.png", "Yellow");
+            result = TestColorResponse(ResourcesFolderName + @"Learning\pacman.png", "Yellow");
             Assert.IsTrue(result);
             // GREEN
-            result = TestColorResponse(resourcesFolderName + @"Learning\green_circle.png", "Green");
+            result = TestColorResponse(ResourcesFolderName + @"Learning\green_circle.png", "Green");
             Assert.IsTrue(result);
             // BLUE
-            result = TestColorResponse(resourcesFolderName + @"Learning\Symbols\B.png", "Blue");
+            result = TestColorResponse(ResourcesFolderName + @"Learning\Symbols\B.png", "Blue");
             Assert.IsTrue(result);
         }
         [TestMethod]
@@ -48,19 +49,19 @@ namespace Gala.Dolly.Test
         public void TestColorLearning()
         {
             bool result;
-            _creator = TestEngine.AI.RecognitionModel;
+            Creator = TestEngine.AI.RecognitionModel;
 
             string response;
 
             // ORANGE
-            response = GetColorResponse(resourcesFolderName + @"Learning\triangle_orange.png");
-            Assert.IsFalse(response.ToUpper().Contains("ORANGE"));
+            response = GetColorResponse(ResourcesFolderName + @"Learning\triangle_orange.png");
+            Assert.IsFalse(response.ToUpper(CultureInfo.CurrentCulture).Contains("ORANGE"));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is ORANGE!");
 
             // PURPLE
-            response = GetColorResponse(resourcesFolderName + @"Learning\star2.png");
-            Assert.IsFalse(response.ToUpper().Contains("PURPLE"));
+            response = GetColorResponse(ResourcesFolderName + @"Learning\star2.png");
+            Assert.IsFalse(response.ToUpper(CultureInfo.CurrentCulture).Contains("PURPLE"));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's PURPLE!");
 
@@ -68,16 +69,16 @@ namespace Gala.Dolly.Test
             TestColors();
 
             // NOW CHECK IF ORANGE AND PURPLE WERE LEARNED
-            _creator = TestEngine.User;
+            Creator = TestEngine.User;
 
-            result = TestColorResponse(resourcesFolderName + @"Learning\orange_pie.png", "orange");
+            result = TestColorResponse(ResourcesFolderName + @"Learning\orange_pie.png", "orange");
             Assert.IsTrue(result);
 
-            result = TestColorResponse(resourcesFolderName + @"Learning\Symbols\C.png", "purple");
+            result = TestColorResponse(ResourcesFolderName + @"Learning\Symbols\C.png", "purple");
             Assert.IsTrue(result);
         }
 
-        public ICreator Creator { get { return _creator; } set { _creator = value; } }
+        public ICreator Creator { get; set; }
 
         internal bool TestColorResponse(string path, string expectedColorName)
         {
@@ -95,14 +96,14 @@ namespace Gala.Dolly.Test
             string result = TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "What color?");
 
             // Verify Creator
-            Assert.IsTrue(CreatorExtension.Equals(_creator, NamedTemplate.Creator));
+            Assert.IsTrue(CreatorExtension.Equals(Creator, NamedTemplate.Creator));
 
             // Finalize
             return result;
         }
-        private bool CheckColorResponse(string response, string expectedColorName)
+        private static bool CheckColorResponse(string response, string expectedColorName)
         {
-            string expectedResponse = string.Format("The color is {0}.", expectedColorName);
+            string expectedResponse = $"The color is {expectedColorName}.";
             return response.Equals(expectedResponse, StringComparison.CurrentCultureIgnoreCase);
         }
     }
