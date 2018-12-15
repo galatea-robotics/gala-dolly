@@ -90,7 +90,10 @@
     <Compile Include="..\Gala.Dolly\Properties\Version.cs">
       <Link>Properties\Version.cs</Link>
     </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="..\Galatea\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="Properties\ResourcesGlobalSuppressions.cs" />
     <Compile Include="Phonemes.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>

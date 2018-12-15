@@ -1,0 +1,12 @@
+﻿{
+  "dependencies": {
+    "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.6.2"
+  },
+  "frameworks": {
+    ".NETFramework,Version=v3.5": {}
+  },
+  "runtimes": {
+    "win": {},
+    "win-x86": {}
+  }
+}

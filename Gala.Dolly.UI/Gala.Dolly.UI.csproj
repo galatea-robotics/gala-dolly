@@ -106,7 +106,6 @@
       <DependentUpon>ChatbotControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ChatbotManager.cs" />
-    <Compile Include="GlobalSuppressions1.cs" />
     <Compile Include="IConsole.cs" />
     <Compile Include="Diagnostics\FileLogger.cs">
       <SubType>Component</SubType>

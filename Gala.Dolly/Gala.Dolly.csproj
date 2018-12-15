@@ -89,13 +89,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ChatbotManager.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Internal\CameraWindow.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Internal\CameraWindow.Designer.cs">
-      <DependentUpon>CameraWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Internal\Extension.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -140,12 +133,6 @@
     <Compile Include="UI\TTS.Designer.cs">
       <DependentUpon>TTS.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\VisionCapture.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\VisionCapture.Designer.cs">
-      <DependentUpon>VisionCapture.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -159,9 +146,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TemplateRecognition.resx">
       <DependentUpon>TemplateRecognition.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\VisionCapture.resx">
-      <DependentUpon>VisionCapture.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +183,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <CodeAnalysisDictionary Include="..\Galatea.Globalization\CodeAnalaysisDictionary.xml">
+      <Link>CodeAnalaysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
     <Content Include="Dolly.ico" />
     <Content Include="Images\b_eyecam.png" />
     <Content Include="Images\eyecam.png" />
@@ -209,14 +196,6 @@
     <None Include="Images\mic_off.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Library\motion_src\dshow\dshow.csproj">
-      <Project>{37b08afd-f4bc-4e13-9119-537ba6a12ccb}</Project>
-      <Name>dshow</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Library\motion_src\motion\motion.csproj">
-      <Project>{f4799c73-dee9-48f2-b626-32149cc30976}</Project>
-      <Name>motion</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Library\motion_src\vfw\vfw.csproj">
       <Project>{ecaa3d55-19ab-440b-b82e-221ae06c4a5b}</Project>
       <Name>vfw</Name>
@@ -276,10 +255,4 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Accord.3.8.0\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Accord.3.8.0\build\Accord.targets'))" />
-  </Target>
 </Project>
