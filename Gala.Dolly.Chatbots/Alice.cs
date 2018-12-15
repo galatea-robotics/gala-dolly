@@ -37,11 +37,11 @@ namespace Gala.Dolly.Chatbots
             ValidateFolders(chatbotAliceConfigFolder, chatbotResourcesFolder);
 
             // Initialize AIMLBot2.5 Properties
-            aimlBot.loadSettings(chatbotAliceConfigFolder);
+            aimlBot.LoadSettings(chatbotAliceConfigFolder);
             aimlBot.PathToAIML = Path.Combine(chatbotResourcesFolder, "alice");
 
-            aimlBot.loadAIMLFromFiles();
-            aimlBot.DefaultPredicates.updateSetting("name", userName);
+            aimlBot.LoadAIMLFromFiles();
+            aimlBot.DefaultPredicates.UpdateSetting("name", userName);
 
             // Initialize Chat runtime
             aimlUser = new AIMLBot.User(userName, aimlBot);
@@ -80,7 +80,7 @@ namespace Gala.Dolly.Chatbots
             get { return base.FriendlyName; }
             set
             {
-                aimlBot.GlobalSettings.updateSetting("name", value);
+                aimlBot.GlobalSettings.UpdateSetting("name", value);
                 base.FriendlyName = value;
             }
         }

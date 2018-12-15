@@ -422,8 +422,7 @@ namespace Gala.Dolly.UI
             Bitmap newBitmap = null;
             try
             {
-                newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height);
-
+                using (newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height))
                 using (Graphics gfx = Graphics.FromImage(newBitmap))
                 {
                     gfx.Clear(blobImage.BitmapBlob.BackgroundIsBlack ? Color.Black : Color.White);

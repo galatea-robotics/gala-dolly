@@ -45,13 +45,11 @@ namespace Gala.Dolly.UI
                 viewSerialInterfaceMenuItemTemp = null;
 
                 // Add Serial >> Open Port, Close Port, and Open at Startup Menu and Menu Items
-                serialOpenPortMenuItem = new ToolStripMenuItem("&Open Port");
-                serialClosePortMenuItem = new ToolStripMenuItem("&Close Port");
-                serialOpenAtStartupMenuItem = new ToolStripMenuItem("O&pen at Startup");
-                serialOpenAtStartupMenuItem.CheckOnClick = true;
+                serialOpenPortMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialOpenPortMenuItem_Text);
+                serialClosePortMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialClosePortMenuItem_Text);
+                serialOpenAtStartupMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialOpenAtStartupMenuItem_Text) { CheckOnClick = true };
                 // Add Disable Warnings
-                serialDisableWarnings = new ToolStripMenuItem("Disable Log Warnings");
-                serialDisableWarnings.CheckOnClick = true;
+                serialDisableWarnings = new ToolStripMenuItem(Resources.SerialInterface_serialDisableWarnings_Text) { CheckOnClick = true };
                 serialDisableWarnings.Click += SerialDisableWarnings_Click;
 
                 serialOpenAtStartupMenuItemTemp = new ToolStripMenuItem(Resources.SerialInterface_serialOpenAtStartupMenuItem_Text);
@@ -86,7 +84,7 @@ namespace Gala.Dolly.UI
             }           
         }
 
-        public new bool DesignMode
+        internal new bool DesignMode
         {
             get
             {
@@ -94,7 +92,7 @@ namespace Gala.Dolly.UI
 
                 // Do this thing
                 if (!result)
-                    result = (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime);
+                    result = (LicenseManager.UsageMode == LicenseUsageMode.Designtime);
 
                 // Finalize
                 return result;

@@ -14,7 +14,7 @@ namespace Gala.Dolly.UI
         {
             if (pe == null)
             {
-                throw new Galatea.TeaArgumentNullException("pe");
+                throw new Galatea.TeaArgumentNullException(nameof(pe));
             }
 
             base.OnPaint(pe);

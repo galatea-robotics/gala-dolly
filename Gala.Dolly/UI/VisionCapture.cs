@@ -1,10 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using dshow;
 using dshow.Core;
@@ -53,10 +50,10 @@ namespace Gala.Dolly.UI
             //maxHeight = cameraWindow.Margin.Top - cameraWindow.Margin.Bottom;
 
             // Load Application Settings
-            txtPanMin.Text = Settings.Default.VisionCapturePanMin.ToString();
-            txtPanMax.Text = Settings.Default.VisionCapturePanMax.ToString();
-            txtTiltMin.Text = Settings.Default.VisionCaptureTiltMin.ToString();
-            txtTiltMax.Text = Settings.Default.VisionCaptureTiltMax.ToString();
+            txtPanMin.Text = Settings.Default.VisionCapturePanMin.ToString(CultureInfo.CurrentCulture);
+            txtPanMax.Text = Settings.Default.VisionCapturePanMax.ToString(CultureInfo.CurrentCulture);
+            txtTiltMin.Text = Settings.Default.VisionCaptureTiltMin.ToString(CultureInfo.CurrentCulture);
+            txtTiltMax.Text = Settings.Default.VisionCaptureTiltMax.ToString(CultureInfo.CurrentCulture);
         }
 
         string IProvider.ProviderId => "Gala.Dolly.UI.VisionCapture";
