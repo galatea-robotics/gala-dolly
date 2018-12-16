@@ -141,6 +141,9 @@
   <data name="ChatbotControl_radDefault_Text" xml:space="preserve">
     <value>DEFAULT</value>
   </data>
+  <data name="ChatbotControl_viewChatbotsMenuItem_Text" xml:space="preserve">
+    <value>&amp;Chatbot Buttons</value>
+  </data>
   <data name="Chatbot_Message_Format" xml:space="preserve">
     <value>&gt;{0}: {1}</value>
   </data>

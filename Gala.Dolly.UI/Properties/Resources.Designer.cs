@@ -142,6 +142,15 @@ namespace Gala.Dolly.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Chatbot Buttons.
+        /// </summary>
+        internal static string ChatbotControl_viewChatbotsMenuItem_Text {
+            get {
+                return ResourceManager.GetString("ChatbotControl_viewChatbotsMenuItem_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon Dolly {

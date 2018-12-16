@@ -43,7 +43,7 @@ namespace Gala.Dolly.UI
                 tempMenuItem = new ToolStripMenuItem();
 
                 viewChatbotsMenuItem = tempMenuItem;
-                //viewChatbotsMenuItem.Text = Gala.Dolly.UI.Properties;
+                viewChatbotsMenuItem.Text = Properties.Resources.ChatbotControl_viewChatbotsMenuItem_Text;
                 viewChatbotsMenuItem.CheckOnClick = true;
             }
             catch
