@@ -726,7 +726,7 @@ namespace Gala.Dolly.UI
                 }
 
                 // Send Error Notification to Speech Module
-                Program.Engine.AI.LanguageModel.SpeechModule.TextToSpeech.Speak(errorMessage, this);
+                SmartEngine.AI.LanguageModel.SpeechModule.TextToSpeech.Speak(errorMessage, this);
 
                 //Program.BaseForm.Chatbot.SendResponse(errorMessage);
 

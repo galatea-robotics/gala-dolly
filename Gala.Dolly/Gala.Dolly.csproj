@@ -59,6 +59,7 @@
     </DocumentationFile>
     <PlatformTarget>x86</PlatformTarget>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -88,7 +89,16 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\Galatea\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
     <Compile Include="ChatbotManager.cs" />
+    <Compile Include="Internal\CameraWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Internal\CameraWindow.Designer.cs">
+      <DependentUpon>CameraWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Internal\Extension.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -133,6 +143,12 @@
     <Compile Include="UI\TTS.Designer.cs">
       <DependentUpon>TTS.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\VisionCapture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\VisionCapture.Designer.cs">
+      <DependentUpon>VisionCapture.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -146,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TemplateRecognition.resx">
       <DependentUpon>TemplateRecognition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\VisionCapture.resx">
+      <DependentUpon>VisionCapture.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -192,10 +211,19 @@
     <Content Include="Images\green_led.png" />
     <Content Include="Images\lettuce_holder.png" />
     <Content Include="Images\red_led.png" />
+    <CodeAnalysisDictionary Include="Properties\ResourcesCodeAnalaysisDictionary.xml" />
     <None Include="Images\mic_on.png" />
     <None Include="Images\mic_off.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Library\motion_src\dshow\dshow.csproj">
+      <Project>{37b08afd-f4bc-4e13-9119-537ba6a12ccb}</Project>
+      <Name>dshow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Library\motion_src\motion\motion.csproj">
+      <Project>{f4799c73-dee9-48f2-b626-32149cc30976}</Project>
+      <Name>motion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Library\motion_src\vfw\vfw.csproj">
       <Project>{ecaa3d55-19ab-440b-b82e-221ae06c4a5b}</Project>
       <Name>vfw</Name>

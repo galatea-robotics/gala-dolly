@@ -137,7 +137,7 @@ namespace Gala.Dolly
             // Finalize
             bool started = false;
 
-            if (_engine.DataAccessManager.IsInitialized)
+            if (SmartEngine.DataAccessManager.IsInitialized)
             {
                 started = true;
             }
@@ -164,9 +164,9 @@ namespace Gala.Dolly
             if (_engine != null)
             {
                 // Save Settings
-                if (_engine.AI?.LanguageModel?.SpeechModule != null)
+                if (SmartEngine.AI?.LanguageModel?.SpeechModule != null)
                 {
-                    Properties.Settings.Default.SpeechIsSilent = Engine.AI.LanguageModel.SpeechModule.StaySilent;
+                    Properties.Settings.Default.SpeechIsSilent = SmartEngine.AI.LanguageModel.SpeechModule.StaySilent;
                 }
                 Properties.Settings.Default.Save();
 

@@ -10,14 +10,13 @@ namespace Gala.Dolly.UI
     using Gala.Dolly.Robotics.BS2Commands;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "TTS")]
-    [CLSCompliant(false)]
-    public partial class TTS : UserControl //, Galatea.Runtime.Speech.ITextToSpeech
+    internal partial class TTS : UserControl //, Galatea.Runtime.Speech.ITextToSpeech
     {
         private ISpeechModule speechModule;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
         [Serializable]
-        protected class MouthPositionList : System.Collections.Generic.Dictionary<int, string>
+        internal class MouthPositionList : System.Collections.Generic.Dictionary<int, string>
         {
             public MouthPositionList()
             {
@@ -142,7 +141,7 @@ namespace Gala.Dolly.UI
             try
             {
                 speechModule = new Galatea.Speech.SpeechModule();
-                speechModule.Initialize(Program.Engine.AI.LanguageModel);
+                speechModule.Initialize(SmartEngine.AI.LanguageModel);
 
                 TextToSpeech5 tts5 = null;
                 try
@@ -186,7 +185,6 @@ namespace Gala.Dolly.UI
             // Set Mouth Position
             TextToSpeech_MouthPositionChange(mouthPosition);
         }
-
 
         private void TextToSpeech_MouthPositionChange(object sender, MouthPositionEventArgs e)
         {

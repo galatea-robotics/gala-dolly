@@ -47,16 +47,10 @@ namespace Gala.Dolly.UI
                 // Add Serial >> Open Port, Close Port, and Open at Startup Menu and Menu Items
                 serialOpenPortMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialOpenPortMenuItem_Text);
                 serialClosePortMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialClosePortMenuItem_Text);
-                serialOpenAtStartupMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialOpenAtStartupMenuItem_Text) { CheckOnClick = true };
-                // Add Disable Warnings
-                serialDisableWarnings = new ToolStripMenuItem(Resources.SerialInterface_serialDisableWarnings_Text) { CheckOnClick = true };
-                serialDisableWarnings.Click += SerialDisableWarnings_Click;
-
                 serialOpenAtStartupMenuItemTemp = new ToolStripMenuItem(Resources.SerialInterface_serialOpenAtStartupMenuItem_Text);
                 serialOpenAtStartupMenuItem = serialOpenAtStartupMenuItemTemp;
                 serialOpenAtStartupMenuItem.CheckOnClick = true;
                 serialOpenAtStartupMenuItemTemp = null;
-
                 serialToolStripMenuItem = new ToolStripMenuItem(Resources.SerialInterface_serialToolStripMenuItem_Text);
                 serialToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[]
                 {
@@ -77,9 +71,9 @@ namespace Gala.Dolly.UI
             }
             catch
             {
-                viewSerialInterfaceMenuItemTemp.Dispose();
-                serialOpenAtStartupMenuItemTemp.Dispose();
-                serialDisableWarningsTemp.Dispose();
+                viewSerialInterfaceMenuItemTemp?.Dispose();
+                serialOpenAtStartupMenuItemTemp?.Dispose();
+                serialDisableWarningsTemp?.Dispose();
                 throw;
             }           
         }

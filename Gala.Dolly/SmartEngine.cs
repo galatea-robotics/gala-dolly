@@ -148,12 +148,12 @@ namespace Gala.Dolly
             base.Dispose(disposing);
         }
 
-        internal new DataAccessManager DataAccessManager
+        internal new static DataAccessManager DataAccessManager
         {
             get { return _dataAccessManager; }
             set { _dataAccessManager = value; }
         }
-        internal new IRobot AI { get { return _ai; } }
+        internal new static IRobot AI { get { return _ai; } }
 
         private static SensoryMotorSystem machine;
         private static VisualProcessor vision;

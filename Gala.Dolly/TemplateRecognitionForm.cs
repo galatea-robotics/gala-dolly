@@ -15,7 +15,7 @@ namespace Gala.Dolly
             if (!Program.Started) return;
 
             // Load Chatbots
-            chatbotControl.InitializeChatbots(Program.Engine.AI.LanguageModel.ChatbotManager);
+            chatbotControl.InitializeChatbots(SmartEngine.AI.LanguageModel.ChatbotManager);
             chatbotControl.Select();
         }
 

@@ -419,23 +419,14 @@ namespace Gala.Dolly.UI
             Rectangle rect = new Rectangle(blobImage.Location.X, blobImage.Location.Y, blobImage.BitmapBlob.Width, blobImage.BitmapBlob.Height);
 
             // Create BRAND FUCKING NEW Bitmap
-            Bitmap newBitmap = null;
-            try
+            using (Bitmap newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height))
+            using (Graphics gfx = Graphics.FromImage(newBitmap))
             {
-                using (newBitmap = new Bitmap(sourceImage.Width, sourceImage.Height))
-                using (Graphics gfx = Graphics.FromImage(newBitmap))
-                {
-                    gfx.Clear(blobImage.BitmapBlob.BackgroundIsBlack ? Color.Black : Color.White);
-                    gfx.DrawImage(bmpTemp, rect);
-                }
+                gfx.Clear(blobImage.BitmapBlob.BackgroundIsBlack ? Color.Black : Color.White);
+                gfx.DrawImage(bmpTemp, rect);
 
                 // Update the Display
                 SetDisplayImage(newBitmap);
-            }
-            catch
-            {
-                newBitmap?.Dispose();
-                throw;
             }
         }
         private void SetDisplayImage(Bitmap bitmap)
