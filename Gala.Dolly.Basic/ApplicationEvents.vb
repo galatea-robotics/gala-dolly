@@ -50,7 +50,7 @@ Namespace My
             Gala.Dolly.Program.Startup()
             If Not Gala.Dolly.Program.Started Then Exit Sub
 
-            Program.Engine.AI.LanguageModel.SpeechModule.StaySilent = Gala.Dolly.Properties.Settings.Default.SpeechIsSilent
+            SmartEngine.AI.LanguageModel.SpeechModule.StaySilent = Gala.Dolly.Properties.Settings.Default.SpeechIsSilent
             Program.Engine.Machine.SerialPortController.DisableWarning = Gala.Dolly.Properties.Settings.Default.SerialPortDisableWarning
         End Sub
 

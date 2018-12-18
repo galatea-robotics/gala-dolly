@@ -526,13 +526,13 @@ namespace Gala.Dolly.UI
         private EyeCamColor _eyeCamColor;
     }
 
-    public enum LEDColor
+    internal enum LEDColor
     {
         Red,
         Green
     }
 
-    public enum EyeCamColor
+    internal enum EyeCamColor
     {
         Blue,
         Grey

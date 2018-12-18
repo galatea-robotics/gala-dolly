@@ -8,7 +8,7 @@ namespace Gala.Dolly.UI
 {
     using Gala.Dolly.Properties;
 
-    public partial class SerialInterface : UserControl
+    internal partial class SerialInterface : UserControl
     {
         internal ToolStripMenuItem viewSerialInterfaceMenuItem;
         internal ToolStripMenuItem serialToolStripMenuItem;

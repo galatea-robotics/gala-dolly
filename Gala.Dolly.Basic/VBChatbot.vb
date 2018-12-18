@@ -1,18 +1,19 @@
-﻿Imports Galatea.Speech
+﻿Imports System.Globalization
+Imports Galatea.Speech
+Imports Gala.Dolly.Chatbots.Properties
 Imports Gala.Dolly.UI
 Imports Galatea
 Imports Galatea.Runtime
-Imports Gala.Dolly.Chatbots.Properties
 Imports SpeechLib
 
 <CLSCompliant(False)>
-Public Class VbChatbot
+Public Class VBChatbot
     Inherits System.Windows.Forms.UserControl
     Implements Galatea.IProvider, IConsole
 
-    Protected WithEvents tts5 As SpeechLib.SpVoice
-    Protected speakFlags As SpeechLib.SpeechVoiceSpeakFlags
-    Protected phonemes As Galatea.Speech.PhonemeCollection
+    Protected WithEvents Tts5 As SpeechLib.SpVoice
+    Private speakFlags As SpeechLib.SpeechVoiceSpeakFlags
+    Private phonemes As Galatea.Speech.PhonemeCollection
 
     Public Sub New()
 
@@ -22,14 +23,19 @@ Public Class VbChatbot
         ' Add any initialization after the InitializeComponent() call.
         btnMicOn.Image = Properties.Resources.mic_on
         btnMicOff.Image = Properties.Resources.mic_off
+
+        ' IProvider
+        Dim t = Me.GetType()
+        _providerId = t.FullName
+        _providerName = t.Name
     End Sub
 
-    Protected Sub VbChatbot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Protected Sub VBChatbot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If DesignMode Then Exit Sub
 
         ' Initialize TTS
-        tts5 = New SpeechLib.SpVoice()
+        Tts5 = New SpeechLib.SpVoice()
 
         speakFlags = SpeechLib.SpeechVoiceSpeakFlags.SVSFlagsAsync _
             Or SpeechLib.SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak _
@@ -54,13 +60,13 @@ Public Class VbChatbot
             TextToSpeech.Rate = Gala.Dolly.Properties.Settings.Default.TtsRate
             TextToSpeech.Volume = Gala.Dolly.Properties.Settings.Default.TtsVolume
 
-            tts5.Rate = TextToSpeech.Rate
-            tts5.Volume = TextToSpeech.Volume
+            Tts5.Rate = TextToSpeech.Rate
+            Tts5.Volume = TextToSpeech.Volume
 
             Dim voices As ISpeechObjectTokens
-            voices = tts5.GetVoices()
-            Dim voiceName = voices.Item(1).GetDescription()     ' Microsoft Zira Mobile
-            tts5.Voice = voices.Item(1)
+            voices = Tts5.GetVoices()
+            'Dim voiceName = voices.Item(1).GetDescription()     ' Microsoft Zira Mobile
+            Tts5.Voice = voices.Item(1)
 
             cbChatbotOnly.Checked = Properties.Settings.Default.LanguageModeChatbotOnly
         End If
@@ -74,16 +80,16 @@ Public Class VbChatbot
         radALICE.Checked = True
     End Sub
 
-    Protected Sub VbChatbot_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+    Protected Sub VBChatbot_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
 
         ' Save Settings
         Properties.Settings.Default.LanguageModeChatbotOnly = cbChatbotOnly.Checked
     End Sub
 
-    Protected Sub cbChatbotOnly_CheckedChanged(sender As Object, e As EventArgs) Handles cbChatbotOnly.CheckedChanged
+    Protected Sub CBChatbotOnly_CheckedChanged(sender As Object, e As EventArgs) Handles cbChatbotOnly.CheckedChanged
 
         If Not (Program.Engine Is Nothing) Then
-            Program.Engine.AI.LanguageModel.Enabled = Not cbChatbotOnly.Checked
+            SmartEngine.AI.LanguageModel.Enabled = Not cbChatbotOnly.Checked
         End If
     End Sub
 
@@ -95,9 +101,8 @@ Public Class VbChatbot
         ' Get Response
         If Not String.IsNullOrEmpty(inputText) Then
 
-            Dim msg As String = String.Format(Settings.Default.ChatbotMessageFormat,
-                                              Program.Engine.User.Name.ToUpper,
-                                              inputText)
+            Dim msg As String = String.Format(CultureInfo.CurrentCulture, Settings.Default.ChatbotMessageFormat,
+                                              Program.Engine.User.Name.ToUpper(CultureInfo.CurrentCulture), inputText)
 
             txtDisplay.AppendText(msg & vbCrLf)
 
@@ -113,7 +118,7 @@ Public Class VbChatbot
             If String.IsNullOrEmpty(responseText) Then
 
                 ' Get AI response to input
-                responseText = Program.Engine.ExecutiveFunctions.GetResponse(Program.Engine.AI.LanguageModel, inputText, Program.Engine.User.FriendlyName)
+                responseText = Program.Engine.ExecutiveFunctions.GetResponse(SmartEngine.AI.LanguageModel, inputText, Program.Engine.User.FriendlyName)
             End If
 
             ' Display response
@@ -127,8 +132,8 @@ Public Class VbChatbot
 
         'LunaPOC.SerialInterface.Wait(240)     ' Don't talk over the Human!
 
-        Dim msg As String = String.Format(Chatbots.Properties.Settings.Default.ChatbotMessageFormat,
-                                          Program.Engine.AI.LanguageModel.ChatbotManager.Current.FriendlyName.ToUpper(),
+        Dim msg As String = String.Format(CultureInfo.CurrentCulture, Settings.Default.ChatbotMessageFormat,
+                                          SmartEngine.AI.LanguageModel.ChatbotManager.Current.FriendlyName.ToUpper(CultureInfo.CurrentCulture),
                                           responseText)
 
         txtDisplay.AppendText(msg & vbCrLf)
@@ -150,13 +155,13 @@ Public Class VbChatbot
         ''resumeMicTimer.Start()
 
         ' just speak the text with the given flags
-        tts5.Speak(responseText, speakFlags)
+        Tts5.Speak(responseText, speakFlags)
 
         ' Set new Response
         responseText = Nothing
     End Sub
 
-    Public Property ChatBotButtonsVisible As Boolean
+    Public Property ChatbotButtonsVisible As Boolean
         Get
             Return radALICE.Visible And radELIZA.Visible And radDefault.Visible
         End Get
@@ -170,13 +175,13 @@ Public Class VbChatbot
 
     Public ReadOnly Property ProviderId As String Implements IProvider.ProviderId
         Get
-            Throw New NotImplementedException()
+            Return _providerId
         End Get
     End Property
 
     Public ReadOnly Property ProviderName As String Implements IProvider.ProviderName
         Get
-            Throw New NotImplementedException()
+            Return _providerName
         End Get
     End Property
 
@@ -188,10 +193,6 @@ Public Class VbChatbot
             _inputting = value
         End Set
     End Property
-
-
-    Private _isSilent As Boolean
-    Private _inputting As Boolean
 
     Public Sub SendResponse(response As String) Implements IConsole.SendResponse
 
@@ -215,12 +216,12 @@ Public Class VbChatbot
         txtInput.Width = pnlInput.ClientSize.Width - Panel2.ClientSize.Width
     End Sub
 
-    Private Sub radALICE_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles radALICE.CheckedChanged
+    Private Sub RadALICE_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles radALICE.CheckedChanged
         If Not radALICE.Checked Then Exit Sub
 
         ' Set Engine ChatBot to Alice
-        Dim alice As IChatbot = ChatbotManager1("Alice")
-        responseText = Galatea.Globalization.ChatbotResources.ChatBotAliceGreeting
+        'Dim alice As IChatbot = ChatbotManager1("Alice")
+        responseText = Galatea.Globalization.ChatbotResources.ChatbotAliceGreeting
         SendResponse()
 
         ' Disable the Default 
@@ -230,12 +231,12 @@ Public Class VbChatbot
         txtInput.Focus()
     End Sub
 
-    Private Sub radELIZA_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles radELIZA.CheckedChanged
+    Private Sub RadELIZA_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles radELIZA.CheckedChanged
         If Not radELIZA.Checked Then Exit Sub
 
         ' Set Engine ChatBot to Eliza
-        Program.Engine.AI.LanguageModel.ChatbotManager.Current = ChatbotManager1("Eliza")
-        responseText = Galatea.Globalization.ChatbotResources.ChatBotElizaGreeting
+        SmartEngine.AI.LanguageModel.ChatbotManager.Current = ChatbotManager1("Eliza")
+        responseText = Galatea.Globalization.ChatbotResources.ChatbotElizaGreeting
         SendResponse()
 
         ' Disable the Default 
@@ -245,7 +246,7 @@ Public Class VbChatbot
         txtInput.Focus()
     End Sub
 
-    Private Sub txtInput_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtInput.KeyDown
+    Private Sub TxtInput_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtInput.KeyDown
         ' No Data
         If history.Count = 0 Then Exit Sub
 
@@ -281,22 +282,22 @@ Public Class VbChatbot
         End If
     End Sub
 
-    Private Sub txtInput_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtInput.KeyPress
+    Private Sub TxtInput_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtInput.KeyPress
 
         If e.KeyChar = Chr(13) Then GetResponse()
     End Sub
 
-    Private Sub btnSend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSend.Click
+    Private Sub BtnSend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSend.Click
 
         GetResponse()
     End Sub
 
-    Private Sub btnMicOn_Click(sender As Object, e As EventArgs) Handles btnMicOn.Click
+    Private Sub BtnMicOn_Click(sender As Object, e As EventArgs) Handles btnMicOn.Click
 
         StartMic()
     End Sub
 
-    Private Sub btnMicOff_Click(sender As Object, e As EventArgs) Handles btnMicOff.Click
+    Private Sub BtnMicOff_Click(sender As Object, e As EventArgs) Handles btnMicOff.Click
 
         StopMic()
     End Sub
@@ -305,14 +306,14 @@ Public Class VbChatbot
 
 #Region "Text to Speech"
 
-    Private Sub tts5_Word(ByVal StreamNumber As Integer, ByVal StreamPosition As Object, ByVal CharacterPosition As Integer, ByVal Length As Integer) Handles tts5.Word
+    Private Sub Tts5_Word(ByVal StreamNumber As Integer, ByVal StreamPosition As Object, ByVal CharacterPosition As Integer, ByVal Length As Integer) Handles Tts5.Word
         'txtInput.Text = responseText
         'txtInput.Select(CharacterPosition, Length)
 
         ''Debug.Write(" WORD:" & txtInput.SelectedText & " ")
     End Sub
 
-    Private Sub tts5_Viseme(ByVal StreamNumber As Integer, ByVal StreamPosition As Object, ByVal Duration As Integer, ByVal NextVisemeId As SpeechVisemeType, ByVal Feature As SpeechVisemeFeature, ByVal CurrentVisemeId As SpeechVisemeType) Handles tts5.Viseme
+    Private Sub Tts5_Viseme(ByVal StreamNumber As Integer, ByVal StreamPosition As Object, ByVal Duration As Integer, ByVal NextVisemeId As SpeechVisemeType, ByVal Feature As SpeechVisemeFeature, ByVal CurrentVisemeId As SpeechVisemeType) Handles Tts5.Viseme
         Dim viseme As Short = CurrentVisemeId
 
         Dim mouthPosition = phonemes(viseme).MouthPosition
@@ -324,7 +325,7 @@ Public Class VbChatbot
         'Debug.Write(" Mouth Position:" & mouthPosition.ToString & " ")
     End Sub
 
-    Private Sub tts5_EndStream(ByVal StreamNumber As Integer, ByVal StreamPosition As Object) Handles tts5.EndStream
+    Private Sub Tts5_EndStream(ByVal StreamNumber As Integer, ByVal StreamPosition As Object) Handles Tts5.EndStream
 
         txtInput.Clear()
 
@@ -345,59 +346,59 @@ Public Class VbChatbot
     End Sub
 
     Private Sub TextToSpeech_RateChanged(ByVal sender As Object, ByVal e As EventArgs) Handles TextToSpeech.RateChanged
-        tts5.Rate = TextToSpeech.Rate
+        Tts5.Rate = TextToSpeech.Rate
         Gala.Dolly.Properties.Settings.Default.TtsRate = TextToSpeech.Rate
         Gala.Dolly.Properties.Settings.Default.Save()
     End Sub
 
     Private Sub TextToSpeech_VolumeChanged(ByVal sender As Object, ByVal e As EventArgs) Handles TextToSpeech.VolumeChanged
-        tts5.Volume = TextToSpeech.Volume
+        Tts5.Volume = TextToSpeech.Volume
         Gala.Dolly.Properties.Settings.Default.TtsVolume = TextToSpeech.Volume
         Gala.Dolly.Properties.Settings.Default.Save()
     End Sub
 
-    Protected inputText As String
-    Protected responseText As String
-    Protected globalizedResponseText As String
-    Protected history As List(Of String) = New List(Of String)
-    Protected historyLine As Integer = -1
+    Private inputText As String
+    Private responseText As String
+    'Private globalizedResponseText As String
+    Private history As List(Of String) = New List(Of String)
+    Private historyLine As Integer = -1
     'Protected substitutionsList As Galatea.Speech.Substitutions
 #End Region
 
 #Region "Speech Recognition"
 
-    Protected WithEvents RecoContext As SpSharedRecoContext
-    Protected dictationGrammar As ISpeechRecoGrammar
-    Protected chatbotGrammar As ISpeechRecoGrammar
-    Protected galateaGrammar As ISpeechRecoGrammar
-    Protected chatbotGrammarRuleName As String = "Gala.Dolly.Chatbot"
-    Protected speechRecognitionText As String
-    Protected speechRecognitionStopped As Boolean = True
-    Protected speechRecognitionPaused As Boolean = False
+    Protected WithEvents RecognitionContext As SpSharedRecoContext
+    Private dictationGrammar As ISpeechRecoGrammar
+    Private chatbotGrammar As ISpeechRecoGrammar
+    Private galateaGrammar As ISpeechRecoGrammar
+    'Private chatbotGrammarRuleName As String = "Gala.Dolly.Chatbot"
+    Private speechRecognitionText As String
+    Private speechRecognitionStopped As Boolean = True
+    Private speechRecognitionPaused As Boolean = False
 
     ' http://www.dreamincode.net/forums/topic/34209-simple-speech-dictation-in-vbnet/
 
     Private Sub StartMic()
 
         'First check to see if reco has been loaded before. If not lets load it.
-        If (RecoContext Is Nothing) Then
+        If (RecognitionContext Is Nothing) Then
 
             If Not Program.Engine Is Nothing Then
 
                 Try
-                    RecoContext = New SpSharedRecoContextClass  'Create a new Reco Context Class
+                    RecognitionContext = New SpSharedRecoContextClass  'Create a new Reco Context Class
 
                     ' Dictation Grammar
-                    dictationGrammar = RecoContext.CreateGrammar(1)      'Setup the Grammar
+                    dictationGrammar = RecognitionContext.CreateGrammar(1)      'Setup the Grammar
                     dictationGrammar.DictationLoad()                     'Load the Grammar
 
                     ' Chatbot Grammar (from file)
-                    chatbotGrammar = RecoContext.CreateGrammar(2)
+                    chatbotGrammar = RecognitionContext.CreateGrammar(2)
                     'chatbotGrammar.LoadChatbotRules(Program.Engine.Chatbot.FriendlyName, chatbotGrammarRuleName)
                     chatbotGrammar.CmdLoadFromFile(Properties.Settings.Default.SpeechRecogChatbotGrammarRuleFile)
 
                     ' Galatea Algorithm Grammar
-                    galateaGrammar = RecoContext.CreateGrammar(3)
+                    galateaGrammar = RecognitionContext.CreateGrammar(3)
                     galateaGrammar.CmdLoadFromFile(Properties.Settings.Default.SpeechRecogEvaluateGrammarRuleFile)
 
                 Catch ex As Exception
@@ -455,12 +456,14 @@ Public Class VbChatbot
     ' This function handles Recognition event from the reco context object.
     ' Recognition event is fired when the speech recognition engines recognizes
     ' a sequences of words.
-    Private Sub RecoContext_Recognition(ByVal StreamNumber As Integer, ByVal StreamPosition As Object, ByVal RecognitionType As SpeechLib.SpeechRecognitionType, ByVal Result As SpeechLib.ISpeechRecoResult) Handles RecoContext.Recognition
+    Private Sub RecoContext_Recognition(ByVal StreamNumber As Integer, ByVal StreamPosition As Object,
+                                        ByVal RecognitionType As SpeechLib.SpeechRecognitionType,
+                                        ByVal Result As SpeechLib.ISpeechRecoResult) Handles RecognitionContext.Recognition
 
         speechRecognitionText = Result.PhraseInfo.GetText
 
         Dim ruleId = Result.PhraseInfo.Rule.Id
-        Dim ruleName = Result.PhraseInfo.Rule.Name
+        'Dim ruleName = Result.PhraseInfo.Rule.Name
 
         ' Evaluate Rule Event
         If ruleId = Properties.Settings.Default.SpeechRecogEvaluateGrammarRuleID Then
@@ -494,4 +497,7 @@ Public Class VbChatbot
     Friend Event SpeechRecognition As EventHandler
 #End Region
 
+    Private _isSilent As Boolean
+    Private _inputting As Boolean
+    Private ReadOnly _providerId, _providerName As String
 End Class

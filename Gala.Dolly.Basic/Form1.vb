@@ -8,7 +8,7 @@ Public Class Form1
     Inherits Gala.Dolly.UI.BaseForm
     Implements Galatea.IProvider
 
-    Private WithEvents languageModel As Galatea.AI.ILanguageAnalyzer
+    Private WithEvents LanguageModel As Galatea.AI.ILanguageAnalyzer
 
     Public Sub New()
 
@@ -34,7 +34,7 @@ Public Class Form1
         viewSerialInterfaceMenuItem = serialInterface1.viewSerialInterfaceMenuItem
         ViewSerialInterface_Click(Nothing, Nothing)
 
-        languageModel = Program.Engine.AI.LanguageModel
+        LanguageModel = SmartEngine.AI.LanguageModel
 
         '' Handle Recognition Event
         'If Program.Started And Program.Engine IsNot Nothing Then
@@ -113,7 +113,7 @@ Public Class Form1
     End Sub
 
 
-    Private Sub languageModel_Responding(sender As Object, e As Galatea.IO.RespondingEventArgs) Handles languageModel.Responding
+    Private Sub LanguageModel_Responding(sender As Object, e As Galatea.IO.RespondingEventArgs) Handles LanguageModel.Responding
 
         If visionCapture.StaticMode Then Exit Sub ' Only send for new images
 
