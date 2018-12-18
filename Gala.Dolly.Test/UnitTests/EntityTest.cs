@@ -109,17 +109,17 @@ namespace Gala.Dolly.Test
 
             // STOP SIGN
             response = GetEntityResponse(ResourcesFolderName + @"Learning\STOP.png");
-            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("RED OCTAGON"));
+            Assert.IsTrue(response.Contains("RED OCTAGON", StringComparison.CurrentCultureIgnoreCase));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's a STOP SIGN!");
 
             // Only Red Octagon
             response = GetEntityResponse(ResourcesFolderName + @"Learning\green_octagon.png");
-            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("GREEN OCTAGON"));
+            Assert.IsTrue(response.Contains("GREEN OCTAGON", StringComparison.CurrentCultureIgnoreCase));
 
             creator = TestEngine.User;
             response = GetEntityResponse(ResourcesFolderName + @"Learning\STOP.png");
-            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("STOP SIGN"));
+            Assert.IsTrue(response.Contains("STOP SIGN", StringComparison.CurrentCultureIgnoreCase));
         }
 
         [TestMethod]
@@ -131,17 +131,17 @@ namespace Gala.Dolly.Test
 
             // PACMAN
             response = GetEntityResponse(ResourcesFolderName + @"Learning\pacman.png");
-            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("YELLOW PIE"));
+            Assert.IsTrue(response.Contains("YELLOW PIE", StringComparison.CurrentCultureIgnoreCase));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's PAC-MAN!");
 
             // Only yellow Pie Shape is Pac-Man
             response = GetEntityResponse(ResourcesFolderName + @"Learning\pizza.png");
-            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("RED PIE"));
+            Assert.IsTrue(response.Contains("RED PIE", StringComparison.CurrentCultureIgnoreCase));
 
             creator = TestEngine.User;
             response = GetEntityResponse(ResourcesFolderName + @"Learning\pacman.png");
-            Assert.IsTrue(response.ToUpper(CultureInfo.CurrentCulture).Contains("PAC-MAN"));
+            Assert.IsTrue(response.Contains("PAC-MAN", StringComparison.CurrentCultureIgnoreCase));
         }
 
         public ICreator Creator { get { return creator; } set { creator = value; } }
@@ -153,7 +153,7 @@ namespace Gala.Dolly.Test
             if (expectedColorName == null) throw new ArgumentNullException(nameof(expectedColorName));
 
             string response = GetEntityResponse(fileName);
-            return response.ToUpper(CultureInfo.CurrentCulture).Contains(expectedColorName.ToUpper(CultureInfo.CurrentCulture));
+            return response.Contains(expectedColorName, StringComparison.CurrentCultureIgnoreCase);
         }
         protected string GetEntityResponse(string fileName)
         {

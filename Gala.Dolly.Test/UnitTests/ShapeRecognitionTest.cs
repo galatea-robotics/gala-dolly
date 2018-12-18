@@ -120,13 +120,13 @@ namespace Gala.Dolly.Test
 
             // PIE
             response = GetShapeResponse(ResourcesFolderName + @"Learning\pizza.png");
-            Assert.IsFalse(response.ToUpper(CultureInfo.CurrentCulture).Contains("PIE SHAPED"));
+            Assert.IsFalse(response.Contains("PIE SHAPED", StringComparison.CurrentCultureIgnoreCase));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The shape is PIE SHAPED!");
 
             // STAR
             response = GetShapeResponse(ResourcesFolderName + @"Learning\star2.png");
-            Assert.IsFalse(response.ToUpper(CultureInfo.CurrentCulture).Contains("STAR"));
+            Assert.IsFalse(response.Contains("STAR", StringComparison.CurrentCultureIgnoreCase));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The shape is STAR!");
 

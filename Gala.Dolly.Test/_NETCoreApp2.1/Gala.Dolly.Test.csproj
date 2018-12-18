@@ -17,6 +17,10 @@
     <AssemblyOriginatorKeyFile>..\..\Gala.Dolly\Gala.Dolly.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Properties\Settings.cs" />
+    <Compile Remove="StringExtension.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Properties\Settings.settings" />
   </ItemGroup>
 

@@ -16,9 +16,11 @@ namespace Gala.Data.Databases
 
     internal class SerializedDataAccessManager : DataAccessManager
     {
+/*
 #if NETFX_CORE
-        private static Assembly serializedDataAsm = typeof(SerializedDataAccessManager).GetTypeInfo().Assembly;
+        private static readonly Assembly serializedDataAsm = typeof(SerializedDataAccessManager).GetTypeInfo().Assembly;
 #endif
+ */
         public SerializedDataAccessManager(string connectionString) : base(connectionString)
         {
         }

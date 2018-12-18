@@ -10,6 +10,7 @@ namespace Gala.Dolly.Test
 {
     using Galatea.AI.Abstract;
     using Gala.Data;
+    using Gala.Data.Properties;
     using Gala.Data.Runtime;
 
     internal class TestEngine : RuntimeEngine, IRuntimeEngine, IEngine
@@ -42,7 +43,7 @@ namespace Gala.Dolly.Test
                 machine = new Galatea.AI.Robotics.Machine();
                 machine.Initialize(this);
 
-                vision = new VisualProcessor(Properties.Settings.Default.ImagingSettings);
+                vision = new VisualProcessor(Settings.Default.ImagingSettings);
                 vision.Initialize(this);
 
                 // Become Self-Aware
@@ -53,7 +54,7 @@ namespace Gala.Dolly.Test
                 System.Diagnostics.Debug.Assert(ExecutiveFunctions.ContextCache != null);
 
                 // Initialize Language Module
-                this.User = new User(Properties.Settings.Default.DefaultUserName);
+                this.User = new User(Settings.Default.DefaultUserName);
                 chatbots = new ChatbotManager();
                 robot.LanguageModel.LoadChatbots(chatbots);
 
@@ -88,7 +89,7 @@ namespace Gala.Dolly.Test
             _ai.InitializeMemory(_dataAccessManager);
 
             // Set Application Settings
-            ((ColorTemplateCollection)_dataAccessManager[TemplateType.Color]).HybridResultThreshold = Properties.Settings.Default.ColorTemplateHybridResultThreshold;
+            ((ColorTemplateCollection)_dataAccessManager[TemplateType.Color]).HybridResultThreshold = Settings.Default.ColorTemplateHybridResultThreshold;
         }
 
         public override void Startup()

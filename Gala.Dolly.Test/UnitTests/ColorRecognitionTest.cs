@@ -57,13 +57,13 @@ namespace Gala.Dolly.Test
 
             // ORANGE
             response = GetColorResponse(ResourcesFolderName + @"Learning\triangle_orange.png");
-            Assert.IsFalse(response.ToUpper(CultureInfo.CurrentCulture).Contains("ORANGE"));
+            Assert.IsFalse(response.Contains("ORANGE", StringComparison.CurrentCultureIgnoreCase));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The color is ORANGE!");
 
             // PURPLE
             response = GetColorResponse(ResourcesFolderName + @"Learning\star2.png");
-            Assert.IsFalse(response.ToUpper(CultureInfo.CurrentCulture).Contains("PURPLE"));
+            Assert.IsFalse(response.Contains("PURPLE", StringComparison.CurrentCultureIgnoreCase));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's PURPLE!");
 

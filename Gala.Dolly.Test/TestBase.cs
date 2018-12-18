@@ -14,7 +14,7 @@ namespace Gala.Dolly.Test
     using Galatea.Imaging.IO;
     using Gala.Data;
     using Gala.Data.Databases;
-    using Properties;
+    using Gala.Data.Properties;
 
     [TestClass]
     [CLSCompliant(false)]
@@ -94,7 +94,7 @@ namespace Gala.Dolly.Test
             {
 #if NETFX_CORE
                 // Load Local Settings
-                Properties.Settings.Load(@"Properties\TestSettings.json");
+                Settings.Load(@"Properties\TestSettings.json");
 #endif
                 //if (System.IO.File.Exists("Gala.Dolly.Command.config"))
                 //    AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", "Gala.Dolly.Command.exe.config");
@@ -214,9 +214,9 @@ namespace Gala.Dolly.Test
             _engine.Shutdown();
 
             // Save Runtime Settings
-            Properties.Settings.Default.DebuggerLogLevel = DebuggerLogLevelSettings.DebuggerLogLevel;
-            Properties.Settings.Default.DebuggerAlertLevel = DebuggerLogLevelSettings.DebuggerAlertLevel;
-            Properties.Settings.Default.Save();
+            Settings.Default.DebuggerLogLevel = DebuggerLogLevelSettings.DebuggerLogLevel;
+            Settings.Default.DebuggerAlertLevel = DebuggerLogLevelSettings.DebuggerAlertLevel;
+            Settings.Default.Save();
         }
     }
 }

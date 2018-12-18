@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Galatea.Runtime;
 using Galatea.Runtime.Services;
+using Gala.Data.Properties;
 
 namespace Gala.Dolly.Test
 {
@@ -14,7 +15,7 @@ namespace Gala.Dolly.Test
         internal ChatbotManager()
         {
             // Initialize Default
-            _chatbot = new DefaultChatbot(Properties.Settings.Default.DefaultChatbotName);
+            _chatbot = new DefaultChatbot(Settings.Default.DefaultChatbotName);
         }
 
         IChatbot IChatbotManager.Current
@@ -54,7 +55,7 @@ namespace Gala.Dolly.Test
             {
             }
 
-            public override string Greeting { get => Properties.Settings.Default.DefaultChatbotResponse; }
+            public override string Greeting { get => Settings.Default.DefaultChatbotResponse; }
         }
 
         private IChatbot _chatbot;

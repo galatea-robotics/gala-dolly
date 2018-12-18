@@ -25,7 +25,6 @@ namespace Gala.Data.Runtime
         /// The message that describes the error.
         /// </param>
         public TeaInitializeDataException(string message) : base(message) { }
-#if !NETFX_CORE
         /// <summary>
         /// Initializes a new instance of the <see cref="TeaInitializeDataException"/> class 
         /// with serialized data.
@@ -45,7 +44,6 @@ namespace Gala.Data.Runtime
         /// The class name is null or <see cref="System.Exception.HResult"/> is zero (0).
         /// </exception>
         protected TeaInitializeDataException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-#endif
         /// <summary>
         /// Initializes a new instance of the <see cref="TeaInitializeDataException"/> class 
         /// with a specified error message and a reference to the inner exception that is the cause 
