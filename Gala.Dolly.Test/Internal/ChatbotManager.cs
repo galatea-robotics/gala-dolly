@@ -3,10 +3,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Galatea.Runtime;
 using Galatea.Runtime.Services;
-using Gala.Data.Properties;
 
 namespace Gala.Dolly.Test
 {
+    using Properties;
+
     /// <summary>
     /// Contains a collection of hard-coded defined Chatbots downloaded from the internet.
     /// </summary>

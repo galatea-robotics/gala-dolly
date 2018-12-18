@@ -140,19 +140,19 @@ namespace Gala.Dolly.Test
 
             // Dollar Sign
             response = GetSymbolResponse(ResourcesFolderName + @"Learning\Symbols\$.png");
-            Assert.IsFalse(response.Contains("DOLLAR SIGN", StringComparison.CurrentCultureIgnoreCase));
+            Assert.IsFalse(response.ContainsCurrentCulture("DOLLAR SIGN"));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "The Symbol is DOLLAR SIGN");
 
             // Pound Sign
             response = GetSymbolResponse(ResourcesFolderName + @"Learning\Symbols\#.png");
-            Assert.IsFalse(response.Contains("POUND SIGN", StringComparison.CurrentCultureIgnoreCase));
+            Assert.IsFalse(response.ContainsCurrentCulture("POUND SIGN"));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's Pound Sign!");
 
             // Asterisk
             response = GetSymbolResponse(ResourcesFolderName + @"Learning\Symbols\asterisk.png");
-            Assert.IsFalse(response.Contains("ASTERISK", StringComparison.CurrentCultureIgnoreCase));
+            Assert.IsFalse(response.ContainsCurrentCulture("ASTERISK"));
 
             TestEngine.ExecutiveFunctions.GetResponse(TestEngine.AI.LanguageModel, "It's an Asterisk!");
 

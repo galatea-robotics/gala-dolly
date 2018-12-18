@@ -14,7 +14,7 @@ namespace Gala.Dolly.Test
     using Galatea.Imaging.IO;
     using Gala.Data;
     using Gala.Data.Databases;
-    using Gala.Data.Properties;
+    using Properties;
 
     [TestClass]
     [CLSCompliant(false)]

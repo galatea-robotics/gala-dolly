@@ -10,8 +10,8 @@ namespace Gala.Dolly.Test
 {
     using Galatea.AI.Abstract;
     using Gala.Data;
-    using Gala.Data.Properties;
     using Gala.Data.Runtime;
+    using Properties;
 
     internal class TestEngine : RuntimeEngine, IRuntimeEngine, IEngine
     {

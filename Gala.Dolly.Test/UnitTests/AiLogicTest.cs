@@ -87,7 +87,7 @@ namespace Gala.Dolly.Test
             {
                 if(checkHybridName)
                 {
-                    result = namedTemplate.FriendlyName.Contains(token, StringComparison.CurrentCultureIgnoreCase);
+                    result = namedTemplate.FriendlyName.ContainsCurrentCulture(token);
                     Assert.IsTrue(result, $"FriendlyName does not contain the label '{token}'.");
                 }
 
