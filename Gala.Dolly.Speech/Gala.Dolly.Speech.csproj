@@ -37,7 +37,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\.NET\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>2</WarningLevel>
@@ -52,14 +52,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\.NET\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <UseVSHostingProcess>true</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
-    <DocumentationFile>..\bin\.NET\Release\Gala.Dolly.Speech.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Gala.Dolly.Speech.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -73,14 +73,13 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Analysis|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\bin\.NET\Analysis\</OutputPath>
+    <OutputPath>..\bin\Analysis\</OutputPath>
     <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\bin\.NET\Analysis\Gala.Dolly.Speech.xml</DocumentationFile>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <ItemGroup>
@@ -90,10 +89,7 @@
     <Compile Include="..\Gala.Dolly\Properties\Version.cs">
       <Link>Properties\Version.cs</Link>
     </Compile>
-    <Compile Include="..\Galatea\GlobalSuppressions.cs">
-      <Link>GlobalSuppressions.cs</Link>
-    </Compile>
-    <Compile Include="Properties\ResourcesGlobalSuppressions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Phonemes.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
@@ -132,12 +128,20 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Interop.HTTSLib">
-      <HintPath>..\..\Library\Interop.HTTSLib.dll</HintPath>
+      <HintPath>..\..\Library\bin\TTS\Interop.HTTSLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Interop.SpeechLib">
-      <HintPath>..\..\Library\Interop.SpeechLib.dll</HintPath>
+      <HintPath>..\..\Library\bin\TTS\Interop.SpeechLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Galatea.Core, Version=1.4.1.2, Culture=neutral, PublicKeyToken=42f08a650bbc5075, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\bin\Galatea\Galatea.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Galatea.Runtime, Version=1.4.1.2, Culture=neutral, PublicKeyToken=42f08a650bbc5075, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\bin\Galatea\Galatea.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -151,20 +155,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Galatea\Galatea.Core.csproj">
-      <Project>{e36af529-f151-4b39-92f1-115c31bcb746}</Project>
-      <Name>Galatea.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Galatea.Runtime\Galatea.Runtime.csproj">
-      <Project>{b0d0c0a4-d37d-4e5b-a357-758e1afb76ba}</Project>
-      <Name>Galatea.Runtime</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\Gala.Dolly\Gala.Dolly.pfx">
       <Link>Gala.Dolly.pfx</Link>
     </None>
-    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers">
+      <Version>2.6.2</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

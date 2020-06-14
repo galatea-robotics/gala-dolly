@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dictionary>
+  <Words>
+    <Recognized>
+      <Word>Chatbot</Word>
+      <Word>Chatbots</Word>
+      <Word>ascii</Word>
+    </Recognized>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>TTS</Acronym>
+    </CasingExceptions>
+    <CasingExceptions>
+      <Acronym>Sp</Acronym>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>

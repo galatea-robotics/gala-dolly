@@ -1,13 +1,12 @@
 ﻿{
   "dependencies": {
-    "Accord.Imaging": "3.8.0",
-    "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.6.2"
+    "Accord.Imaging": "3.8.0"
   },
   "frameworks": {
     ".NETFramework,Version=v3.5": {}
   },
-    "runtimes": {
-        "win": {},
-        "win-x86": {}
-    }
+  "runtimes": {
+    "win": {},
+    "win-x86": {}
+  }
 }
