@@ -7,13 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Library", "_Library", "{7A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chatbots", "Chatbots", "{199D4CE7-F4C3-4773-87DB-7C105335A767}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Dolly", "Gala.Dolly\Gala.Dolly\Gala.Dolly.csproj", "{F0D42607-BEA9-4F6E-854D-40809AD378D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Dolly", "Gala.Dolly\Gala.Dolly.csproj", "{F0D42607-BEA9-4F6E-854D-40809AD378D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Data", "Gala.Dolly\Gala.Data\Gala.Data.csproj", "{FCE634B4-5A87-4519-98D4-240B4A42F8D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Data", "Gala.Data\Gala.Data.csproj", "{FCE634B4-5A87-4519-98D4-240B4A42F8D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Dolly.Speech", "Gala.Dolly\Gala.Dolly.Speech\Gala.Dolly.Speech.csproj", "{503B5858-4665-47B9-8BD3-2BBE917291C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Dolly.Speech", "Gala.Dolly.Speech\Gala.Dolly.Speech.csproj", "{503B5858-4665-47B9-8BD3-2BBE917291C2}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Gala.Dolly.Basic", "Gala.Dolly\Gala.Dolly.Basic\Gala.Dolly.Basic.vbproj", "{BBB026F9-43EA-4AA8-BDBF-CB934C390E45}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Gala.Dolly.Basic", "Gala.Dolly.Basic\Gala.Dolly.Basic.vbproj", "{BBB026F9-43EA-4AA8-BDBF-CB934C390E45}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Video", "Video", "{7461A5B3-CDE5-466A-9872-E7F8498FCD3A}"
 EndProject
@@ -27,13 +27,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vfw", "..\Library\motion_sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dshow", "..\Library\motion_src\dshow\dshow.csproj", "{37B08AFD-F4BC-4E13-9119-537BA6A12CCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Dolly.UI", "Gala.Dolly\Gala.Dolly.UI\Gala.Dolly.UI.csproj", "{270E9E4E-9F39-4A3A-A04D-FC0B40BA7B12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Dolly.UI", "Gala.Dolly.UI\Gala.Dolly.UI.csproj", "{270E9E4E-9F39-4A3A-A04D-FC0B40BA7B12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Dolly.Chatbots", "Gala.Dolly\Gala.Dolly.Chatbots\Gala.Dolly.Chatbots.csproj", "{8378C9BA-915F-4018-9944-8578F2855FF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Dolly.Chatbots", "Gala.Dolly.Chatbots\Gala.Dolly.Chatbots.csproj", "{8378C9BA-915F-4018-9944-8578F2855FF1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5F310ED6-BDB4-4A37-AD6B-A2724E076E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Dolly.Test", "Gala.Dolly\Gala.Dolly.Test\Gala.Dolly.Test.csproj", "{9C2F32EC-E713-46A8-8F19-3377EDF9CC65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gala.Dolly.Test", "Gala.Dolly.Test\Gala.Dolly.Test.csproj", "{9C2F32EC-E713-46A8-8F19-3377EDF9CC65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
