@@ -88,6 +88,7 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="StringExtension.cs" />
     <Compile Include="TestCases\TestCases.cs" />
     <Compile Include="UnitTests\AiLogicTest.cs" />
     <Compile Include="UnitTests\EntityTest.cs" />

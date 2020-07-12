@@ -26,7 +26,10 @@ namespace Gala.Dolly.Test
         private static NamedEntity _namedEntity;
         private static string connectionString;
 
-        protected const string ResourcesFolderName = @"..\..\..\..\Resources\";
+        protected static string ResourcesFolderName
+        {
+            get { return Settings.Default.ResourcesFolderName; }
+        }
 
         internal static TestEngine TestEngine { get { return _engine; } }
 
@@ -36,8 +39,6 @@ namespace Gala.Dolly.Test
             _providerId = t.FullName;
             _providerName = t.Name;
         }
-
-        //public Galatea.AI.Abstract.IUser User { get { return _user; } }
 
         public static BaseTemplate NamedTemplate { get { return _namedTemplate; } }
         public static NamedEntity NamedEntity { get { return _namedEntity; } }
@@ -160,9 +161,7 @@ namespace Gala.Dolly.Test
                     dataAccessManager = new SerializedDataAccessManager(connectionString);
 
                     // Restore Data from backup file
-                    FileInfo fi = new FileInfo(connectionString);
-                    string backupFilename = Path.Combine(fi.DirectoryName, "SerializedData.V1.dat");
-                    dataAccessManager.RestoreBackup(backupFilename);
+                    dataAccessManager.RestoreBackup("SerializedData.V1.dat");
 
                     // Initialize Engine
                     engine = new TestEngine(debugger, dataAccessManager);

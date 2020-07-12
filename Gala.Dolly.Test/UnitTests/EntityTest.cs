@@ -30,7 +30,7 @@ namespace Gala.Dolly.Test
             try
             {
                 dataAccessManager = new SerializedDataAccessManager(ConnectionString);
-                dataAccessManager.RestoreBackup(@"..\..\..\..\Data\SerializedData.1344.dat");
+                dataAccessManager.RestoreBackup("SerializedData.1344.dat");
 
                 TestEngine.DataAccessManager = dataAccessManager;
                 TestEngine.InitializeDatabase();

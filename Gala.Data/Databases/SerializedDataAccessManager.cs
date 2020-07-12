@@ -29,9 +29,12 @@ namespace Gala.Data.Databases
         /// Restores the file data specified by <paramref name="path"/> to the data file 
         /// specified by <see cref="DataAccessManager.ConnectionString"/>.
         /// </summary>
-        public void RestoreBackup(string path)
+        public override void RestoreBackup(string backupName)
         {
-            FileInfo fi = new FileInfo(path);
+         string directory = new FileInfo(this.ConnectionString).DirectoryName;
+         string path = Path.Combine(directory, backupName);
+
+         FileInfo fi = new FileInfo(path);
             fi.CopyTo(this.ConnectionString, true);
         }
 

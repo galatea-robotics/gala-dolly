@@ -50,6 +50,8 @@ namespace Gala.Data
         
         #endregion
 
+        public abstract void RestoreBackup(string backupName);
+
         protected string ConnectionString { get { return _connectionString; } }
 
         #region Component Model
